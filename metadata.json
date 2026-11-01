@@ -1,0 +1,6 @@
+{
+  "name": "QR GENIUS",
+  "description": "Free multilingual QR code generator. Create, customize with colors and logos, and export vector SVG, PNG, and PDF for URLs, Wi-Fi, WhatsApp, vCards, and more.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

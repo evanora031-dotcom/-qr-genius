@@ -1,0 +1,156 @@
+@import "tailwindcss";
+
+:root {
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  color-scheme: light;
+}
+
+html, body {
+  overflow-x: hidden;
+  max-width: 100%;
+  width: 100%;
+}
+
+[dir="rtl"], [dir="rtl"] body {
+  font-family: 'Cairo', 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+/* Custom scrollbars for clean SaaS UI */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Print styling for QR sheets */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  .print-only {
+    display: block !important;
+  }
+}
+
+/* ==========================================================================
+   MOBILE-SPECIFIC MEDIA QUERY (320px - 767px)
+   Tablet (768px - 1023px) and Desktop (1024px+) remain untouched.
+   ========================================================================== */
+@media screen and (max-width: 767px) {
+  /* 1. Make QR Studio occupy the full available mobile screen width */
+  .qr-studio-wrapper {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding-left: 0.5rem !important;
+    padding-right: 0.5rem !important;
+    padding-top: 0.5rem !important;
+    padding-bottom: 2rem !important;
+    margin: 0 !important;
+    box-sizing: border-box !important;
+  }
+
+  /* 2. Remove the narrow centered container causing the tiny interface & excessive whitespace */
+  .qr-studio-container {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    box-sizing: border-box !important;
+  }
+
+  /* 3. Ensure cards stretch to fill mobile screen without overflowing */
+  .qr-studio-card {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    padding: 0.875rem !important;
+    box-sizing: border-box !important;
+    border-radius: 1rem !important;
+  }
+
+  /* 4. Responsive two-column grid for QR type cards on mobile */
+  .qr-type-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 0.5rem !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .qr-type-card {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-height: 82px !important;
+    padding: 0.625rem !important;
+    box-sizing: border-box !important;
+  }
+
+  /* 5. Inputs, Buttons and Customizer controls appropriately sized */
+  .qr-customizer-tabs {
+    display: flex !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    padding: 0.25rem !important;
+    gap: 0.25rem !important;
+    overflow-x: auto !important;
+  }
+
+  .qr-customizer-tab-btn {
+    flex: 1 1 0% !important;
+    min-width: 60px !important;
+    padding-left: 0.25rem !important;
+    padding-right: 0.25rem !important;
+    font-size: 0.6875rem !important;
+    box-sizing: border-box !important;
+  }
+
+  /* 6. Appropriately sized QR preview box */
+  .qr-preview-wrapper {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 0.875rem !important;
+    box-sizing: border-box !important;
+    position: static !important;
+  }
+
+  .qr-preview-canvas-box {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 1rem 0.5rem !important;
+    min-height: 200px !important;
+    box-sizing: border-box !important;
+  }
+
+  .qr-preview-canvas {
+    max-width: 240px !important;
+    width: 100% !important;
+    height: auto !important;
+  }
+
+  /* 7. Prevent horizontal scroll globally across mobile */
+  html, body, #root, main {
+    overflow-x: hidden !important;
+    width: 100% !important;
+    max-width: 100vw !important;
+    box-sizing: border-box !important;
+  }
+}
