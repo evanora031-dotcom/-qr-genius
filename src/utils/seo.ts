@@ -423,6 +423,17 @@ export function updateDocumentSEO(pageId: PageId, lang: Language) {
   let ogDesc = document.querySelector('meta[property="og:description"]');
   if (ogDesc) ogDesc.setAttribute('content', meta.description);
 
+  // Keep social sharing URLs aligned with the canonical page URL.
+  const baseUrl = typeof window !== 'undefined' ? window.location.origin : 'https://qr-genius-1on.pages.dev';
+  const canonicalUrl = `${baseUrl}${meta.canonicalPath}`;
+  let ogUrl = document.querySelector('meta[property="og:url"]');
+  if (!ogUrl) {
+    ogUrl = document.createElement('meta');
+    ogUrl.setAttribute('property', 'og:url');
+    document.head.appendChild(ogUrl);
+  }
+  ogUrl.setAttribute('content', canonicalUrl);
+
   // 4. Update Twitter Tags
   let twTitle = document.querySelector('meta[name="twitter:title"]');
   if (twTitle) twTitle.setAttribute('content', meta.title);
@@ -437,7 +448,7 @@ export function updateDocumentSEO(pageId: PageId, lang: Language) {
     canonical.setAttribute('rel', 'canonical');
     document.head.appendChild(canonical);
   }
-  const baseUrl = typeof window !== 'undefined' ? window.location.origin : 'https://qrgenius.app';
+  const baseUrl = typeof window !== 'undefined' ? window.location.origin : 'https://qr-genius-1on.pages.dev';
   canonical.setAttribute('href', `${baseUrl}${meta.canonicalPath}`);
 
   // 6. Update HTML Lang and Dir attributes
@@ -446,27 +457,19 @@ export function updateDocumentSEO(pageId: PageId, lang: Language) {
 }
 
 export function generateSitemapXML(): string {
-  const baseUrl = typeof window !== 'undefined' ? window.location.origin : 'https://qrgenius.app';
+  const baseUrl = typeof window !== 'undefined' ? window.location.origin : 'https://qr-genius-1on.pages.dev';
   const pages: PageId[] = ['home', 'generator', 'url', 'wifi', 'whatsapp', 'business', 'about', 'contact', 'privacy', 'terms', 'faq'];
-  const languages: Language[] = ['en', 'ar', 'fr', 'es'];
 
-  let xml = `<?xml version="1.0" encoding="UTF-8"?>\n`;
-  xml += `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n`;
+  // Language variants currently share the same URL paths. Do not publish
+  // hreflang alternates until each language has a distinct crawlable URL.
+  let xml = `<?xml version="1.0" encoding="UTF-8"?>\\n`;
+  xml += `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\\n`;
 
   for (const page of pages) {
-    const metaEn = SEO_METADATA[page].en;
-    xml += `  <url>\n`;
-    xml += `    <loc>${baseUrl}${metaEn.canonicalPath}</loc>\n`;
-    xml += `    <lastmod>2026-11-01</lastmod>\n`;
-    xml += `    <changefreq>${page === 'home' || page === 'generator' ? 'daily' : 'weekly'}</changefreq>\n`;
-    xml += `    <priority>${page === 'home' ? '1.0' : page.includes('url') || page.includes('wifi') ? '0.9' : '0.8'}</priority>\n`;
-    
-    // Hreflang alternates
-    for (const lang of languages) {
-      const path = SEO_METADATA[page][lang].canonicalPath;
-      xml += `    <xhtml:link rel="alternate" hreflang="${lang}" href="${baseUrl}${path}"/>\n`;
-    }
-    xml += `  </url>\n`;
+    const meta = SEO_METADATA[page].en;
+    xml += `  <url>\\n`;
+    xml += `    <loc>${baseUrl}${meta.canonicalPath}</loc>\\n`;
+    xml += `  </url>\\n`;
   }
 
   xml += `</urlset>`;
@@ -474,7 +477,7 @@ export function generateSitemapXML(): string {
 }
 
 export function generateRobotsTxt(): string {
-  const baseUrl = typeof window !== 'undefined' ? window.location.origin : 'https://qrgenius.app';
+  const baseUrl = typeof window !== 'undefined' ? window.location.origin : 'https://qr-genius-1on.pages.dev';
   return `# Robots.txt for QR GENIUS
 User-agent: *
 Allow: /
