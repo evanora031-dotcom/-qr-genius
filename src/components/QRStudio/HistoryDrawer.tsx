@@ -48,7 +48,7 @@ export const HistoryDrawer: React.FC<HistoryDrawerProps> = ({
   };
 
   const handleClearAll = () => {
-    if (window.confirm('Are you sure you want to clear your local QR code history?')) {
+    if (window.confirm((lang === 'ar' ? 'هل أنت متأكد من مسح سجل رموز QR المحلي؟' : 'Are you sure you want to clear your local QR code history?'))) {
       clearAllHistory();
       onHistoryUpdated();
     }
@@ -157,7 +157,7 @@ export const HistoryDrawer: React.FC<HistoryDrawerProps> = ({
                     {item.previewDataUrl ? (
                       <img
                         src={item.previewDataUrl}
-                        alt="QR Thumbnail"
+                        alt={lang === 'ar' ? 'صورة مصغرة لرمز QR' : 'QR Thumbnail'}
                         className="w-full h-full object-contain"
                       />
                     ) : (
@@ -204,7 +204,7 @@ export const HistoryDrawer: React.FC<HistoryDrawerProps> = ({
                       <button
                         type="button"
                         onClick={(e) => handleDownloadItem(item, e)}
-                        title="Download PNG"
+                        title={lang === 'ar' ? 'تنزيل PNG' : 'Download PNG'}
                         className="p-1 text-slate-400 hover:text-slate-700 rounded hover:bg-slate-100"
                       >
                         <Download className="w-3.5 h-3.5" />
@@ -213,7 +213,7 @@ export const HistoryDrawer: React.FC<HistoryDrawerProps> = ({
                       <button
                         type="button"
                         onClick={(e) => handleDownloadItemSVG(item, e)}
-                        title="Download SVG"
+                        title={lang === 'ar' ? 'تنزيل SVG' : 'Download SVG'}
                         className="p-1 text-slate-400 hover:text-slate-700 rounded hover:bg-slate-100"
                       >
                         <FileCode className="w-3.5 h-3.5" />
