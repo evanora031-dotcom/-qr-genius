@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://qr-genius-1on.pages.dev/</loc>
-  </url>
+  <url><loc>https://qr-genius-1on.pages.dev/</loc></url>
+  <url><loc>https://qr-genius-1on.pages.dev/generator</loc></url>
+  <url><loc>https://qr-genius-1on.pages.dev/tools/url</loc></url>
+  <url><loc>https://qr-genius-1on.pages.dev/tools/wifi</loc></url>
+  <url><loc>https://qr-genius-1on.pages.dev/tools/whatsapp</loc></url>
+  <url><loc>https://qr-genius-1on.pages.dev/tools/business-vcard</loc></url>
+  <url><loc>https://qr-genius-1on.pages.dev/about</loc></url>
+  <url><loc>https://qr-genius-1on.pages.dev/contact</loc></url>
+  <url><loc>https://qr-genius-1on.pages.dev/privacy</loc></url>
+  <url><loc>https://qr-genius-1on.pages.dev/terms</loc></url>
+  <url><loc>https://qr-genius-1on.pages.dev/faq</loc></url>
 </urlset>
