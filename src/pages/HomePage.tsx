@@ -255,7 +255,7 @@ export const HomePage: React.FC<HomePageProps> = ({ lang, onNavigate }) => {
                     </p>
                   </div>
                   <div className="flex items-center text-xs font-bold text-indigo-600 group-hover:text-indigo-700">
-                    <span>Create {card.titleKey}</span>
+                    <span>{lang === 'ar' ? `إنشاء ${card.titleKey}` : `Create ${card.titleKey}`}</span>
                     <ChevronRight className="w-3.5 h-3.5 ml-1 transition-transform group-hover:translate-x-0.5 rtl:group-hover:-translate-x-0.5" />
                   </div>
                 </div>
@@ -376,20 +376,20 @@ export const HomePage: React.FC<HomePageProps> = ({ lang, onNavigate }) => {
 
               <div className="p-6 rounded-2xl bg-slate-50 border border-slate-200 text-left rtl:text-right">
                 <div className="text-3xl font-extrabold text-indigo-600 mb-1">2048px</div>
-                <div className="text-xs font-bold text-slate-900 mb-1">Ultra Resolution</div>
-                <p className="text-[11px] text-slate-500">Crystal-clear raster PNG exports ready for signs &amp; packaging.</p>
+                <div className="text-xs font-bold text-slate-900 mb-1">{lang === 'ar' ? 'دقة فائقة' : 'Ultra Resolution'}</div>
+                <p className="text-[11px] text-slate-500">{lang === 'ar' ? 'ملفات PNG واضحة وجاهزة للوحات والعبوات.' : 'Crystal-clear raster PNG exports ready for signs &amp; packaging.'}</p>
               </div>
 
               <div className="p-6 rounded-2xl bg-slate-50 border border-slate-200 text-left rtl:text-right">
                 <div className="text-3xl font-extrabold text-indigo-600 mb-1">SVG</div>
-                <div className="text-xs font-bold text-slate-900 mb-1">True Vector</div>
-                <p className="text-[11px] text-slate-500">Clean mathematical SVG paths for Illustrator and Figma.</p>
+                <div className="text-xs font-bold text-slate-900 mb-1">{lang === 'ar' ? 'رسومات متجهية حقيقية' : 'True Vector'}</div>
+                <p className="text-[11px] text-slate-500">{lang === 'ar' ? 'مسارات SVG دقيقة ومتوافقة مع Illustrator وFigma.' : 'Clean mathematical SVG paths for Illustrator and Figma.'}</p>
               </div>
 
               <div className="p-6 rounded-2xl bg-slate-50 border border-slate-200 text-left rtl:text-right">
                 <div className="text-3xl font-extrabold text-indigo-600 mb-1">4</div>
-                <div className="text-xs font-bold text-slate-900 mb-1">Languages + RTL</div>
-                <p className="text-[11px] text-slate-500">English, Arabic with full RTL mirroring, French, and Spanish.</p>
+                <div className="text-xs font-bold text-slate-900 mb-1">{lang === 'ar' ? 'اللغات واتجاه RTL' : 'Languages + RTL'}</div>
+                <p className="text-[11px] text-slate-500">{lang === 'ar' ? 'الإنجليزية والعربية باتجاه RTL والفرنسية والإسبانية.' : 'English, Arabic with full RTL mirroring, French, and Spanish.'}</p>
               </div>
             </div>
           </div>
@@ -403,17 +403,17 @@ export const HomePage: React.FC<HomePageProps> = ({ lang, onNavigate }) => {
       <section className="py-16 bg-gradient-to-r from-indigo-600 to-purple-700 text-white">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6">
           <h2 className="text-3xl font-extrabold sm:text-4xl tracking-tight">
-            Ready to Generate Your Custom QR Code?
+            {lang === 'ar' ? 'هل أنت مستعد لإنشاء رمز QR مخصص؟' : 'Ready to Generate Your Custom QR Code?'}
           </h2>
           <p className="text-sm text-indigo-100 max-w-xl mx-auto leading-relaxed">
-            Join thousands of businesses, creators, and organizers generating free, beautiful QR codes daily.
+            {lang === 'ar' ? 'انضم إلى المستخدمين الذين ينشئون رموز QR مجانية وأنيقة لأعمالهم ومشاريعهم كل يوم.' : 'Join thousands of businesses, creators, and organizers generating free, beautiful QR codes daily.'}
           </p>
           <button
             type="button"
             onClick={() => onNavigate('generator')}
             className="py-3.5 px-8 rounded-xl font-bold text-sm bg-white text-indigo-700 hover:bg-indigo-50 shadow-lg transition-colors inline-flex items-center gap-2"
           >
-            <span>Start Generating Now</span>
+            <span>{lang === 'ar' ? 'ابدأ إنشاء الرموز الآن' : 'Start Generating Now'}</span>
             <ArrowRight className="w-4 h-4" />
           </button>
         </div>
