@@ -401,13 +401,19 @@ export const SEO_METADATA: Record<PageId, Record<Language, PageMeta>> = {
   }
 };
 
+const SEO_LANGUAGES: Language[] = ['en', 'ar', 'fr', 'es'];
+
+function getLocalizedPath(path: string, lang: Language): string {
+  return path === '/' ? `/${lang}/` : `/${lang}${path}`;
+}
+
 export function updateDocumentSEO(pageId: PageId, lang: Language) {
   const meta = SEO_METADATA[pageId]?.[lang] || SEO_METADATA.home.en;
-  
-  // 1. Update Title
+  const baseUrl = typeof window !== 'undefined' ? window.location.origin : 'https://qr-genius-1on.pages.dev';
+  const canonicalUrl = `${baseUrl}${getLocalizedPath(meta.canonicalPath, lang)}`;
+
   document.title = meta.title;
 
-  // 2. Update Meta Description
   let descTag = document.querySelector('meta[name="description"]');
   if (!descTag) {
     descTag = document.createElement('meta');
@@ -416,42 +422,45 @@ export function updateDocumentSEO(pageId: PageId, lang: Language) {
   }
   descTag.setAttribute('content', meta.description);
 
-  // 3. Update OG Tags
-  let ogTitle = document.querySelector('meta[property="og:title"]');
-  if (ogTitle) ogTitle.setAttribute('content', meta.title);
+  const setMeta = (selector: string, attribute: string, value: string) => {
+    let tag = document.querySelector(selector);
+    if (!tag) {
+      tag = document.createElement('meta');
+      const [key, name] = selector.match(/\[(property|name)="([^"]+)"\]/)?.slice(1) || [];
+      if (key && name) tag.setAttribute(key, name);
+      document.head.appendChild(tag);
+    }
+    tag.setAttribute('content', value);
+  };
 
-  let ogDesc = document.querySelector('meta[property="og:description"]');
-  if (ogDesc) ogDesc.setAttribute('content', meta.description);
+  setMeta('meta[property="og:title"]', 'property', meta.title);
+  setMeta('meta[property="og:description"]', 'property', meta.description);
+  setMeta('meta[property="og:url"]', 'property', canonicalUrl);
+  setMeta('meta[name="twitter:title"]', 'name', meta.title);
+  setMeta('meta[name="twitter:description"]', 'name', meta.description);
 
-  // Keep social sharing URLs aligned with the canonical page URL.
-  const baseUrl = typeof window !== 'undefined' ? window.location.origin : 'https://qr-genius-1on.pages.dev';
-  const canonicalUrl = `${baseUrl}${meta.canonicalPath}`;
-  let ogUrl = document.querySelector('meta[property="og:url"]');
-  if (!ogUrl) {
-    ogUrl = document.createElement('meta');
-    ogUrl.setAttribute('property', 'og:url');
-    document.head.appendChild(ogUrl);
-  }
-  ogUrl.setAttribute('content', canonicalUrl);
-
-  // 4. Update Twitter Tags
-  let twTitle = document.querySelector('meta[name="twitter:title"]');
-  if (twTitle) twTitle.setAttribute('content', meta.title);
-
-  let twDesc = document.querySelector('meta[name="twitter:description"]');
-  if (twDesc) twDesc.setAttribute('content', meta.description);
-
-  // 5. Update Canonical link
-  let canonical = document.querySelector('link[rel="canonical"]');
+  let canonical = document.querySelector('link[rel="canonical"]') as HTMLLinkElement | null;
   if (!canonical) {
     canonical = document.createElement('link');
-    canonical.setAttribute('rel', 'canonical');
+    canonical.rel = 'canonical';
     document.head.appendChild(canonical);
   }
-  const baseUrl = typeof window !== 'undefined' ? window.location.origin : 'https://qr-genius-1on.pages.dev';
-  canonical.setAttribute('href', `${baseUrl}${meta.canonicalPath}`);
+  canonical.href = canonicalUrl;
 
-  // 6. Update HTML Lang and Dir attributes
+  document.head.querySelectorAll('link[rel="alternate"][hreflang]').forEach((node) => node.remove());
+  SEO_LANGUAGES.forEach((locale) => {
+    const alternate = document.createElement('link');
+    alternate.rel = 'alternate';
+    alternate.hreflang = locale;
+    alternate.href = `${baseUrl}${getLocalizedPath(meta.canonicalPath, locale)}`;
+    document.head.appendChild(alternate);
+  });
+  const defaultAlternate = document.createElement('link');
+  defaultAlternate.rel = 'alternate';
+  defaultAlternate.hreflang = 'x-default';
+  defaultAlternate.href = `${baseUrl}${getLocalizedPath(meta.canonicalPath, 'en')}`;
+  document.head.appendChild(defaultAlternate);
+
   document.documentElement.lang = lang;
   document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
 }
@@ -459,17 +468,20 @@ export function updateDocumentSEO(pageId: PageId, lang: Language) {
 export function generateSitemapXML(): string {
   const baseUrl = typeof window !== 'undefined' ? window.location.origin : 'https://qr-genius-1on.pages.dev';
   const pages: PageId[] = ['home', 'generator', 'url', 'wifi', 'whatsapp', 'business', 'about', 'contact', 'privacy', 'terms', 'faq'];
-
-  // Language variants currently share the same URL paths. Do not publish
-  // hreflang alternates until each language has a distinct crawlable URL.
-  let xml = `<?xml version="1.0" encoding="UTF-8"?>\\n`;
-  xml += `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\\n`;
+  let xml = `<?xml version="1.0" encoding="UTF-8"?>\n`;
+  xml += `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n`;
 
   for (const page of pages) {
-    const meta = SEO_METADATA[page].en;
-    xml += `  <url>\\n`;
-    xml += `    <loc>${baseUrl}${meta.canonicalPath}</loc>\\n`;
-    xml += `  </url>\\n`;
+    for (const locale of SEO_LANGUAGES) {
+      const path = SEO_METADATA[page][locale].canonicalPath;
+      xml += `  <url>\n`;
+      xml += `    <loc>${baseUrl}${getLocalizedPath(path, locale)}</loc>\n`;
+      for (const alternateLocale of SEO_LANGUAGES) {
+        xml += `    <xhtml:link rel="alternate" hreflang="${alternateLocale}" href="${baseUrl}${getLocalizedPath(path, alternateLocale)}" />\n`;
+      }
+      xml += `    <xhtml:link rel="alternate" hreflang="x-default" href="${baseUrl}${getLocalizedPath(path, 'en')}" />\n`;
+      xml += `  </url>\n`;
+    }
   }
 
   xml += `</urlset>`;
