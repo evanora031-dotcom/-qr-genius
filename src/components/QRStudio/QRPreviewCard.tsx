@@ -166,7 +166,7 @@ export const QRPreviewCard: React.FC<QRPreviewCardProps> = ({
             {t.preview.title}
           </span>
           <span className="text-[10px] px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 font-semibold border border-emerald-200">
-            Live
+            {lang === 'ar' ? 'مباشر' : 'Live'}
           </span>
         </div>
         <button
@@ -350,11 +350,11 @@ export const QRPreviewCard: React.FC<QRPreviewCardProps> = ({
                 <span>Verified Scannable {t.qrTypes[type].label}</span>
               </div>
               <p className="text-[11px] text-emerald-700 leading-normal">
-                {type === 'wifi' && 'Triggers instant "Join Wi-Fi Network" prompt on iOS & Android devices.'}
-                {type === 'vcard' && 'Triggers native "Add to Contacts / Create New Contact" on iOS & Android.'}
-                {type === 'whatsapp' && 'Opens WhatsApp chat directly without saving phone number first.'}
-                {type === 'url' && 'Opens web destination directly in default mobile browser.'}
-                {type !== 'wifi' && type !== 'vcard' && type !== 'whatsapp' && type !== 'url' && 'Standard compliant payload readable by any modern smartphone camera.'}
+                {type === 'wifi' && (lang === 'ar' ? 'يعرض خيار الاتصال بشبكة Wi-Fi مباشرةً على أجهزة iOS وAndroid.' : 'Triggers instant "Join Wi-Fi Network" prompt on iOS & Android devices.')}
+                {type === 'vcard' && (lang === 'ar' ? 'يعرض خيار إضافة جهة الاتصال أو إنشاء جهة جديدة على iOS وAndroid.' : 'Triggers native "Add to Contacts / Create New Contact" on iOS & Android.')}
+                {type === 'whatsapp' && (lang === 'ar' ? 'يفتح محادثة واتساب مباشرةً دون الحاجة إلى حفظ رقم الهاتف أولاً.' : 'Opens WhatsApp chat directly without saving phone number first.')}
+                {type === 'url' && (lang === 'ar' ? 'يفتح وجهة الويب مباشرةً في متصفح الهاتف الافتراضي.' : 'Opens web destination directly in default mobile browser.')}
+                {type !== 'wifi' && type !== 'vcard' && type !== 'whatsapp' && type !== 'url' && (lang === 'ar' ? 'بيانات متوافقة مع المعايير ويمكن قراءتها بكاميرات الهواتف الحديثة.' : 'Standard compliant payload readable by any modern smartphone camera.')}
               </p>
             </div>
 
