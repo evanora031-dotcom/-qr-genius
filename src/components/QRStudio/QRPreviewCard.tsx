@@ -347,7 +347,7 @@ export const QRPreviewCard: React.FC<QRPreviewCardProps> = ({
             <div className="p-2.5 bg-emerald-50 rounded-xl border border-emerald-100 mb-3 text-xs text-emerald-800 space-y-1">
               <div className="flex items-center gap-1.5 font-semibold text-emerald-900">
                 <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
-                <span>Verified Scannable {t.qrTypes[type].label}</span>
+                <span>{lang === 'ar' ? `تم التحقق من قابلية مسح ${t.qrTypes[type].label}` : `Verified Scannable ${t.qrTypes[type].label}`}</span>
               </div>
               <p className="text-[11px] text-emerald-700 leading-normal">
                 {type === 'wifi' && (lang === 'ar' ? 'يعرض خيار الاتصال بشبكة Wi-Fi مباشرةً على أجهزة iOS وAndroid.' : 'Triggers instant "Join Wi-Fi Network" prompt on iOS & Android devices.')}
