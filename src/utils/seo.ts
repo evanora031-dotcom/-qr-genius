@@ -21,21 +21,21 @@ export const SEO_METADATA: Record<PageId, Record<Language, PageMeta>> = {
       title: "كيو آر جينيوس – مولد رموز QR مجاني متعدد اللغات | أنشئ. امسح. تواصل.",
       description: "أنشئ رموز QR مجانية ومخصصة فوراً. دعم روابط المواقع، شبكات الواي فاي، محادثات الواتساب، وبطاقات العمل مع تصدير عالي الدقة بصيغ SVG وPNG وPDF.",
       keywords: "مولد باركود مجاني, تصميم باركود qr, كيو ار واي فاي, كود واتساب, بطاقة عمل qr",
-      canonicalPath: "/ar",
+      canonicalPath: "/",
       h1: "أنشئ. امسح. تواصل. المولد المجاني فائق السرعة لرموز QR"
     },
     fr: {
       title: "QR GENIUS – Générateur de QR Code Gratuit & Multilingue | Créer. Scanner. Connecter.",
       description: "Générez des QR codes gratuits et personnalisés instantanément. Compatible URLs, Wi-Fi, WhatsApp, vCards avec exports vectoriels SVG, PNG haute définition et PDF.",
       keywords: "generateur qr code gratuit, qr code vectoriel svg, qr wifi, qr whatsapp, vcard qr",
-      canonicalPath: "/fr",
+      canonicalPath: "/",
       h1: "Créer. Scanner. Connecter. Le générateur de QR code rapide et gratuit"
     },
     es: {
       title: "QR GENIUS – Generador de Códigos QR Gratis y Multilingüe | Crear. Escanear. Conectar.",
       description: "Genere códigos QR gratuitos y personalizados al instante. Compatible con URLs, Wi-Fi, WhatsApp, vCards y redes sociales con descargas en SVG, PNG de alta resolución y PDF.",
       keywords: "generador codigo qr gratis, crear qr personalizado, qr wifi, qr whatsapp, tarjeta vcard qr",
-      canonicalPath: "/es",
+      canonicalPath: "/",
       h1: "Crear. Escanear. Conectar. El generador de códigos QR gratuito de alta velocidad"
     }
   },
