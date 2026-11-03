@@ -16,13 +16,35 @@ import { FAQPage } from './pages/FAQPage';
 import { SitemapView } from './pages/SitemapView';
 import { RobotsView } from './pages/RobotsView';
 
+const ROUTES: Record<string, PageId> = {
+  '/': 'home',
+  '/generator': 'generator',
+  '/tools/url': 'url',
+  '/tools/wifi': 'wifi',
+  '/tools/whatsapp': 'whatsapp',
+  '/tools/business-vcard': 'business',
+  '/about': 'about',
+  '/contact': 'contact',
+  '/privacy': 'privacy',
+  '/terms': 'terms',
+  '/faq': 'faq',
+  '/sitemap': 'sitemap',
+  '/robots': 'robots',
+};
+
+const PATHS: Partial<Record<PageId, string>> = Object.fromEntries(
+  Object.entries(ROUTES).map(([path, page]) => [page, path])
+) as Partial<Record<PageId, string>>;
+
 export default function App() {
-  // Parse initial page from hash if present
   const getInitialPage = (): PageId => {
     if (typeof window === 'undefined') return 'home';
-    const hash = window.location.hash.replace(/^#\/?/, '').toLowerCase() as PageId;
+    const path = window.location.pathname.replace(/\\/+$/, '') || '/';
+    if (ROUTES[path]) return ROUTES[path];
+    // Keep old hash links working while moving to crawlable paths.
+    const hash = window.location.hash.replace(/^#\\/?/, '').toLowerCase() as PageId;
     const validPages: PageId[] = [
-      'home', 'generator', 'url', 'wifi', 'whatsapp', 'business', 
+      'home', 'generator', 'url', 'wifi', 'whatsapp', 'business',
       'about', 'contact', 'privacy', 'terms', 'faq', 'sitemap', 'robots'
     ];
     return validPages.includes(hash) ? hash : 'home';
@@ -32,63 +54,58 @@ export default function App() {
   const [lang, setLangState] = useState<Language>(() => getStoredLanguage());
   const [historyItems, setHistoryItems] = useState<QRHistoryItem[]>(() => getStoredHistory());
   const [isHistoryOpen, setIsHistoryOpen] = useState(false);
-  
-  // Specific generator route states
+
   const [generatorType, setGeneratorType] = useState<QRType>('url');
   const [configToLoad, setConfigToLoad] = useState<QRConfig | null>(null);
   const [typeToLoad, setTypeToLoad] = useState<QRType | null>(null);
 
-  // Sync language with storage and document
   const setLang = (newLang: Language) => {
     setLangState(newLang);
     setStoredLanguage(newLang);
   };
 
-  // Sync hash on popstate / hashchange
   useEffect(() => {
-    const handleHashChange = () => {
-      const page = getInitialPage();
-      setCurrentPage(page);
+    const handleLocationChange = () => setCurrentPage(getInitialPage());
+    window.addEventListener('popstate', handleLocationChange);
+    window.addEventListener('hashchange', handleLocationChange);
+    return () => {
+      window.removeEventListener('popstate', handleLocationChange);
+      window.removeEventListener('hashchange', handleLocationChange);
     };
-    window.addEventListener('hashchange', handleHashChange);
-    return () => window.removeEventListener('hashchange', handleHashChange);
   }, []);
 
-  // Update SEO, RTL direction, and URL hash whenever page or lang changes
   useEffect(() => {
     updateDocumentSEO(currentPage, lang);
-    if (window.location.hash.replace(/^#\/?/, '') !== currentPage) {
-      window.history.replaceState(null, '', currentPage === 'home' ? '#' : `#${currentPage}`);
+    const expectedPath = PATHS[currentPage] || '/';
+    if (window.location.pathname !== expectedPath) {
+      window.history.replaceState(null, '', expectedPath);
     }
   }, [currentPage, lang]);
 
-  // Update history items list
-  const refreshHistory = () => {
-    setHistoryItems(getStoredHistory());
-  };
+  const refreshHistory = () => setHistoryItems(getStoredHistory());
 
-  // Navigation handler
   const handleNavigate = (page: PageId, type?: QRType) => {
-    if (type) {
-      setGeneratorType(type);
+    if (type) setGeneratorType(type);
+    const nextPath = PATHS[page] || '/';
+    if (window.location.pathname !== nextPath) {
+      window.history.pushState(null, '', nextPath);
     }
     setCurrentPage(page);
-    window.location.hash = page === 'home' ? '' : `#${page}`;
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  // Load history item into studio
   const handleLoadHistoryItem = (item: QRHistoryItem) => {
     setTypeToLoad(item.type);
     setConfigToLoad(item.config);
     setGeneratorType(item.type);
+    const nextPath = PATHS.generator || '/generator';
+    if (window.location.pathname !== nextPath) window.history.pushState(null, '', nextPath);
     setCurrentPage('generator');
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
     <div className="min-h-screen flex flex-col bg-white text-slate-900 selection:bg-indigo-100 selection:text-indigo-950">
-      {/* Top Bar Navigation */}
       <Navbar
         currentPage={currentPage}
         setCurrentPage={setCurrentPage}
@@ -97,16 +114,8 @@ export default function App() {
         openHistory={() => setIsHistoryOpen(true)}
         historyCount={historyItems.length}
       />
-
-      {/* Main Content Viewport */}
       <main className="flex-1">
-        {currentPage === 'home' && (
-          <HomePage
-            lang={lang}
-            onNavigate={handleNavigate}
-          />
-        )}
-
+        {currentPage === 'home' && <HomePage lang={lang} onNavigate={handleNavigate} />}
         {currentPage === 'generator' && (
           <GeneratorPage
             initialType={generatorType}
@@ -117,91 +126,19 @@ export default function App() {
             externalTypeToLoad={typeToLoad}
           />
         )}
-
-        {currentPage === 'url' && (
-          <ToolLandingPage
-            tool="url"
-            lang={lang}
-            onNavigate={handleNavigate}
-            onHistoryUpdated={refreshHistory}
-          />
-        )}
-
-        {currentPage === 'wifi' && (
-          <ToolLandingPage
-            tool="wifi"
-            lang={lang}
-            onNavigate={handleNavigate}
-            onHistoryUpdated={refreshHistory}
-          />
-        )}
-
-        {currentPage === 'whatsapp' && (
-          <ToolLandingPage
-            tool="whatsapp"
-            lang={lang}
-            onNavigate={handleNavigate}
-            onHistoryUpdated={refreshHistory}
-          />
-        )}
-
-        {currentPage === 'business' && (
-          <ToolLandingPage
-            tool="business"
-            lang={lang}
-            onNavigate={handleNavigate}
-            onHistoryUpdated={refreshHistory}
-          />
-        )}
-
-        {currentPage === 'about' && (
-          <AboutPage
-            lang={lang}
-            onNavigate={handleNavigate}
-          />
-        )}
-
-        {currentPage === 'contact' && (
-          <ContactPage
-            lang={lang}
-          />
-        )}
-
-        {currentPage === 'privacy' && (
-          <PrivacyPage
-            lang={lang}
-          />
-        )}
-
-        {currentPage === 'terms' && (
-          <TermsPage
-            lang={lang}
-          />
-        )}
-
-        {currentPage === 'faq' && (
-          <FAQPage
-            lang={lang}
-            onNavigate={handleNavigate}
-          />
-        )}
-
-        {currentPage === 'sitemap' && (
-          <SitemapView />
-        )}
-
-        {currentPage === 'robots' && (
-          <RobotsView />
-        )}
+        {currentPage === 'url' && <ToolLandingPage tool="url" lang={lang} onNavigate={handleNavigate} onHistoryUpdated={refreshHistory} />}
+        {currentPage === 'wifi' && <ToolLandingPage tool="wifi" lang={lang} onNavigate={handleNavigate} onHistoryUpdated={refreshHistory} />}
+        {currentPage === 'whatsapp' && <ToolLandingPage tool="whatsapp" lang={lang} onNavigate={handleNavigate} onHistoryUpdated={refreshHistory} />}
+        {currentPage === 'business' && <ToolLandingPage tool="business" lang={lang} onNavigate={handleNavigate} onHistoryUpdated={refreshHistory} />}
+        {currentPage === 'about' && <AboutPage lang={lang} onNavigate={handleNavigate} />}
+        {currentPage === 'contact' && <ContactPage lang={lang} />}
+        {currentPage === 'privacy' && <PrivacyPage lang={lang} />}
+        {currentPage === 'terms' && <TermsPage lang={lang} />}
+        {currentPage === 'faq' && <FAQPage lang={lang} onNavigate={handleNavigate} />}
+        {currentPage === 'sitemap' && <SitemapView />}
+        {currentPage === 'robots' && <RobotsView />}
       </main>
-
-      {/* Footer */}
-      <Footer
-        lang={lang}
-        setCurrentPage={setCurrentPage}
-      />
-
-      {/* Local History Slide-over Drawer */}
+      <Footer lang={lang} setCurrentPage={setCurrentPage} />
       <HistoryDrawer
         isOpen={isHistoryOpen}
         onClose={() => setIsHistoryOpen(false)}
