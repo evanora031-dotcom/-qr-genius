@@ -68,9 +68,9 @@ export const TypeSelector: React.FC<TypeSelectorProps> = ({
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
         <div>
           <label className="text-xs font-bold uppercase tracking-wider text-slate-700">
-            Select QR Code Type
+            {lang === 'ar' ? 'اختر نوع رمز QR' : 'Select QR Code Type'}
           </label>
-          <span className="hidden sm:inline text-slate-400 text-xs ml-2">· 12 Categories</span>
+          <span className="hidden sm:inline text-slate-400 text-xs ml-2">· {lang === 'ar' ? '12 فئة' : '12 Categories'}</span>
         </div>
 
         {/* 3D vs Flat Style Toggle */}
@@ -85,7 +85,7 @@ export const TypeSelector: React.FC<TypeSelectorProps> = ({
             }`}
           >
             <Box className="w-3 h-3" />
-            <span>3D Icons</span>
+            <span>{lang === 'ar' ? 'أيقونات ثلاثية الأبعاد' : '3D Icons'}</span>
           </button>
           <button
             type="button"
@@ -97,7 +97,7 @@ export const TypeSelector: React.FC<TypeSelectorProps> = ({
             }`}
           >
             <Layers className="w-3 h-3" />
-            <span>Flat 2D</span>
+            <span>{lang === 'ar' ? 'ثنائية الأبعاد' : 'Flat 2D'}</span>
           </button>
         </div>
       </div>
