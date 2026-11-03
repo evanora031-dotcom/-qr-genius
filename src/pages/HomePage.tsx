@@ -344,13 +344,19 @@ export const HomePage: React.FC<HomePageProps> = ({ lang, onNavigate }) => {
               </p>
 
               <div className="space-y-3.5 pt-2">
-                {[
+                {(lang === 'ar' ? [
+                  'مجاني مدى الحياة دون حدود لعدد مرات المسح',
+                  'إنشاء محلي: لا تغادر البيانات متصفحك',
+                  'صيغة SVG متجهة قابلة للتكبير دون فقدان الوضوح',
+                  'تصحيح أخطاء قابل للتعديل للحفاظ على قابلية المسح مع الشعارات',
+                  'دعم كامل للغات واتجاه الكتابة من اليمين إلى اليسار'
+                ] : [
                   '100% Free Lifetime Usage with zero scan limits',
                   'Client-side generation: payloads never leave your browser',
                   'Vector SVG format allows infinite scaling without blurriness',
                   'Adjustable Error Correction ensures readability with logos',
                   'Full multilingual RTL support for global audiences'
-                ].map((point, idx) => (
+                ]).map((point, idx) => (
                   <div key={idx} className="flex items-start gap-2.5">
                     <div className="w-5 h-5 rounded-full bg-indigo-50 text-indigo-600 flex items-center justify-center shrink-0 mt-0.5">
                       <CheckCircle2 className="w-3.5 h-3.5" />
