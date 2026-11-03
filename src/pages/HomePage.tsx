@@ -46,20 +46,20 @@ export const HomePage: React.FC<HomePageProps> = ({ lang, onNavigate }) => {
               {/* Pill-free Editorial Kicker */}
               <div className="flex items-center gap-2 text-xs font-bold text-indigo-700 tracking-wide uppercase flex-wrap">
                 <Sparkles className="w-4 h-4 text-indigo-600 shrink-0" />
-                <span>Next-Generation QR Technology</span>
+                <span>{lang === 'ar' ? 'تقنية رموز QR من الجيل الجديد' : 'Next-Generation QR Technology'}</span>
                 <span className="text-slate-300">·</span>
-                <span className="text-slate-500 font-medium">100% Free Forever</span>
+                <span className="text-slate-500 font-medium">{lang === 'ar' ? 'مجاني 100% إلى الأبد' : '100% Free Forever'}</span>
               </div>
 
               <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 tracking-tight leading-[1.18] text-balance">
-                Create. Scan. Connect.
+                {lang === 'ar' ? 'أنشئ. امسح. تواصل.' : 'Create. Scan. Connect.'}
                 <span className="block text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 via-purple-600 to-indigo-800">
-                  The Free Modern QR Generator
+                  {lang === 'ar' ? 'مولّد رموز QR مجاني وعصري' : 'The Free Modern QR Generator'}
                 </span>
               </h1>
 
               <p className="text-base sm:text-lg text-slate-600 leading-relaxed max-w-2xl">
-                Generate high-resolution, custom-styled QR codes for websites, Wi-Fi networks, WhatsApp chats, and digital business cards. Download infinite-resolution vector SVG, crisp PNG, or printable PDF sheets with zero registrations.
+                {lang === 'ar' ? 'أنشئ رموز QR عالية الدقة ومخصصة للمواقع وشبكات Wi-Fi ومحادثات واتساب وبطاقات العمل الرقمية. حمّل ملفات SVG المتجهة أو PNG الواضحة أو PDF الجاهز للطباعة دون الحاجة إلى التسجيل.' : 'Generate high-resolution, custom-styled QR codes for websites, Wi-Fi networks, WhatsApp chats, and digital business cards. Download infinite-resolution vector SVG, crisp PNG, or printable PDF sheets with zero registrations.'}
               </p>
 
               {/* Action Buttons */}
@@ -69,7 +69,7 @@ export const HomePage: React.FC<HomePageProps> = ({ lang, onNavigate }) => {
                   onClick={() => onNavigate('generator')}
                   className="py-3.5 px-6 rounded-xl font-bold text-sm text-white bg-indigo-600 hover:bg-indigo-700 active:bg-indigo-800 shadow-lg shadow-indigo-200 transition-all flex items-center justify-center gap-2 group"
                 >
-                  <span>Open Full QR Studio</span>
+                  <span>{lang === 'ar' ? 'افتح استوديو QR الكامل' : 'Open Full QR Studio'}</span>
                   <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1 rtl:group-hover:-translate-x-1" />
                 </button>
 
@@ -79,7 +79,7 @@ export const HomePage: React.FC<HomePageProps> = ({ lang, onNavigate }) => {
                   className="py-3.5 px-6 rounded-xl font-bold text-sm text-slate-700 bg-white hover:bg-slate-50 border border-slate-200 shadow-xs transition-colors flex items-center justify-center gap-2"
                 >
                   <Wifi className="w-4 h-4 text-indigo-600" />
-                  <span>Wi-Fi QR Tool</span>
+                  <span>{lang === 'ar' ? 'أداة رمز Wi-Fi' : 'Wi-Fi QR Tool'}</span>
                 </button>
               </div>
 
@@ -87,15 +87,15 @@ export const HomePage: React.FC<HomePageProps> = ({ lang, onNavigate }) => {
               <div className="pt-4 flex flex-wrap items-center gap-x-6 gap-y-2 text-xs text-slate-500">
                 <div className="flex items-center gap-1.5">
                   <ShieldCheck className="w-4 h-4 text-emerald-600" />
-                  <span>100% Client-Side Privacy</span>
+                  <span>{lang === 'ar' ? 'خصوصية كاملة على جهازك' : '100% Client-Side Privacy'}</span>
                 </div>
                 <div className="flex items-center gap-1.5">
                   <Zap className="w-4 h-4 text-indigo-600" />
-                  <span>No Scan Limits</span>
+                  <span>{lang === 'ar' ? 'مسح دون حدود' : 'No Scan Limits'}</span>
                 </div>
                 <div className="flex items-center gap-1.5">
                   <Download className="w-4 h-4 text-purple-600" />
-                  <span>Vector SVG &amp; PDF Included</span>
+                  <span>{lang === 'ar' ? 'يتضمن SVG وPDF متجهيين' : 'Vector SVG &amp; PDF Included'}</span>
                 </div>
               </div>
             </div>
@@ -109,12 +109,12 @@ export const HomePage: React.FC<HomePageProps> = ({ lang, onNavigate }) => {
                       <QrCode className="w-4 h-4" />
                     </div>
                     <div>
-                      <div className="text-xs font-bold text-slate-900">Interactive Preview</div>
-                      <div className="text-[10px] text-slate-400">Scannable ISO/IEC 18004</div>
+                      <div className="text-xs font-bold text-slate-900">{lang === 'ar' ? 'معاينة تفاعلية' : 'Interactive Preview'}</div>
+                      <div className="text-[10px] text-slate-400">{lang === 'ar' ? 'قابل للمسح وفق ISO/IEC 18004' : 'Scannable ISO/IEC 18004'}</div>
                     </div>
                   </div>
                   <span className="text-[10px] font-semibold text-indigo-600 bg-indigo-50 px-2 py-0.5 rounded-full">
-                    Ready to Scan
+                    {lang === 'ar' ? 'جاهز للمسح' : 'Ready to Scan'}
                   </span>
                 </div>
 
@@ -185,19 +185,19 @@ export const HomePage: React.FC<HomePageProps> = ({ lang, onNavigate }) => {
                       https://qrgenius.app
                     </span>
                     <p className="text-[10px] text-slate-400 mt-0.5">
-                      Styled with SaaS Indigo &amp; Rounded Corners
+                      {lang === 'ar' ? 'تصميم بلون نيلي وزوايا مستديرة' : 'Styled with SaaS Indigo &amp; Rounded Corners'}
                     </p>
                   </div>
                 </div>
 
                 <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
-                  <span className="text-xs text-slate-500 font-medium">Ready to create yours?</span>
+                  <span className="text-xs text-slate-500 font-medium">{lang === 'ar' ? 'هل أنت مستعد لإنشاء رمزك؟' : 'Ready to create yours?'}</span>
                   <button
                     type="button"
                     onClick={() => onNavigate('generator')}
                     className="text-xs font-bold text-indigo-600 hover:text-indigo-700 flex items-center gap-1"
                   >
-                    <span>Launch Designer</span>
+                    <span>{lang === 'ar' ? 'ابدأ التصميم' : 'Launch Designer'}</span>
                     <ChevronRight className="w-3.5 h-3.5" />
                   </button>
                 </div>
@@ -213,10 +213,10 @@ export const HomePage: React.FC<HomePageProps> = ({ lang, onNavigate }) => {
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-12">
             <div>
               <div className="text-xs font-bold text-indigo-600 tracking-wider uppercase mb-1">
-                Versatile Generators
+                {lang === 'ar' ? 'أدوات إنشاء متعددة الاستخدامات' : 'Versatile Generators'}
               </div>
               <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
-                Designed for Real-World Scenarios
+                {lang === 'ar' ? 'مصممة للاستخدامات اليومية' : 'Designed for Real-World Scenarios'}
               </h2>
             </div>
             <button
@@ -224,7 +224,7 @@ export const HomePage: React.FC<HomePageProps> = ({ lang, onNavigate }) => {
               onClick={() => onNavigate('generator')}
               className="mt-3 md:mt-0 text-xs font-bold text-indigo-600 hover:text-indigo-700 flex items-center gap-1"
             >
-              <span>View all 12 formats in Studio</span>
+              <span>{lang === 'ar' ? 'عرض الأنواع الاثني عشر في الاستوديو' : 'View all 12 formats in Studio'}</span>
               <ArrowRight className="w-3.5 h-3.5" />
             </button>
           </div>
@@ -269,13 +269,13 @@ export const HomePage: React.FC<HomePageProps> = ({ lang, onNavigate }) => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-2xl mx-auto mb-16">
             <span className="text-xs font-bold text-indigo-600 uppercase tracking-wider">
-              Quick &amp; Intuitive
+              {lang === 'ar' ? 'سريع وسهل الاستخدام' : 'Quick &amp; Intuitive'}
             </span>
             <h2 className="text-3xl font-extrabold text-slate-900 tracking-tight sm:text-4xl mt-1">
-              How QR GENIUS Works in 3 Steps
+              {lang === 'ar' ? 'كيف يعمل QR GENIUS في 3 خطوات؟' : 'How QR GENIUS Works in 3 Steps'}
             </h2>
             <p className="text-sm text-slate-600 mt-3">
-              No registration, no credit card, no waiting. Generate production-ready QR codes in seconds.
+              {lang === 'ar' ? 'لا تسجيل ولا بطاقة ائتمان ولا انتظار. أنشئ رموز QR جاهزة للاستخدام خلال ثوانٍ.' : 'No registration, no credit card, no waiting. Generate production-ready QR codes in seconds.'}
             </p>
           </div>
 
@@ -286,7 +286,7 @@ export const HomePage: React.FC<HomePageProps> = ({ lang, onNavigate }) => {
                 01.
               </span>
               <h3 className="text-lg font-bold text-slate-900 mb-2">
-                Choose Your Payload
+                {lang === 'ar' ? 'اختر نوع البيانات' : 'Choose Your Payload'}
               </h3>
               <p className="text-xs text-slate-600 leading-relaxed">
                 Pick from 12 industry-standard formats: Web URL, Wi-Fi network credentials, WhatsApp chat, vCard business card, Email, or SMS.
@@ -299,7 +299,7 @@ export const HomePage: React.FC<HomePageProps> = ({ lang, onNavigate }) => {
                 02.
               </span>
               <h3 className="text-lg font-bold text-slate-900 mb-2">
-                Brand &amp; Customize
+                {lang === 'ar' ? 'أضف هويتك وخصص الرمز' : 'Brand &amp; Customize'}
               </h3>
               <p className="text-xs text-slate-600 leading-relaxed">
                 Style your QR code with your brand colors, gradients, custom dot patterns, corner frame shapes, and embed your company logo.
@@ -312,7 +312,7 @@ export const HomePage: React.FC<HomePageProps> = ({ lang, onNavigate }) => {
                 03.
               </span>
               <h3 className="text-lg font-bold text-slate-900 mb-2">
-                Export Vector &amp; Print
+                {lang === 'ar' ? 'صدّر واطبع' : 'Export Vector &amp; Print'}
               </h3>
               <p className="text-xs text-slate-600 leading-relaxed">
                 Download infinite-resolution vector SVG for professional print shops, high-res PNG (up to 2048px), or ready-to-print A4 PDF sheets.
@@ -328,10 +328,10 @@ export const HomePage: React.FC<HomePageProps> = ({ lang, onNavigate }) => {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             <div className="lg:col-span-6 space-y-6">
               <span className="text-xs font-bold text-indigo-600 uppercase tracking-wider">
-                Why Professionals Choose Us
+                {lang === 'ar' ? 'لماذا يختارنا المحترفون؟' : 'Why Professionals Choose Us'}
               </span>
               <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight">
-                Built for High-DPI Print, Billboards, and Daily Marketing
+                {lang === 'ar' ? 'مصمم للطباعة عالية الدقة واللوحات والتسويق اليومي' : 'Built for High-DPI Print, Billboards, and Daily Marketing'}
               </h2>
               <p className="text-sm text-slate-600 leading-relaxed">
                 Unlike services that lock your downloads behind paywalls or insert temporary tracking links that break when subscriptions expire, QR GENIUS creates permanent, static ISO-compliant QR codes that work indefinitely.
