@@ -18,26 +18,26 @@ export const AboutPage: React.FC<AboutPageProps> = ({ lang, onNavigate }) => {
         <div className="text-center space-y-4">
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-indigo-50 border border-indigo-200 text-xs font-semibold text-indigo-700">
             <Sparkles className="w-3.5 h-3.5" />
-            <span>Our Mission</span>
+            <span>{lang === 'ar' ? 'رسالتنا' : 'Our Mission'}</span>
           </div>
           <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
-            About QR GENIUS
+            {lang === 'ar' ? 'عن كيو آر جينيوس' : 'About QR GENIUS'}
           </h1>
           <p className="text-base text-slate-600 max-w-2xl mx-auto leading-relaxed">
-            We built QR GENIUS to provide a fast, truly free, and uncompromisingly private QR code generator for creators, developers, small businesses, and enterprises worldwide.
+            {lang === 'ar' ? 'أنشأنا كيو آر جينيوس لتوفير أداة سريعة ومجانية فعلاً وتحافظ على الخصوصية لإنشاء رموز QR، لخدمة المبدعين والمطورين والشركات الصغيرة والمؤسسات حول العالم.' : 'We built QR GENIUS to provide a fast, truly free, and uncompromisingly private QR code generator for creators, developers, small businesses, and enterprises worldwide.'}
           </p>
         </div>
 
         {/* The Problem We Solved */}
         <div className="p-8 rounded-2xl bg-slate-50 border border-slate-200 space-y-4">
           <h2 className="text-xl font-bold text-slate-900">
-            Why Does the Internet Need Another QR Code Generator?
+            {lang === 'ar' ? 'لماذا يحتاج الإنترنت إلى مولّد آخر لرموز QR؟' : 'Why Does the Internet Need Another QR Code Generator?'}
           </h2>
           <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-            Most commercial QR code generators operate on deceptive business models: they trick users into printing physical flyers and restaurant menus, only to disable the QR codes 14 days later unless you pay $35/month. Many also inject third-party redirect tracking domains that compromise user privacy and slow down scanning.
+            {lang === 'ar' ? 'تعتمد بعض مولدات رموز QR التجارية على نماذج مضللة؛ فقد تتوقف الرموز بعد فترة قصيرة ما لم تشترك في باقة مدفوعة. كما تستخدم بعض الخدمات روابط تحويل وتتبع خارجية قد تؤثر في الخصوصية وسرعة المسح.' : 'Most commercial QR code generators operate on deceptive business models: they trick users into printing physical flyers and restaurant menus, only to disable the QR codes 14 days later unless you pay $35/month. Many also inject third-party redirect tracking domains that compromise user privacy and slow down scanning.'}
           </p>
           <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-            At <strong>QR GENIUS</strong>, all 12 QR code generators compile directly to ISO/IEC 18004 standards inside your browser. They contain your exact URL, Wi-Fi password, or vCard payload directly in the dots. No middleman servers, no expiring links, and no hostage tactics.
+            {lang === 'ar' ? <>في <strong>QR GENIUS</strong>، تُنشأ أنواع الرموز الاثنا عشر داخل متصفحك وفق معيار ISO/IEC 18004. وتُشفّر البيانات المطلوبة مباشرةً داخل الرمز، دون خوادم وسيطة أو روابط تنتهي صلاحيتها.</> : <>At <strong>QR GENIUS</strong>, all 12 QR code generators compile directly to ISO/IEC 18004 standards inside your browser. They contain your exact URL, Wi-Fi password, or vCard payload directly in the dots. No middleman servers, no expiring links, and no hostage tactics.</>}
           </p>
         </div>
 
@@ -47,7 +47,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ lang, onNavigate }) => {
             <div className="w-10 h-10 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center">
               <Lock className="w-5 h-5" />
             </div>
-            <h3 className="text-base font-bold text-slate-900">100% Client-Side Privacy</h3>
+            <h3 className="text-base font-bold text-slate-900">{lang === 'ar' ? 'خصوصية كاملة على جهازك' : '100% Client-Side Privacy'}</h3>
             <p className="text-xs text-slate-600 leading-relaxed">
               Every QR matrix computation and rendering happens locally on your computer or phone using JavaScript and Canvas/SVG APIs. Your payloads are never sent to a database.
             </p>
@@ -57,7 +57,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ lang, onNavigate }) => {
             <div className="w-10 h-10 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center">
               <Zap className="w-5 h-5" />
             </div>
-            <h3 className="text-base font-bold text-slate-900">Infinite Lifespan</h3>
+            <h3 className="text-base font-bold text-slate-900">{lang === 'ar' ? 'صلاحية غير محدودة' : 'Infinite Lifespan'}</h3>
             <p className="text-xs text-slate-600 leading-relaxed">
               Because static QR codes contain the raw data, they work as long as paper exists or your web server is alive. They can never be shut down by anyone.
             </p>
@@ -67,7 +67,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ lang, onNavigate }) => {
             <div className="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center">
               <Globe className="w-5 h-5" />
             </div>
-            <h3 className="text-base font-bold text-slate-900">Global &amp; Multilingual</h3>
+            <h3 className="text-base font-bold text-slate-900">{lang === 'ar' ? 'عالمي ومتعدد اللغات' : 'Global &amp; Multilingual'}</h3>
             <p className="text-xs text-slate-600 leading-relaxed">
               Engineered with full internationalization for English, Arabic with native RTL layout mirroring, French, and Spanish.
             </p>
@@ -76,7 +76,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ lang, onNavigate }) => {
 
         {/* Open Architecture */}
         <div className="border-t border-slate-200 pt-12 space-y-4">
-          <h2 className="text-xl font-bold text-slate-900">Engineering Standards</h2>
+          <h2 className="text-xl font-bold text-slate-900">{lang === 'ar' ? 'المعايير الهندسية' : 'Engineering Standards'}</h2>
           <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
             QR GENIUS is built with modern React 19, TypeScript, and clean Tailwind CSS. All mathematical calculations follow QR code specifications ISO/IEC 18004:2015 with Reed-Solomon error correction algorithm implementations.
           </p>
@@ -85,7 +85,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ lang, onNavigate }) => {
               onClick={() => onNavigate('generator')}
               className="py-3 px-6 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-xs font-bold transition-colors inline-flex items-center gap-2"
             >
-              <span>Try QR Studio Now</span>
+              <span>{lang === 'ar' ? 'جرّب استوديو QR الآن' : 'Try QR Studio Now'}</span>
             </button>
           </div>
         </div>

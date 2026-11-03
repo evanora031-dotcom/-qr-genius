@@ -66,18 +66,31 @@ const FAQS: FAQItem[] = [
   }
 ];
 
+
+const FAQS_AR: FAQItem[] = [
+  { id: 'f1', category: 'general', question: 'هل إنشاء رموز QR على الموقع مجاني فعلاً؟', answer: 'نعم، جميع أدوات إنشاء رموز QR الاثنتي عشرة مجانية للاستخدام الشخصي والتجاري، دون حدود للمسح أو تسجيل إلزامي أو تاريخ انتهاء.' },
+  { id: 'f2', category: 'general', question: 'هل تنتهي صلاحية رموز QR أو تتوقف عن العمل؟', answer: 'لا. ينشئ الموقع رموز QR ثابتة وفق المعايير، وتُشفّر البيانات مثل رابط الموقع أو شبكة Wi-Fi مباشرةً داخل الرمز. سيظل الرمز صالحاً ما دام الرابط أو الوجهة متاحاً.' },
+  { id: 'f3', category: 'print', question: 'ما صيغة الملف المناسبة للطباعة الاحترافية؟', answer: 'نوصي بصيغة SVG المتجهة للطباعة الاحترافية واللافتات والتغليف؛ إذ يمكن تكبيرها دون فقدان الجودة. وللاستخدام الرقمي والمنشورات، يمكنك اختيار PNG عالي الدقة أو فائق الدقة.' },
+  { id: 'f4', category: 'print', question: 'ما أقل حجم موصى به لطباعة رمز QR؟', answer: 'للاستخدام المعتاد، نوصي بحجم مطبوع لا يقل عن 2 × 2 سم، مع التأكد من وجود تباين واضح ومساحة بيضاء حول الرمز. زد الحجم عند عرضه من مسافة بعيدة.' },
+  { id: 'f5', category: 'security', question: 'هل بياناتي آمنة عند إنشاء رموز QR هنا؟', answer: 'نعم. تتم معالجة البيانات محلياً داخل متصفحك باستخدام JavaScript، ولا تُرسل محتويات الرمز إلى خوادمنا. ينطبق ذلك على كلمات مرور Wi-Fi وبيانات جهات الاتصال والروابط.' },
+  { id: 'f6', category: 'technical', question: 'ما مستوى تصحيح الأخطاء (ECC) ولماذا هو مهم؟', answer: 'يساعد تصحيح الأخطاء على قراءة الرمز حتى عند تلف جزء منه أو تغطيته جزئياً بشعار. تتدرج المستويات من L إلى H، ويُفضّل اختيار مستوى أعلى عند إضافة شعار إلى وسط الرمز.' },
+  { id: 'f7', category: 'technical', question: 'هل يمكنني إضافة شعاري إلى وسط رمز QR؟', answer: 'نعم. افتح تبويب الشعار في استوديو QR واختر أحد الشعارات الجاهزة أو ارفع شعارك بصيغة PNG أو JPG أو SVG.' },
+  { id: 'f8', category: 'general', question: 'ما الفرق بين رموز QR الثابتة والديناميكية؟', answer: 'تحتوي الرموز الثابتة على البيانات مباشرةً ولا تحتاج إلى خادم تحويل. أما الرموز الديناميكية فتستخدم عادةً رابطاً وسيطاً يمكن تغيير وجهته لاحقاً. الأدوات هنا تنشئ رموزاً ثابتة.' }
+];
+
 export const FAQPage: React.FC<FAQPageProps> = ({ lang, onNavigate }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [activeCategory, setActiveCategory] = useState<string>('all');
   const [openIds, setOpenIds] = useState<Record<string, boolean>>({ f1: true, f2: true });
 
   const t = translations[lang];
+  const faqs = lang === 'ar' ? FAQS_AR : FAQS;
 
   const toggleAccordion = (id: string) => {
     setOpenIds(prev => ({ ...prev, [id]: !prev[id] }));
   };
 
-  const filteredFaqs = FAQS.filter(item => {
+  const filteredFaqs = faqs.filter(item => {
     const matchesCat = activeCategory === 'all' || item.category === activeCategory;
     const matchesSearch = item.question.toLowerCase().includes(searchTerm.toLowerCase()) ||
                           item.answer.toLowerCase().includes(searchTerm.toLowerCase());
@@ -91,13 +104,13 @@ export const FAQPage: React.FC<FAQPageProps> = ({ lang, onNavigate }) => {
         <div className="text-center space-y-3">
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-indigo-50 border border-indigo-200 text-xs font-semibold text-indigo-700">
             <HelpCircle className="w-3.5 h-3.5" />
-            <span>Knowledge Base</span>
+            <span>{lang === 'ar' ? 'مركز المعرفة' : 'Knowledge Base'}</span>
           </div>
           <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
-            Frequently Asked Questions
+            {lang === 'ar' ? 'الأسئلة الشائعة' : 'Frequently Asked Questions'}
           </h1>
           <p className="text-sm text-slate-600 max-w-xl mx-auto leading-relaxed">
-            Everything you need to know about generating, customizing, and printing high-durability QR codes.
+            {lang === 'ar' ? 'كل ما تحتاج إلى معرفته حول إنشاء رموز QR وتخصيصها وطباعتها بجودة عالية.' : 'Everything you need to know about generating, customizing, and printing high-durability QR codes.'}
           </p>
         </div>
 
@@ -109,18 +122,18 @@ export const FAQPage: React.FC<FAQPageProps> = ({ lang, onNavigate }) => {
               type="text"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              placeholder="Search frequently asked questions..."
+              placeholder={lang === 'ar' ? 'ابحث في الأسئلة الشائعة...' : 'Search frequently asked questions...'}
               className="w-full pl-10 pr-4 rtl:pr-10 rtl:pl-4 py-3 text-sm rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-indigo-600/30 bg-slate-50/50"
             />
           </div>
 
           <div className="flex flex-wrap items-center gap-2">
             {[
-              { id: 'all', label: 'All Questions' },
-              { id: 'general', label: 'General' },
-              { id: 'print', label: 'Print & Formats' },
-              { id: 'technical', label: 'Technical & Error Correction' },
-              { id: 'security', label: 'Privacy & Security' },
+              { id: 'all', label: lang === 'ar' ? 'كل الأسئلة' : 'All Questions' },
+              { id: 'general', label: lang === 'ar' ? 'عام' : 'General' },
+              { id: 'print', label: lang === 'ar' ? 'الطباعة والصيغ' : 'Print & Formats' },
+              { id: 'technical', label: lang === 'ar' ? 'تقني وتصحيح الأخطاء' : 'Technical & Error Correction' },
+              { id: 'security', label: lang === 'ar' ? 'الخصوصية والأمان' : 'Privacy & Security' },
             ].map((cat) => (
               <button
                 key={cat.id}
@@ -142,7 +155,7 @@ export const FAQPage: React.FC<FAQPageProps> = ({ lang, onNavigate }) => {
         <div className="space-y-3">
           {filteredFaqs.length === 0 ? (
             <div className="text-center py-12 text-slate-500 text-sm">
-              No questions found matching &ldquo;{searchTerm}&rdquo;. Try another search term.
+              {lang === 'ar' ? <>لا توجد أسئلة تطابق «{searchTerm}». جرّب عبارة بحث أخرى.</> : <>No questions found matching &ldquo;{searchTerm}&rdquo;. Try another search term.</>}
             </div>
           ) : (
             filteredFaqs.map((faq) => {
@@ -176,22 +189,22 @@ export const FAQPage: React.FC<FAQPageProps> = ({ lang, onNavigate }) => {
 
         {/* Quick CTA */}
         <div className="p-8 rounded-2xl bg-gradient-to-r from-indigo-50 to-purple-50 border border-indigo-100 text-center space-y-4">
-          <h3 className="text-lg font-bold text-slate-900">Have a question not listed here?</h3>
+          <h3 className="text-lg font-bold text-slate-900">{lang === 'ar' ? 'هل لديك سؤال غير موجود هنا؟' : 'Have a question not listed here?'}</h3>
           <p className="text-xs text-slate-600 max-w-md mx-auto">
-            Our engineering team is always happy to assist with technical specifications, custom enterprise needs, and print guidelines.
+            {lang === 'ar' ? 'يسعد فريقنا مساعدتك في المواصفات التقنية واحتياجات المؤسسات وإرشادات الطباعة.' : 'Our engineering team is always happy to assist with technical specifications, custom enterprise needs, and print guidelines.'}
           </p>
           <div className="flex justify-center gap-3">
             <button
               onClick={() => onNavigate('contact')}
               className="py-2.5 px-5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-xs font-bold transition-colors shadow-sm"
             >
-              Contact Support
+              {lang === 'ar' ? 'تواصل مع الدعم' : 'Contact Support'}
             </button>
             <button
               onClick={() => onNavigate('generator')}
               className="py-2.5 px-5 bg-white border border-slate-200 text-slate-700 rounded-xl text-xs font-bold hover:bg-slate-50 transition-colors"
             >
-              Open Studio
+              {lang === 'ar' ? 'افتح الاستوديو' : 'Open Studio'}
             </button>
           </div>
         </div>

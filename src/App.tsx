@@ -36,22 +36,39 @@ const PATHS: Partial<Record<PageId, string>> = Object.fromEntries(
   Object.entries(ROUTES).map(([path, page]) => [page, path])
 ) as Partial<Record<PageId, string>>;
 
-export default function App() {
-  const getInitialPage = (): PageId => {
-    if (typeof window === 'undefined') return 'home';
-    const path = window.location.pathname.replace(/\/+$/, '') || '/';
-    if (ROUTES[path]) return ROUTES[path];
-    // Keep old hash links working while moving to crawlable paths.
-    const hash = window.location.hash.replace(/^#\/?/, '').toLowerCase() as PageId;
-    const validPages: PageId[] = [
-      'home', 'generator', 'url', 'wifi', 'whatsapp', 'business',
-      'about', 'contact', 'privacy', 'terms', 'faq', 'sitemap', 'robots'
-    ];
-    return validPages.includes(hash) ? hash : 'home';
-  };
+const LANGUAGES: Language[] = ['en', 'ar', 'fr', 'es'];
 
-  const [currentPage, setCurrentPage] = useState<PageId>(getInitialPage);
-  const [lang, setLangState] = useState<Language>(() => getStoredLanguage());
+function getRouteFromLocation(): { page: PageId; lang: Language } {
+  if (typeof window === 'undefined') return { page: 'home', lang: 'en' };
+
+  const rawPath = window.location.pathname.replace(/\/+$/, '') || '/';
+  const segments = rawPath.split('/').filter(Boolean);
+  const hasLocalePrefix = segments.length > 0 && LANGUAGES.includes(segments[0] as Language);
+  const lang = hasLocalePrefix ? segments[0] as Language : getStoredLanguage();
+  const routePath = hasLocalePrefix
+    ? (segments.length > 1 ? `/${segments.slice(1).join('/')}` : '/')
+    : rawPath;
+
+  if (ROUTES[routePath]) return { page: ROUTES[routePath], lang };
+
+  // Keep old hash links working while moving to crawlable localized paths.
+  const hash = window.location.hash.replace(/^#\/?/, '').toLowerCase() as PageId;
+  const validPages: PageId[] = [
+    'home', 'generator', 'url', 'wifi', 'whatsapp', 'business',
+    'about', 'contact', 'privacy', 'terms', 'faq', 'sitemap', 'robots'
+  ];
+  return { page: validPages.includes(hash) ? hash : 'home', lang };
+}
+
+function localizedPath(page: PageId, lang: Language): string {
+  const path = PATHS[page] || '/';
+  return path === '/' ? `/${lang}/` : `/${lang}${path}`;
+}
+
+export default function App() {
+  const initialRoute = getRouteFromLocation();
+  const [currentPage, setCurrentPage] = useState<PageId>(initialRoute.page);
+  const [lang, setLangState] = useState<Language>(initialRoute.lang);
   const [historyItems, setHistoryItems] = useState<QRHistoryItem[]>(() => getStoredHistory());
   const [isHistoryOpen, setIsHistoryOpen] = useState(false);
 
@@ -65,7 +82,12 @@ export default function App() {
   };
 
   useEffect(() => {
-    const handleLocationChange = () => setCurrentPage(getInitialPage());
+    const handleLocationChange = () => {
+      const route = getRouteFromLocation();
+      setCurrentPage(route.page);
+      setLangState(route.lang);
+      setStoredLanguage(route.lang);
+    };
     window.addEventListener('popstate', handleLocationChange);
     window.addEventListener('hashchange', handleLocationChange);
     return () => {
@@ -76,7 +98,7 @@ export default function App() {
 
   useEffect(() => {
     updateDocumentSEO(currentPage, lang);
-    const expectedPath = PATHS[currentPage] || '/';
+    const expectedPath = localizedPath(currentPage, lang);
     if (window.location.pathname !== expectedPath) {
       window.history.replaceState(null, '', expectedPath);
     }
@@ -86,7 +108,7 @@ export default function App() {
 
   const handleNavigate = (page: PageId, type?: QRType) => {
     if (type) setGeneratorType(type);
-    const nextPath = PATHS[page] || '/';
+    const nextPath = localizedPath(page, lang);
     if (window.location.pathname !== nextPath) {
       window.history.pushState(null, '', nextPath);
     }
@@ -98,7 +120,7 @@ export default function App() {
     setTypeToLoad(item.type);
     setConfigToLoad(item.config);
     setGeneratorType(item.type);
-    const nextPath = PATHS.generator || '/generator';
+    const nextPath = localizedPath('generator', lang);
     if (window.location.pathname !== nextPath) window.history.pushState(null, '', nextPath);
     setCurrentPage('generator');
     window.scrollTo({ top: 0, behavior: 'smooth' });

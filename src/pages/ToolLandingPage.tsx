@@ -97,13 +97,57 @@ const TOOL_CONFIGS = {
   }
 };
 
+
+const TOOL_CONFIGS_AR: typeof TOOL_CONFIGS = {
+  url: {
+    type: 'url', badge: 'أداة المواقع الرسمية', title: 'مولّد رمز QR مجاني لرابط الموقع',
+    subtitle: 'حوّل أي موقع أو صفحة هبوط أو مدونة أو متجر إلكتروني إلى رمز QR دائم وجاهز للمسح، مع إمكانية تخصيص الألوان وإضافة الشعار.',
+    benefits: ['يفتح أي عنوان ويب مباشرةً دون روابط تحويل وسيطة', 'متوافق مع Google Analytics ومعلمات تتبع حملات UTM', 'تنزيل SVG متجهي قابل للتكبير للطباعة واللافتات والتغليف', 'دون حدود للمسح أو اشتراكات شهرية أو تاريخ انتهاء'],
+    faqs: [
+      { q: 'هل تنتهي صلاحية رموز QR الخاصة بروابط المواقع؟', a: 'لا. ينشئ QR GENIUS رموزاً ثابتة تتضمن عنوان موقعك مباشرةً. سيعمل الرمز ما دام موقعك متاحاً على الإنترنت.' },
+      { q: 'هل يمكن إضافة معلمات تتبع UTM إلى الرابط؟', a: 'نعم، أضف معلمات UTM إلى الرابط مباشرةً في حقل الإدخال قبل إنشاء الرمز.' },
+      { q: 'ما أفضل صيغة لطباعة الرمز على المنشورات؟', a: 'نوصي بصيغة SVG المتجهة أو صورة PNG فائقة الدقة 2048 بكسل للحصول على طباعة واضحة.' }
+    ]
+  },
+  wifi: {
+    type: 'wifi', badge: 'اتصل دون كتابة كلمة المرور', title: 'مولّد رمز QR لشبكة Wi-Fi',
+    subtitle: 'أنشئ رمز Wi-Fi يتيح لضيوفك الاتصال بسهولة في المنزل أو المقهى أو المكتب. يعمل مع أجهزة iPhone وAndroid دون الحاجة إلى كتابة كلمة المرور.',
+    benefits: ['يمسح الضيف الرمز بكاميرا الهاتف ثم يختار الاتصال بالشبكة', 'يدعم أنواع الحماية WPA وWPA2 وWPA3 وWEP والشبكات المفتوحة', 'يدعم خيار الشبكات المخفية التي لا تبث اسمها', 'خصوصية تامة: تُشفّر كلمة المرور داخل الرمز ولا تُخزّن على الخوادم'],
+    faqs: [
+      { q: 'هل يحتاج الضيوف إلى تطبيق لمسح رمز Wi-Fi؟', a: 'لا. تتعرف معظم أجهزة iPhone وAndroid الحديثة على رموز Wi-Fi باستخدام الكاميرا أو Google Lens وتعرض خيار الاتصال.' },
+      { q: 'هل إنشاء رمز Wi-Fi هنا آمن؟', a: 'نعم. تتم معالجة بيانات الشبكة محلياً داخل متصفحك ولا تغادر كلمة المرور جهازك.' },
+      { q: 'ماذا أفعل إذا غيّرت كلمة مرور الشبكة؟', a: 'يتضمن الرمز الثابت كلمة المرور القديمة؛ أنشئ رمزاً جديداً باستخدام كلمة المرور المحدّثة ثم اطبعه.' }
+    ]
+  },
+  whatsapp: {
+    type: 'whatsapp', badge: 'محادثة مباشرة بنقرة', title: 'مولّد رمز QR لمحادثة واتساب مباشرة',
+    subtitle: 'أنشئ رمز واتساب يفتح محادثة مباشرة مع رسالة ترحيب جاهزة. مناسب لخدمة العملاء والمنشورات وعلب المنتجات والقوائم.',
+    benefits: ['يفتح للعملاء محادثة مباشرة في واتساب عند مسح الرمز', 'أضف رسالة ترحيب مسبقة لتسهيل استقبال الاستفسارات', 'يعمل دولياً مع أرقام الهواتف من مختلف البلدان', 'أضف شعار واتساب الرسمي داخل رمز QR بنقرة واحدة'],
+    faqs: [
+      { q: 'كيف يعمل رمز QR الخاص بواتساب؟', a: 'يحتوي الرمز على رابط wa.me القياسي. عند مسحه، يفتح الهاتف تطبيق واتساب للمحادثة مع الرقم المحدد.' },
+      { q: 'هل يجب تضمين رمز الدولة؟', a: 'نعم. أدخل رمز الاتصال الدولي كاملاً مع الرقم، دون شرطات أو مسافات.' },
+      { q: 'هل يستطيع المستخدم تعديل الرسالة قبل إرسالها؟', a: 'نعم. تظهر الرسالة الجاهزة في مربع الكتابة ويمكن للمستخدم تعديلها قبل الإرسال.' }
+    ]
+  },
+  business: {
+    type: 'vcard', badge: 'بطاقة عمل رقمية', title: 'مولّد رمز QR لبطاقة العمل الرقمية vCard',
+    subtitle: 'حوّل بيانات الاتصال إلى بطاقة عمل رقمية. عند مسح الرمز، يمكن حفظ الاسم والهاتف والبريد والشركة والموقع مباشرةً في جهات اتصال الهاتف.',
+    benefits: ['استغنِ عن بطاقات العمل الورقية وإدخال بيانات الاتصال يدوياً', 'احفظ الاسم والمسمى الوظيفي والشركة والهاتف والبريد والعنوان والملاحظات', 'صيغة vCard 3.0 متوافقة مع جهات اتصال iOS وGoogle', 'مثالية للمؤتمرات وبطاقات التعريف وتوقيعات البريد والسير الذاتية'],
+    faqs: [
+      { q: 'كيف يعمل مسح vCard على الهواتف؟', a: 'عند مسح الرمز بكاميرا الهاتف، يظهر خيار إضافة جهة الاتصال مع تعبئة حقول البيانات لتسهيل حفظها.' },
+      { q: 'هل يوجد حد لعدد مرات مسح بطاقة vCard؟', a: 'لا. يمكنك طباعة الرمز على عدد كبير من البطاقات أو عرضه في عرض تقديمي، دون حد لمرات المسح.' },
+      { q: 'هل يمكن إضافة شعار الشركة إلى وسط الرمز؟', a: 'نعم. افتح استوديو QR الكامل لرفع شعار الشركة وتخصيص الألوان.' }
+    ]
+  }
+};
+
 export const ToolLandingPage: React.FC<ToolLandingPageProps> = ({
   tool,
   lang,
   onNavigate,
   onHistoryUpdated
 }) => {
-  const toolData = TOOL_CONFIGS[tool];
+  const toolData = lang === 'ar' ? TOOL_CONFIGS_AR[tool] : TOOL_CONFIGS[tool];
   const t = translations[lang];
 
   // Dedicated local state for instant mini-studio
@@ -166,7 +210,7 @@ export const ToolLandingPage: React.FC<ToolLandingPageProps> = ({
             <div className="inline-flex items-center gap-2 text-xs font-bold text-indigo-700 tracking-wide uppercase mb-2 sm:mb-3">
               <span>{toolData.badge}</span>
               <span className="text-slate-300">·</span>
-              <span>Free Online Tool</span>
+              <span>{lang === 'ar' ? 'أداة مجانية عبر الإنترنت' : 'Free Online Tool'}</span>
             </div>
             <h1 className="text-2xl sm:text-3xl lg:text-5xl font-extrabold text-slate-900 tracking-tight leading-tight">
               {toolData.title}
@@ -196,15 +240,15 @@ export const ToolLandingPage: React.FC<ToolLandingPageProps> = ({
 
             <div className="flex items-center justify-between p-4 bg-white rounded-xl border border-slate-200 text-xs">
               <div>
-                <span className="font-bold text-slate-800">Need full custom colors, logos &amp; shapes?</span>
-                <p className="text-slate-500 text-[11px] mt-0.5">Open our studio to access all custom options.</p>
+                <span className="font-bold text-slate-800">{lang === 'ar' ? 'هل تريد تخصيص الألوان والشعارات والأشكال؟' : 'Need full custom colors, logos &amp; shapes?'}</span>
+                <p className="text-slate-500 text-[11px] mt-0.5">{lang === 'ar' ? 'افتح الاستوديو للوصول إلى جميع خيارات التخصيص.' : 'Open our studio to access all custom options.'}</p>
               </div>
               <button
                 type="button"
                 onClick={() => onNavigate('generator', toolData.type)}
                 className="py-2 px-3.5 bg-indigo-600 text-white font-bold rounded-lg hover:bg-indigo-700 transition-colors flex items-center gap-1.5 shrink-0"
               >
-                <span>Full Studio</span>
+                <span>{lang === 'ar' ? 'الاستوديو الكامل' : 'Full Studio'}</span>
                 <ArrowRight className="w-3.5 h-3.5" />
               </button>
             </div>
@@ -225,7 +269,7 @@ export const ToolLandingPage: React.FC<ToolLandingPageProps> = ({
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 pt-8">
           <div>
             <h2 className="text-2xl font-bold text-slate-900 tracking-tight mb-4">
-              Why Use Our {toolData.title}?
+              {lang === 'ar' ? `لماذا تستخدم ${toolData.title}؟` : `Why Use Our ${toolData.title}?`}
             </h2>
             <div className="space-y-4">
               {toolData.benefits.map((benefit, idx) => (
@@ -244,10 +288,10 @@ export const ToolLandingPage: React.FC<ToolLandingPageProps> = ({
           <div className="bg-slate-50 rounded-2xl p-6 border border-slate-200 space-y-4">
             <h3 className="text-base font-bold text-slate-900 flex items-center gap-2">
               <ShieldCheck className="w-5 h-5 text-indigo-600" />
-              <span>Client-Side Security Guarantee</span>
+              <span>{lang === 'ar' ? 'ضمان الأمان والمعالجة المحلية' : 'Client-Side Security Guarantee'}</span>
             </h3>
             <p className="text-xs text-slate-600 leading-relaxed">
-              When creating sensitive codes such as Wi-Fi credentials or personal vCard details, privacy is essential. QR GENIUS renders and compiles all matrix algorithms 100% inside your local browser. No data payload is ever sent to or logged on our servers.
+              {lang === 'ar' ? 'عند إنشاء رموز تتضمن بيانات حساسة مثل كلمات مرور Wi-Fi أو معلومات جهات الاتصال، تكون الخصوصية أساسية. ينشئ QR GENIUS الرموز محلياً داخل متصفحك، ولا يرسل محتوى البيانات إلى خوادمه أو يسجله.' : 'When creating sensitive codes such as Wi-Fi credentials or personal vCard details, privacy is essential. QR GENIUS renders and compiles all matrix algorithms 100% inside your local browser. No data payload is ever sent to or logged on our servers.'}
             </p>
             <div className="pt-2 flex items-center gap-3">
               <button
@@ -255,7 +299,7 @@ export const ToolLandingPage: React.FC<ToolLandingPageProps> = ({
                 onClick={() => onNavigate('generator', toolData.type)}
                 className="text-xs font-bold text-indigo-600 hover:text-indigo-700 flex items-center gap-1"
               >
-                <span>Customize in Studio</span>
+                <span>{lang === 'ar' ? 'خصص الرمز في الاستوديو' : 'Customize in Studio'}</span>
                 <ArrowRight className="w-3.5 h-3.5" />
               </button>
             </div>
@@ -265,7 +309,7 @@ export const ToolLandingPage: React.FC<ToolLandingPageProps> = ({
         {/* Tool FAQs */}
         <div className="pt-8 border-t border-slate-200">
           <h2 className="text-2xl font-bold text-slate-900 tracking-tight mb-8">
-            Frequently Asked Questions
+            {lang === 'ar' ? 'الأسئلة الشائعة' : 'Frequently Asked Questions'}
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {toolData.faqs.map((faq, idx) => (

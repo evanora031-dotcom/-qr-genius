@@ -36,7 +36,7 @@ export const Footer: React.FC<FooterProps> = ({ lang, setCurrentPage }) => {
             </p>
             <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-800/80 border border-slate-700/60 text-xs text-emerald-400">
               <ShieldCheck className="w-4 h-4" />
-              <span>100% Client-Side Privacy</span>
+              <span>{lang === 'ar' ? 'خصوصية كاملة: المعالجة على جهازك' : '100% Client-Side Privacy'}</span>
             </div>
           </div>
 
@@ -137,7 +137,7 @@ export const Footer: React.FC<FooterProps> = ({ lang, setCurrentPage }) => {
             © {new Date().getFullYear()} QR GENIUS. {t.footer.rights}
           </div>
           <div className="flex items-center gap-1 text-slate-400">
-            <span>Built for speed, privacy, and precision</span>
+            <span>{lang === 'ar' ? 'صُمم للسرعة والخصوصية والدقة' : 'Built for speed, privacy, and precision'}</span>
             <Heart className="w-3.5 h-3.5 text-rose-500 inline fill-rose-500" />
           </div>
         </div>

@@ -122,7 +122,7 @@ export const FormInputs: React.FC<FormInputsProps> = ({
               className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-600/30 focus:border-indigo-600 transition-colors resize-y"
             />
             <div className="flex justify-between items-center mt-1 text-[11px] text-slate-400">
-              <span>Plain text payload directly displayed upon scan</span>
+              <span>{lang === 'ar' ? 'يظهر النص مباشرةً عند مسح الرمز' : 'Plain text payload directly displayed upon scan'}</span>
               <span>{(rawPayload || '').length} {t.forms.characterCount}</span>
             </div>
           </div>
@@ -142,7 +142,7 @@ export const FormInputs: React.FC<FormInputsProps> = ({
                     type="text"
                     value={wifi.ssid || ''}
                     onChange={(e) => updateField('ssid', e.target.value)}
-                    placeholder="e.g. Office_Guest_5G"
+                    placeholder={lang === 'ar' ? 'مثال: Office_Guest_5G' : 'e.g. Office_Guest_5G'}
                     className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-600/30 focus:border-indigo-600"
                   />
                 </div>
@@ -158,7 +158,7 @@ export const FormInputs: React.FC<FormInputsProps> = ({
                         value={wifi.password || ''}
                         disabled={wifi.encryption === 'nopass'}
                         onChange={(e) => updateField('password', e.target.value)}
-                        placeholder="Network password"
+                        placeholder={lang === 'ar' ? 'كلمة مرور الشبكة' : 'Network password'}
                         className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-600/30 focus:border-indigo-600 disabled:bg-slate-100"
                       />
                       {wifi.encryption !== 'nopass' && (
@@ -182,9 +182,9 @@ export const FormInputs: React.FC<FormInputsProps> = ({
                       onChange={(e) => updateField('encryption', e.target.value)}
                       className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-indigo-600/30 focus:border-indigo-600"
                     >
-                      <option value="WPA">WPA / WPA2 / WPA3 (Standard)</option>
-                      <option value="WEP">WEP (Legacy)</option>
-                      <option value="nopass">None (Open Network)</option>
+                      <option value="WPA">{lang === 'ar' ? 'WPA / WPA2 / WPA3 (قياسي)' : 'WPA / WPA2 / WPA3 (Standard)'}</option>
+                      <option value="WEP">{lang === 'ar' ? 'WEP (قديم)' : 'WEP (Legacy)'}</option>
+                      <option value="nopass">{lang === 'ar' ? 'بدون تشفير (شبكة مفتوحة)' : 'None (Open Network)'}</option>
                     </select>
                   </div>
                 </div>
@@ -233,7 +233,7 @@ export const FormInputs: React.FC<FormInputsProps> = ({
                       type="tel"
                       value={wa.phoneNumber || ''}
                       onChange={(e) => updateField('phoneNumber', e.target.value)}
-                      placeholder="e.g. 5550192834"
+                      placeholder={lang === 'ar' ? 'مثال: 5550192834' : 'e.g. 5550192834'}
                       className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-indigo-600/30 focus:border-indigo-600"
                     />
                   </div>
@@ -247,7 +247,7 @@ export const FormInputs: React.FC<FormInputsProps> = ({
                     rows={3}
                     value={wa.message || ''}
                     onChange={(e) => updateField('message', e.target.value)}
-                    placeholder="Hello! I would like more information about your services..."
+                    placeholder={lang === 'ar' ? 'مرحباً! أود معرفة المزيد عن خدماتكم...' : 'Hello! I would like more information about your services...'}
                     className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-indigo-600/30 focus:border-indigo-600 resize-y"
                   />
                 </div>
@@ -282,7 +282,7 @@ export const FormInputs: React.FC<FormInputsProps> = ({
                     type="text"
                     value={emailData.subject || ''}
                     onChange={(e) => updateField('subject', e.target.value)}
-                    placeholder="Inquiry / Feedback"
+                    placeholder={lang === 'ar' ? 'استفسار / ملاحظات' : 'Inquiry / Feedback'}
                     className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-indigo-600/30 focus:border-indigo-600"
                   />
                 </div>
@@ -294,7 +294,7 @@ export const FormInputs: React.FC<FormInputsProps> = ({
                     rows={3}
                     value={emailData.body || ''}
                     onChange={(e) => updateField('body', e.target.value)}
-                    placeholder="Hello, I am reaching out regarding..."
+                    placeholder={lang === 'ar' ? 'أتواصل معكم بخصوص...' : 'Hello, I am reaching out regarding...'}
                     className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-indigo-600/30 focus:border-indigo-600 resize-y"
                   />
                 </div>
@@ -348,7 +348,7 @@ export const FormInputs: React.FC<FormInputsProps> = ({
                     rows={3}
                     value={sms.message || ''}
                     onChange={(e) => updateField('message', e.target.value)}
-                    placeholder="Enter pre-filled SMS message text here..."
+                    placeholder={lang === 'ar' ? 'أدخل نص الرسالة القصيرة هنا...' : 'Enter pre-filled SMS message text here...'}
                     className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-indigo-600/30 focus:border-indigo-600 resize-y"
                   />
                 </div>
@@ -421,7 +421,7 @@ export const FormInputs: React.FC<FormInputsProps> = ({
                       onChange={() => updateField('locationType', 'address')}
                       className="text-indigo-600 focus:ring-indigo-500"
                     />
-                    <span>Search Address / Place</span>
+                    <span>{lang === 'ar' ? 'البحث عن عنوان / مكان' : 'Search Address / Place'}</span>
                   </label>
                   <label className="flex items-center gap-1.5 cursor-pointer">
                     <input
@@ -432,7 +432,7 @@ export const FormInputs: React.FC<FormInputsProps> = ({
                       onChange={() => updateField('locationType', 'coordinates')}
                       className="text-indigo-600 focus:ring-indigo-500"
                     />
-                    <span>GPS Coordinates (Lat / Lng)</span>
+                    <span>{lang === 'ar' ? 'إحداثيات GPS (خط العرض / الطول)' : 'GPS Coordinates (Lat / Lng)'}</span>
                   </label>
                 </div>
 
@@ -472,7 +472,7 @@ export const FormInputs: React.FC<FormInputsProps> = ({
                       type="text"
                       value={maps.address || ''}
                       onChange={(e) => updateField('address', e.target.value)}
-                      placeholder="e.g. Empire State Building, New York, NY"
+                      placeholder={lang === 'ar' ? 'مثال: برج إيفل، باريس' : 'e.g. Empire State Building, New York, NY'}
                       className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-indigo-600/30 focus:border-indigo-600"
                     />
                   </div>
@@ -608,7 +608,7 @@ export const FormInputs: React.FC<FormInputsProps> = ({
                     type="text"
                     value={vc.notes || ''}
                     onChange={(e) => updateField('notes', e.target.value)}
-                    placeholder="Scan to save to mobile contacts directly"
+                    placeholder={lang === 'ar' ? 'امسح الرمز لحفظ جهة الاتصال على الهاتف مباشرةً' : 'Scan to save to mobile contacts directly'}
                     className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-indigo-600/30 focus:border-indigo-600"
                   />
                 </div>

@@ -1,6 +1,355 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://qr-genius-1on.pages.dev/</loc>
+    <loc>https://qr-genius-1on.pages.dev/en/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://qr-genius-1on.pages.dev/en/" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://qr-genius-1on.pages.dev/ar/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://qr-genius-1on.pages.dev/fr/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://qr-genius-1on.pages.dev/es/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://qr-genius-1on.pages.dev/en/" />
+  </url>
+  <url>
+    <loc>https://qr-genius-1on.pages.dev/ar/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://qr-genius-1on.pages.dev/en/" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://qr-genius-1on.pages.dev/ar/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://qr-genius-1on.pages.dev/fr/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://qr-genius-1on.pages.dev/es/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://qr-genius-1on.pages.dev/en/" />
+  </url>
+  <url>
+    <loc>https://qr-genius-1on.pages.dev/fr/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://qr-genius-1on.pages.dev/en/" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://qr-genius-1on.pages.dev/ar/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://qr-genius-1on.pages.dev/fr/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://qr-genius-1on.pages.dev/es/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://qr-genius-1on.pages.dev/en/" />
+  </url>
+  <url>
+    <loc>https://qr-genius-1on.pages.dev/es/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://qr-genius-1on.pages.dev/en/" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://qr-genius-1on.pages.dev/ar/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://qr-genius-1on.pages.dev/fr/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://qr-genius-1on.pages.dev/es/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://qr-genius-1on.pages.dev/en/" />
+  </url>
+  <url>
+    <loc>https://qr-genius-1on.pages.dev/en/generator</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://qr-genius-1on.pages.dev/en/generator" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://qr-genius-1on.pages.dev/ar/generator" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://qr-genius-1on.pages.dev/fr/generator" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://qr-genius-1on.pages.dev/es/generator" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://qr-genius-1on.pages.dev/en/generator" />
+  </url>
+  <url>
+    <loc>https://qr-genius-1on.pages.dev/ar/generator</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://qr-genius-1on.pages.dev/en/generator" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://qr-genius-1on.pages.dev/ar/generator" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://qr-genius-1on.pages.dev/fr/generator" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://qr-genius-1on.pages.dev/es/generator" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://qr-genius-1on.pages.dev/en/generator" />
+  </url>
+  <url>
+    <loc>https://qr-genius-1on.pages.dev/fr/generator</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://qr-genius-1on.pages.dev/en/generator" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://qr-genius-1on.pages.dev/ar/generator" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://qr-genius-1on.pages.dev/fr/generator" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://qr-genius-1on.pages.dev/es/generator" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://qr-genius-1on.pages.dev/en/generator" />
+  </url>
+  <url>
+    <loc>https://qr-genius-1on.pages.dev/es/generator</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://qr-genius-1on.pages.dev/en/generator" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://qr-genius-1on.pages.dev/ar/generator" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://qr-genius-1on.pages.dev/fr/generator" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://qr-genius-1on.pages.dev/es/generator" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://qr-genius-1on.pages.dev/en/generator" />
+  </url>
+  <url>
+    <loc>https://qr-genius-1on.pages.dev/en/tools/url</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://qr-genius-1on.pages.dev/en/tools/url" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://qr-genius-1on.pages.dev/ar/tools/url" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://qr-genius-1on.pages.dev/fr/tools/url" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://qr-genius-1on.pages.dev/es/tools/url" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://qr-genius-1on.pages.dev/en/tools/url" />
+  </url>
+  <url>
+    <loc>https://qr-genius-1on.pages.dev/ar/tools/url</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://qr-genius-1on.pages.dev/en/tools/url" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://qr-genius-1on.pages.dev/ar/tools/url" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://qr-genius-1on.pages.dev/fr/tools/url" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://qr-genius-1on.pages.dev/es/tools/url" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://qr-genius-1on.pages.dev/en/tools/url" />
+  </url>
+  <url>
+    <loc>https://qr-genius-1on.pages.dev/fr/tools/url</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://qr-genius-1on.pages.dev/en/tools/url" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://qr-genius-1on.pages.dev/ar/tools/url" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://qr-genius-1on.pages.dev/fr/tools/url" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://qr-genius-1on.pages.dev/es/tools/url" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://qr-genius-1on.pages.dev/en/tools/url" />
+  </url>
+  <url>
+    <loc>https://qr-genius-1on.pages.dev/es/tools/url</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://qr-genius-1on.pages.dev/en/tools/url" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://qr-genius-1on.pages.dev/ar/tools/url" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://qr-genius-1on.pages.dev/fr/tools/url" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://qr-genius-1on.pages.dev/es/tools/url" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://qr-genius-1on.pages.dev/en/tools/url" />
+  </url>
+  <url>
+    <loc>https://qr-genius-1on.pages.dev/en/tools/wifi</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://qr-genius-1on.pages.dev/en/tools/wifi" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://qr-genius-1on.pages.dev/ar/tools/wifi" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://qr-genius-1on.pages.dev/fr/tools/wifi" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://qr-genius-1on.pages.dev/es/tools/wifi" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://qr-genius-1on.pages.dev/en/tools/wifi" />
+  </url>
+  <url>
+    <loc>https://qr-genius-1on.pages.dev/ar/tools/wifi</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://qr-genius-1on.pages.dev/en/tools/wifi" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://qr-genius-1on.pages.dev/ar/tools/wifi" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://qr-genius-1on.pages.dev/fr/tools/wifi" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://qr-genius-1on.pages.dev/es/tools/wifi" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://qr-genius-1on.pages.dev/en/tools/wifi" />
+  </url>
+  <url>
+    <loc>https://qr-genius-1on.pages.dev/fr/tools/wifi</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://qr-genius-1on.pages.dev/en/tools/wifi" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://qr-genius-1on.pages.dev/ar/tools/wifi" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://qr-genius-1on.pages.dev/fr/tools/wifi" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://qr-genius-1on.pages.dev/es/tools/wifi" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://qr-genius-1on.pages.dev/en/tools/wifi" />
+  </url>
+  <url>
+    <loc>https://qr-genius-1on.pages.dev/es/tools/wifi</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://qr-genius-1on.pages.dev/en/tools/wifi" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://qr-genius-1on.pages.dev/ar/tools/wifi" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://qr-genius-1on.pages.dev/fr/tools/wifi" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://qr-genius-1on.pages.dev/es/tools/wifi" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://qr-genius-1on.pages.dev/en/tools/wifi" />
+  </url>
+  <url>
+    <loc>https://qr-genius-1on.pages.dev/en/tools/whatsapp</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://qr-genius-1on.pages.dev/en/tools/whatsapp" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://qr-genius-1on.pages.dev/ar/tools/whatsapp" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://qr-genius-1on.pages.dev/fr/tools/whatsapp" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://qr-genius-1on.pages.dev/es/tools/whatsapp" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://qr-genius-1on.pages.dev/en/tools/whatsapp" />
+  </url>
+  <url>
+    <loc>https://qr-genius-1on.pages.dev/ar/tools/whatsapp</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://qr-genius-1on.pages.dev/en/tools/whatsapp" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://qr-genius-1on.pages.dev/ar/tools/whatsapp" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://qr-genius-1on.pages.dev/fr/tools/whatsapp" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://qr-genius-1on.pages.dev/es/tools/whatsapp" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://qr-genius-1on.pages.dev/en/tools/whatsapp" />
+  </url>
+  <url>
+    <loc>https://qr-genius-1on.pages.dev/fr/tools/whatsapp</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://qr-genius-1on.pages.dev/en/tools/whatsapp" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://qr-genius-1on.pages.dev/ar/tools/whatsapp" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://qr-genius-1on.pages.dev/fr/tools/whatsapp" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://qr-genius-1on.pages.dev/es/tools/whatsapp" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://qr-genius-1on.pages.dev/en/tools/whatsapp" />
+  </url>
+  <url>
+    <loc>https://qr-genius-1on.pages.dev/es/tools/whatsapp</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://qr-genius-1on.pages.dev/en/tools/whatsapp" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://qr-genius-1on.pages.dev/ar/tools/whatsapp" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://qr-genius-1on.pages.dev/fr/tools/whatsapp" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://qr-genius-1on.pages.dev/es/tools/whatsapp" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://qr-genius-1on.pages.dev/en/tools/whatsapp" />
+  </url>
+  <url>
+    <loc>https://qr-genius-1on.pages.dev/en/tools/business-vcard</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://qr-genius-1on.pages.dev/en/tools/business-vcard" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://qr-genius-1on.pages.dev/ar/tools/business-vcard" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://qr-genius-1on.pages.dev/fr/tools/business-vcard" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://qr-genius-1on.pages.dev/es/tools/business-vcard" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://qr-genius-1on.pages.dev/en/tools/business-vcard" />
+  </url>
+  <url>
+    <loc>https://qr-genius-1on.pages.dev/ar/tools/business-vcard</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://qr-genius-1on.pages.dev/en/tools/business-vcard" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://qr-genius-1on.pages.dev/ar/tools/business-vcard" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://qr-genius-1on.pages.dev/fr/tools/business-vcard" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://qr-genius-1on.pages.dev/es/tools/business-vcard" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://qr-genius-1on.pages.dev/en/tools/business-vcard" />
+  </url>
+  <url>
+    <loc>https://qr-genius-1on.pages.dev/fr/tools/business-vcard</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://qr-genius-1on.pages.dev/en/tools/business-vcard" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://qr-genius-1on.pages.dev/ar/tools/business-vcard" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://qr-genius-1on.pages.dev/fr/tools/business-vcard" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://qr-genius-1on.pages.dev/es/tools/business-vcard" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://qr-genius-1on.pages.dev/en/tools/business-vcard" />
+  </url>
+  <url>
+    <loc>https://qr-genius-1on.pages.dev/es/tools/business-vcard</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://qr-genius-1on.pages.dev/en/tools/business-vcard" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://qr-genius-1on.pages.dev/ar/tools/business-vcard" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://qr-genius-1on.pages.dev/fr/tools/business-vcard" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://qr-genius-1on.pages.dev/es/tools/business-vcard" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://qr-genius-1on.pages.dev/en/tools/business-vcard" />
+  </url>
+  <url>
+    <loc>https://qr-genius-1on.pages.dev/en/about</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://qr-genius-1on.pages.dev/en/about" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://qr-genius-1on.pages.dev/ar/about" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://qr-genius-1on.pages.dev/fr/about" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://qr-genius-1on.pages.dev/es/about" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://qr-genius-1on.pages.dev/en/about" />
+  </url>
+  <url>
+    <loc>https://qr-genius-1on.pages.dev/ar/about</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://qr-genius-1on.pages.dev/en/about" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://qr-genius-1on.pages.dev/ar/about" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://qr-genius-1on.pages.dev/fr/about" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://qr-genius-1on.pages.dev/es/about" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://qr-genius-1on.pages.dev/en/about" />
+  </url>
+  <url>
+    <loc>https://qr-genius-1on.pages.dev/fr/about</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://qr-genius-1on.pages.dev/en/about" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://qr-genius-1on.pages.dev/ar/about" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://qr-genius-1on.pages.dev/fr/about" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://qr-genius-1on.pages.dev/es/about" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://qr-genius-1on.pages.dev/en/about" />
+  </url>
+  <url>
+    <loc>https://qr-genius-1on.pages.dev/es/about</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://qr-genius-1on.pages.dev/en/about" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://qr-genius-1on.pages.dev/ar/about" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://qr-genius-1on.pages.dev/fr/about" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://qr-genius-1on.pages.dev/es/about" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://qr-genius-1on.pages.dev/en/about" />
+  </url>
+  <url>
+    <loc>https://qr-genius-1on.pages.dev/en/contact</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://qr-genius-1on.pages.dev/en/contact" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://qr-genius-1on.pages.dev/ar/contact" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://qr-genius-1on.pages.dev/fr/contact" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://qr-genius-1on.pages.dev/es/contact" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://qr-genius-1on.pages.dev/en/contact" />
+  </url>
+  <url>
+    <loc>https://qr-genius-1on.pages.dev/ar/contact</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://qr-genius-1on.pages.dev/en/contact" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://qr-genius-1on.pages.dev/ar/contact" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://qr-genius-1on.pages.dev/fr/contact" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://qr-genius-1on.pages.dev/es/contact" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://qr-genius-1on.pages.dev/en/contact" />
+  </url>
+  <url>
+    <loc>https://qr-genius-1on.pages.dev/fr/contact</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://qr-genius-1on.pages.dev/en/contact" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://qr-genius-1on.pages.dev/ar/contact" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://qr-genius-1on.pages.dev/fr/contact" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://qr-genius-1on.pages.dev/es/contact" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://qr-genius-1on.pages.dev/en/contact" />
+  </url>
+  <url>
+    <loc>https://qr-genius-1on.pages.dev/es/contact</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://qr-genius-1on.pages.dev/en/contact" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://qr-genius-1on.pages.dev/ar/contact" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://qr-genius-1on.pages.dev/fr/contact" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://qr-genius-1on.pages.dev/es/contact" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://qr-genius-1on.pages.dev/en/contact" />
+  </url>
+  <url>
+    <loc>https://qr-genius-1on.pages.dev/en/privacy</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://qr-genius-1on.pages.dev/en/privacy" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://qr-genius-1on.pages.dev/ar/privacy" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://qr-genius-1on.pages.dev/fr/privacy" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://qr-genius-1on.pages.dev/es/privacy" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://qr-genius-1on.pages.dev/en/privacy" />
+  </url>
+  <url>
+    <loc>https://qr-genius-1on.pages.dev/ar/privacy</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://qr-genius-1on.pages.dev/en/privacy" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://qr-genius-1on.pages.dev/ar/privacy" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://qr-genius-1on.pages.dev/fr/privacy" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://qr-genius-1on.pages.dev/es/privacy" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://qr-genius-1on.pages.dev/en/privacy" />
+  </url>
+  <url>
+    <loc>https://qr-genius-1on.pages.dev/fr/privacy</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://qr-genius-1on.pages.dev/en/privacy" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://qr-genius-1on.pages.dev/ar/privacy" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://qr-genius-1on.pages.dev/fr/privacy" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://qr-genius-1on.pages.dev/es/privacy" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://qr-genius-1on.pages.dev/en/privacy" />
+  </url>
+  <url>
+    <loc>https://qr-genius-1on.pages.dev/es/privacy</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://qr-genius-1on.pages.dev/en/privacy" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://qr-genius-1on.pages.dev/ar/privacy" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://qr-genius-1on.pages.dev/fr/privacy" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://qr-genius-1on.pages.dev/es/privacy" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://qr-genius-1on.pages.dev/en/privacy" />
+  </url>
+  <url>
+    <loc>https://qr-genius-1on.pages.dev/en/terms</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://qr-genius-1on.pages.dev/en/terms" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://qr-genius-1on.pages.dev/ar/terms" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://qr-genius-1on.pages.dev/fr/terms" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://qr-genius-1on.pages.dev/es/terms" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://qr-genius-1on.pages.dev/en/terms" />
+  </url>
+  <url>
+    <loc>https://qr-genius-1on.pages.dev/ar/terms</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://qr-genius-1on.pages.dev/en/terms" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://qr-genius-1on.pages.dev/ar/terms" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://qr-genius-1on.pages.dev/fr/terms" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://qr-genius-1on.pages.dev/es/terms" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://qr-genius-1on.pages.dev/en/terms" />
+  </url>
+  <url>
+    <loc>https://qr-genius-1on.pages.dev/fr/terms</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://qr-genius-1on.pages.dev/en/terms" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://qr-genius-1on.pages.dev/ar/terms" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://qr-genius-1on.pages.dev/fr/terms" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://qr-genius-1on.pages.dev/es/terms" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://qr-genius-1on.pages.dev/en/terms" />
+  </url>
+  <url>
+    <loc>https://qr-genius-1on.pages.dev/es/terms</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://qr-genius-1on.pages.dev/en/terms" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://qr-genius-1on.pages.dev/ar/terms" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://qr-genius-1on.pages.dev/fr/terms" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://qr-genius-1on.pages.dev/es/terms" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://qr-genius-1on.pages.dev/en/terms" />
+  </url>
+  <url>
+    <loc>https://qr-genius-1on.pages.dev/en/faq</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://qr-genius-1on.pages.dev/en/faq" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://qr-genius-1on.pages.dev/ar/faq" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://qr-genius-1on.pages.dev/fr/faq" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://qr-genius-1on.pages.dev/es/faq" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://qr-genius-1on.pages.dev/en/faq" />
+  </url>
+  <url>
+    <loc>https://qr-genius-1on.pages.dev/ar/faq</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://qr-genius-1on.pages.dev/en/faq" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://qr-genius-1on.pages.dev/ar/faq" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://qr-genius-1on.pages.dev/fr/faq" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://qr-genius-1on.pages.dev/es/faq" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://qr-genius-1on.pages.dev/en/faq" />
+  </url>
+  <url>
+    <loc>https://qr-genius-1on.pages.dev/fr/faq</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://qr-genius-1on.pages.dev/en/faq" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://qr-genius-1on.pages.dev/ar/faq" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://qr-genius-1on.pages.dev/fr/faq" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://qr-genius-1on.pages.dev/es/faq" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://qr-genius-1on.pages.dev/en/faq" />
+  </url>
+  <url>
+    <loc>https://qr-genius-1on.pages.dev/es/faq</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://qr-genius-1on.pages.dev/en/faq" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://qr-genius-1on.pages.dev/ar/faq" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://qr-genius-1on.pages.dev/fr/faq" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://qr-genius-1on.pages.dev/es/faq" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://qr-genius-1on.pages.dev/en/faq" />
   </url>
 </urlset>

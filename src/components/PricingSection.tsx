@@ -34,7 +34,7 @@ export const PricingSection: React.FC<PricingSectionProps> = ({ lang, onSelectFr
           {/* Free Plan */}
           <div className="bg-white rounded-2xl border-2 border-indigo-600/30 p-5 sm:p-8 shadow-sm flex flex-col justify-between relative overflow-hidden">
             <div className="absolute top-0 right-0 rtl:right-auto rtl:left-0 bg-indigo-600 text-white text-[11px] font-bold px-4 py-1 rounded-bl-xl rtl:rounded-bl-none rtl:rounded-br-xl uppercase tracking-wider">
-              Forever Free
+              {lang === 'ar' ? 'مجاني إلى الأبد' : 'Forever Free'}
             </div>
 
             <div>
@@ -42,12 +42,12 @@ export const PricingSection: React.FC<PricingSectionProps> = ({ lang, onSelectFr
                 {t.pro.freeTitle}
               </div>
               <p className="text-xs text-slate-500 mb-6">
-                All 12 generators with unlimited scans, full customization, and SVG/PDF downloads.
+                {lang === 'ar' ? 'جميع الأدوات الاثنتي عشرة مع مسح غير محدود وتخصيص كامل وتنزيل SVG وPDF.' : 'All 12 generators with unlimited scans, full customization, and SVG/PDF downloads.'}
               </p>
 
               <div className="flex items-baseline gap-1 mb-8">
                 <span className="text-4xl font-extrabold text-slate-900">$0</span>
-                <span className="text-xs text-slate-500 font-medium">/ forever</span>
+                <span className="text-xs text-slate-500 font-medium">{lang === 'ar' ? '/ مدى الحياة' : '/ forever'}</span>
               </div>
 
               <ul className="space-y-3.5 text-xs text-slate-700 mb-8">
@@ -77,19 +77,19 @@ export const PricingSection: React.FC<PricingSectionProps> = ({ lang, onSelectFr
             <div>
               <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-indigo-500/20 text-indigo-300 text-[10px] font-semibold mb-3">
                 <Sparkles className="w-3 h-3" />
-                <span>Enterprise Grade</span>
+                <span>{lang === 'ar' ? 'مستوى المؤسسات' : 'Enterprise Grade'}</span>
               </div>
 
               <div className="text-xl font-bold text-white mb-2">
                 {t.pro.proTitle}
               </div>
               <p className="text-xs text-slate-300 mb-6">
-                For marketing teams, agencies, and brands requiring dynamic URLs, analytics, and bulk generation.
+                {lang === 'ar' ? 'لفرق التسويق والوكالات والعلامات التجارية التي تحتاج إلى روابط ديناميكية وتحليلات وإنشاء جماعي.' : 'For marketing teams, agencies, and brands requiring dynamic URLs, analytics, and bulk generation.'}
               </p>
 
               <div className="flex items-baseline gap-1 mb-8">
                 <span className="text-4xl font-extrabold text-white">$19</span>
-                <span className="text-xs text-slate-400 font-medium">/ month (billed annually)</span>
+                <span className="text-xs text-slate-400 font-medium">{lang === 'ar' ? '/ شهرياً (تُدفع سنوياً)' : '/ month (billed annually)'}</span>
               </div>
 
               <ul className="space-y-3.5 text-xs text-slate-200 mb-8">
@@ -128,20 +128,20 @@ export const PricingSection: React.FC<PricingSectionProps> = ({ lang, onSelectFr
               <div className="w-12 h-12 rounded-xl bg-indigo-100 text-indigo-600 flex items-center justify-center mb-4">
                 <Shield className="w-6 h-6" />
               </div>
-              <h3 className="text-lg font-bold mb-2">QR GENIUS Enterprise Preview</h3>
+              <h3 className="text-lg font-bold mb-2">{lang === 'ar' ? 'معاينة QR GENIUS للمؤسسات' : 'QR GENIUS Enterprise Preview'}</h3>
               <p className="text-xs text-slate-600 leading-relaxed mb-4">
-                QR GENIUS core generator is 100% free and functional. Dynamic QR code redirect hosting, custom subdomains, and webhook tracking are prepared for enterprise SLA clients.
+                {lang === 'ar' ? 'أداة إنشاء QR GENIUS الأساسية مجانية وتعمل بالكامل. أما استضافة إعادة توجيه الرموز الديناميكية والنطاقات الفرعية المخصصة وتتبع Webhook فهي مخصصة لعملاء المؤسسات.' : 'QR GENIUS core generator is 100% free and functional. Dynamic QR code redirect hosting, custom subdomains, and webhook tracking are prepared for enterprise SLA clients.'}
               </p>
               <div className="p-3 bg-slate-50 rounded-xl border border-slate-200 text-xs text-slate-700 mb-6 space-y-1.5">
-                <div>✓ No credit card or registration is needed for any free features.</div>
-                <div>✓ All standard downloads (SVG, PNG, PDF) have lifetime validity.</div>
+                <div>✓ {lang === 'ar' ? 'لا تحتاج الميزات المجانية إلى بطاقة ائتمان أو تسجيل.' : 'No credit card or registration is needed for any free features.'}</div>
+                <div>✓ {lang === 'ar' ? 'جميع التنزيلات القياسية (SVG وPNG وPDF) صالحة مدى الحياة.' : 'All standard downloads (SVG, PNG, PDF) have lifetime validity.'}</div>
               </div>
               <div className="flex gap-3">
                 <button
                   onClick={() => setShowProModal(false)}
                   className="flex-1 py-2.5 px-4 bg-indigo-600 text-white rounded-xl text-xs font-bold hover:bg-indigo-700 transition-colors"
                 >
-                  Continue Free Use
+                  {lang === 'ar' ? 'متابعة الاستخدام المجاني' : 'Continue Free Use'}
                 </button>
               </div>
             </div>
