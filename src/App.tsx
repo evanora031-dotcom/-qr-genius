@@ -39,10 +39,10 @@ const PATHS: Partial<Record<PageId, string>> = Object.fromEntries(
 export default function App() {
   const getInitialPage = (): PageId => {
     if (typeof window === 'undefined') return 'home';
-    const path = window.location.pathname.replace(/\\/+$/, '') || '/';
+    const path = window.location.pathname.replace(/\/+$/, '') || '/';
     if (ROUTES[path]) return ROUTES[path];
     // Keep old hash links working while moving to crawlable paths.
-    const hash = window.location.hash.replace(/^#\\/?/, '').toLowerCase() as PageId;
+    const hash = window.location.hash.replace(/^#\/?/, '').toLowerCase() as PageId;
     const validPages: PageId[] = [
       'home', 'generator', 'url', 'wifi', 'whatsapp', 'business',
       'about', 'contact', 'privacy', 'terms', 'faq', 'sitemap', 'robots'
