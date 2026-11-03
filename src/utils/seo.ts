@@ -422,7 +422,7 @@ export function updateDocumentSEO(pageId: PageId, lang: Language) {
   }
   descTag.setAttribute('content', meta.description);
 
-  const setMeta = (selector: string, attribute: string, value: string) => {
+  const setMeta = (selector: string, value: string) => {
     let tag = document.querySelector(selector);
     if (!tag) {
       tag = document.createElement('meta');
@@ -433,11 +433,11 @@ export function updateDocumentSEO(pageId: PageId, lang: Language) {
     tag.setAttribute('content', value);
   };
 
-  setMeta('meta[property="og:title"]', 'property', meta.title);
-  setMeta('meta[property="og:description"]', 'property', meta.description);
-  setMeta('meta[property="og:url"]', 'property', canonicalUrl);
-  setMeta('meta[name="twitter:title"]', 'name', meta.title);
-  setMeta('meta[name="twitter:description"]', 'name', meta.description);
+  setMeta('meta[property="og:title"]', meta.title);
+  setMeta('meta[property="og:description"]', meta.description);
+  setMeta('meta[property="og:url"]', canonicalUrl);
+  setMeta('meta[name="twitter:title"]', meta.title);
+  setMeta('meta[name="twitter:description"]', meta.description);
 
   let canonical = document.querySelector('link[rel="canonical"]') as HTMLLinkElement | null;
   if (!canonical) {
