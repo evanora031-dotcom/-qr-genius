@@ -173,17 +173,17 @@ export const QRPreviewCard: React.FC<QRPreviewCardProps> = ({
           type="button"
           onClick={handleManualSave}
           className="inline-flex items-center gap-1 text-[11px] font-semibold text-slate-500 hover:text-indigo-600 transition-colors"
-          title="Save to local browser history"
+          title={lang === 'ar' ? 'حفظ في سجل المتصفح المحلي' : 'Save to local browser history'}
         >
           {saveSuccess ? (
             <>
               <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
-              <span className="text-emerald-600">Saved</span>
+              <span className="text-emerald-600">{lang === 'ar' ? 'تم الحفظ' : 'Saved'}</span>
             </>
           ) : (
             <>
               <Bookmark className="w-3.5 h-3.5" />
-              <span>Save</span>
+              <span>{lang === 'ar' ? 'حفظ' : 'Save'}</span>
             </>
           )}
         </button>
@@ -224,7 +224,7 @@ export const QRPreviewCard: React.FC<QRPreviewCardProps> = ({
               type="button"
               onClick={() => setShowResMenu(!showResMenu)}
               className="px-3 bg-indigo-700 hover:bg-indigo-800 text-white border-l border-indigo-500 transition-colors flex items-center justify-center"
-              aria-label="Select PNG resolution"
+              aria-label={lang === 'ar' ? 'اختيار دقة PNG' : 'Select PNG resolution'}
             >
               <ChevronDown className="w-4 h-4" />
             </button>
@@ -269,20 +269,20 @@ export const QRPreviewCard: React.FC<QRPreviewCardProps> = ({
             type="button"
             onClick={handleDownloadSVG}
             className="py-2.5 px-3 bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 rounded-xl text-xs font-bold transition-colors flex items-center justify-center gap-1.5"
-            title="Download infinite resolution vector SVG"
+            title={lang === 'ar' ? 'تنزيل SVG متجهي بدقة قابلة للتكبير' : 'Download infinite resolution vector SVG'}
           >
             <FileCode className="w-3.5 h-3.5 text-indigo-600" />
-            <span>SVG Vector</span>
+            <span>{lang === 'ar' ? 'ملف SVG متجهي' : 'SVG Vector'}</span>
           </button>
 
           <button
             type="button"
             onClick={handleDownloadPDF}
             className="py-2.5 px-3 bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 rounded-xl text-xs font-bold transition-colors flex items-center justify-center gap-1.5"
-            title="Download printable A4 card PDF"
+            title={lang === 'ar' ? 'تنزيل ملف PDF للطباعة بحجم A4' : 'Download printable A4 card PDF'}
           >
             <FileText className="w-3.5 h-3.5 text-indigo-600" />
-            <span>Print PDF</span>
+            <span>{lang === 'ar' ? 'طباعة PDF' : 'Print PDF'}</span>
           </button>
         </div>
 
@@ -296,7 +296,7 @@ export const QRPreviewCard: React.FC<QRPreviewCardProps> = ({
             {copySuccess ? (
               <>
                 <Check className="w-3.5 h-3.5 text-emerald-600" />
-                <span className="text-emerald-700 font-bold">Copied!</span>
+                <span className="text-emerald-700 font-bold">{lang === 'ar' ? 'تم النسخ!' : 'Copied!'}</span>
               </>
             ) : (
               <>
@@ -324,7 +324,7 @@ export const QRPreviewCard: React.FC<QRPreviewCardProps> = ({
             <div className="flex items-center justify-between pb-3 mb-4 border-b border-slate-100">
               <h3 className="text-sm font-bold flex items-center gap-2">
                 <Scan className="w-4 h-4 text-indigo-600" />
-                <span>QR Verification Helper</span>
+                <span>{lang === 'ar' ? 'مساعد التحقق من رمز QR' : 'QR Verification Helper'}</span>
               </h3>
               <button
                 type="button"
@@ -336,7 +336,7 @@ export const QRPreviewCard: React.FC<QRPreviewCardProps> = ({
             </div>
 
             <p className="text-xs text-slate-600 mb-3 leading-relaxed">
-              Scan this code with an iOS Camera, Google Lens, or any QR scanner. Below is the exact payload encoded into the code:
+              {lang === 'ar' ? 'امسح هذا الرمز باستخدام كاميرا iOS أو Google Lens أو أي قارئ QR. فيما يلي البيانات المشفّرة داخل الرمز:' : 'Scan this code with an iOS Camera, Google Lens, or any QR scanner. Below is the exact payload encoded into the code:'}
             </p>
 
             <div className="p-3 bg-slate-50 rounded-xl border border-slate-200 mb-3 font-mono text-[11px] text-slate-800 break-all max-h-28 overflow-y-auto">
@@ -360,12 +360,12 @@ export const QRPreviewCard: React.FC<QRPreviewCardProps> = ({
 
             <div className="text-[11px] text-slate-500 space-y-1 mb-4">
               <div className="flex items-center justify-between">
-                <span>Error Correction Level</span>
+                <span>{lang === 'ar' ? 'مستوى تصحيح الأخطاء' : 'Error Correction Level'}</span>
                 <span className="font-semibold text-slate-700">Level {config.errorCorrectionLevel}</span>
               </div>
               <div className="flex items-center justify-between">
-                <span>Specification</span>
-                <span className="font-semibold text-slate-700">ISO/IEC 18004 Standard</span>
+                <span>{lang === 'ar' ? 'المواصفة' : 'Specification'}</span>
+                <span className="font-semibold text-slate-700">ISO/IEC 18004 {lang === 'ar' ? 'المعيار' : 'Standard'}</span>
               </div>
             </div>
 
@@ -379,14 +379,14 @@ export const QRPreviewCard: React.FC<QRPreviewCardProps> = ({
                 className="flex-1 py-2 px-3 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-xs font-semibold transition-colors flex items-center justify-center gap-1.5"
               >
                 <Copy className="w-3.5 h-3.5" />
-                <span>Copy Payload</span>
+                <span>{lang === 'ar' ? 'نسخ البيانات' : 'Copy Payload'}</span>
               </button>
               <button
                 type="button"
                 onClick={() => setShowScanModal(false)}
                 className="flex-1 py-2 px-3 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-xs font-bold transition-colors"
               >
-                Close
+                {lang === 'ar' ? 'إغلاق' : 'Close'}
               </button>
             </div>
           </div>
