@@ -34,6 +34,12 @@ const FEATURE_CARDS: { type: QRType; titleKey: string; descKey: string; icon: Re
 
 export const HomePage: React.FC<HomePageProps> = ({ lang, onNavigate }) => {
   const t = translations[lang];
+  const featureCards = lang === 'ar' ? [
+    { ...FEATURE_CARDS[0], titleKey: 'رابط موقع إلكتروني', descKey: 'وجّه الزوار مباشرةً إلى أي صفحة أو متجر أو رابط باستخدام رموز موثوقة.' },
+    { ...FEATURE_CARDS[1], titleKey: 'شبكة Wi-Fi', descKey: 'يمكن للضيوف الاتصال بالشبكة فوراً دون كتابة كلمات مرور طويلة.' },
+    { ...FEATURE_CARDS[2], titleKey: 'محادثة واتساب', descKey: 'افتح محادثات واتساب مباشرةً مع العملاء ورسالة جاهزة.' },
+    { ...FEATURE_CARDS[3], titleKey: 'جهة اتصال vCard', descKey: 'بطاقة عمل رقمية تحفظ الاسم والهاتف والبريد والعنوان بنقرة واحدة.' }
+  ] : FEATURE_CARDS;
 
   return (
     <div className="w-full overflow-x-hidden">
@@ -230,7 +236,7 @@ export const HomePage: React.FC<HomePageProps> = ({ lang, onNavigate }) => {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {FEATURE_CARDS.map((card) => {
+            {featureCards.map((card) => {
               return (
                 <div
                   key={card.type}
@@ -289,7 +295,7 @@ export const HomePage: React.FC<HomePageProps> = ({ lang, onNavigate }) => {
                 {lang === 'ar' ? 'اختر نوع البيانات' : 'Choose Your Payload'}
               </h3>
               <p className="text-xs text-slate-600 leading-relaxed">
-                Pick from 12 industry-standard formats: Web URL, Wi-Fi network credentials, WhatsApp chat, vCard business card, Email, or SMS.
+                {lang === 'ar' ? 'اختر من بين 12 نوعاً قياسياً: رابط موقع، بيانات شبكة Wi-Fi، محادثة واتساب، بطاقة vCard، بريد إلكتروني أو رسالة SMS.' : 'Pick from 12 industry-standard formats: Web URL, Wi-Fi network credentials, WhatsApp chat, vCard business card, Email, or SMS.'}
               </p>
             </div>
 
@@ -302,7 +308,7 @@ export const HomePage: React.FC<HomePageProps> = ({ lang, onNavigate }) => {
                 {lang === 'ar' ? 'أضف هويتك وخصص الرمز' : 'Brand &amp; Customize'}
               </h3>
               <p className="text-xs text-slate-600 leading-relaxed">
-                Style your QR code with your brand colors, gradients, custom dot patterns, corner frame shapes, and embed your company logo.
+                {lang === 'ar' ? 'خصص رمز QR بألوان علامتك التجارية والتدرجات وأنماط النقاط وأشكال الإطارات، وأضف شعار شركتك.' : 'Style your QR code with your brand colors, gradients, custom dot patterns, corner frame shapes, and embed your company logo.'}
               </p>
             </div>
 
@@ -315,7 +321,7 @@ export const HomePage: React.FC<HomePageProps> = ({ lang, onNavigate }) => {
                 {lang === 'ar' ? 'صدّر واطبع' : 'Export Vector &amp; Print'}
               </h3>
               <p className="text-xs text-slate-600 leading-relaxed">
-                Download infinite-resolution vector SVG for professional print shops, high-res PNG (up to 2048px), or ready-to-print A4 PDF sheets.
+                {lang === 'ar' ? 'نزّل ملف SVG متجهياً للطباعة الاحترافية أو PNG بدقة تصل إلى 2048 بكسل أو صفحات PDF جاهزة للطباعة بحجم A4.' : 'Download infinite-resolution vector SVG for professional print shops, high-res PNG (up to 2048px), or ready-to-print A4 PDF sheets.'}
               </p>
             </div>
           </div>
@@ -334,7 +340,7 @@ export const HomePage: React.FC<HomePageProps> = ({ lang, onNavigate }) => {
                 {lang === 'ar' ? 'مصمم للطباعة عالية الدقة واللوحات والتسويق اليومي' : 'Built for High-DPI Print, Billboards, and Daily Marketing'}
               </h2>
               <p className="text-sm text-slate-600 leading-relaxed">
-                Unlike services that lock your downloads behind paywalls or insert temporary tracking links that break when subscriptions expire, QR GENIUS creates permanent, static ISO-compliant QR codes that work indefinitely.
+                {lang === 'ar' ? 'على عكس الخدمات التي تقيّد التنزيل أو تستخدم روابط تتبع مؤقتة، ينشئ QR GENIUS رموز QR ثابتة ومتوافقة مع معيار ISO وتظل صالحة ما دامت وجهتها متاحة.' : 'Unlike services that lock your downloads behind paywalls or insert temporary tracking links that break when subscriptions expire, QR GENIUS creates permanent, static ISO-compliant QR codes that work indefinitely.'}
               </p>
 
               <div className="space-y-3.5 pt-2">
@@ -358,8 +364,8 @@ export const HomePage: React.FC<HomePageProps> = ({ lang, onNavigate }) => {
             <div className="lg:col-span-6 grid grid-cols-2 gap-4">
               <div className="p-6 rounded-2xl bg-slate-50 border border-slate-200 text-left rtl:text-right">
                 <div className="text-3xl font-extrabold text-indigo-600 mb-1">100%</div>
-                <div className="text-xs font-bold text-slate-900 mb-1">Local &amp; Private</div>
-                <p className="text-[11px] text-slate-500">Processed entirely in-browser without database logging.</p>
+                <div className="text-xs font-bold text-slate-900 mb-1">{lang === 'ar' ? 'محلي وخاص' : 'Local &amp; Private'}</div>
+                <p className="text-[11px] text-slate-500">{lang === 'ar' ? 'تتم المعالجة بالكامل داخل المتصفح دون تسجيل البيانات في قاعدة بيانات.' : 'Processed entirely in-browser without database logging.'}</p>
               </div>
 
               <div className="p-6 rounded-2xl bg-slate-50 border border-slate-200 text-left rtl:text-right">
