@@ -52,7 +52,7 @@ export const CustomizationPanel: React.FC<CustomizationPanelProps> = ({
 
     setUploadError(null);
     if (file.size > 2 * 1024 * 1024) {
-      setUploadError('Please upload an image smaller than 2MB');
+      setUploadError(lang === 'ar' ? 'يرجى رفع صورة بحجم أقل من 2 ميجابايت.' : 'Please upload an image smaller than 2MB');
       return;
     }
 
@@ -286,10 +286,10 @@ export const CustomizationPanel: React.FC<CustomizationPanelProps> = ({
                       onChange={(e) => onChangeConfig({ gradientDirection: e.target.value as any })}
                       className="w-full px-2.5 py-1.5 rounded-lg border border-slate-200 text-xs text-slate-800 bg-white"
                     >
-                      <option value="to-br">Diagonal (Top-Left to Bottom-Right)</option>
-                      <option value="to-r">Horizontal (Left to Right)</option>
-                      <option value="to-b">Vertical (Top to Bottom)</option>
-                      <option value="radial">Radial Glow</option>
+                      <option value="to-br">{lang === 'ar' ? 'قطري (من أعلى اليسار إلى أسفل اليمين)' : 'Diagonal (Top-Left to Bottom-Right)'}</option>
+                      <option value="to-r">{lang === 'ar' ? 'أفقي (من اليسار إلى اليمين)' : 'Horizontal (Left to Right)'}</option>
+                      <option value="to-b">{lang === 'ar' ? 'عمودي (من الأعلى إلى الأسفل)' : 'Vertical (Top to Bottom)'}</option>
+                      <option value="radial">{lang === 'ar' ? 'توهج دائري' : 'Radial Glow'}</option>
                     </select>
                   </div>
                 </div>
@@ -430,7 +430,7 @@ export const CustomizationPanel: React.FC<CustomizationPanelProps> = ({
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
                 {[
                   { id: 'square', label: t.customizer.shapeSquare },
-                  { id: 'dot', label: 'Circle / Dot' },
+                  { id: 'dot', label: (lang === 'ar' ? 'دائرة / نقطة' : 'Circle / Dot') },
                   { id: 'rounded', label: t.customizer.shapeRounded },
                   { id: 'diamond', label: t.customizer.shapeDiamond },
                 ].map((item) => (
