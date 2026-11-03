@@ -62,3 +62,34 @@ for (const page of pages) {
 // The root fallback is the English home page; locale-prefixed URLs have their own static metadata.
 await writeFile(path.join(distDir, 'index.html'), renderPage('en', 'home'), 'utf8');
 console.log(`Generated ${generated} localized HTML entry points with page-specific SEO metadata.`);
+
+// Generate the sitemap from the same localized route metadata used for canonical tags.
+// This keeps sitemap URLs and hreflang alternates in sync with prerendered pages.
+function escapeXml(value: string): string {
+  return value.replaceAll('&', '&amp;').replaceAll('"', '&quot;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll("'", '&apos;');
+}
+
+const sitemapEntries = pages.flatMap((page) =>
+  locales.map((locale) => {
+    const canonicalPath = SEO_METADATA[page][locale].canonicalPath;
+    const loc = `${baseUrl}${localizedPath(canonicalPath, locale)}`;
+    const alternates = locales.map((alternateLocale) => {
+      const alternatePath = localizedPath(SEO_METADATA[page][alternateLocale].canonicalPath, alternateLocale);
+      return `    <xhtml:link rel="alternate" hreflang="${alternateLocale}" href="${escapeXml(`${baseUrl}${alternatePath}`)}" />`;
+    });
+    const defaultPath = localizedPath(SEO_METADATA[page].en.canonicalPath, 'en');
+    alternates.push(`    <xhtml:link rel="alternate" hreflang="x-default" href="${escapeXml(`${baseUrl}${defaultPath}`)}" />`);
+    return `  <url>\n    <loc>${escapeXml(loc)}</loc>\n${alternates.join('\n')}\n  </url>`;
+  })
+);
+
+const sitemap = [
+  '<?xml version="1.0" encoding="UTF-8"?>',
+  '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">',
+  ...sitemapEntries,
+  '</urlset>',
+  ''
+].join('\n');
+
+await writeFile(path.join(distDir, 'sitemap.xml'), sitemap, 'utf8');
+console.log(`Generated sitemap.xml with ${sitemapEntries.length} canonical localized URLs.`);
