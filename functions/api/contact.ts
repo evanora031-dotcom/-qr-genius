@@ -96,10 +96,6 @@ export async function onRequestPost(context: {
     return json({ error: "Unsupported content type" }, 415);
   }
 
-  if (!env.RESEND_API_KEY || !env.RESEND_FROM_EMAIL) {
-    return json({ error: "Email service is not configured" }, 503);
-  }
-
   let data: Record<string, unknown>;
   try {
     data = JSON.parse(await readBoundedBody(request)) as Record<string, unknown>;
@@ -112,12 +108,6 @@ export async function onRequestPost(context: {
     }
     return json({ error: "Invalid request" }, 400);
   }
-
-  // Honeypot: silently accept automated submissions without sending email.
-  if (typeof data.company === "string" && data.company.trim()) {
-    return json({ ok: true });
-  }
-
 
   // Enforce Turnstile whenever the server-side secret is configured.
   // Hostnames are environment-specific; never include local hosts in production.
@@ -173,6 +163,15 @@ export async function onRequestPost(context: {
     } catch {
       return json({ error: "Security verification unavailable" }, 503);
     }
+  }
+
+  // Honeypot is evaluated only after Turnstile so it cannot bypass verification.
+  if (typeof data.company === "string" && data.company.trim()) {
+    return json({ ok: true });
+  }
+
+  if (!env.RESEND_API_KEY || !env.RESEND_FROM_EMAIL) {
+    return json({ error: "Email service is not configured" }, 503);
   }
 
   const name = typeof data.name === "string" ? data.name.trim() : "";
