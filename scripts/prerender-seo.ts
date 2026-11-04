@@ -5,7 +5,43 @@ import { SEO_METADATA } from '../src/utils/seo.ts';
 
 const projectRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const distDir = path.join(projectRoot, 'dist');
-const template = await readFile(path.join(distDir, 'index.html'), 'utf8');
+const rawTemplate = await readFile(path.join(distDir, 'index.html'), 'utf8');
+// Keep the prerendered SEO fallback readable and visually intentional while the app bundle loads.
+const fallbackStyles = `<style>
+  .seo-static-content {
+    width: min(100% - 2rem, 880px);
+    margin: clamp(2rem, 7vh, 5rem) auto;
+    padding: clamp(1.5rem, 4vw, 3rem);
+    color: #172033;
+    background: #fff;
+    border: 1px solid #e8eaf2;
+    border-radius: 24px;
+    box-shadow: 0 18px 55px rgba(30, 41, 59, .08);
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    line-height: 1.75;
+  }
+  .seo-static-content::before {
+    content: "QR GENIUS";
+    display: inline-block;
+    margin-bottom: 1.25rem;
+    color: #635bdb;
+    font-size: .78rem;
+    font-weight: 800;
+    letter-spacing: .16em;
+  }
+  .seo-static-content h1 { margin: 0 0 1rem; color: #111827; font-size: clamp(1.8rem, 4vw, 2.6rem); line-height: 1.2; font-weight: 800; }
+  .seo-static-content h2 { margin: 1.8rem 0 .5rem; color: #202b45; font-size: 1.25rem; font-weight: 750; }
+  .seo-static-content h3 { margin: 1.2rem 0 .35rem; font-size: 1rem; font-weight: 700; }
+  .seo-static-content p { margin: .65rem 0; color: #536078; }
+  .seo-static-content ol, .seo-static-content ul { padding-inline-start: 1.4rem; color: #536078; }
+  .seo-static-content li { margin: .35rem 0; }
+  .seo-static-content a { color: #5145cd; font-weight: 650; text-decoration: underline; text-underline-offset: 3px; }
+  html[dir="rtl"] .seo-static-content { text-align: right; font-family: Cairo, system-ui, sans-serif; }
+  @media (max-width: 640px) {
+    .seo-static-content { width: calc(100% - 1.25rem); margin: 1rem auto; padding: 1.25rem; border-radius: 18px; }
+  }
+</style>`;
+const template = rawTemplate.replace('</head>', fallbackStyles + '\\n</head>');
 
 const locales = ['en', 'ar', 'fr', 'es'] as const;
 const pages = ['home', 'generator', 'url', 'wifi', 'whatsapp', 'business', 'about', 'contact', 'privacy', 'terms', 'faq'] as const;
