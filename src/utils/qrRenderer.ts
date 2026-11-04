@@ -54,7 +54,7 @@ export function isLogoArea(
 
 // Generate the matrix from content with fallback resilience for high density payloads
 export function getQRMatrix(content: string, errorCorrectionLevel: QRConfig['errorCorrectionLevel']) {
-  const safeContent = (content || '').trim() || 'https://qrgenius.app';
+  const safeContent = (content || '').trim() || 'https://getqrgenius.com';
   try {
     const qr = QRCode.create(safeContent, {
       errorCorrectionLevel: errorCorrectionLevel || 'M'
@@ -70,7 +70,7 @@ export function getQRMatrix(content: string, errorCorrectionLevel: QRConfig['err
         const qrL = QRCode.create(safeContent, { errorCorrectionLevel: 'L' });
         return qrL.modules;
       } catch {
-        const fallback = QRCode.create('https://qrgenius.app', { errorCorrectionLevel: 'M' });
+        const fallback = QRCode.create('https://getqrgenius.com', { errorCorrectionLevel: 'M' });
         return fallback.modules;
       }
     }
