@@ -5,6 +5,7 @@ import { Language } from '../types';
 
 type TurnstileOptions = {
   sitekey: string;
+  action: string;
   callback: (token: string) => void;
   'expired-callback': () => void;
   'error-callback': () => void;
@@ -72,6 +73,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ lang }) => {
         if (!active || !turnstileContainer.current || !window.turnstile) return;
         widgetId = window.turnstile.render(turnstileContainer.current, {
           sitekey: turnstileSiteKey,
+          action: 'contact',
           callback: (token) => setTurnstileToken(token),
           'expired-callback': () => setTurnstileToken(''),
           'error-callback': () => setTurnstileToken('')
