@@ -8,6 +8,7 @@ const distDir = path.join(projectRoot, 'dist');
 const rawTemplate = await readFile(path.join(distDir, 'index.html'), 'utf8');
 // Keep the prerendered SEO fallback readable and visually intentional while the app bundle loads.
 const fallbackStyles = `<style>
+  .js-enabled .seo-static-content { display: none; }
   .seo-static-content {
     width: min(100% - 2rem, 880px);
     margin: clamp(2rem, 7vh, 5rem) auto;
@@ -41,7 +42,7 @@ const fallbackStyles = `<style>
     .seo-static-content { width: calc(100% - 1.25rem); margin: 1rem auto; padding: 1.25rem; border-radius: 18px; }
   }
 </style>`;
-const template = rawTemplate.replace('</head>', fallbackStyles + '\\n</head>');
+const template = rawTemplate.replace('</head>', '<script>document.documentElement.classList.add("js-enabled");</script>' + fallbackStyles + '\\n</head>');
 
 const locales = ['en', 'ar', 'fr', 'es'] as const;
 const pages = ['home', 'generator', 'url', 'wifi', 'whatsapp', 'business', 'about', 'contact', 'privacy', 'terms', 'faq'] as const;
