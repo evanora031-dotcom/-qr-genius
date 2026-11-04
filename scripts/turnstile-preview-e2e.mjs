@@ -30,7 +30,9 @@ try {
     (r) => r.url().endsWith('/api/contact') && r.request().method() === 'POST',
     { timeout: 30000 }
   );
-  await submit.click();
+  // Submit through the native form API so the test exercises React's onSubmit
+  // handler without depending on a mobile-style click target or overlay geometry.
+  await page.locator('form').evaluate((form) => form.requestSubmit());
   const firstResponse = await firstResponsePromise;
 
   if (firstResponse.status() !== 502) {
