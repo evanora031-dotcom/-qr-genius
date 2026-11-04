@@ -32,6 +32,7 @@ export function formatWifi(data: WifiData): string {
 export function formatWhatsapp(data: WhatsappData): string {
   const cleanPhone = (data.phoneNumber || '').replace(/[^\d+]/g, '');
   const cleanCode = (data.countryCode || '').replace(/[^\d+]/g, '');
+  if (!cleanPhone) return '';
   const fullNumber = cleanPhone.startsWith('+') ? cleanPhone.slice(1) : `${cleanCode.replace('+', '')}${cleanPhone}`;
   const msg = (data.message || '').trim();
   if (!fullNumber) return '';
