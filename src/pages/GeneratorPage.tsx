@@ -65,7 +65,7 @@ const DEFAULT_PAYLOADS: Record<QRType, any> = {
   text: 'Hello from QR GENIUS! Create. Scan. Connect.',
   wifi: { ssid: 'MyHomeWiFi', password: 'SecretPassword123', encryption: 'WPA', hidden: false } as WifiData,
   whatsapp: { countryCode: '+1', phoneNumber: '5550192834', message: 'Hello! I scanned your QR code.' } as WhatsappData,
-  email: { email: 'hello@qrgenius.app', subject: 'Inquiry from QR Code', body: 'Hello QR GENIUS team,' } as EmailData,
+  email: { email: 'support@getqrgenius.com', subject: 'Inquiry from QR Code', body: 'Hello QR GENIUS team,' } as EmailData,
   phone: '+15552345678',
   sms: { phoneNumber: '+15559876543', message: 'Hi there! Scanned your SMS QR code.' } as SmsData,
   instagram: 'qrgeniusapp',
