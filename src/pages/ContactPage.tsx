@@ -31,11 +31,12 @@ export const ContactPage: React.FC<ContactPageProps> = ({ lang }) => {
       return;
     }
 
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-      setSubmitted(true);
-    }, 600);
+    setFormError(text(
+      'The contact form is temporarily unavailable. Your message has not been sent. Please try again later.',
+      'نموذج التواصل غير متاح مؤقتاً. لم يتم إرسال رسالتك. يرجى المحاولة لاحقاً.',
+      'Le formulaire de contact est temporairement indisponible. Votre message n’a pas été envoyé. Veuillez réessayer plus tard.',
+      'El formulario de contacto no está disponible temporalmente. Tu mensaje no se ha enviado. Inténtalo de nuevo más tarde.'
+    ));
   };
 
   return (
@@ -84,7 +85,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ lang }) => {
                   <span className="block text-[10px] text-slate-400 uppercase font-semibold">
                     {text('Email Address', 'البريد الإلكتروني', 'Adresse e-mail', 'Correo electrónico')}
                   </span>
-                  <span className="font-mono text-white">support@qrgenius.app</span>
+                  <span className="text-white">{text('Not available yet', 'غير متاح حالياً', 'Pas encore disponible', 'Aún no disponible')}</span>
                 </div>
               </div>
 
@@ -97,7 +98,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ lang }) => {
                     {text('Response Time', 'وقت الرد', 'Délai de réponse', 'Tiempo de respuesta')}
                   </span>
                   <span className="text-white">
-                    {text('Within 24 business hours', 'خلال 24 ساعة عمل', 'Sous 24 heures ouvrées', 'En un plazo de 24 horas laborables')}
+                    {text('Contact service temporarily unavailable', 'خدمة التواصل غير متاحة مؤقتاً', 'Service de contact temporairement indisponible', 'Servicio de contacto temporalmente no disponible')}
                   </span>
                 </div>
               </div>
