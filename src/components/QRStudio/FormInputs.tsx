@@ -20,6 +20,14 @@ import {
 } from '../../types';
 import { translations } from '../../i18n/translations';
 
+
+const FORM_UI = {
+en:{details:'Details',urlHint:'{ui.urlHint}',plainHint:'Plain text payload directly displayed upon scan',ssid:'e.g. Office_Guest_5G',password:'Network password',standard:'WPA / WPA2 / WPA3 (Standard)',legacy:'WEP (Legacy)',open:'None (Open Network)',hidden:'SSID is not broadcasted',phone:'e.g. 5550192834',waMessage:'Hello! I would like more information about your services...',subject:'Inquiry / Feedback',body:'Hello, I am reaching out regarding...',sms:'Enter pre-filled SMS message text here...',instagram:'{ui.instagram}',facebook:'{ui.facebook}',youtube:'{ui.youtube}',addressMode:'Search Address / Place',gpsMode:'GPS Coordinates (Lat / Lng)',address:'e.g. Eiffel Tower, Paris',notes:'Scan to save to mobile contacts directly'},
+ar:{details:'التفاصيل',urlHint:'أدخل رابط صفحة ويب صالحاً، مثل https://yourdomain.com',plainHint:'يظهر النص مباشرةً عند مسح الرمز',ssid:'مثال: Office_Guest_5G',password:'كلمة مرور الشبكة',standard:'WPA / WPA2 / WPA3 (قياسي)',legacy:'WEP (قديم)',open:'بدون تشفير (شبكة مفتوحة)',hidden:'اسم الشبكة غير معلن',phone:'مثال: 5550192834',waMessage:'مرحباً! أود معرفة المزيد عن خدماتكم...',subject:'استفسار / ملاحظات',body:'أتواصل معكم بخصوص...',sms:'أدخل نص الرسالة القصيرة هنا...',instagram:'اسم مستخدم Instagram أو رابط الملف الشخصي',facebook:'صفحة Facebook أو رابط الملف الشخصي',youtube:'قناة YouTube أو رابط الفيديو أو المعرّف',addressMode:'البحث عن عنوان / مكان',gpsMode:'إحداثيات GPS (خط العرض / الطول)',address:'مثال: برج إيفل، باريس',notes:'امسح الرمز لحفظ جهة الاتصال على الهاتف مباشرةً'},
+fr:{details:'Détails',urlHint:'Saisissez un lien web valide (ex. https://votresite.com).',plainHint:'Le texte s’affiche directement après le scan',ssid:'Ex. : Office_Guest_5G',password:'Mot de passe Wi-Fi',standard:'WPA / WPA2 / WPA3 (Standard)',legacy:'WEP (Ancien)',open:'Aucun (réseau ouvert)',hidden:'Le SSID n’est pas diffusé',phone:'Ex. : 5550192834',waMessage:'Bonjour ! Je souhaite en savoir plus sur vos services...',subject:'Demande / Commentaire',body:'Je vous contacte au sujet de...',sms:'Saisissez le texte du SMS à préremplir...',instagram:'Nom d’utilisateur ou lien du profil Instagram',facebook:'Page Facebook ou lien du profil',youtube:'Chaîne YouTube, lien vidéo ou identifiant',addressMode:'Rechercher une adresse / un lieu',gpsMode:'Coordonnées GPS (latitude / longitude)',address:'Ex. : Tour Eiffel, Paris',notes:'Scannez pour enregistrer le contact sur le téléphone'},
+es:{details:'Detalles',urlHint:'Introduce un enlace web válido (p. ej., https://tusitio.com).',plainHint:'El texto se muestra directamente al escanear',ssid:'Ej.: Office_Guest_5G',password:'Contraseña de la red',standard:'WPA / WPA2 / WPA3 (Estándar)',legacy:'WEP (Antiguo)',open:'Ninguno (red abierta)',hidden:'El SSID no se transmite',phone:'Ej.: 5550192834',waMessage:'¡Hola! Me gustaría obtener más información sobre sus servicios...',subject:'Consulta / Comentarios',body:'Me pongo en contacto con ustedes sobre...',sms:'Introduce el texto del SMS que se preparará...',instagram:'Nombre de usuario o enlace del perfil de Instagram',facebook:'Página de Facebook o enlace del perfil',youtube:'Canal de YouTube, enlace del vídeo o ID',addressMode:'Buscar dirección / lugar',gpsMode:'Coordenadas GPS (latitud / longitud)',address:'Ej.: Torre Eiffel, París',notes:'Escanea para guardar el contacto en el teléfono'}
+};
+
 interface FormInputsProps {
   type: QRType;
   lang: Language;
@@ -40,6 +48,7 @@ export const FormInputs: React.FC<FormInputsProps> = ({
   formattedContent
 }) => {
   const t = translations[lang];
+  const ui = FORM_UI[lang];
   const [copied, setCopied] = React.useState(false);
   const [showWifiPassword, setShowWifiPassword] = React.useState(false);
 
@@ -61,7 +70,7 @@ export const FormInputs: React.FC<FormInputsProps> = ({
     <div className="qr-studio-card w-full box-border bg-white rounded-2xl border border-slate-200 p-4 sm:p-6 shadow-sm overflow-hidden">
       <div className="flex items-center justify-between pb-3 sm:pb-4 mb-4 sm:mb-5 border-b border-slate-100">
         <h3 className="text-sm font-bold text-slate-900">
-          {t.qrTypes[type].label} Details
+          {t.qrTypes[type].label} {ui.details}
         </h3>
         <div className="flex items-center gap-1.5 sm:gap-2">
           <button
@@ -122,7 +131,7 @@ export const FormInputs: React.FC<FormInputsProps> = ({
               className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-600/30 focus:border-indigo-600 transition-colors resize-y"
             />
             <div className="flex justify-between items-center mt-1 text-[11px] text-slate-400">
-              <span>{lang === 'ar' ? 'يظهر النص مباشرةً عند مسح الرمز' : 'Plain text payload directly displayed upon scan'}</span>
+              <span>{ui.plainHint}</span>
               <span>{(rawPayload || '').length} {t.forms.characterCount}</span>
             </div>
           </div>
@@ -142,7 +151,7 @@ export const FormInputs: React.FC<FormInputsProps> = ({
                     type="text"
                     value={wifi.ssid || ''}
                     onChange={(e) => updateField('ssid', e.target.value)}
-                    placeholder={lang === 'ar' ? 'مثال: Office_Guest_5G' : 'e.g. Office_Guest_5G'}
+                    placeholder={ui.ssid}
                     className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-600/30 focus:border-indigo-600"
                   />
                 </div>
@@ -158,7 +167,7 @@ export const FormInputs: React.FC<FormInputsProps> = ({
                         value={wifi.password || ''}
                         disabled={wifi.encryption === 'nopass'}
                         onChange={(e) => updateField('password', e.target.value)}
-                        placeholder={lang === 'ar' ? 'كلمة مرور الشبكة' : 'Network password'}
+                        placeholder={ui.password}
                         className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-600/30 focus:border-indigo-600 disabled:bg-slate-100"
                       />
                       {wifi.encryption !== 'nopass' && (
@@ -182,9 +191,9 @@ export const FormInputs: React.FC<FormInputsProps> = ({
                       onChange={(e) => updateField('encryption', e.target.value)}
                       className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-indigo-600/30 focus:border-indigo-600"
                     >
-                      <option value="WPA">{lang === 'ar' ? 'WPA / WPA2 / WPA3 (قياسي)' : 'WPA / WPA2 / WPA3 (Standard)'}</option>
-                      <option value="WEP">{lang === 'ar' ? 'WEP (قديم)' : 'WEP (Legacy)'}</option>
-                      <option value="nopass">{lang === 'ar' ? 'بدون تشفير (شبكة مفتوحة)' : 'None (Open Network)'}</option>
+                      <option value="WPA">{ui.standard}</option>
+                      <option value="WEP">{ui.legacy}</option>
+                      <option value="nopass">{ui.open}</option>
                     </select>
                   </div>
                 </div>
@@ -198,7 +207,7 @@ export const FormInputs: React.FC<FormInputsProps> = ({
                     className="w-4 h-4 text-indigo-600 rounded border-slate-300 focus:ring-indigo-500"
                   />
                   <label htmlFor="wifiHidden" className="text-xs text-slate-700 select-none cursor-pointer">
-                    {t.forms.hiddenNetwork} (SSID is not broadcasted)
+                    {t.forms.hiddenNetwork} ({ui.hidden})
                   </label>
                 </div>
               </div>
@@ -233,7 +242,7 @@ export const FormInputs: React.FC<FormInputsProps> = ({
                       type="tel"
                       value={wa.phoneNumber || ''}
                       onChange={(e) => updateField('phoneNumber', e.target.value)}
-                      placeholder={lang === 'ar' ? 'مثال: 5550192834' : 'e.g. 5550192834'}
+                      placeholder={ui.phone}
                       className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-indigo-600/30 focus:border-indigo-600"
                     />
                   </div>
@@ -247,7 +256,7 @@ export const FormInputs: React.FC<FormInputsProps> = ({
                     rows={3}
                     value={wa.message || ''}
                     onChange={(e) => updateField('message', e.target.value)}
-                    placeholder={lang === 'ar' ? 'مرحباً! أود معرفة المزيد عن خدماتكم...' : 'Hello! I would like more information about your services...'}
+                    placeholder={ui.waMessage}
                     className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-indigo-600/30 focus:border-indigo-600 resize-y"
                   />
                 </div>
@@ -282,7 +291,7 @@ export const FormInputs: React.FC<FormInputsProps> = ({
                     type="text"
                     value={emailData.subject || ''}
                     onChange={(e) => updateField('subject', e.target.value)}
-                    placeholder={lang === 'ar' ? 'استفسار / ملاحظات' : 'Inquiry / Feedback'}
+                    placeholder={ui.subject}
                     className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-indigo-600/30 focus:border-indigo-600"
                   />
                 </div>
@@ -294,7 +303,7 @@ export const FormInputs: React.FC<FormInputsProps> = ({
                     rows={3}
                     value={emailData.body || ''}
                     onChange={(e) => updateField('body', e.target.value)}
-                    placeholder={lang === 'ar' ? 'أتواصل معكم بخصوص...' : 'Hello, I am reaching out regarding...'}
+                    placeholder={ui.body}
                     className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-indigo-600/30 focus:border-indigo-600 resize-y"
                   />
                 </div>
@@ -348,7 +357,7 @@ export const FormInputs: React.FC<FormInputsProps> = ({
                     rows={3}
                     value={sms.message || ''}
                     onChange={(e) => updateField('message', e.target.value)}
-                    placeholder={lang === 'ar' ? 'أدخل نص الرسالة القصيرة هنا...' : 'Enter pre-filled SMS message text here...'}
+                    placeholder={ui.sms}
                     className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-indigo-600/30 focus:border-indigo-600 resize-y"
                   />
                 </div>
@@ -421,7 +430,7 @@ export const FormInputs: React.FC<FormInputsProps> = ({
                       onChange={() => updateField('locationType', 'address')}
                       className="text-indigo-600 focus:ring-indigo-500"
                     />
-                    <span>{lang === 'ar' ? 'البحث عن عنوان / مكان' : 'Search Address / Place'}</span>
+                    <span>{ui.addressMode}</span>
                   </label>
                   <label className="flex items-center gap-1.5 cursor-pointer">
                     <input
@@ -432,7 +441,7 @@ export const FormInputs: React.FC<FormInputsProps> = ({
                       onChange={() => updateField('locationType', 'coordinates')}
                       className="text-indigo-600 focus:ring-indigo-500"
                     />
-                    <span>{lang === 'ar' ? 'إحداثيات GPS (خط العرض / الطول)' : 'GPS Coordinates (Lat / Lng)'}</span>
+                    <span>{ui.gpsMode}</span>
                   </label>
                 </div>
 
@@ -472,7 +481,7 @@ export const FormInputs: React.FC<FormInputsProps> = ({
                       type="text"
                       value={maps.address || ''}
                       onChange={(e) => updateField('address', e.target.value)}
-                      placeholder={lang === 'ar' ? 'مثال: برج إيفل، باريس' : 'e.g. Empire State Building, New York, NY'}
+                      placeholder={ui.address}
                       className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-indigo-600/30 focus:border-indigo-600"
                     />
                   </div>
@@ -608,7 +617,7 @@ export const FormInputs: React.FC<FormInputsProps> = ({
                     type="text"
                     value={vc.notes || ''}
                     onChange={(e) => updateField('notes', e.target.value)}
-                    placeholder={lang === 'ar' ? 'امسح الرمز لحفظ جهة الاتصال على الهاتف مباشرةً' : 'Scan to save to mobile contacts directly'}
+                    placeholder={ui.notes}
                     className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-indigo-600/30 focus:border-indigo-600"
                   />
                 </div>
