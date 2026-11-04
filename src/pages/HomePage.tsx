@@ -34,12 +34,12 @@ const FEATURE_CARDS: { type: QRType; titleKey: string; descKey: string; icon: Re
 
 export const HomePage: React.FC<HomePageProps> = ({ lang, onNavigate }) => {
   const t = translations[lang];
-  const featureCards = lang === 'ar' ? [
-    { ...FEATURE_CARDS[0], titleKey: 'رابط موقع إلكتروني', descKey: 'وجّه الزوار مباشرةً إلى أي صفحة أو متجر أو رابط باستخدام رموز موثوقة.' },
-    { ...FEATURE_CARDS[1], titleKey: 'شبكة Wi-Fi', descKey: 'يمكن للضيوف الاتصال بالشبكة فوراً دون كتابة كلمات مرور طويلة.' },
-    { ...FEATURE_CARDS[2], titleKey: 'محادثة واتساب', descKey: 'افتح محادثات واتساب مباشرةً مع العملاء ورسالة جاهزة.' },
-    { ...FEATURE_CARDS[3], titleKey: 'جهة اتصال vCard', descKey: 'بطاقة عمل رقمية تحفظ الاسم والهاتف والبريد والعنوان بنقرة واحدة.' }
-  ] : FEATURE_CARDS;
+  const featureCards = [
+    { ...FEATURE_CARDS[0], titleKey: lang === 'ar' ? 'رابط موقع إلكتروني' : lang === 'fr' ? 'Lien de site web' : lang === 'es' ? 'Enlace de sitio web' : 'Website URL', descKey: lang === 'ar' ? 'وجّه الزوار مباشرةً إلى أي صفحة أو متجر أو رابط باستخدام رموز موثوقة.' : lang === 'fr' ? 'Dirigez les visiteurs vers une page, une boutique ou un lien en un scan.' : lang === 'es' ? 'Dirige a los visitantes a cualquier página, tienda o enlace con un solo escaneo.' : 'Link directly to any webpage, storefront, or linktree with reliable QR codes.' },
+    { ...FEATURE_CARDS[1], titleKey: lang === 'ar' ? 'شبكة Wi-Fi' : 'Wi-Fi', descKey: lang === 'ar' ? 'يمكن للضيوف الاتصال بالشبكة فوراً دون كتابة كلمات مرور طويلة.' : lang === 'fr' ? 'Les invités se connectent sans saisir de longs mots de passe.' : lang === 'es' ? 'Los invitados se conectan sin escribir contraseñas largas.' : 'Guests scan to connect instantly without typing long complex passwords.' },
+    { ...FEATURE_CARDS[2], titleKey: lang === 'ar' ? 'محادثة واتساب' : lang === 'fr' ? 'Discussion WhatsApp' : lang === 'es' ? 'Chat de WhatsApp' : 'WhatsApp Chat', descKey: lang === 'ar' ? 'افتح محادثات واتساب مباشرةً مع العملاء ورسالة جاهزة.' : lang === 'fr' ? 'Ouvrez une conversation WhatsApp avec un message prérempli.' : lang === 'es' ? 'Abre conversaciones de WhatsApp con un mensaje predefinido.' : 'Open direct WhatsApp conversations with customers with pre-typed text.' },
+    { ...FEATURE_CARDS[3], titleKey: lang === 'ar' ? 'جهة اتصال vCard' : lang === 'fr' ? 'Contact vCard' : lang === 'es' ? 'Contacto vCard' : 'vCard Contact', descKey: lang === 'ar' ? 'بطاقة عمل رقمية تحفظ الاسم والهاتف والبريد والعنوان بنقرة واحدة.' : lang === 'fr' ? 'Une carte numérique pour enregistrer nom, téléphone, e-mail et adresse.' : lang === 'es' ? 'Tarjeta digital para guardar nombre, teléfono, correo y dirección.' : 'Digital business cards. Save name, phone, email, and address in one tap.' }
+  ];
 
   return (
     <div className="w-full overflow-x-hidden">
@@ -52,20 +52,20 @@ export const HomePage: React.FC<HomePageProps> = ({ lang, onNavigate }) => {
               {/* Pill-free Editorial Kicker */}
               <div className="flex items-center gap-2 text-xs font-bold text-indigo-700 tracking-wide uppercase flex-wrap">
                 <Sparkles className="w-4 h-4 text-indigo-600 shrink-0" />
-                <span>{lang === 'ar' ? 'تقنية رموز QR من الجيل الجديد' : 'Next-Generation QR Technology'}</span>
+                <span>{lang === 'ar' ? 'تقنية رموز QR من الجيل الجديد' : lang === 'fr' ? 'Technologie QR de nouvelle génération' : lang === 'es' ? 'Tecnología QR de nueva generación' : 'Next-Generation QR Technology'}</span>
                 <span className="text-slate-300">·</span>
-                <span className="text-slate-500 font-medium">{lang === 'ar' ? 'مجاني 100% إلى الأبد' : '100% Free Forever'}</span>
+                <span className="text-slate-500 font-medium">{lang === 'ar' ? 'مجاني 100% إلى الأبد' : lang === 'fr' ? '100 % gratuit, pour toujours' : lang === 'es' ? '100 % gratis para siempre' : '100% Free Forever'}</span>
               </div>
 
               <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 tracking-tight leading-[1.18] text-balance">
-                {lang === 'ar' ? 'أنشئ. امسح. تواصل.' : 'Create. Scan. Connect.'}
+                {lang === 'ar' ? 'أنشئ. امسح. تواصل.' : lang === 'fr' ? 'Créer. Scanner. Connecter.' : lang === 'es' ? 'Crear. Escanear. Conectar.' : 'Create. Scan. Connect.'}
                 <span className="block text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 via-purple-600 to-indigo-800">
-                  {lang === 'ar' ? 'مولّد رموز QR مجاني وعصري' : 'The Free Modern QR Generator'}
+                  {lang === 'ar' ? 'مولّد رموز QR مجاني وعصري' : lang === 'fr' ? 'Le générateur QR moderne et gratuit' : lang === 'es' ? 'El generador QR moderno y gratuito' : 'The Free Modern QR Generator'}
                 </span>
               </h1>
 
               <p className="text-base sm:text-lg text-slate-600 leading-relaxed max-w-2xl">
-                {lang === 'ar' ? 'أنشئ رموز QR عالية الدقة ومخصصة للمواقع وشبكات Wi-Fi ومحادثات واتساب وبطاقات العمل الرقمية. حمّل ملفات SVG المتجهة أو PNG الواضحة أو PDF الجاهز للطباعة دون الحاجة إلى التسجيل.' : 'Generate high-resolution, custom-styled QR codes for websites, Wi-Fi networks, WhatsApp chats, and digital business cards. Download infinite-resolution vector SVG, crisp PNG, or printable PDF sheets with zero registrations.'}
+                {lang === 'ar' ? 'أنشئ رموز QR عالية الدقة ومخصصة للمواقع وشبكات Wi-Fi ومحادثات واتساب وبطاقات العمل الرقمية. حمّل ملفات SVG المتجهة أو PNG الواضحة أو PDF الجاهز للطباعة دون الحاجة إلى التسجيل.' : lang === 'fr' ? 'Créez des QR codes personnalisés haute résolution pour les sites web, le Wi-Fi, WhatsApp et les cartes de visite numériques. Téléchargez des fichiers SVG vectoriels, PNG nets ou PDF prêts à imprimer, sans inscription.' : lang === 'es' ? 'Genere códigos QR personalizados de alta resolución para sitios web, redes Wi-Fi, WhatsApp y tarjetas de visita digitales. Descargue archivos SVG vectoriales, PNG nítidos o PDF listos para imprimir, sin registrarse.' : 'Generate high-resolution, custom-styled QR codes for websites, Wi-Fi networks, WhatsApp chats, and digital business cards. Download infinite-resolution vector SVG, crisp PNG, or printable PDF sheets with zero registrations.'}
               </p>
 
               {/* Action Buttons */}
@@ -75,7 +75,7 @@ export const HomePage: React.FC<HomePageProps> = ({ lang, onNavigate }) => {
                   onClick={() => onNavigate('generator')}
                   className="py-3.5 px-6 rounded-xl font-bold text-sm text-white bg-indigo-600 hover:bg-indigo-700 active:bg-indigo-800 shadow-lg shadow-indigo-200 transition-all flex items-center justify-center gap-2 group"
                 >
-                  <span>{lang === 'ar' ? 'افتح استوديو QR الكامل' : 'Open Full QR Studio'}</span>
+                  <span>{lang === 'ar' ? 'افتح استوديو QR الكامل' : lang === 'fr' ? 'Ouvrir le studio QR complet' : lang === 'es' ? 'Abrir el estudio QR completo' : 'Open Full QR Studio'}</span>
                   <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1 rtl:group-hover:-translate-x-1" />
                 </button>
 
@@ -85,7 +85,7 @@ export const HomePage: React.FC<HomePageProps> = ({ lang, onNavigate }) => {
                   className="py-3.5 px-6 rounded-xl font-bold text-sm text-slate-700 bg-white hover:bg-slate-50 border border-slate-200 shadow-xs transition-colors flex items-center justify-center gap-2"
                 >
                   <Wifi className="w-4 h-4 text-indigo-600" />
-                  <span>{lang === 'ar' ? 'أداة رمز Wi-Fi' : 'Wi-Fi QR Tool'}</span>
+                  <span>{lang === 'ar' ? 'أداة رمز Wi-Fi' : lang === 'fr' ? 'Outil QR Wi-Fi' : lang === 'es' ? 'Herramienta QR Wi-Fi' : 'Wi-Fi QR Tool'}</span>
                 </button>
               </div>
 
@@ -93,15 +93,15 @@ export const HomePage: React.FC<HomePageProps> = ({ lang, onNavigate }) => {
               <div className="pt-4 flex flex-wrap items-center gap-x-6 gap-y-2 text-xs text-slate-500">
                 <div className="flex items-center gap-1.5">
                   <ShieldCheck className="w-4 h-4 text-emerald-600" />
-                  <span>{lang === 'ar' ? 'خصوصية كاملة على جهازك' : '100% Client-Side Privacy'}</span>
+                  <span>{lang === 'ar' ? 'خصوصية كاملة على جهازك' : lang === 'fr' ? 'Confidentialité 100 % sur votre appareil' : lang === 'es' ? 'Privacidad 100 % en tu dispositivo' : '100% Client-Side Privacy'}</span>
                 </div>
                 <div className="flex items-center gap-1.5">
                   <Zap className="w-4 h-4 text-indigo-600" />
-                  <span>{lang === 'ar' ? 'مسح دون حدود' : 'No Scan Limits'}</span>
+                  <span>{lang === 'ar' ? 'مسح دون حدود' : lang === 'fr' ? 'Scans illimités' : lang === 'es' ? 'Escaneos ilimitados' : 'No Scan Limits'}</span>
                 </div>
                 <div className="flex items-center gap-1.5">
                   <Download className="w-4 h-4 text-purple-600" />
-                  <span>{lang === 'ar' ? 'يتضمن SVG وPDF متجهيين' : 'Vector SVG &amp; PDF Included'}</span>
+                  <span>{lang === 'ar' ? 'يتضمن SVG وPDF متجهيين' : lang === 'fr' ? 'SVG vectoriel et PDF inclus' : lang === 'es' ? 'Incluye SVG vectorial y PDF' : 'Vector SVG &amp; PDF Included'}</span>
                 </div>
               </div>
             </div>
@@ -115,12 +115,12 @@ export const HomePage: React.FC<HomePageProps> = ({ lang, onNavigate }) => {
                       <QrCode className="w-4 h-4" />
                     </div>
                     <div>
-                      <div className="text-xs font-bold text-slate-900">{lang === 'ar' ? 'معاينة تفاعلية' : 'Interactive Preview'}</div>
-                      <div className="text-[10px] text-slate-400">{lang === 'ar' ? 'قابل للمسح وفق ISO/IEC 18004' : 'Scannable ISO/IEC 18004'}</div>
+                      <div className="text-xs font-bold text-slate-900">{lang === 'ar' ? 'معاينة تفاعلية' : lang === 'fr' ? 'Aperçu interactif' : lang === 'es' ? 'Vista previa interactiva' : 'Interactive Preview'}</div>
+                      <div className="text-[10px] text-slate-400">{lang === 'ar' ? 'قابل للمسح وفق ISO/IEC 18004' : lang === 'fr' ? 'Scannable selon ISO/IEC 18004' : lang === 'es' ? 'Escaneable según ISO/IEC 18004' : 'Scannable ISO/IEC 18004'}</div>
                     </div>
                   </div>
                   <span className="text-[10px] font-semibold text-indigo-600 bg-indigo-50 px-2 py-0.5 rounded-full">
-                    {lang === 'ar' ? 'جاهز للمسح' : 'Ready to Scan'}
+                    {lang === 'ar' ? 'جاهز للمسح' : lang === 'fr' ? 'Prêt à scanner' : lang === 'es' ? 'Listo para escanear' : 'Ready to Scan'}
                   </span>
                 </div>
 
@@ -191,19 +191,19 @@ export const HomePage: React.FC<HomePageProps> = ({ lang, onNavigate }) => {
                       https://getqrgenius.com
                     </span>
                     <p className="text-[10px] text-slate-400 mt-0.5">
-                      {lang === 'ar' ? 'تصميم بلون نيلي وزوايا مستديرة' : 'Styled with SaaS Indigo &amp; Rounded Corners'}
+                      {lang === 'ar' ? 'تصميم بلون نيلي وزوايا مستديرة' : lang === 'fr' ? 'Style indigo SaaS et coins arrondis' : lang === 'es' ? 'Estilo índigo SaaS y esquinas redondeadas' : 'Styled with SaaS Indigo &amp; Rounded Corners'}
                     </p>
                   </div>
                 </div>
 
                 <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
-                  <span className="text-xs text-slate-500 font-medium">{lang === 'ar' ? 'هل أنت مستعد لإنشاء رمزك؟' : 'Ready to create yours?'}</span>
+                  <span className="text-xs text-slate-500 font-medium">{lang === 'ar' ? 'هل أنت مستعد لإنشاء رمزك؟' : lang === 'fr' ? 'Prêt à créer le vôtre ?' : lang === 'es' ? '¿Listo para crear el tuyo?' : 'Ready to create yours?'}</span>
                   <button
                     type="button"
                     onClick={() => onNavigate('generator')}
                     className="text-xs font-bold text-indigo-600 hover:text-indigo-700 flex items-center gap-1"
                   >
-                    <span>{lang === 'ar' ? 'ابدأ التصميم' : 'Launch Designer'}</span>
+                    <span>{lang === 'ar' ? 'ابدأ التصميم' : lang === 'fr' ? 'Lancer le concepteur' : lang === 'es' ? 'Abrir el diseñador' : 'Launch Designer'}</span>
                     <ChevronRight className="w-3.5 h-3.5" />
                   </button>
                 </div>
@@ -219,10 +219,10 @@ export const HomePage: React.FC<HomePageProps> = ({ lang, onNavigate }) => {
           <div className="flex flex-col md:flex-row md:items-end justify-between mb-12">
             <div>
               <div className="text-xs font-bold text-indigo-600 tracking-wider uppercase mb-1">
-                {lang === 'ar' ? 'أدوات إنشاء متعددة الاستخدامات' : 'Versatile Generators'}
+                {lang === 'ar' ? 'أدوات إنشاء متعددة الاستخدامات' : lang === 'fr' ? 'Générateurs polyvalents' : lang === 'es' ? 'Generadores versátiles' : 'Versatile Generators'}
               </div>
               <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
-                {lang === 'ar' ? 'مصممة للاستخدامات اليومية' : 'Designed for Real-World Scenarios'}
+                {lang === 'ar' ? 'مصممة للاستخدامات اليومية' : lang === 'fr' ? 'Conçu pour les usages du quotidien' : lang === 'es' ? 'Diseñado para situaciones reales' : 'Designed for Real-World Scenarios'}
               </h2>
             </div>
             <button
@@ -230,7 +230,7 @@ export const HomePage: React.FC<HomePageProps> = ({ lang, onNavigate }) => {
               onClick={() => onNavigate('generator')}
               className="mt-3 md:mt-0 text-xs font-bold text-indigo-600 hover:text-indigo-700 flex items-center gap-1"
             >
-              <span>{lang === 'ar' ? 'عرض الأنواع الاثني عشر في الاستوديو' : 'View all 12 formats in Studio'}</span>
+              <span>{lang === 'ar' ? 'عرض الأنواع الاثني عشر في الاستوديو' : lang === 'fr' ? 'Voir les 12 formats dans le studio' : lang === 'es' ? 'Ver los 12 formatos en el estudio' : 'View all 12 formats in Studio'}</span>
               <ArrowRight className="w-3.5 h-3.5" />
             </button>
           </div>
@@ -276,13 +276,13 @@ export const HomePage: React.FC<HomePageProps> = ({ lang, onNavigate }) => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-2xl mx-auto mb-16">
             <span className="text-xs font-bold text-indigo-600 uppercase tracking-wider">
-              {lang === 'ar' ? 'سريع وسهل الاستخدام' : 'Quick &amp; Intuitive'}
+              {lang === 'ar' ? 'سريع وسهل الاستخدام' : lang === 'fr' ? 'Rapide et intuitif' : lang === 'es' ? 'Rápido e intuitivo' : 'Quick &amp; Intuitive'}
             </span>
             <h2 className="text-3xl font-extrabold text-slate-900 tracking-tight sm:text-4xl mt-1">
-              {lang === 'ar' ? 'كيف يعمل QR GENIUS في 3 خطوات؟' : 'How QR GENIUS Works in 3 Steps'}
+              {lang === 'ar' ? 'كيف يعمل QR GENIUS في 3 خطوات؟' : lang === 'fr' ? 'Comment fonctionne QR GENIUS en 3 étapes' : lang === 'es' ? 'Cómo funciona QR GENIUS en 3 pasos' : 'How QR GENIUS Works in 3 Steps'}
             </h2>
             <p className="text-sm text-slate-600 mt-3">
-              {lang === 'ar' ? 'لا تسجيل ولا بطاقة ائتمان ولا انتظار. أنشئ رموز QR جاهزة للاستخدام خلال ثوانٍ.' : 'No registration, no credit card, no waiting. Generate production-ready QR codes in seconds.'}
+              {lang === 'ar' ? 'لا تسجيل ولا بطاقة ائتمان ولا انتظار. أنشئ رموز QR جاهزة للاستخدام خلال ثوانٍ.' : lang === 'fr' ? 'Sans inscription, sans carte bancaire et sans attente. Créez des QR codes prêts à l’emploi en quelques secondes.' : lang === 'es' ? 'Sin registro, tarjeta de crédito ni esperas. Crea códigos QR listos para usar en segundos.' : 'No registration, no credit card, no waiting. Generate production-ready QR codes in seconds.'}
             </p>
           </div>
 
@@ -293,10 +293,10 @@ export const HomePage: React.FC<HomePageProps> = ({ lang, onNavigate }) => {
                 01.
               </span>
               <h3 className="text-lg font-bold text-slate-900 mb-2">
-                {lang === 'ar' ? 'اختر نوع البيانات' : 'Choose Your Payload'}
+                {lang === 'ar' ? 'اختر نوع البيانات' : lang === 'fr' ? 'Choisissez le type de contenu' : lang === 'es' ? 'Elige el tipo de contenido' : 'Choose Your Payload'}
               </h3>
               <p className="text-xs text-slate-600 leading-relaxed">
-                {lang === 'ar' ? 'اختر من بين 12 نوعاً قياسياً: رابط موقع، بيانات شبكة Wi-Fi، محادثة واتساب، بطاقة vCard، بريد إلكتروني أو رسالة SMS.' : 'Pick from 12 industry-standard formats: Web URL, Wi-Fi network credentials, WhatsApp chat, vCard business card, Email, or SMS.'}
+                {lang === 'ar' ? 'اختر من بين 12 نوعاً قياسياً: رابط موقع، بيانات شبكة Wi-Fi، محادثة واتساب، بطاقة vCard، بريد إلكتروني أو رسالة SMS.' : lang === 'fr' ? 'Choisissez parmi 12 formats standard : URL web, identifiants Wi-Fi, discussion WhatsApp, carte vCard, e-mail ou SMS.' : lang === 'es' ? 'Elige entre 12 formatos estándar: URL web, credenciales Wi-Fi, chat de WhatsApp, tarjeta vCard, correo electrónico o SMS.' : 'Pick from 12 industry-standard formats: Web URL, Wi-Fi network credentials, WhatsApp chat, vCard business card, Email, or SMS.'}
               </p>
             </div>
 
@@ -306,10 +306,10 @@ export const HomePage: React.FC<HomePageProps> = ({ lang, onNavigate }) => {
                 02.
               </span>
               <h3 className="text-lg font-bold text-slate-900 mb-2">
-                {lang === 'ar' ? 'أضف هويتك وخصص الرمز' : 'Brand &amp; Customize'}
+                {lang === 'ar' ? 'أضف هويتك وخصص الرمز' : lang === 'fr' ? 'Personnalisez votre identité' : lang === 'es' ? 'Personaliza tu diseño' : 'Brand &amp; Customize'}
               </h3>
               <p className="text-xs text-slate-600 leading-relaxed">
-                {lang === 'ar' ? 'خصص رمز QR بألوان علامتك التجارية والتدرجات وأنماط النقاط وأشكال الإطارات، وأضف شعار شركتك.' : 'Style your QR code with your brand colors, gradients, custom dot patterns, corner frame shapes, and embed your company logo.'}
+                {lang === 'ar' ? 'خصص رمز QR بألوان علامتك التجارية والتدرجات وأنماط النقاط وأشكال الإطارات، وأضف شعار شركتك.' : lang === 'fr' ? 'Personnalisez votre QR code avec les couleurs de votre marque, des dégradés, des motifs de points, des cadres et votre logo.' : lang === 'es' ? 'Personaliza tu código QR con los colores de tu marca, degradados, patrones de puntos, marcos e incorpora tu logotipo.' : 'Style your QR code with your brand colors, gradients, custom dot patterns, corner frame shapes, and embed your company logo.'}
               </p>
             </div>
 
@@ -319,10 +319,10 @@ export const HomePage: React.FC<HomePageProps> = ({ lang, onNavigate }) => {
                 03.
               </span>
               <h3 className="text-lg font-bold text-slate-900 mb-2">
-                {lang === 'ar' ? 'صدّر واطبع' : 'Export Vector &amp; Print'}
+                {lang === 'ar' ? 'صدّر واطبع' : lang === 'fr' ? 'Exporter et imprimer' : lang === 'es' ? 'Exportar e imprimir' : 'Export Vector &amp; Print'}
               </h3>
               <p className="text-xs text-slate-600 leading-relaxed">
-                {lang === 'ar' ? 'نزّل ملف SVG متجهياً للطباعة الاحترافية أو PNG بدقة تصل إلى 2048 بكسل أو صفحات PDF جاهزة للطباعة بحجم A4.' : 'Download infinite-resolution vector SVG for professional print shops, high-res PNG (up to 2048px), or ready-to-print A4 PDF sheets.'}
+                {lang === 'ar' ? 'نزّل ملف SVG متجهياً للطباعة الاحترافية أو PNG بدقة تصل إلى 2048 بكسل أو صفحات PDF جاهزة للطباعة بحجم A4.' : lang === 'fr' ? 'Téléchargez un SVG vectoriel pour l’impression professionnelle, un PNG haute résolution (jusqu’à 2048 px) ou des feuilles PDF A4 prêtes à imprimer.' : lang === 'es' ? 'Descarga un SVG vectorial para impresión profesional, PNG de alta resolución (hasta 2048 px) o páginas PDF A4 listas para imprimir.' : 'Download infinite-resolution vector SVG for professional print shops, high-res PNG (up to 2048px), or ready-to-print A4 PDF sheets.'}
               </p>
             </div>
           </div>
@@ -335,28 +335,22 @@ export const HomePage: React.FC<HomePageProps> = ({ lang, onNavigate }) => {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             <div className="lg:col-span-6 space-y-6">
               <span className="text-xs font-bold text-indigo-600 uppercase tracking-wider">
-                {lang === 'ar' ? 'لماذا يختارنا المحترفون؟' : 'Why Professionals Choose Us'}
+                {lang === 'ar' ? 'لماذا يختارنا المحترفون؟' : lang === 'fr' ? 'Pourquoi les professionnels nous choisissent' : lang === 'es' ? 'Por qué nos eligen los profesionales' : 'Why Professionals Choose Us'}
               </span>
               <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight">
-                {lang === 'ar' ? 'مصمم للطباعة عالية الدقة واللوحات والتسويق اليومي' : 'Built for High-DPI Print, Billboards, and Daily Marketing'}
+                {lang === 'ar' ? 'مصمم للطباعة عالية الدقة واللوحات والتسويق اليومي' : lang === 'fr' ? 'Conçu pour l’impression haute résolution, les panneaux et le marketing quotidien' : lang === 'es' ? 'Diseñado para impresión de alta resolución, carteles y marketing diario' : 'Built for High-DPI Print, Billboards, and Daily Marketing'}
               </h2>
               <p className="text-sm text-slate-600 leading-relaxed">
-                {lang === 'ar' ? 'على عكس الخدمات التي تقيّد التنزيل أو تستخدم روابط تتبع مؤقتة، ينشئ QR GENIUS رموز QR ثابتة ومتوافقة مع معيار ISO وتظل صالحة ما دامت وجهتها متاحة.' : 'Unlike services that lock your downloads behind paywalls or insert temporary tracking links that break when subscriptions expire, QR GENIUS creates permanent, static ISO-compliant QR codes that work indefinitely.'}
+                {lang === 'ar' ? 'على عكس الخدمات التي تقيّد التنزيل أو تستخدم روابط تتبع مؤقتة، ينشئ QR GENIUS رموز QR ثابتة ومتوافقة مع معيار ISO وتظل صالحة ما دامت وجهتها متاحة.' : lang === 'fr' ? 'Contrairement aux services qui limitent les téléchargements ou utilisent des liens temporaires, QR GENIUS crée des QR codes statiques conformes à la norme ISO, qui restent fonctionnels tant que leur destination est disponible.' : lang === 'es' ? 'A diferencia de los servicios que limitan las descargas o usan enlaces temporales, QR GENIUS crea códigos QR estáticos compatibles con ISO que siguen funcionando mientras el destino esté disponible.' : 'Unlike services that lock your downloads behind paywalls or insert temporary tracking links that break when subscriptions expire, QR GENIUS creates permanent, static ISO-compliant QR codes that work indefinitely.'}
               </p>
 
               <div className="space-y-3.5 pt-2">
-                {(lang === 'ar' ? [
-                  'مجاني مدى الحياة دون حدود لعدد مرات المسح',
-                  'إنشاء محلي: لا تغادر البيانات متصفحك',
-                  'صيغة SVG متجهة قابلة للتكبير دون فقدان الوضوح',
-                  'تصحيح أخطاء قابل للتعديل للحفاظ على قابلية المسح مع الشعارات',
-                  'دعم كامل للغات واتجاه الكتابة من اليمين إلى اليسار'
-                ] : [
-                  '100% Free Lifetime Usage with zero scan limits',
-                  'Client-side generation: payloads never leave your browser',
-                  'Vector SVG format allows infinite scaling without blurriness',
-                  'Adjustable Error Correction ensures readability with logos',
-                  'Full multilingual RTL support for global audiences'
+                {([
+                  lang === 'ar' ? 'مجاني مدى الحياة دون حدود لعدد مرات المسح' : lang === 'fr' ? 'Gratuit à vie avec scans illimités' : lang === 'es' ? 'Gratis de por vida y sin límites de escaneo' : '100% Free Lifetime Usage with zero scan limits',
+                  lang === 'ar' ? 'إنشاء محلي: لا تغادر البيانات متصفحك' : lang === 'fr' ? 'Génération locale : vos données ne quittent pas le navigateur' : lang === 'es' ? 'Generación local: tus datos no salen del navegador' : 'Client-side generation: payloads never leave your browser',
+                  lang === 'ar' ? 'صيغة SVG متجهة قابلة للتكبير دون فقدان الوضوح' : lang === 'fr' ? 'Le SVG vectoriel s’agrandit sans perte de netteté' : lang === 'es' ? 'El SVG vectorial se amplía sin perder nitidez' : 'Vector SVG format allows infinite scaling without blurriness',
+                  lang === 'ar' ? 'تصحيح أخطاء قابل للتعديل للحفاظ على قابلية المسح مع الشعارات' : lang === 'fr' ? 'Correction d’erreurs réglable pour préserver la lisibilité avec un logo' : lang === 'es' ? 'Corrección de errores ajustable para mantener la legibilidad con logotipos' : 'Adjustable Error Correction ensures readability with logos',
+                  lang === 'ar' ? 'دعم كامل للغات واتجاه الكتابة من اليمين إلى اليسار' : lang === 'fr' ? 'Prise en charge multilingue et RTL' : lang === 'es' ? 'Compatibilidad multilingüe y RTL' : 'Full multilingual RTL support for global audiences'
                 ]).map((point, idx) => (
                   <div key={idx} className="flex items-start gap-2.5">
                     <div className="w-5 h-5 rounded-full bg-indigo-50 text-indigo-600 flex items-center justify-center shrink-0 mt-0.5">
@@ -371,26 +365,26 @@ export const HomePage: React.FC<HomePageProps> = ({ lang, onNavigate }) => {
             <div className="lg:col-span-6 grid grid-cols-2 gap-4">
               <div className="p-6 rounded-2xl bg-slate-50 border border-slate-200 text-left rtl:text-right">
                 <div className="text-3xl font-extrabold text-indigo-600 mb-1">100%</div>
-                <div className="text-xs font-bold text-slate-900 mb-1">{lang === 'ar' ? 'محلي وخاص' : 'Local &amp; Private'}</div>
-                <p className="text-[11px] text-slate-500">{lang === 'ar' ? 'تتم المعالجة بالكامل داخل المتصفح دون تسجيل البيانات في قاعدة بيانات.' : 'Processed entirely in-browser without database logging.'}</p>
+                <div className="text-xs font-bold text-slate-900 mb-1">{lang === 'ar' ? 'محلي وخاص' : lang === 'fr' ? 'Local et privé' : lang === 'es' ? 'Local y privado' : 'Local &amp; Private'}</div>
+                <p className="text-[11px] text-slate-500">{lang === 'ar' ? 'تتم المعالجة بالكامل داخل المتصفح دون تسجيل البيانات في قاعدة بيانات.' : lang === 'fr' ? 'Traitement entièrement dans le navigateur, sans enregistrement dans une base de données.' : lang === 'es' ? 'Procesado íntegramente en el navegador, sin guardar datos en una base de datos.' : 'Processed entirely in-browser without database logging.'}</p>
               </div>
 
               <div className="p-6 rounded-2xl bg-slate-50 border border-slate-200 text-left rtl:text-right">
                 <div className="text-3xl font-extrabold text-indigo-600 mb-1">2048px</div>
-                <div className="text-xs font-bold text-slate-900 mb-1">{lang === 'ar' ? 'دقة فائقة' : 'Ultra Resolution'}</div>
-                <p className="text-[11px] text-slate-500">{lang === 'ar' ? 'ملفات PNG واضحة وجاهزة للوحات والعبوات.' : 'Crystal-clear raster PNG exports ready for signs &amp; packaging.'}</p>
+                <div className="text-xs font-bold text-slate-900 mb-1">{lang === 'ar' ? 'دقة فائقة' : lang === 'fr' ? 'Ultra haute résolution' : lang === 'es' ? 'Ultra resolución' : 'Ultra Resolution'}</div>
+                <p className="text-[11px] text-slate-500">{lang === 'ar' ? 'ملفات PNG واضحة وجاهزة للوحات والعبوات.' : lang === 'fr' ? 'Exports PNG nets, prêts pour les panneaux et emballages.' : lang === 'es' ? 'Exportaciones PNG nítidas, listas para carteles y embalajes.' : 'Crystal-clear raster PNG exports ready for signs &amp; packaging.'}</p>
               </div>
 
               <div className="p-6 rounded-2xl bg-slate-50 border border-slate-200 text-left rtl:text-right">
                 <div className="text-3xl font-extrabold text-indigo-600 mb-1">SVG</div>
-                <div className="text-xs font-bold text-slate-900 mb-1">{lang === 'ar' ? 'رسومات متجهية حقيقية' : 'True Vector'}</div>
-                <p className="text-[11px] text-slate-500">{lang === 'ar' ? 'مسارات SVG دقيقة ومتوافقة مع Illustrator وFigma.' : 'Clean mathematical SVG paths for Illustrator and Figma.'}</p>
+                <div className="text-xs font-bold text-slate-900 mb-1">{lang === 'ar' ? 'رسومات متجهية حقيقية' : lang === 'fr' ? 'Véritable format vectoriel' : lang === 'es' ? 'Vectorial auténtico' : 'True Vector'}</div>
+                <p className="text-[11px] text-slate-500">{lang === 'ar' ? 'مسارات SVG دقيقة ومتوافقة مع Illustrator وFigma.' : lang === 'fr' ? 'Tracés SVG précis, compatibles avec Illustrator et Figma.' : lang === 'es' ? 'Trazados SVG precisos, compatibles con Illustrator y Figma.' : 'Clean mathematical SVG paths for Illustrator and Figma.'}</p>
               </div>
 
               <div className="p-6 rounded-2xl bg-slate-50 border border-slate-200 text-left rtl:text-right">
                 <div className="text-3xl font-extrabold text-indigo-600 mb-1">4</div>
-                <div className="text-xs font-bold text-slate-900 mb-1">{lang === 'ar' ? 'اللغات واتجاه RTL' : 'Languages + RTL'}</div>
-                <p className="text-[11px] text-slate-500">{lang === 'ar' ? 'الإنجليزية والعربية باتجاه RTL والفرنسية والإسبانية.' : 'English, Arabic with full RTL mirroring, French, and Spanish.'}</p>
+                <div className="text-xs font-bold text-slate-900 mb-1">{lang === 'ar' ? 'اللغات واتجاه RTL' : lang === 'fr' ? 'Langues et RTL' : lang === 'es' ? 'Idiomas y RTL' : 'Languages + RTL'}</div>
+                <p className="text-[11px] text-slate-500">{lang === 'ar' ? 'الإنجليزية والعربية باتجاه RTL والفرنسية والإسبانية.' : lang === 'fr' ? 'Anglais, arabe avec prise en charge RTL, français et espagnol.' : lang === 'es' ? 'Inglés, árabe con compatibilidad RTL, francés y español.' : 'English, Arabic with full RTL mirroring, French, and Spanish.'}</p>
               </div>
             </div>
           </div>
@@ -404,17 +398,17 @@ export const HomePage: React.FC<HomePageProps> = ({ lang, onNavigate }) => {
       <section className="py-16 bg-gradient-to-r from-indigo-600 to-purple-700 text-white">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6">
           <h2 className="text-3xl font-extrabold sm:text-4xl tracking-tight">
-            {lang === 'ar' ? 'هل أنت مستعد لإنشاء رمز QR مخصص؟' : 'Ready to Generate Your Custom QR Code?'}
+            {lang === 'ar' ? 'هل أنت مستعد لإنشاء رمز QR مخصص؟' : lang === 'fr' ? 'Prêt à créer votre QR code personnalisé ?' : lang === 'es' ? '¿Listo para crear tu código QR personalizado?' : 'Ready to Generate Your Custom QR Code?'}
           </h2>
           <p className="text-sm text-indigo-100 max-w-xl mx-auto leading-relaxed">
-            {lang === 'ar' ? 'انضم إلى المستخدمين الذين ينشئون رموز QR مجانية وأنيقة لأعمالهم ومشاريعهم كل يوم.' : 'Join thousands of businesses, creators, and organizers generating free, beautiful QR codes daily.'}
+            {lang === 'ar' ? 'انضم إلى المستخدمين الذين ينشئون رموز QR مجانية وأنيقة لأعمالهم ومشاريعهم كل يوم.' : lang === 'fr' ? 'Rejoignez les entreprises, créateurs et organisateurs qui créent chaque jour de magnifiques QR codes gratuits.' : lang === 'es' ? 'Únete a empresas, creadores y organizadores que generan cada día códigos QR gratuitos y atractivos.' : 'Join thousands of businesses, creators, and organizers generating free, beautiful QR codes daily.'}
           </p>
           <button
             type="button"
             onClick={() => onNavigate('generator')}
             className="py-3.5 px-8 rounded-xl font-bold text-sm bg-white text-indigo-700 hover:bg-indigo-50 shadow-lg transition-colors inline-flex items-center gap-2"
           >
-            <span>{lang === 'ar' ? 'ابدأ إنشاء الرموز الآن' : 'Start Generating Now'}</span>
+            <span>{lang === 'ar' ? 'ابدأ إنشاء الرموز الآن' : lang === 'fr' ? 'Commencer maintenant' : lang === 'es' ? 'Empezar ahora' : 'Start Generating Now'}</span>
             <ArrowRight className="w-4 h-4" />
           </button>
         </div>
