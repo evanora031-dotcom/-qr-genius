@@ -78,13 +78,44 @@ const FAQS_AR: FAQItem[] = [
   { id: 'f8', category: 'general', question: 'ما الفرق بين رموز QR الثابتة والديناميكية؟', answer: 'تحتوي الرموز الثابتة على البيانات مباشرةً ولا تحتاج إلى خادم تحويل. أما الرموز الديناميكية فتستخدم عادةً رابطاً وسيطاً يمكن تغيير وجهته لاحقاً. الأدوات هنا تنشئ رموزاً ثابتة.' }
 ];
 
+
+const FAQS_FR: FAQItem[] = [
+  { id: 'f1', category: 'general', question: 'La création de QR codes avec QR GENIUS est-elle gratuite ?', answer: 'Oui. Les 12 générateurs sont gratuits pour un usage personnel et commercial, sans inscription obligatoire ni limite de scans imposée par QR GENIUS.' },
+  { id: 'f2', category: 'general', question: 'Les QR codes expirent-ils ?', answer: 'Les outils créent des QR codes statiques : les données sont intégrées directement dans le code. Ils restent utilisables tant que le lien ou le service de destination fonctionne.' },
+  { id: 'f3', category: 'print', question: 'Quel format choisir pour une impression professionnelle ?', answer: 'Choisissez SVG pour les affiches, emballages et impressions grand format : ce format vectoriel peut être redimensionné sans pixellisation. Le PNG haute résolution convient aux usages numériques et aux documents courants.' },
+  { id: 'f4', category: 'print', question: 'Quelle taille minimale prévoir à l’impression ?', answer: 'Pour un usage courant, prévoyez au moins 2 × 2 cm, avec un contraste net et une marge blanche autour du code. Augmentez la taille lorsque le QR code doit être lu de plus loin.' },
+  { id: 'f5', category: 'security', question: 'Mes données sont-elles protégées pendant la création ?', answer: 'La génération est effectuée localement dans votre navigateur. Les contenus saisis pour les réseaux Wi-Fi, les contacts ou les liens ne sont pas envoyés à nos serveurs pour créer le QR code.' },
+  { id: 'f6', category: 'technical', question: 'À quoi sert la correction d’erreurs (ECC) ?', answer: 'La correction d’erreurs aide un QR code à rester lisible si une partie est masquée ou endommagée. Les niveaux vont de L à H. Si vous ajoutez un logo, testez toujours le code avec plusieurs téléphones avant impression.' },
+  { id: 'f7', category: 'technical', question: 'Puis-je ajouter mon propre logo au QR code ?', answer: 'Oui. Ouvrez l’onglet Logo dans QR Studio et choisissez une icône proposée ou importez votre fichier PNG, JPG ou SVG.' },
+  { id: 'f8', category: 'general', question: 'Quelle est la différence entre un QR code statique et dynamique ?', answer: 'Un code statique contient directement les données et sa destination ne peut pas être modifiée après création. Un code dynamique utilise généralement une redirection qui permet de changer la destination. QR GENIUS crée des codes statiques.' }
+];
+
+const FAQS_ES: FAQItem[] = [
+  { id: 'f1', category: 'general', question: '¿Crear códigos QR con QR GENIUS es realmente gratis?', answer: 'Sí. Los 12 generadores son gratuitos para uso personal y comercial, sin registro obligatorio ni límites de escaneo impuestos por QR GENIUS.' },
+  { id: 'f2', category: 'general', question: '¿Los códigos QR caducan?', answer: 'Las herramientas crean códigos QR estáticos: los datos se guardan directamente en el patrón. Seguirán funcionando mientras el enlace o servicio de destino esté disponible.' },
+  { id: 'f3', category: 'print', question: '¿Qué formato debo descargar para impresión profesional?', answer: 'Elige SVG para carteles, envases e impresiones grandes: es un formato vectorial que se puede ampliar sin pixelarse. PNG de alta resolución es adecuado para usos digitales y documentos habituales.' },
+  { id: 'f4', category: 'print', question: '¿Qué tamaño mínimo se recomienda para imprimir un QR?', answer: 'Para un uso habitual, recomendamos al menos 2 × 2 cm, con buen contraste y un margen blanco alrededor. Aumenta el tamaño si se va a escanear desde más lejos.' },
+  { id: 'f5', category: 'security', question: '¿Están protegidos mis datos al crear códigos QR?', answer: 'La generación se realiza localmente en tu navegador. Los datos introducidos para redes Wi-Fi, contactos o enlaces no se envían a nuestros servidores para crear el código.' },
+  { id: 'f6', category: 'technical', question: '¿Para qué sirve la corrección de errores (ECC)?', answer: 'La corrección de errores ayuda a leer un QR aunque una parte esté tapada o dañada. Los niveles van de L a H. Si añades un logotipo, prueba el código con varios teléfonos antes de imprimirlo.' },
+  { id: 'f7', category: 'technical', question: '¿Puedo añadir mi propio logotipo al código QR?', answer: 'Sí. Abre la pestaña Logotipo en QR Studio y selecciona un icono disponible o sube tu archivo PNG, JPG o SVG.' },
+  { id: 'f8', category: 'general', question: '¿Cuál es la diferencia entre códigos QR estáticos y dinámicos?', answer: 'Un código estático contiene los datos directamente y su destino no se puede cambiar después de crearlo. Un código dinámico suele usar una redirección que permite cambiar el destino. QR GENIUS crea códigos estáticos.' }
+];
+
+const FAQ_COPY = {
+  en: { heading: 'Frequently Asked Questions', intro: 'Everything you need to know about generating, customizing, and printing QR codes.', search: 'Search frequently asked questions...', all: 'All Questions', general: 'General', print: 'Print & Formats', technical: 'Technical & Error Correction', security: 'Privacy & Security', empty: 'No questions found. Try another search term.', cta: 'Have a question not listed here?', support: 'Our team can help with technical questions, business needs, and print guidance.', contact: 'Contact Support', studio: 'Open Studio' },
+  ar: { heading: 'الأسئلة الشائعة', intro: 'كل ما تحتاج إلى معرفته حول إنشاء رموز QR وتخصيصها وطباعتها.', search: 'ابحث في الأسئلة الشائعة...', all: 'كل الأسئلة', general: 'عام', print: 'الطباعة والصيغ', technical: 'تقني وتصحيح الأخطاء', security: 'الخصوصية والأمان', empty: 'لا توجد أسئلة مطابقة. جرّب عبارة بحث أخرى.', cta: 'هل لديك سؤال غير موجود هنا؟', support: 'يمكن لفريقنا مساعدتك في الأسئلة التقنية واحتياجات الأعمال وإرشادات الطباعة.', contact: 'تواصل مع الدعم', studio: 'افتح الاستوديو' },
+  fr: { heading: 'Questions fréquentes', intro: 'Tout savoir sur la création, la personnalisation et l’impression des QR codes.', search: 'Rechercher dans les questions fréquentes...', all: 'Toutes les questions', general: 'Général', print: 'Impression et formats', technical: 'Technique et correction d’erreurs', security: 'Confidentialité et sécurité', empty: 'Aucune question trouvée. Essayez un autre terme.', cta: 'Vous ne trouvez pas votre réponse ?', support: 'Notre équipe peut vous aider pour les questions techniques, professionnelles et d’impression.', contact: 'Contacter le support', studio: 'Ouvrir le studio' },
+  es: { heading: 'Preguntas frecuentes', intro: 'Todo lo que necesitas saber sobre cómo crear, personalizar e imprimir códigos QR.', search: 'Buscar en las preguntas frecuentes...', all: 'Todas las preguntas', general: 'General', print: 'Impresión y formatos', technical: 'Técnica y corrección de errores', security: 'Privacidad y seguridad', empty: 'No se encontraron preguntas. Prueba otro término.', cta: '¿No encuentras tu respuesta?', support: 'Nuestro equipo puede ayudarte con dudas técnicas, necesidades comerciales e impresión.', contact: 'Contactar con soporte', studio: 'Abrir el estudio' }
+};
+
 export const FAQPage: React.FC<FAQPageProps> = ({ lang, onNavigate }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [activeCategory, setActiveCategory] = useState<string>('all');
   const [openIds, setOpenIds] = useState<Record<string, boolean>>({ f1: true, f2: true });
 
   const t = translations[lang];
-  const faqs = lang === 'ar' ? FAQS_AR : FAQS;
+  const faqs = lang === 'ar' ? FAQS_AR : lang === 'fr' ? FAQS_FR : lang === 'es' ? FAQS_ES : FAQS;
+  const copy = FAQ_COPY[lang];
 
   const toggleAccordion = (id: string) => {
     setOpenIds(prev => ({ ...prev, [id]: !prev[id] }));
@@ -107,10 +138,10 @@ export const FAQPage: React.FC<FAQPageProps> = ({ lang, onNavigate }) => {
             <span>{lang === 'ar' ? 'مركز المعرفة' : 'Knowledge Base'}</span>
           </div>
           <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
-            {lang === 'ar' ? 'الأسئلة الشائعة' : 'Frequently Asked Questions'}
+            {copy.heading}
           </h1>
           <p className="text-sm text-slate-600 max-w-xl mx-auto leading-relaxed">
-            {lang === 'ar' ? 'كل ما تحتاج إلى معرفته حول إنشاء رموز QR وتخصيصها وطباعتها بجودة عالية.' : 'Everything you need to know about generating, customizing, and printing high-durability QR codes.'}
+            {copy.intro}
           </p>
         </div>
 
@@ -122,18 +153,18 @@ export const FAQPage: React.FC<FAQPageProps> = ({ lang, onNavigate }) => {
               type="text"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              placeholder={lang === 'ar' ? 'ابحث في الأسئلة الشائعة...' : 'Search frequently asked questions...'}
+              placeholder={copy.search}
               className="w-full pl-10 pr-4 rtl:pr-10 rtl:pl-4 py-3 text-sm rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-indigo-600/30 bg-slate-50/50"
             />
           </div>
 
           <div className="flex flex-wrap items-center gap-2">
             {[
-              { id: 'all', label: lang === 'ar' ? 'كل الأسئلة' : 'All Questions' },
-              { id: 'general', label: lang === 'ar' ? 'عام' : 'General' },
-              { id: 'print', label: lang === 'ar' ? 'الطباعة والصيغ' : 'Print & Formats' },
-              { id: 'technical', label: lang === 'ar' ? 'تقني وتصحيح الأخطاء' : 'Technical & Error Correction' },
-              { id: 'security', label: lang === 'ar' ? 'الخصوصية والأمان' : 'Privacy & Security' },
+              { id: 'all', label: copy.all },
+              { id: 'general', label: copy.general },
+              { id: 'print', label: copy.print },
+              { id: 'technical', label: copy.technical },
+              { id: 'security', label: copy.security },
             ].map((cat) => (
               <button
                 key={cat.id}
@@ -155,7 +186,7 @@ export const FAQPage: React.FC<FAQPageProps> = ({ lang, onNavigate }) => {
         <div className="space-y-3">
           {filteredFaqs.length === 0 ? (
             <div className="text-center py-12 text-slate-500 text-sm">
-              {lang === 'ar' ? <>لا توجد أسئلة تطابق «{searchTerm}». جرّب عبارة بحث أخرى.</> : <>No questions found matching &ldquo;{searchTerm}&rdquo;. Try another search term.</>}
+              {copy.empty}
             </div>
           ) : (
             filteredFaqs.map((faq) => {
@@ -189,22 +220,22 @@ export const FAQPage: React.FC<FAQPageProps> = ({ lang, onNavigate }) => {
 
         {/* Quick CTA */}
         <div className="p-8 rounded-2xl bg-gradient-to-r from-indigo-50 to-purple-50 border border-indigo-100 text-center space-y-4">
-          <h3 className="text-lg font-bold text-slate-900">{lang === 'ar' ? 'هل لديك سؤال غير موجود هنا؟' : 'Have a question not listed here?'}</h3>
+          <h3 className="text-lg font-bold text-slate-900">{copy.cta}</h3>
           <p className="text-xs text-slate-600 max-w-md mx-auto">
-            {lang === 'ar' ? 'يسعد فريقنا مساعدتك في المواصفات التقنية واحتياجات المؤسسات وإرشادات الطباعة.' : 'Our engineering team is always happy to assist with technical specifications, custom enterprise needs, and print guidelines.'}
+            {copy.support}
           </p>
           <div className="flex justify-center gap-3">
             <button
               onClick={() => onNavigate('contact')}
               className="py-2.5 px-5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-xs font-bold transition-colors shadow-sm"
             >
-              {lang === 'ar' ? 'تواصل مع الدعم' : 'Contact Support'}
+              {copy.contact}
             </button>
             <button
               onClick={() => onNavigate('generator')}
               className="py-2.5 px-5 bg-white border border-slate-200 text-slate-700 rounded-xl text-xs font-bold hover:bg-slate-50 transition-colors"
             >
-              {lang === 'ar' ? 'افتح الاستوديو' : 'Open Studio'}
+              {copy.studio}
             </button>
           </div>
         </div>
