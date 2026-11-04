@@ -92,7 +92,21 @@ export const PrivacyPage: React.FC<PrivacyPageProps> = ({ lang }) => {
 
           <section className="space-y-2">
             <h2 className="text-base font-bold text-slate-900">
-              {text('4. Data Security', '4. أمن البيانات', '4. Sécurité des données', '4. Seguridad de los datos')}
+              {text('4. Privacy-Focused Website Analytics', '4. تحليلات الموقع مع مراعاة الخصوصية', '4. Mesure d’audience respectueuse de la vie privée', '4. Analítica web respetuosa con la privacidad')}
+            </h2>
+            <p>
+              {text(
+                'We use Cloudflare Web Analytics to understand page performance and aggregate website usage. Cloudflare states that this service does not collect or use visitors’ personal data, does not use cookies or localStorage for analytics, and does not fingerprint individuals. Its browser beacon sends performance measurements to Cloudflare. Analytics may be incomplete when the beacon is blocked by browser settings or extensions.',
+                'نستخدم خدمة Cloudflare Web Analytics لفهم أداء الصفحات وقياس استخدام الموقع بصورة إجمالية. وتوضح Cloudflare أن هذه الخدمة لا تجمع البيانات الشخصية للزوار ولا تستخدم ملفات تعريف الارتباط أو التخزين المحلي لأغراض التحليلات، ولا تنشئ بصمة تعريفية للأفراد. ويرسل البرنامج النصي الخاص بالخدمة قياسات الأداء إلى Cloudflare. وقد تكون البيانات غير مكتملة إذا حُظر هذا البرنامج من إعدادات المتصفح أو إضافاته.',
+                'Nous utilisons Cloudflare Web Analytics pour comprendre les performances des pages et mesurer l’utilisation globale du site. Cloudflare indique que ce service ne collecte ni n’utilise les données personnelles des visiteurs, n’utilise pas de cookies ni de stockage local à des fins analytiques et ne crée pas d’empreinte individuelle. Son script de mesure transmet des indicateurs de performance à Cloudflare. Les données peuvent être incomplètes si ce script est bloqué par le navigateur ou une extension.',
+                'Utilizamos Cloudflare Web Analytics para comprender el rendimiento de las páginas y medir el uso general del sitio. Cloudflare indica que este servicio no recopila ni utiliza datos personales de los visitantes, no usa cookies ni almacenamiento local para análisis y no crea huellas digitales individuales. Su script de medición envía métricas de rendimiento a Cloudflare. Los datos pueden estar incompletos si el navegador o una extensión bloquea ese script.'
+              )}
+            </p>
+          </section>
+
+          <section className="space-y-2">
+            <h2 className="text-base font-bold text-slate-900">
+              {text('5. Data Security', '5. أمن البيانات', '5. Sécurité des données', '5. Seguridad de los datos')}
             </h2>
             <p>
               {text(
@@ -106,15 +120,15 @@ export const PrivacyPage: React.FC<PrivacyPageProps> = ({ lang }) => {
 
           <section className="space-y-2">
             <h2 className="text-base font-bold text-slate-900">
-              {text('5. Contact About Privacy', '5. التواصل بشأن الخصوصية', '5. Contact au sujet de la confidentialité', '5. Contacto sobre privacidad')}
+              {text('6. Contact About Privacy', '6. التواصل بشأن الخصوصية', '6. Contact au sujet de la confidentialité', '6. Contacto sobre privacidad')}
             </h2>
             <p>
               {text(
-                'If you have questions about this policy, contact us at',
-                'إذا كانت لديك أسئلة أو استفسارات حول هذه السياسة، تواصل معنا عبر',
-                'Si vous avez des questions concernant cette politique, contactez-nous à l’adresse',
-                'Si tienes preguntas sobre esta política, ponte en contacto con nosotros en'
-              )} <code>privacy@qrgenius.app</code>.
+                'We do not currently publish a dedicated privacy contact email address. Please check this page for future contact details.',
+                'لا ننشر حالياً عنوان بريد إلكتروني مخصصاً لاستفسارات الخصوصية. يُرجى مراجعة هذه الصفحة للاطلاع على أي معلومات تواصل مستقبلية.',
+                'Nous ne publions pas actuellement d’adresse e-mail dédiée aux questions de confidentialité. Consultez cette page pour toute future information de contact.',
+                'Actualmente no publicamos una dirección de correo electrónico específica para consultas de privacidad. Consulta esta página para futuras opciones de contacto.'
+              )}.
             </p>
           </section>
         </div>
