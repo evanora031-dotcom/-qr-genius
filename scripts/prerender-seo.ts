@@ -9,7 +9,7 @@ const template = await readFile(path.join(distDir, 'index.html'), 'utf8');
 
 const locales = ['en', 'ar', 'fr', 'es'] as const;
 const pages = ['home', 'generator', 'url', 'wifi', 'whatsapp', 'business', 'about', 'contact', 'privacy', 'terms', 'faq'] as const;
-const baseUrl = 'https://qr-genius-1on.pages.dev';
+const baseUrl = 'https://getqrgenius.com';
 
 function escapeHtml(value: string): string {
   return value.replaceAll('&', '&amp;').replaceAll('"', '&quot;').replaceAll('<', '&lt;').replaceAll('>', '&gt;');
@@ -43,7 +43,7 @@ function renderPage(locale: typeof locales[number], page: typeof pages[number]):
   );
   alternates.push(`  <link rel="alternate" hreflang="x-default" href="${baseUrl}${localizedPath(meta.canonicalPath, 'en')}" />`);
   html = html.replace('</head>', `${alternates.join('\n')}\n</head>`);
-  html = html.replace('"url": "https://qr-genius-1on.pages.dev/"', `"url": "${canonicalUrl}"`);
+  html = html.replace('"url": "https://qr-genius-1on.pages.dev/"', '"url": "https://getqrgenius.com/"');
   return html;
 }
 
