@@ -15,6 +15,7 @@ declare global {
     turnstile?: {
       render: (container: HTMLElement, options: TurnstileOptions) => string;
       remove: (widgetId: string) => void;
+      reset: (widgetId?: string) => void;
     };
   }
 }
@@ -58,6 +59,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ lang }) => {
   const [loading, setLoading] = useState(false);
   const turnstileSiteKey = import.meta.env.VITE_TURNSTILE_SITE_KEY || '';
   const turnstileContainer = useRef<HTMLDivElement>(null);
+  const turnstileWidgetId = useRef<string | null>(null);
   const [turnstileToken, setTurnstileToken] = useState('');
 
   useEffect(() => {
@@ -74,6 +76,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ lang }) => {
           'expired-callback': () => setTurnstileToken(''),
           'error-callback': () => setTurnstileToken('')
         });
+        turnstileWidgetId.current = widgetId;
       })
       .catch(() => {
         if (!active) return;
@@ -88,6 +91,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ lang }) => {
     return () => {
       active = false;
       if (widgetId && window.turnstile) window.turnstile.remove(widgetId);
+      turnstileWidgetId.current = null;
     };
   }, [turnstileSiteKey, lang]);
 
@@ -122,6 +126,10 @@ export const ContactPage: React.FC<ContactPageProps> = ({ lang }) => {
       if (!response.ok) throw new Error('Contact request failed');
       setSubmitted(true);
     } catch {
+      setTurnstileToken('');
+      if (turnstileWidgetId.current && window.turnstile) {
+        window.turnstile.reset(turnstileWidgetId.current);
+      }
       setFormError(text(
         'We could not send your message right now. Please try again or email support@getqrgenius.com.',
         'تعذّر إرسال رسالتك الآن. حاول مرة أخرى أو راسل support@getqrgenius.com.',
