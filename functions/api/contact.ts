@@ -1,6 +1,7 @@
 interface ContactEnv {
   RESEND_API_KEY: string;
   RESEND_FROM_EMAIL: string;
+  TURNSTILE_SECRET_KEY?: string;
 }
 
 const MAX_BODY_BYTES = 12 * 1024;
@@ -114,6 +115,36 @@ export async function onRequestPost(context: {
   // Honeypot: silently accept automated submissions without sending email.
   if (typeof data.company === "string" && data.company.trim()) {
     return json({ ok: true });
+  }
+
+
+  // Enforce Turnstile whenever the server-side secret is configured.
+  // The secret is stored only as a Cloudflare Pages secret, never in client code.
+  if (env.TURNSTILE_SECRET_KEY) {
+    const turnstileToken = typeof data.turnstileToken === "string" ? data.turnstileToken : "";
+    if (!turnstileToken || turnstileToken.length > 2048) {
+      return json({ error: "Security verification failed" }, 400);
+    }
+
+    try {
+      const verificationBody = new URLSearchParams();
+      verificationBody.set("secret", env.TURNSTILE_SECRET_KEY);
+      verificationBody.set("response", turnstileToken);
+      const verificationResponse = await fetch(
+        "https://challenges.cloudflare.com/turnstile/v0/siteverify",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          body: verificationBody
+        }
+      );
+      const verificationResult = await verificationResponse.json() as { success?: boolean };
+      if (!verificationResponse.ok || verificationResult.success !== true) {
+        return json({ error: "Security verification failed" }, 400);
+      }
+    } catch {
+      return json({ error: "Security verification unavailable" }, 503);
+    }
   }
 
   const name = typeof data.name === "string" ? data.name.trim() : "";
