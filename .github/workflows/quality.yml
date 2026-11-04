@@ -107,7 +107,7 @@ jobs:
           node-version: 22
       - name: Install Playwright
         run: |
-          npm install --no-save --no-package-lock playwright
+          npm install --no-save --no-package-lock --legacy-peer-deps playwright
           npx playwright install --with-deps chromium
       - name: Verify valid Turnstile token and replay protection
         env:
