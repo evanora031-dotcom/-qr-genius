@@ -109,7 +109,7 @@ jobs:
         run: |
           npm install --no-save --no-package-lock --legacy-peer-deps playwright
           npx playwright install --with-deps chromium
-      - name: Verify valid Turnstile test token in browser
+      - name: Verify Turnstile callback integration in browser
         env:
           PREVIEW_URL: https://feature-site-redesign.qr-genius-1on.pages.dev
         run: node scripts/turnstile-preview-e2e.mjs
