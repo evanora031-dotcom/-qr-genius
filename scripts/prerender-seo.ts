@@ -42,7 +42,7 @@ const fallbackStyles = `<style>
     .seo-static-content { width: calc(100% - 1.25rem); margin: 1rem auto; padding: 1.25rem; border-radius: 18px; }
   }
 </style>`;
-const template = rawTemplate.replace('</head>', '<script>document.documentElement.classList.add("js-enabled");</script>' + fallbackStyles + '\\n</head>');
+const template = rawTemplate.replace('</head>', '<script>document.documentElement.classList.add("js-enabled");</script>' + fallbackStyles + '\n</head>');
 
 const locales = ['en', 'ar', 'fr', 'es'] as const;
 const pages = ['home', 'generator', 'url', 'wifi', 'whatsapp', 'business', 'about', 'contact', 'privacy', 'terms', 'faq'] as const;
