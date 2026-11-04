@@ -404,7 +404,7 @@ export const SEO_METADATA: Record<PageId, Record<Language, PageMeta>> = {
 const SEO_LANGUAGES: Language[] = ['en', 'ar', 'fr', 'es'];
 
 function getLocalizedPath(path: string, lang: Language): string {
-  if (path === '/' && lang === 'en') return '/';
+  if (lang === 'en') return path;
   return path === '/' ? `/${lang}/` : `/${lang}${path}`;
 }
 
