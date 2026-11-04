@@ -71,29 +71,29 @@ export const SEO_METADATA: Record<PageId, Record<Language, PageMeta>> = {
   },
   url: {
     en: {
-      title: "Free Website URL QR Code Generator | Instant Links | QR GENIUS",
-      description: "Convert any website link or landing page into a clean, permanent QR code with custom colors and logo embedding. Free and scan-guaranteed.",
+      title: "Free URL to QR Code Generator | Website Link QR | QR GENIUS",
+      description: "Turn a website URL into a customizable QR code. Add colors or a logo, then download your code for digital sharing or print.",
       keywords: "url to qr code, link qr code generator, website qr code, free webpage qr",
       canonicalPath: "/tools/url",
       h1: "Website URL QR Code Generator"
     },
     ar: {
-      title: "مولد رمز QR لرابط موقع إلكتروني مجاناً | روابط فورية | كيو آر جينيوس",
-      description: "حول أي رابط موقع أو صفحة هبوط إلى رمز QR دائم واحترافي مع تخصيص الألوان وإضافة الشعار.",
+      title: "مولد QR للرابط والموقع الإلكتروني مجاناً | QR Genius",
+      description: "حوّل رابط موقعك إلى رمز QR قابل للتخصيص، وأضف الألوان أو الشعار ثم نزّله للمشاركة أو الطباعة.",
       keywords: "تحويل رابط الى باركود, كود موقع ويب, باركود رابط مجاني",
       canonicalPath: "/tools/url",
       h1: "مولد رموز QR لروابط المواقع الإلكترونية"
     },
     fr: {
-      title: "Générateur de QR Code pour Liens URL | Liens Web Rapides | QR GENIUS",
-      description: "Transformez vos liens web et pages de destination en QR codes permanents avec couleurs et logos personnalisés.",
+      title: "Générateur QR Code URL Gratuit | Lien de Site Web | QR GENIUS",
+      description: "Convertissez une adresse web en QR code personnalisable. Ajoutez des couleurs ou un logo, puis téléchargez-le pour le partager ou l’imprimer.",
       keywords: "lien vers qr code, generateur qr url, qr code site internet",
       canonicalPath: "/tools/url",
       h1: "Générateur de QR Code pour URL de Site Web"
     },
     es: {
-      title: "Generador de Código QR para URLs de Sitios Web | Enlaces Directos | QR GENIUS",
-      description: "Convierta cualquier enlace web en un código QR limpio y permanente con colores personalizados e inserción de logotipo.",
+      title: "Generador QR para URL Gratis | Código para Enlaces Web | QR GENIUS",
+      description: "Convierte una dirección web en un código QR personalizable. Añade colores o un logotipo y descárgalo para compartir o imprimir.",
       keywords: "convertir enlace a qr, generador qr url, qr pagina web",
       canonicalPath: "/tools/url",
       h1: "Generador de Códigos QR para Enlaces Web"
@@ -101,29 +101,29 @@ export const SEO_METADATA: Record<PageId, Record<Language, PageMeta>> = {
   },
   wifi: {
     en: {
-      title: "Free Wi-Fi QR Code Generator | Connect Without Password | QR GENIUS",
-      description: "Create a scan-to-connect Wi-Fi QR code for your guests, café, or office. Works on iPhone and Android with WPA/WPA2, WEP, and hidden networks.",
+      title: "Free Wi-Fi QR Code Generator | Scan to Connect | QR GENIUS",
+      description: "Create a Wi-Fi QR code so guests can join your network without typing the password. Customize the code and share it at home, work, or your café.",
       keywords: "wifi qr code, scan to connect wifi, guest wifi qr code, generate wifi qr, free wifi barcode",
       canonicalPath: "/tools/wifi",
       h1: "Scan-to-Connect Wi-Fi QR Code Generator"
     },
     ar: {
-      title: "مولد رمز QR لشبكات الواي فاي مجاناً | اتصال بدون كتابة كلمة السر | كيو آر جينيوس",
-      description: "أنشئ رمز QR للواي فاي لضيوفك أو مقهاك أو مكتبك. يعمل على آيفون وأندرويد فورياً مع دعم شبكات WPA وWEP والشبكات المخفية.",
+      title: "مولد QR للواي فاي مجاناً | مشاركة الشبكة بالمسح | QR Genius",
+      description: "أنشئ رمز QR لشبكة Wi-Fi كي يتصل الضيوف دون كتابة كلمة المرور. خصّص الرمز وشاركه في المنزل أو المكتب أو المقهى.",
       keywords: "باركود واي فاي, مشاركة شبكة نت qr, اتصال فوري بالواي فاي",
       canonicalPath: "/tools/wifi",
       h1: "مولد رموز QR للاتصال بشبكات الواي فاي"
     },
     fr: {
-      title: "Générateur de QR Code Wi-Fi Gratuit | Connexion Directe Sans Mot de Passe | QR GENIUS",
-      description: "Créez un QR code Wi-Fi pour vos invités, restaurant ou bureau. Fonctionne sur iOS et Android sans taper le mot de passe.",
+      title: "Générateur QR Code Wi-Fi Gratuit | Connexion par Scan | QR GENIUS",
+      description: "Créez un QR code Wi-Fi pour permettre à vos invités de rejoindre le réseau sans saisir le mot de passe. Personnalisez-le et partagez-le facilement.",
       keywords: "qr code wifi gratuit, connexion directe wifi, qr reseau invite",
       canonicalPath: "/tools/wifi",
       h1: "Générateur de QR Code Wi-Fi pour Connexion Instantanée"
     },
     es: {
-      title: "Generador de Código QR para Redes Wi-Fi Gratis | Conexión Sin Contraseña | QR GENIUS",
-      description: "Genere un código QR de Wi-Fi para sus invitados, cafetería u oficina. Compatible con iOS y Android con seguridad WPA/WPA2.",
+      title: "Generador QR Wi-Fi Gratis | Conexión al Escanear | QR GENIUS",
+      description: "Crea un código QR Wi-Fi para que tus invitados se conecten sin escribir la contraseña. Personalízalo y compártelo en casa, la oficina o tu cafetería.",
       keywords: "qr wifi gratis, conectar a wifi con qr, qr red invitados",
       canonicalPath: "/tools/wifi",
       h1: "Generador de Códigos QR para Conexión Wi-Fi"
@@ -131,29 +131,29 @@ export const SEO_METADATA: Record<PageId, Record<Language, PageMeta>> = {
   },
   whatsapp: {
     en: {
-      title: "Free WhatsApp QR Code Generator | Direct Chat Link | QR GENIUS",
-      description: "Generate a click-to-chat WhatsApp QR code with pre-filled greeting message. Ideal for customer support, sales, and marketing flyers.",
+      title: "Free WhatsApp QR Code Generator | Scan to Chat | QR GENIUS",
+      description: "Create a WhatsApp QR code that opens a chat with your number and an optional pre-filled message. Share it on flyers, menus, or business materials.",
       keywords: "whatsapp qr code, wa me qr generator, whatsapp direct chat qr, scan to message whatsapp",
       canonicalPath: "/tools/whatsapp",
       h1: "Direct Chat WhatsApp QR Code Generator"
     },
     ar: {
-      title: "مولد رمز QR لمحادثات واتساب مجاناً | فتح شات مباشر | كيو آر جينيوس",
-      description: "أنشئ رمز QR لمحادثة واتساب مباشرة مع رسالة ترحيبية جاهزة. مثالي لخدمة العملاء والمبيعات والملصقات الإعلانية.",
+      title: "مولد QR لواتساب مجاناً | رابط محادثة مباشرة | QR Genius",
+      description: "أنشئ رمز QR يفتح محادثة واتساب مع رقمك ورسالة اختيارية جاهزة. شاركه على المنشورات أو القوائم أو مواد العمل.",
       keywords: "باركود واتساب, رابط واتس مباشر, محادثة فورية qr",
       canonicalPath: "/tools/whatsapp",
       h1: "مولد رموز QR لمحادثات واتساب المباشرة"
     },
     fr: {
-      title: "Générateur de QR Code WhatsApp Gratuit | Chat Direct & Message | QR GENIUS",
-      description: "Créez un QR code WhatsApp avec message pré-rempli pour votre support client, vos ventes et vos supports de communication.",
+      title: "Générateur QR Code WhatsApp Gratuit | Lien de Discussion | QR GENIUS",
+      description: "Créez un QR code qui ouvre une discussion WhatsApp avec votre numéro et un message facultatif. Partagez-le sur vos menus ou supports professionnels.",
       keywords: "qr code whatsapp, lien direct whatsapp, scanner pour discuter whatsapp",
       canonicalPath: "/tools/whatsapp",
       h1: "Générateur de QR Code pour WhatsApp Chat Direct"
     },
     es: {
-      title: "Generador de Código QR para WhatsApp Gratis | Chat Directo | QR GENIUS",
-      description: "Cree un código QR para iniciar chat en WhatsApp con mensaje prediseñado. Perfecto para atención al cliente y ventas.",
+      title: "Generador QR WhatsApp Gratis | Enlace para Chatear | QR GENIUS",
+      description: "Crea un código QR que abre un chat de WhatsApp con tu número y un mensaje opcional. Compártelo en folletos, menús o materiales comerciales.",
       keywords: "qr whatsapp gratis, escanear chat whatsapp, enlace directo whatsapp",
       canonicalPath: "/tools/whatsapp",
       h1: "Generador de Códigos QR para Chat Directo de WhatsApp"
@@ -161,29 +161,29 @@ export const SEO_METADATA: Record<PageId, Record<Language, PageMeta>> = {
   },
   business: {
     en: {
-      title: "Free vCard Digital Business Card QR Code Generator | QR GENIUS",
-      description: "Create digital contact vCard QR codes. When scanned, customers can instantly save your name, phone, email, and company directly to phone contacts.",
+      title: "Free vCard QR Code Generator | Digital Business Card | QR GENIUS",
+      description: "Create a vCard QR code with your contact details. People can scan it to open a contact card and save the information on a compatible phone.",
       keywords: "vcard qr code, digital business card qr, contact qr generator, save contact qr",
       canonicalPath: "/tools/business-vcard",
       h1: "Digital vCard Business Card QR Generator"
     },
     ar: {
-      title: "مولد رمز QR لبطاقات العمل الرقمية vCard مجاناً | كيو آر جينيوس",
-      description: "أنشئ رمز QR لبطاقة عملك الرقمية. عند مسح الرمز، يمكن للعملاء حفظ اسمك ورقم هاتفك وبريدك وشركتك في جهات الاتصال فوراً.",
+      title: "مولد QR لبطاقة العمل الرقمية vCard مجاناً | QR Genius",
+      description: "أنشئ رمز QR لبطاقة عملك الرقمية مع الاسم والهاتف والبريد والشركة. يمكن مسح الرمز لفتح بيانات الاتصال وحفظها على هاتف متوافق.",
       keywords: "بطاقة عمل ذكية qr, باركود vcard, حفظ جهة اتصال بالباركود",
       canonicalPath: "/tools/business-vcard",
       h1: "مولد رموز QR لبطاقات العمل وجهات الاتصال vCard"
     },
     fr: {
-      title: "Générateur de QR Code Carte de Visite vCard | QR GENIUS",
-      description: "Créez un QR code pour votre carte de visite numérique vCard. Permet aux contacts d'enregistrer vos coordonnées en un clic.",
+      title: "Générateur QR Code vCard Gratuit | Carte de Visite | QR GENIUS",
+      description: "Créez un QR code vCard avec vos coordonnées. Vos contacts peuvent le scanner pour ouvrir votre fiche et l’enregistrer sur un téléphone compatible.",
       keywords: "qr code vcard, carte de visite numerique qr, enregistrer contact qr",
       canonicalPath: "/tools/business-vcard",
       h1: "Générateur de QR Code pour Cartes de Visite vCard"
     },
     es: {
-      title: "Generador de Códigos QR para Tarjetas Digitales vCard | QR GENIUS",
-      description: "Cree códigos QR de tarjetas de presentación vCard. Permite a sus clientes guardar sus datos de contacto al instante.",
+      title: "Generador QR vCard Gratis | Tarjeta de Visita Digital | QR GENIUS",
+      description: "Crea un código QR vCard con tus datos de contacto. Otras personas pueden escanearlo para abrir tu ficha y guardarla en un teléfono compatible.",
       keywords: "qr vcard, tarjeta de presentacion qr, guardar contacto con qr",
       canonicalPath: "/tools/business-vcard",
       h1: "Generador de Códigos QR para Tarjetas de Contacto vCard"
