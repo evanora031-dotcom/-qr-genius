@@ -141,13 +141,34 @@ const TOOL_CONFIGS_AR: typeof TOOL_CONFIGS = {
   }
 };
 
+
+const TOOL_CONFIGS_FR: typeof TOOL_CONFIGS = {
+url:{type:'url',badge:'Outil gratuit en ligne',title:'Générateur de QR Code pour URL',subtitle:'Transformez un site web ou une boutique en QR code permanent, prêt à scanner, avec couleurs et logo personnalisables.',benefits:['Ouvrez directement toute adresse web','Compatible avec Google Analytics et les paramètres UTM','Téléchargez un SVG vectoriel pour une impression nette','Sans limite de scans, abonnement ni expiration'],faqs:[{q:'Les QR codes URL expirent-ils ?',a:'Non. Le code statique contient directement votre adresse web et fonctionne tant que le site reste en ligne.'},{q:'Puis-je ajouter des paramètres UTM ?',a:'Oui, ajoutez-les directement à l’adresse dans le champ URL.'},{q:'Quel format choisir pour imprimer ?',a:'Le SVG vectoriel ou le PNG 2048 px offre une impression nette.'}]},
+wifi:{type:'wifi',badge:'Connexion sans mot de passe',title:'Générateur de QR Code Wi-Fi',subtitle:'Créez un QR code Wi-Fi pour vos invités, votre café ou votre bureau. Compatible avec iPhone et Android.',benefits:['Les invités scannent le code pour rejoindre le réseau','Prend en charge WPA, WPA2, WPA3, WEP et les réseaux ouverts','Compatible avec les réseaux masqués','Le mot de passe est intégré au code et non stocké sur nos serveurs'],faqs:[{q:'Faut-il une application pour scanner ?',a:'Non. Les appareils récents reconnaissent les QR codes Wi-Fi avec leur appareil photo.'},{q:'La création est-elle sécurisée ?',a:'Oui. Les données Wi-Fi sont traitées localement dans votre navigateur.'},{q:'Que faire si je change le mot de passe ?',a:'Créez un nouveau QR code avec le mot de passe mis à jour.'}]},
+whatsapp:{type:'whatsapp',badge:'Discussion directe',title:'Générateur de QR Code WhatsApp',subtitle:'Créez un QR code qui ouvre une discussion WhatsApp avec un message prérempli. Idéal pour le service client et les supports publicitaires.',benefits:['Ouvrez une conversation WhatsApp après le scan','Préremplissez un message d’accueil','Fonctionne avec les numéros internationaux','Ajoutez le logo WhatsApp au QR code'],faqs:[{q:'Comment fonctionne le QR code WhatsApp ?',a:'Il contient un lien wa.me qui ouvre la conversation avec le numéro indiqué.'},{q:'Dois-je inclure l’indicatif du pays ?',a:'Oui, saisissez le numéro au format international sans tirets ni espaces.'},{q:'Le message peut-il être modifié ?',a:'Oui, le message prérempli peut être modifié avant son envoi.'}]},
+business:{type:'vcard',badge:'Carte de visite numérique',title:'Générateur de QR Code vCard',subtitle:'Transformez vos coordonnées en carte de visite numérique enregistrable dans les contacts après le scan.',benefits:['Évitez les cartes papier et la saisie manuelle','Enregistrez nom, poste, entreprise, téléphone et e-mail','Format vCard 3.0 compatible avec iOS et Google','Idéal pour conférences et signatures e-mail'],faqs:[{q:'Comment fonctionne une vCard ?',a:'Le téléphone propose d’ajouter le contact et remplit les champs disponibles.'},{q:'Existe-t-il une limite de scans ?',a:'Non, les scans ne sont pas limités.'},{q:'Puis-je ajouter un logo ?',a:'Oui, utilisez le studio complet pour ajouter votre logo et personnaliser les couleurs.'}]}
+};
+const TOOL_CONFIGS_ES: typeof TOOL_CONFIGS = {
+url:{type:'url',badge:'Herramienta gratuita en línea',title:'Generador de códigos QR para URL',subtitle:'Convierte un sitio web o una tienda en un código QR permanente, listo para escanear y con colores y logotipo personalizados.',benefits:['Abre cualquier dirección web directamente','Compatible con Google Analytics y parámetros UTM','Descarga SVG vectorial para imprimir con nitidez','Sin límites de escaneos, suscripciones ni caducidad'],faqs:[{q:'¿Caducan los códigos QR de URL?',a:'No. El código estático contiene tu dirección web y funciona mientras el sitio esté en línea.'},{q:'¿Puedo añadir parámetros UTM?',a:'Sí, añádelos directamente a la dirección en el campo URL.'},{q:'¿Qué formato es mejor para imprimir?',a:'SVG vectorial o PNG de 2048 px ofrecen una impresión nítida.'}]},
+wifi:{type:'wifi',badge:'Conexión sin contraseña',title:'Generador de códigos QR para Wi-Fi',subtitle:'Crea un código QR Wi-Fi para invitados, cafeterías u oficinas. Compatible con iPhone y Android.',benefits:['Los invitados escanean el código para conectarse','Compatible con WPA, WPA2, WPA3, WEP y redes abiertas','Admite redes ocultas','La contraseña se codifica en el QR y no se guarda en servidores'],faqs:[{q:'¿Se necesita una aplicación para escanear?',a:'No. Los dispositivos modernos reconocen los códigos QR Wi-Fi con la cámara.'},{q:'¿Es seguro crear el código?',a:'Sí. Los datos Wi-Fi se procesan localmente en el navegador.'},{q:'¿Qué hago si cambio la contraseña?',a:'Genera un nuevo código QR con la contraseña actualizada.'}]},
+whatsapp:{type:'whatsapp',badge:'Chat directo',title:'Generador de códigos QR para WhatsApp',subtitle:'Crea un código QR que abre un chat de WhatsApp con un mensaje preparado. Ideal para atención al cliente y publicidad.',benefits:['Abre una conversación de WhatsApp al escanear','Prepara un mensaje de bienvenida','Funciona con números internacionales','Añade el logotipo de WhatsApp al código'],faqs:[{q:'¿Cómo funciona el QR de WhatsApp?',a:'Contiene un enlace wa.me que abre el chat con el número indicado.'},{q:'¿Debo incluir el prefijo del país?',a:'Sí, introduce el número internacional completo sin guiones ni espacios.'},{q:'¿Se puede editar el mensaje?',a:'Sí, el mensaje preparado puede modificarse antes de enviarlo.'}]},
+business:{type:'vcard',badge:'Tarjeta de visita digital',title:'Generador de códigos QR para vCard',subtitle:'Convierte tus datos de contacto en una tarjeta digital que se puede guardar en la agenda al escanear.',benefits:['Evita las tarjetas de papel y la introducción manual','Guarda nombre, cargo, empresa, teléfono y correo','Formato vCard 3.0 compatible con iOS y Google','Ideal para eventos y firmas de correo'],faqs:[{q:'¿Cómo funciona una vCard?',a:'El teléfono ofrece añadir el contacto y completa los campos disponibles.'},{q:'¿Hay un límite de escaneos?',a:'No, los escaneos son ilimitados.'},{q:'¿Puedo añadir un logotipo?',a:'Sí, abre el estudio completo para añadir tu logotipo y personalizar los colores.'}]}
+};
+const TOOL_UI = {
+en:{online:'Free Online Tool',customTitle:'Need full custom colors, logos & shapes?',customText:'Open our studio to access all custom options.',studio:'Full Studio',why:'Why Use Our',security:'Client-Side Security Guarantee',securityText:'QR GENIUS processes QR data locally in your browser; payloads are not sent to or logged on our servers.',customize:'Customize in Studio',faqs:'Frequently Asked Questions'},
+ar:{online:'أداة مجانية عبر الإنترنت',customTitle:'هل تريد تخصيص الألوان والشعارات والأشكال؟',customText:'افتح الاستوديو للوصول إلى جميع خيارات التخصيص.',studio:'الاستوديو الكامل',why:'لماذا تستخدم',security:'ضمان الأمان والمعالجة المحلية',securityText:'يعالج QR GENIUS بيانات الرمز محلياً داخل متصفحك ولا يرسلها إلى خوادمه أو يسجلها.',customize:'خصص الرمز في الاستوديو',faqs:'الأسئلة الشائعة'},
+fr:{online:'Outil gratuit en ligne',customTitle:'Personnalisez couleurs, logos et formes',customText:'Ouvrez le studio pour accéder à toutes les options.',studio:'Studio complet',why:'Pourquoi utiliser',security:'Protection et traitement local',securityText:'QR GENIUS traite les données localement dans votre navigateur, sans les envoyer ni les enregistrer sur ses serveurs.',customize:'Personnaliser dans le studio',faqs:'Questions fréquentes'},
+es:{online:'Herramienta gratuita en línea',customTitle:'Personaliza colores, logotipos y formas',customText:'Abre el estudio para acceder a todas las opciones.',studio:'Estudio completo',why:'Por qué usar',security:'Protección y procesamiento local',securityText:'QR GENIUS procesa los datos localmente en tu navegador, sin enviarlos ni guardarlos en sus servidores.',customize:'Personalizar en el estudio',faqs:'Preguntas frecuentes'}
+};
+
 export const ToolLandingPage: React.FC<ToolLandingPageProps> = ({
   tool,
   lang,
   onNavigate,
   onHistoryUpdated
 }) => {
-  const toolData = lang === 'ar' ? TOOL_CONFIGS_AR[tool] : TOOL_CONFIGS[tool];
+  const toolData = lang === 'ar' ? TOOL_CONFIGS_AR[tool] : lang === 'fr' ? TOOL_CONFIGS_FR[tool] : lang === 'es' ? TOOL_CONFIGS_ES[tool] : TOOL_CONFIGS[tool];
+  const ui = TOOL_UI[lang];
   const t = translations[lang];
 
   // Dedicated local state for instant mini-studio
@@ -210,7 +231,7 @@ export const ToolLandingPage: React.FC<ToolLandingPageProps> = ({
             <div className="inline-flex items-center gap-2 text-xs font-bold text-indigo-700 tracking-wide uppercase mb-2 sm:mb-3">
               <span>{toolData.badge}</span>
               <span className="text-slate-300">·</span>
-              <span>{lang === 'ar' ? 'أداة مجانية عبر الإنترنت' : 'Free Online Tool'}</span>
+              <span>{ui.online}</span>
             </div>
             <h1 className="text-2xl sm:text-3xl lg:text-5xl font-extrabold text-slate-900 tracking-tight leading-tight">
               {toolData.title}
@@ -240,15 +261,15 @@ export const ToolLandingPage: React.FC<ToolLandingPageProps> = ({
 
             <div className="flex items-center justify-between p-4 bg-white rounded-xl border border-slate-200 text-xs">
               <div>
-                <span className="font-bold text-slate-800">{lang === 'ar' ? 'هل تريد تخصيص الألوان والشعارات والأشكال؟' : 'Need full custom colors, logos &amp; shapes?'}</span>
-                <p className="text-slate-500 text-[11px] mt-0.5">{lang === 'ar' ? 'افتح الاستوديو للوصول إلى جميع خيارات التخصيص.' : 'Open our studio to access all custom options.'}</p>
+                <span className="font-bold text-slate-800">{ui.customTitle}</span>
+                <p className="text-slate-500 text-[11px] mt-0.5">{ui.customText}</p>
               </div>
               <button
                 type="button"
                 onClick={() => onNavigate('generator', toolData.type)}
                 className="py-2 px-3.5 bg-indigo-600 text-white font-bold rounded-lg hover:bg-indigo-700 transition-colors flex items-center gap-1.5 shrink-0"
               >
-                <span>{lang === 'ar' ? 'الاستوديو الكامل' : 'Full Studio'}</span>
+                <span>{ui.studio}</span>
                 <ArrowRight className="w-3.5 h-3.5" />
               </button>
             </div>
@@ -269,7 +290,7 @@ export const ToolLandingPage: React.FC<ToolLandingPageProps> = ({
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 pt-8">
           <div>
             <h2 className="text-2xl font-bold text-slate-900 tracking-tight mb-4">
-              {lang === 'ar' ? `لماذا تستخدم ${toolData.title}؟` : `Why Use Our ${toolData.title}?`}
+              {lang === 'ar' ? `لماذا تستخدم ${toolData.title}؟` : `${ui.why} ${toolData.title}?`}
             </h2>
             <div className="space-y-4">
               {toolData.benefits.map((benefit, idx) => (
@@ -288,10 +309,10 @@ export const ToolLandingPage: React.FC<ToolLandingPageProps> = ({
           <div className="bg-slate-50 rounded-2xl p-6 border border-slate-200 space-y-4">
             <h3 className="text-base font-bold text-slate-900 flex items-center gap-2">
               <ShieldCheck className="w-5 h-5 text-indigo-600" />
-              <span>{lang === 'ar' ? 'ضمان الأمان والمعالجة المحلية' : 'Client-Side Security Guarantee'}</span>
+              <span>{ui.security}</span>
             </h3>
             <p className="text-xs text-slate-600 leading-relaxed">
-              {lang === 'ar' ? 'عند إنشاء رموز تتضمن بيانات حساسة مثل كلمات مرور Wi-Fi أو معلومات جهات الاتصال، تكون الخصوصية أساسية. ينشئ QR GENIUS الرموز محلياً داخل متصفحك، ولا يرسل محتوى البيانات إلى خوادمه أو يسجله.' : 'When creating sensitive codes such as Wi-Fi credentials or personal vCard details, privacy is essential. QR GENIUS renders and compiles all matrix algorithms 100% inside your local browser. No data payload is ever sent to or logged on our servers.'}
+              {ui.securityText}
             </p>
             <div className="pt-2 flex items-center gap-3">
               <button
@@ -299,7 +320,7 @@ export const ToolLandingPage: React.FC<ToolLandingPageProps> = ({
                 onClick={() => onNavigate('generator', toolData.type)}
                 className="text-xs font-bold text-indigo-600 hover:text-indigo-700 flex items-center gap-1"
               >
-                <span>{lang === 'ar' ? 'خصص الرمز في الاستوديو' : 'Customize in Studio'}</span>
+                <span>{ui.customize}</span>
                 <ArrowRight className="w-3.5 h-3.5" />
               </button>
             </div>
@@ -309,7 +330,7 @@ export const ToolLandingPage: React.FC<ToolLandingPageProps> = ({
         {/* Tool FAQs */}
         <div className="pt-8 border-t border-slate-200">
           <h2 className="text-2xl font-bold text-slate-900 tracking-tight mb-8">
-            {lang === 'ar' ? 'الأسئلة الشائعة' : 'Frequently Asked Questions'}
+            {ui.faqs}
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {toolData.faqs.map((faq, idx) => (
