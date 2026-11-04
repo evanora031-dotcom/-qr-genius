@@ -138,8 +138,12 @@ export async function onRequestPost(context: {
           body: verificationBody
         }
       );
-      const verificationResult = await verificationResponse.json() as { success?: boolean };
-      if (!verificationResponse.ok || verificationResult.success !== true) {
+      const verificationResult = await verificationResponse.json() as { success?: boolean; hostname?: string };
+      if (
+        !verificationResponse.ok ||
+        verificationResult.success !== true ||
+        verificationResult.hostname !== new URL(request.url).hostname
+      ) {
         return json({ error: "Security verification failed" }, 400);
       }
     } catch {
