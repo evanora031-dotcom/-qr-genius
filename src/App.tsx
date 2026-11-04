@@ -62,6 +62,7 @@ function getRouteFromLocation(): { page: PageId; lang: Language } {
 
 function localizedPath(page: PageId, lang: Language): string {
   const path = PATHS[page] || '/';
+  if (page === 'home' && lang === 'en') return '/';
   return path === '/' ? `/${lang}/` : `/${lang}${path}`;
 }
 
