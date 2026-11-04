@@ -41,6 +41,7 @@ export const QRPreviewCard: React.FC<QRPreviewCardProps> = ({
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const [loading, setLoading] = useState(true);
+  const [renderError, setRenderError] = useState<string | null>(null);
   const [copySuccess, setCopySuccess] = useState(false);
   const [saveSuccess, setSaveSuccess] = useState(false);
   const [pngResolution, setPngResolution] = useState<number>(1024);
@@ -53,6 +54,7 @@ export const QRPreviewCard: React.FC<QRPreviewCardProps> = ({
   useEffect(() => {
     let active = true;
     setLoading(true);
+    setRenderError(null);
 
     renderQRToCanvas(config, 512)
       .then((generatedCanvas) => {
@@ -68,6 +70,9 @@ export const QRPreviewCard: React.FC<QRPreviewCardProps> = ({
       })
       .catch((err) => {
         console.error('QR Render error:', err);
+        if (containerRef.current) containerRef.current.innerHTML = '';
+        canvasRef.current = null;
+        setRenderError(err instanceof Error ? err.message : 'QR_RENDER_FAILED');
         setLoading(false);
       });
 
@@ -86,6 +91,7 @@ export const QRPreviewCard: React.FC<QRPreviewCardProps> = ({
       autoSaveHistory(exportCanvas);
     } catch (e) {
       console.error(e);
+      setRenderError(e instanceof Error ? e.message : 'QR_RENDER_FAILED');
     } finally {
       setLoading(false);
       setShowResMenu(false);
@@ -94,10 +100,15 @@ export const QRPreviewCard: React.FC<QRPreviewCardProps> = ({
 
   // Handle SVG Download
   const handleDownloadSVG = () => {
-    const svgStr = renderQRToSVG(config, 1000);
-    const filename = `qrgenius_${type}_${Date.now()}.svg`;
-    downloadSVG(svgStr, filename);
-    if (canvasRef.current) autoSaveHistory(canvasRef.current);
+    try {
+      const svgStr = renderQRToSVG(config, 1000);
+      const filename = `qrgenius_${type}_${Date.now()}.svg`;
+      downloadSVG(svgStr, filename);
+      if (canvasRef.current) autoSaveHistory(canvasRef.current);
+    } catch (e) {
+      console.error(e);
+      setRenderError(e instanceof Error ? e.message : 'QR_RENDER_FAILED');
+    }
   };
 
   // Handle PDF Download
@@ -114,6 +125,7 @@ export const QRPreviewCard: React.FC<QRPreviewCardProps> = ({
       autoSaveHistory(exportCanvas);
     } catch (e) {
       console.error(e);
+      setRenderError(e instanceof Error ? e.message : 'QR_RENDER_FAILED');
     } finally {
       setLoading(false);
     }
@@ -199,6 +211,16 @@ export const QRPreviewCard: React.FC<QRPreviewCardProps> = ({
 
         <div ref={containerRef} className="flex items-center justify-center" />
 
+        {renderError && (
+          <p role="alert" className="mt-3 text-xs font-medium text-rose-600 text-center">
+            {renderError === 'QR_CONTENT_EMPTY'
+              ? (lang === 'ar' ? 'أدخل المحتوى المطلوب لإنشاء رمز QR.' : lang === 'fr' ? 'Saisissez le contenu pour créer le QR code.' : lang === 'es' ? 'Introduce el contenido para crear el código QR.' : 'Enter content to generate your QR code.')
+              : renderError === 'QR_CONTENT_TOO_LONG'
+                ? (lang === 'ar' ? 'المحتوى طويل جداً لرمز QR. اختصره أو استخدم رابطاً.' : lang === 'fr' ? 'Le contenu est trop long pour un QR code. Raccourcissez-le ou utilisez un lien.' : lang === 'es' ? 'El contenido es demasiado largo para un código QR. Acórtalo o usa un enlace.' : 'This content is too long for a QR code. Shorten it or use a link.')
+                : (lang === 'ar' ? 'تعذّر إنشاء رمز QR. تحقق من البيانات وحاول مجدداً.' : lang === 'fr' ? 'Impossible de créer le QR code. Vérifiez les données et réessayez.' : lang === 'es' ? 'No se pudo crear el código QR. Revisa los datos e inténtalo de nuevo.' : 'Could not generate the QR code. Check the input and try again.')}
+          </p>
+        )}
+
         <div className="mt-4 text-center">
           <p className="text-[11px] text-slate-500 flex items-center justify-center gap-1">
             <Scan className="w-3.5 h-3.5 text-indigo-500" />
@@ -214,6 +236,7 @@ export const QRPreviewCard: React.FC<QRPreviewCardProps> = ({
           <div className="flex rounded-xl shadow-xs overflow-hidden">
             <button
               type="button"
+              disabled={loading || Boolean(renderError)}
               onClick={() => handleDownloadPNG(pngResolution)}
               className="flex-1 py-3 px-4 bg-indigo-600 hover:bg-indigo-700 active:bg-indigo-800 text-white text-xs font-bold transition-colors flex items-center justify-center gap-2"
             >
@@ -222,6 +245,7 @@ export const QRPreviewCard: React.FC<QRPreviewCardProps> = ({
             </button>
             <button
               type="button"
+              disabled={loading || Boolean(renderError)}
               onClick={() => setShowResMenu(!showResMenu)}
               className="px-3 bg-indigo-700 hover:bg-indigo-800 text-white border-l border-indigo-500 transition-colors flex items-center justify-center"
               aria-label={lang === 'ar' ? 'اختيار دقة PNG' : 'Select PNG resolution'}
@@ -267,6 +291,7 @@ export const QRPreviewCard: React.FC<QRPreviewCardProps> = ({
         <div className="grid grid-cols-2 gap-2">
           <button
             type="button"
+            disabled={loading || Boolean(renderError)}
             onClick={handleDownloadSVG}
             className="py-2.5 px-3 bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 rounded-xl text-xs font-bold transition-colors flex items-center justify-center gap-1.5"
             title={lang === 'ar' ? 'تنزيل SVG متجهي بدقة قابلة للتكبير' : 'Download infinite resolution vector SVG'}
@@ -277,6 +302,7 @@ export const QRPreviewCard: React.FC<QRPreviewCardProps> = ({
 
           <button
             type="button"
+            disabled={loading || Boolean(renderError)}
             onClick={handleDownloadPDF}
             className="py-2.5 px-3 bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 rounded-xl text-xs font-bold transition-colors flex items-center justify-center gap-1.5"
             title={lang === 'ar' ? 'تنزيل ملف PDF للطباعة بحجم A4' : 'Download printable A4 card PDF'}
