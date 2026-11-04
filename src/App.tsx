@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { PageId, Language, QRType, QRConfig, QRHistoryItem } from './types';
 import { updateDocumentSEO } from './utils/seo';
-import { getStoredHistory, getStoredLanguage, setStoredLanguage } from './utils/storage';
+import { getStoredHistory, setStoredLanguage } from './utils/storage';
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
 import { HistoryDrawer } from './components/QRStudio/HistoryDrawer';
@@ -44,7 +44,7 @@ function getRouteFromLocation(): { page: PageId; lang: Language } {
   const rawPath = window.location.pathname.replace(/\/+$/, '') || '/';
   const segments = rawPath.split('/').filter(Boolean);
   const hasLocalePrefix = segments.length > 0 && LANGUAGES.includes(segments[0] as Language);
-  const lang = hasLocalePrefix ? segments[0] as Language : getStoredLanguage();
+  const lang = hasLocalePrefix ? segments[0] as Language : 'en';
   const routePath = hasLocalePrefix
     ? (segments.length > 1 ? `/${segments.slice(1).join('/')}` : '/')
     : rawPath;
@@ -62,7 +62,7 @@ function getRouteFromLocation(): { page: PageId; lang: Language } {
 
 function localizedPath(page: PageId, lang: Language): string {
   const path = PATHS[page] || '/';
-  if (page === 'home' && lang === 'en') return '/';
+  if (lang === 'en') return path;
   return path === '/' ? `/${lang}/` : `/${lang}${path}`;
 }
 
