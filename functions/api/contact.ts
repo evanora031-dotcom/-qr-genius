@@ -142,7 +142,6 @@ export async function onRequestPost(context: {
       const verificationBody = new URLSearchParams();
       verificationBody.set("secret", env.TURNSTILE_SECRET_KEY);
       verificationBody.set("response", turnstileToken);
-      verificationBody.set("action", "contact");
       const clientIp = request.headers.get("CF-Connecting-IP");
       if (clientIp) verificationBody.set("remoteip", clientIp);
 
