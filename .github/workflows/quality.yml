@@ -92,3 +92,24 @@ jobs:
             cat /tmp/response.json || true
             exit 1
           fi
+
+  turnstile-preview-browser-tests:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/feature/site-redesign'
+    needs: [quality, turnstile-preview-negative-tests]
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install Playwright
+        run: |
+          npm install --no-save --no-package-lock playwright
+          npx playwright install --with-deps chromium
+      - name: Verify valid Turnstile token and replay protection
+        env:
+          PREVIEW_URL: https://feature-site-redesign.qr-genius-1on.pages.dev
+        run: node scripts/turnstile-preview-e2e.mjs
