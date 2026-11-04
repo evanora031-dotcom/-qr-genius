@@ -2,6 +2,7 @@ interface ContactEnv {
   RESEND_API_KEY: string;
   RESEND_FROM_EMAIL: string;
   TURNSTILE_SECRET_KEY?: string;
+  TURNSTILE_HOSTNAMES?: string;
 }
 
 const MAX_BODY_BYTES = 12 * 1024;
@@ -119,32 +120,56 @@ export async function onRequestPost(context: {
 
 
   // Enforce Turnstile whenever the server-side secret is configured.
-  // The secret is stored only as a Cloudflare Pages secret, never in client code.
+  // Hostnames are environment-specific; never include local hosts in production.
   if (env.TURNSTILE_SECRET_KEY) {
     const turnstileToken = typeof data.turnstileToken === "string" ? data.turnstileToken : "";
-    if (!turnstileToken || turnstileToken.length > 2048) {
-      return json({ error: "Security verification failed" }, 400);
+    const expectedHostnames = new Set(
+      (env.TURNSTILE_HOSTNAMES || "")
+        .split(",")
+        .map((hostname) => hostname.trim())
+        .filter(Boolean)
+    );
+    if (
+      !turnstileToken ||
+      turnstileToken.length > 2048 ||
+      expectedHostnames.size === 0 ||
+      !expectedHostnames.has(new URL(request.url).hostname)
+    ) {
+      return json({ error: "Security verification failed" }, 403);
     }
 
     try {
       const verificationBody = new URLSearchParams();
       verificationBody.set("secret", env.TURNSTILE_SECRET_KEY);
       verificationBody.set("response", turnstileToken);
+      verificationBody.set("action", "contact");
+      const clientIp = request.headers.get("CF-Connecting-IP");
+      if (clientIp) verificationBody.set("remoteip", clientIp);
+
       const verificationResponse = await fetch(
         "https://challenges.cloudflare.com/turnstile/v0/siteverify",
         {
           method: "POST",
           headers: { "Content-Type": "application/x-www-form-urlencoded" },
-          body: verificationBody
+          body: verificationBody,
+          signal: AbortSignal.timeout(10_000)
         }
       );
-      const verificationResult = await verificationResponse.json() as { success?: boolean; hostname?: string };
+      if (!verificationResponse.ok) {
+        return json({ error: "Security verification unavailable" }, 503);
+      }
+
+      const verificationResult = await verificationResponse.json() as {
+        success?: boolean;
+        hostname?: string;
+        action?: string;
+      };
       if (
-        !verificationResponse.ok ||
         verificationResult.success !== true ||
-        verificationResult.hostname !== new URL(request.url).hostname
+        verificationResult.action !== "contact" ||
+        !expectedHostnames.has(verificationResult.hostname || "")
       ) {
-        return json({ error: "Security verification failed" }, 400);
+        return json({ error: "Security verification failed" }, 403);
       }
     } catch {
       return json({ error: "Security verification unavailable" }, 503);
