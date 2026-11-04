@@ -11,6 +11,17 @@ import {
 import { Language, PageId } from '../types';
 import { translations } from '../i18n/translations';
 
+const PAGE_PATHS: Partial<Record<PageId, string>> = {
+  home: '/', generator: '/generator', url: '/tools/url', wifi: '/tools/wifi',
+  whatsapp: '/tools/whatsapp', business: '/tools/business-vcard', about: '/about',
+  contact: '/contact', privacy: '/privacy', terms: '/terms', faq: '/faq'
+};
+
+function localizedHref(page: PageId, lang: Language): string {
+  const path = PAGE_PATHS[page] || '/';
+  return path === '/' ? `/${lang}/` : `/${lang}${path}`;
+}
+
 interface NavbarProps {
   currentPage: PageId;
   setCurrentPage: (page: PageId) => void;
@@ -55,9 +66,7 @@ export const Navbar: React.FC<NavbarProps> = ({
       <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between gap-2 sm:gap-6 h-16">
           {/* Zone 1: Single text wordmark with subtle brand icon */}
-          <button
-            onClick={() => handleNavClick('home')}
-            className="flex items-center gap-2 text-left rtl:text-right group focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-600 rounded-lg p-1 shrink-0"
+          <a href={localizedHref('home', lang)} onClick={(event) => { event.preventDefault(); handleNavClick('home'); }} className="flex items-center gap-2 text-left rtl:text-right group focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-600 rounded-lg p-1 shrink-0"
           >
             <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-gradient-to-tr from-indigo-600 via-indigo-700 to-purple-600 flex items-center justify-center text-white shadow-sm shadow-indigo-200 shrink-0">
               <QrCode className="w-4 h-4 sm:w-5 sm:h-5 transition-transform group-hover:scale-105" />
@@ -65,58 +74,46 @@ export const Navbar: React.FC<NavbarProps> = ({
             <span className="text-lg sm:text-xl font-extrabold tracking-tight bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 bg-clip-text text-transparent whitespace-nowrap">
               QR GENIUS
             </span>
-          </button>
+          </a>
 
           {/* Zone 2: Clean single-line desktop navigation links */}
           <nav className="hidden lg:flex items-center gap-6 text-sm font-medium text-slate-600">
-            <button
-              onClick={() => handleNavClick('home')}
-              className={`hover:text-indigo-600 transition-colors whitespace-nowrap shrink-0 ${
+            <a href={localizedHref('home', lang)} onClick={(event) => { event.preventDefault(); handleNavClick('home'); }} className={`hover:text-indigo-600 transition-colors whitespace-nowrap shrink-0 ${
                 currentPage === 'home' ? 'text-indigo-600 font-semibold' : ''
               }`}
             >
               {t.nav.home}
-            </button>
-            <button
-              onClick={() => handleNavClick('generator')}
-              className={`hover:text-indigo-600 transition-colors whitespace-nowrap shrink-0 ${
+            </a>
+            <a href={localizedHref('generator', lang)} onClick={(event) => { event.preventDefault(); handleNavClick('generator'); }} className={`hover:text-indigo-600 transition-colors whitespace-nowrap shrink-0 ${
                 currentPage === 'generator' ? 'text-indigo-600 font-semibold' : ''
               }`}
             >
               {t.nav.studio}
-            </button>
-            <button
-              onClick={() => handleNavClick('wifi')}
-              className={`hover:text-indigo-600 transition-colors whitespace-nowrap shrink-0 ${
+            </a>
+            <a href={localizedHref('wifi', lang)} onClick={(event) => { event.preventDefault(); handleNavClick('wifi'); }} className={`hover:text-indigo-600 transition-colors whitespace-nowrap shrink-0 ${
                 currentPage === 'wifi' ? 'text-indigo-600 font-semibold' : ''
               }`}
             >
               {t.nav.wifiQr}
-            </button>
-            <button
-              onClick={() => handleNavClick('whatsapp')}
-              className={`hover:text-indigo-600 transition-colors whitespace-nowrap shrink-0 ${
+            </a>
+            <a href={localizedHref('whatsapp', lang)} onClick={(event) => { event.preventDefault(); handleNavClick('whatsapp'); }} className={`hover:text-indigo-600 transition-colors whitespace-nowrap shrink-0 ${
                 currentPage === 'whatsapp' ? 'text-indigo-600 font-semibold' : ''
               }`}
             >
               {t.nav.whatsappQr}
-            </button>
-            <button
-              onClick={() => handleNavClick('business')}
-              className={`hover:text-indigo-600 transition-colors whitespace-nowrap shrink-0 ${
+            </a>
+            <a href={localizedHref('business', lang)} onClick={(event) => { event.preventDefault(); handleNavClick('business'); }} className={`hover:text-indigo-600 transition-colors whitespace-nowrap shrink-0 ${
                 currentPage === 'business' ? 'text-indigo-600 font-semibold' : ''
               }`}
             >
               {t.nav.businessQr}
-            </button>
-            <button
-              onClick={() => handleNavClick('faq')}
-              className={`hover:text-indigo-600 transition-colors whitespace-nowrap shrink-0 ${
+            </a>
+            <a href={localizedHref('faq', lang)} onClick={(event) => { event.preventDefault(); handleNavClick('faq'); }} className={`hover:text-indigo-600 transition-colors whitespace-nowrap shrink-0 ${
                 currentPage === 'faq' ? 'text-indigo-600 font-semibold' : ''
               }`}
             >
               {t.nav.faq}
-            </button>
+            </a>
           </nav>
 
           {/* Zone 3: Language Selector, History & Actions */}
@@ -180,13 +177,11 @@ export const Navbar: React.FC<NavbarProps> = ({
             </div>
 
             {/* Primary Action Button (Desktop) */}
-            <button
-              onClick={() => handleNavClick('generator')}
-              className="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-2 text-xs font-semibold text-white bg-indigo-600 hover:bg-indigo-700 active:bg-indigo-800 rounded-lg shadow-sm transition-colors whitespace-nowrap shrink-0 min-h-[40px]"
+            <a href={localizedHref('generator', lang)} onClick={(event) => { event.preventDefault(); handleNavClick('generator'); }} className="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-2 text-xs font-semibold text-white bg-indigo-600 hover:bg-indigo-700 active:bg-indigo-800 rounded-lg shadow-sm transition-colors whitespace-nowrap shrink-0 min-h-[40px]"
             >
               <Sparkles className="w-3.5 h-3.5" />
               <span>{t.nav.createQr}</span>
-            </button>
+            </a>
 
             {/* Mobile Hamburger Button */}
             <button
@@ -229,81 +224,61 @@ export const Navbar: React.FC<NavbarProps> = ({
           </div>
 
           {/* Navigation Links */}
-          <button
-            onClick={() => handleNavClick('home')}
-            className={`w-full text-left rtl:text-right px-3 py-3 rounded-xl text-sm font-medium min-h-[44px] flex items-center ${
+          <a href={localizedHref('home', lang)} onClick={(event) => { event.preventDefault(); handleNavClick('home'); }} className={`w-full text-left rtl:text-right px-3 py-3 rounded-xl text-sm font-medium min-h-[44px] flex items-center ${
               currentPage === 'home' ? 'bg-indigo-50 text-indigo-600 font-bold' : 'text-slate-700 hover:bg-slate-50'
             }`}
           >
             {t.nav.home}
-          </button>
-          <button
-            onClick={() => handleNavClick('generator')}
-            className={`w-full text-left rtl:text-right px-3 py-3 rounded-xl text-sm font-medium min-h-[44px] flex items-center ${
+          </a>
+          <a href={localizedHref('generator', lang)} onClick={(event) => { event.preventDefault(); handleNavClick('generator'); }} className={`w-full text-left rtl:text-right px-3 py-3 rounded-xl text-sm font-medium min-h-[44px] flex items-center ${
               currentPage === 'generator' ? 'bg-indigo-50 text-indigo-600 font-bold' : 'text-slate-700 hover:bg-slate-50'
             }`}
           >
             {t.nav.studio}
-          </button>
-          <button
-            onClick={() => handleNavClick('url')}
-            className={`w-full text-left rtl:text-right px-3 py-3 rounded-xl text-sm font-medium min-h-[44px] flex items-center ${
+          </a>
+          <a href={localizedHref('url', lang)} onClick={(event) => { event.preventDefault(); handleNavClick('url'); }} className={`w-full text-left rtl:text-right px-3 py-3 rounded-xl text-sm font-medium min-h-[44px] flex items-center ${
               currentPage === 'url' ? 'bg-indigo-50 text-indigo-600 font-bold' : 'text-slate-700 hover:bg-slate-50'
             }`}
           >
             {t.nav.urlQr}
-          </button>
-          <button
-            onClick={() => handleNavClick('wifi')}
-            className={`w-full text-left rtl:text-right px-3 py-3 rounded-xl text-sm font-medium min-h-[44px] flex items-center ${
+          </a>
+          <a href={localizedHref('wifi', lang)} onClick={(event) => { event.preventDefault(); handleNavClick('wifi'); }} className={`w-full text-left rtl:text-right px-3 py-3 rounded-xl text-sm font-medium min-h-[44px] flex items-center ${
               currentPage === 'wifi' ? 'bg-indigo-50 text-indigo-600 font-bold' : 'text-slate-700 hover:bg-slate-50'
             }`}
           >
             {t.nav.wifiQr}
-          </button>
-          <button
-            onClick={() => handleNavClick('whatsapp')}
-            className={`w-full text-left rtl:text-right px-3 py-3 rounded-xl text-sm font-medium min-h-[44px] flex items-center ${
+          </a>
+          <a href={localizedHref('whatsapp', lang)} onClick={(event) => { event.preventDefault(); handleNavClick('whatsapp'); }} className={`w-full text-left rtl:text-right px-3 py-3 rounded-xl text-sm font-medium min-h-[44px] flex items-center ${
               currentPage === 'whatsapp' ? 'bg-indigo-50 text-indigo-600 font-bold' : 'text-slate-700 hover:bg-slate-50'
             }`}
           >
             {t.nav.whatsappQr}
-          </button>
-          <button
-            onClick={() => handleNavClick('business')}
-            className={`w-full text-left rtl:text-right px-3 py-3 rounded-xl text-sm font-medium min-h-[44px] flex items-center ${
+          </a>
+          <a href={localizedHref('business', lang)} onClick={(event) => { event.preventDefault(); handleNavClick('business'); }} className={`w-full text-left rtl:text-right px-3 py-3 rounded-xl text-sm font-medium min-h-[44px] flex items-center ${
               currentPage === 'business' ? 'bg-indigo-50 text-indigo-600 font-bold' : 'text-slate-700 hover:bg-slate-50'
             }`}
           >
             {t.nav.businessQr}
-          </button>
-          <button
-            onClick={() => handleNavClick('about')}
-            className="w-full text-left rtl:text-right px-3 py-3 rounded-xl text-sm font-medium text-slate-700 hover:bg-slate-50 min-h-[44px] flex items-center"
+          </a>
+          <a href={localizedHref('about', lang)} onClick={(event) => { event.preventDefault(); handleNavClick('about'); }} className="w-full text-left rtl:text-right px-3 py-3 rounded-xl text-sm font-medium text-slate-700 hover:bg-slate-50 min-h-[44px] flex items-center"
           >
             {t.nav.about}
-          </button>
-          <button
-            onClick={() => handleNavClick('faq')}
-            className="w-full text-left rtl:text-right px-3 py-3 rounded-xl text-sm font-medium text-slate-700 hover:bg-slate-50 min-h-[44px] flex items-center"
+          </a>
+          <a href={localizedHref('faq', lang)} onClick={(event) => { event.preventDefault(); handleNavClick('faq'); }} className="w-full text-left rtl:text-right px-3 py-3 rounded-xl text-sm font-medium text-slate-700 hover:bg-slate-50 min-h-[44px] flex items-center"
           >
             {t.nav.faq}
-          </button>
-          <button
-            onClick={() => handleNavClick('contact')}
-            className="w-full text-left rtl:text-right px-3 py-3 rounded-xl text-sm font-medium text-slate-700 hover:bg-slate-50 min-h-[44px] flex items-center"
+          </a>
+          <a href={localizedHref('contact', lang)} onClick={(event) => { event.preventDefault(); handleNavClick('contact'); }} className="w-full text-left rtl:text-right px-3 py-3 rounded-xl text-sm font-medium text-slate-700 hover:bg-slate-50 min-h-[44px] flex items-center"
           >
             {t.nav.contact}
-          </button>
+          </a>
 
           <div className="pt-2">
-            <button
-              onClick={() => handleNavClick('generator')}
-              className="w-full flex items-center justify-center gap-2 py-3.5 text-sm font-bold text-white bg-indigo-600 hover:bg-indigo-700 active:bg-indigo-800 rounded-xl shadow-sm min-h-[48px]"
+            <a href={localizedHref('generator', lang)} onClick={(event) => { event.preventDefault(); handleNavClick('generator'); }} className="w-full flex items-center justify-center gap-2 py-3.5 text-sm font-bold text-white bg-indigo-600 hover:bg-indigo-700 active:bg-indigo-800 rounded-xl shadow-sm min-h-[48px]"
             >
               <Sparkles className="w-4 h-4" />
               <span>{t.nav.createQr}</span>
-            </button>
+            </a>
           </div>
         </div>
       )}
