@@ -18,7 +18,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ lang }) => {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setFormError(null);
     if (!name.trim() || !email.trim() || !message.trim()) {
@@ -31,12 +31,32 @@ export const ContactPage: React.FC<ContactPageProps> = ({ lang }) => {
       return;
     }
 
-    setFormError(text(
-      'The contact form is temporarily unavailable. Your message has not been sent. Please try again later.',
-      'نموذج التواصل غير متاح مؤقتاً. لم يتم إرسال رسالتك. يرجى المحاولة لاحقاً.',
-      'Le formulaire de contact est temporairement indisponible. Votre message n’a pas été envoyé. Veuillez réessayer plus tard.',
-      'El formulario de contacto no está disponible temporalmente. Tu mensaje no se ha enviado. Inténtalo de nuevo más tarde.'
-    ));
+    setLoading(true);
+    try {
+      const formData = new FormData(e.currentTarget);
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: name.trim(),
+          email: email.trim(),
+          topic,
+          message: message.trim(),
+          company: String(formData.get('company') || '')
+        })
+      });
+      if (!response.ok) throw new Error('Contact request failed');
+      setSubmitted(true);
+    } catch {
+      setFormError(text(
+        'We could not send your message right now. Please try again or email support@getqrgenius.com.',
+        'تعذّر إرسال رسالتك الآن. حاول مرة أخرى أو راسل support@getqrgenius.com.',
+        'Nous ne pouvons pas envoyer votre message pour le moment. Réessayez ou écrivez à support@getqrgenius.com.',
+        'No hemos podido enviar tu mensaje ahora. Inténtalo de nuevo o escribe a support@getqrgenius.com.'
+      ));
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -144,6 +164,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ lang }) => {
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-4">
+                <input type="text" name="company" tabIndex={-1} autoComplete="off" aria-hidden="true" className="hidden" />
                 <div>
                   <label className="block text-xs font-semibold text-slate-700 mb-1.5">
                     {text('Your Full Name', 'اسمك الكامل', 'Votre nom complet', 'Nombre completo')} <span className="text-rose-500">*</span>
