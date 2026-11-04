@@ -16,7 +16,7 @@ function escapeHtml(value: string): string {
 }
 
 function localizedPath(pagePath: string, locale: string): string {
-  if (pagePath === '/' && locale === 'en') return '/';
+  if (locale === 'en') return pagePath;
   return pagePath === '/' ? `/${locale}/` : `/${locale}${pagePath}`;
 }
 
