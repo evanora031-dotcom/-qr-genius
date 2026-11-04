@@ -77,7 +77,7 @@ export const PrivacyPage: React.FC<PrivacyPageProps> = ({ lang }) => {
 
           <section className="space-y-2">
             <h2 className="text-base font-bold text-slate-900">
-              {text('3. Local Browser Storage (localStorage)', '2. التخزين المحلي في المتصفح (localStorage)', '2. Stockage local dans le navigateur (localStorage)', '2. Almacenamiento local del navegador (localStorage)')}
+              {text('3. Local Browser Storage (localStorage)', '3. التخزين المحلي في المتصفح (localStorage)', '3. Stockage local dans le navigateur (localStorage)', '3. Almacenamiento local del navegador (localStorage)')}
             </h2>
             <p>
               {text(
