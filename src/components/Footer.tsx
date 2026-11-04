@@ -12,6 +12,7 @@ const PAGE_PATHS: Partial<Record<PageId, string>> = {
 
 function localizedHref(page: PageId, lang: Language): string {
   const path = PAGE_PATHS[page] || '/';
+  if (lang === 'en') return path;
   return path === '/' ? `/${lang}/` : `/${lang}${path}`;
 }
 
