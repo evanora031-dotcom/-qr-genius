@@ -124,11 +124,11 @@ export const PrivacyPage: React.FC<PrivacyPageProps> = ({ lang }) => {
             </h2>
             <p>
               {text(
-                'We do not currently publish a dedicated privacy contact email address. Please check this page for future contact details.',
-                'لا ننشر حالياً عنوان بريد إلكتروني مخصصاً لاستفسارات الخصوصية. يُرجى مراجعة هذه الصفحة للاطلاع على أي معلومات تواصل مستقبلية.',
-                'Nous ne publions pas actuellement d’adresse e-mail dédiée aux questions de confidentialité. Consultez cette page pour toute future information de contact.',
-                'Actualmente no publicamos una dirección de correo electrónico específica para consultas de privacidad. Consulta esta página para futuras opciones de contacto.'
-              )}.
+                'For privacy questions or requests, contact us at',
+                'للاستفسارات أو الطلبات المتعلقة بالخصوصية، يُرجى التواصل معنا عبر',
+                'Pour toute question ou demande relative à la confidentialité, contactez-nous à',
+                'Para preguntas o solicitudes relacionadas con la privacidad, contáctanos en'
+              )} <a href="mailto:support@getqrgenius.com" className="text-indigo-700 underline underline-offset-2">support@getqrgenius.com</a>.
             </p>
           </section>
         </div>
