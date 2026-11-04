@@ -1,0 +1,54 @@
+name: Turnstile preview security checks
+
+on:
+  push:
+    branches:
+      - feature/site-redesign
+
+permissions:
+  contents: read
+
+jobs:
+  turnstile-negative-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Wait for preview deployment and reject missing token
+        shell: bash
+        run: |
+          url="https://feature-site-redesign.qr-genius-1on.pages.dev/api/contact"
+          payload='{"name":"Turnstile Test","email":"test@example.com","topic":"Feedback / Suggestion","message":"Automated negative test: missing token must be rejected."}'
+          for attempt in $(seq 1 36); do
+            status=$(curl --silent --show-error --max-time 10 --output /tmp/response.json --write-out '%{http_code}' \
+              --request POST "$url" \
+              --header 'Content-Type: application/json' \
+              --header 'Origin: https://feature-site-redesign.qr-genius-1on.pages.dev' \
+              --data "$payload" || true)
+            if [ "$status" = "403" ] && grep -q 'Security verification failed' /tmp/response.json; then
+              echo "PASS: missing Turnstile token rejected (403)"
+              exit 0
+            fi
+            echo "Waiting for preview to enforce Turnstile (attempt $attempt, HTTP $status)"
+            sleep 10
+          done
+          echo "FAIL: preview did not reject a missing token as expected"
+          cat /tmp/response.json || true
+          exit 1
+
+      - name: Reject invalid Turnstile token
+        shell: bash
+        run: |
+          url="https://feature-site-redesign.qr-genius-1on.pages.dev/api/contact"
+          payload='{"name":"Turnstile Test","email":"test@example.com","topic":"Feedback / Suggestion","message":"Automated negative test: invalid token must be rejected.","turnstileToken":"invalid-turnstile-token"}'
+          status=$(curl --silent --show-error --max-time 15 --output /tmp/response.json --write-out '%{http_code}' \
+            --request POST "$url" \
+            --header 'Content-Type: application/json' \
+            --header 'Origin: https://feature-site-redesign.qr-genius-1on.pages.dev' \
+            --data "$payload" || true)
+          if [ "$status" = "403" ] && grep -q 'Security verification failed' /tmp/response.json; then
+            echo "PASS: invalid Turnstile token rejected (403)"
+          else
+            echo "FAIL: invalid token response was HTTP $status"
+            cat /tmp/response.json || true
+            exit 1
+          fi
