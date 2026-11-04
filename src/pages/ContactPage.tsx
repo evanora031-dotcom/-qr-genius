@@ -85,7 +85,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ lang }) => {
                   <span className="block text-[10px] text-slate-400 uppercase font-semibold">
                     {text('Email Address', 'البريد الإلكتروني', 'Adresse e-mail', 'Correo electrónico')}
                   </span>
-                  <span className="text-white">{text('Not available yet', 'غير متاح حالياً', 'Pas encore disponible', 'Aún no disponible')}</span>
+                  <a href="mailto:support@getqrgenius.com" className="text-white underline underline-offset-2 hover:text-indigo-200">support@getqrgenius.com</a>
                 </div>
               </div>
 
@@ -98,7 +98,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ lang }) => {
                     {text('Response Time', 'وقت الرد', 'Délai de réponse', 'Tiempo de respuesta')}
                   </span>
                   <span className="text-white">
-                    {text('Contact service temporarily unavailable', 'خدمة التواصل غير متاحة مؤقتاً', 'Service de contact temporairement indisponible', 'Servicio de contacto temporalmente no disponible')}
+                    {text('Email us directly for support', 'راسلنا مباشرة عبر البريد الإلكتروني للدعم', 'Écrivez-nous directement pour obtenir de l’aide', 'Escríbenos directamente para recibir ayuda')}
                   </span>
                 </div>
               </div>
