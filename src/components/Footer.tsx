@@ -3,6 +3,18 @@ import { QrCode, ShieldCheck, Heart } from 'lucide-react';
 import { Language, PageId } from '../types';
 import { translations } from '../i18n/translations';
 
+const PAGE_PATHS: Partial<Record<PageId, string>> = {
+  home: '/', generator: '/generator', url: '/tools/url', wifi: '/tools/wifi',
+  whatsapp: '/tools/whatsapp', business: '/tools/business-vcard', about: '/about',
+  contact: '/contact', privacy: '/privacy', terms: '/terms', faq: '/faq',
+  sitemap: '/sitemap', robots: '/robots'
+};
+
+function localizedHref(page: PageId, lang: Language): string {
+  const path = PAGE_PATHS[page] || '/';
+  return path === '/' ? `/${lang}/` : `/${lang}${path}`;
+}
+
 interface FooterProps {
   lang: Language;
   setCurrentPage: (page: PageId) => void;
@@ -47,29 +59,29 @@ export const Footer: React.FC<FooterProps> = ({ lang, setCurrentPage }) => {
             </h3>
             <ul className="space-y-2.5 text-xs text-slate-400">
               <li>
-                <button onClick={() => handleLink('generator')} className="hover:text-indigo-400 transition-colors">
+                <a href={localizedHref('generator', lang)} onClick={(event) => { event.preventDefault(); handleLink('generator'); }} className="hover:text-indigo-400 transition-colors">
                   {t.nav.studio}
-                </button>
+                </a>
               </li>
               <li>
-                <button onClick={() => handleLink('url')} className="hover:text-indigo-400 transition-colors">
+                <a href={localizedHref('url', lang)} onClick={(event) => { event.preventDefault(); handleLink('url'); }} className="hover:text-indigo-400 transition-colors">
                   {t.nav.urlQr}
-                </button>
+                </a>
               </li>
               <li>
-                <button onClick={() => handleLink('wifi')} className="hover:text-indigo-400 transition-colors">
+                <a href={localizedHref('wifi', lang)} onClick={(event) => { event.preventDefault(); handleLink('wifi'); }} className="hover:text-indigo-400 transition-colors">
                   {t.nav.wifiQr}
-                </button>
+                </a>
               </li>
               <li>
-                <button onClick={() => handleLink('whatsapp')} className="hover:text-indigo-400 transition-colors">
+                <a href={localizedHref('whatsapp', lang)} onClick={(event) => { event.preventDefault(); handleLink('whatsapp'); }} className="hover:text-indigo-400 transition-colors">
                   {t.nav.whatsappQr}
-                </button>
+                </a>
               </li>
               <li>
-                <button onClick={() => handleLink('business')} className="hover:text-indigo-400 transition-colors">
+                <a href={localizedHref('business', lang)} onClick={(event) => { event.preventDefault(); handleLink('business'); }} className="hover:text-indigo-400 transition-colors">
                   {t.nav.businessQr}
-                </button>
+                </a>
               </li>
             </ul>
           </div>
@@ -81,29 +93,29 @@ export const Footer: React.FC<FooterProps> = ({ lang, setCurrentPage }) => {
             </h3>
             <ul className="space-y-2.5 text-xs text-slate-400">
               <li>
-                <button onClick={() => handleLink('about')} className="hover:text-indigo-400 transition-colors">
+                <a href={localizedHref('about', lang)} onClick={(event) => { event.preventDefault(); handleLink('about'); }} className="hover:text-indigo-400 transition-colors">
                   {t.footer.aboutUs}
-                </button>
+                </a>
               </li>
               <li>
-                <button onClick={() => handleLink('faq')} className="hover:text-indigo-400 transition-colors">
+                <a href={localizedHref('faq', lang)} onClick={(event) => { event.preventDefault(); handleLink('faq'); }} className="hover:text-indigo-400 transition-colors">
                   {t.footer.faq}
-                </button>
+                </a>
               </li>
               <li>
-                <button onClick={() => handleLink('contact')} className="hover:text-indigo-400 transition-colors">
+                <a href={localizedHref('contact', lang)} onClick={(event) => { event.preventDefault(); handleLink('contact'); }} className="hover:text-indigo-400 transition-colors">
                   {t.nav.contact}
-                </button>
+                </a>
               </li>
               <li>
-                <button onClick={() => handleLink('sitemap')} className="hover:text-indigo-400 transition-colors">
+                <a href={localizedHref('sitemap', lang)} onClick={(event) => { event.preventDefault(); handleLink('sitemap'); }} className="hover:text-indigo-400 transition-colors">
                   {t.footer.sitemap}
-                </button>
+                </a>
               </li>
               <li>
-                <button onClick={() => handleLink('robots')} className="hover:text-indigo-400 transition-colors">
+                <a href={localizedHref('robots', lang)} onClick={(event) => { event.preventDefault(); handleLink('robots'); }} className="hover:text-indigo-400 transition-colors">
                   {t.footer.robots}
-                </button>
+                </a>
               </li>
             </ul>
           </div>
@@ -115,14 +127,14 @@ export const Footer: React.FC<FooterProps> = ({ lang, setCurrentPage }) => {
             </h3>
             <ul className="space-y-2.5 text-xs text-slate-400">
               <li>
-                <button onClick={() => handleLink('privacy')} className="hover:text-indigo-400 transition-colors">
+                <a href={localizedHref('privacy', lang)} onClick={(event) => { event.preventDefault(); handleLink('privacy'); }} className="hover:text-indigo-400 transition-colors">
                   {t.footer.privacy}
-                </button>
+                </a>
               </li>
               <li>
-                <button onClick={() => handleLink('terms')} className="hover:text-indigo-400 transition-colors">
+                <a href={localizedHref('terms', lang)} onClick={(event) => { event.preventDefault(); handleLink('terms'); }} className="hover:text-indigo-400 transition-colors">
                   {t.footer.terms}
-                </button>
+                </a>
               </li>
             </ul>
             <div className="mt-6 p-3 bg-slate-800/50 rounded-xl border border-slate-700/50 text-[11px] text-slate-400 leading-normal">
