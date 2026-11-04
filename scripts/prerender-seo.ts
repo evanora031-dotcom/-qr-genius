@@ -25,11 +25,35 @@ function setHeadTag(html: string, pattern: RegExp, tag: string): string {
   return html.replace('</head>', `  ${tag}\n</head>`);
 }
 
+function renderStaticContent(locale: typeof locales[number], page: typeof pages[number]): string {
+  const meta = SEO_METADATA[page][locale];
+  const toolPages = ['url', 'wifi', 'whatsapp', 'business'] as const;
+  const labels: Record<typeof locales[number], string> = {
+    en: 'Explore QR code tools',
+    ar: 'استكشف أدوات رموز QR',
+    fr: 'Découvrir les outils QR',
+    es: 'Explorar herramientas QR'
+  };
+  const links = toolPages.map((tool) => {
+    const toolMeta = SEO_METADATA[tool][locale];
+    const href = localizedPath(toolMeta.canonicalPath, locale);
+    return '<li><a href="' + escapeHtml(href) + '">' + escapeHtml(toolMeta.h1) + '</a></li>';
+  }).join('');
+  return '<section class="seo-static-content" aria-label="' + escapeHtml(meta.h1) + '">' +
+    '<h1>' + escapeHtml(meta.h1) + '</h1>' +
+    '<p>' + escapeHtml(meta.description) + '</p>' +
+    '<nav aria-label="' + escapeHtml(labels[locale]) + '">' +
+    '<h2>' + escapeHtml(labels[locale]) + '</h2><ul>' + links + '</ul></nav></section>';
+}
+
 function renderPage(locale: typeof locales[number], page: typeof pages[number]): string {
   const meta = SEO_METADATA[page][locale];
   const canonicalPath = localizedPath(meta.canonicalPath, locale);
   const canonicalUrl = `${baseUrl}${canonicalPath}`;
   let html = template.replace(/<html\s+lang="[^"]*">/, `<html lang="${locale}" dir="${locale === 'ar' ? 'rtl' : 'ltr'}">`);
+  // Put meaningful, crawlable page content in the initial HTML response.
+  // React replaces this lightweight fallback when the application mounts.
+  html = html.replace('<div id="root"></div>', '<div id="root">' + renderStaticContent(locale, page) + '</div>');
   html = html.replace(/<title>[\s\S]*?<\/title>/, `<title>${escapeHtml(meta.title)}</title>`);
   html = setHeadTag(html, /<meta\s+name="description"[^>]*>/, `<meta name="description" content="${escapeHtml(meta.description)}" />`);
   html = setHeadTag(html, /<meta\s+property="og:title"[^>]*>/, `<meta property="og:title" content="${escapeHtml(meta.title)}" />`);
