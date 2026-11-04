@@ -57,6 +57,24 @@ jobs:
           cat /tmp/response.json || true
           exit 1
 
+      - name: Ensure honeypot cannot bypass Turnstile
+        shell: bash
+        run: |
+          url="https://feature-site-redesign.qr-genius-1on.pages.dev/api/contact"
+          payload='{"name":"Turnstile Test","email":"test@example.com","topic":"Feedback / Suggestion","message":"Automated test: honeypot must not bypass Turnstile.","company":"bot"}'
+          status=$(curl --silent --show-error --max-time 15 --output /tmp/response.json --write-out '%{http_code}' \
+            --request POST "$url" \
+            --header 'Content-Type: application/json' \
+            --header 'Origin: https://feature-site-redesign.qr-genius-1on.pages.dev' \
+            --data "$payload" || true)
+          if [ "$status" = "403" ] && grep -q 'Security verification failed' /tmp/response.json; then
+            echo "PASS: honeypot cannot bypass Turnstile (403)"
+          else
+            echo "FAIL: honeypot bypass test returned HTTP $status"
+            cat /tmp/response.json || true
+            exit 1
+          fi
+
       - name: Reject invalid Turnstile token
         shell: bash
         run: |
