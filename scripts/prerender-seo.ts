@@ -76,10 +76,15 @@ let generated = 0;
 for (const page of pages) {
   for (const locale of locales) {
     const route = localizedPath(SEO_METADATA[page][locale].canonicalPath, locale);
-    const relativeDir = route.replace(/^\/+|\/+$/g, '');
-    const outputDir = path.join(distDir, relativeDir);
-    await mkdir(outputDir, { recursive: true });
-    await writeFile(path.join(outputDir, 'index.html'), renderPage(locale, page), 'utf8');
+    const relativeRoute = route.replace(/^\\/+|\\/+$/g, '');
+    // Cloudflare Pages redirects folder index routes to trailing-slash URLs.
+    // Emit flat HTML files for non-home pages so canonical extensionless URLs
+    // (for example /tools/url) are served directly without a slash redirect.
+    const outputFile = page === 'home'
+      ? path.join(distDir, relativeRoute, 'index.html')
+      : path.join(distDir, relativeRoute + '.html');
+    await mkdir(path.dirname(outputFile), { recursive: true });
+    await writeFile(outputFile, renderPage(locale, page), 'utf8');
     generated += 1;
   }
 }
