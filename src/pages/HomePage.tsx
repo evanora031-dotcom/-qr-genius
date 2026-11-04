@@ -188,7 +188,7 @@ export const HomePage: React.FC<HomePageProps> = ({ lang, onNavigate }) => {
 
                   <div className="mt-3 text-center">
                     <span className="text-xs font-mono font-bold text-slate-800">
-                      https://qrgenius.app
+                      https://getqrgenius.com
                     </span>
                     <p className="text-[10px] text-slate-400 mt-0.5">
                       {lang === 'ar' ? 'تصميم بلون نيلي وزوايا مستديرة' : 'Styled with SaaS Indigo &amp; Rounded Corners'}
@@ -238,9 +238,10 @@ export const HomePage: React.FC<HomePageProps> = ({ lang, onNavigate }) => {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {featureCards.map((card) => {
               return (
-                <div
+                <a
                   key={card.type}
-                  onClick={() => onNavigate('generator', card.type)}
+                  href={`/${lang}/${card.type === 'url' ? 'tools/url' : card.type === 'wifi' ? 'tools/wifi' : card.type === 'whatsapp' ? 'tools/whatsapp' : 'tools/business-vcard'}`}
+                  onClick={(event) => { event.preventDefault(); onNavigate(card.type === 'url' ? 'url' : card.type === 'wifi' ? 'wifi' : card.type === 'whatsapp' ? 'whatsapp' : 'business'); }}
                   className="p-6 rounded-2xl border border-slate-200 hover:border-indigo-400 hover:shadow-xl transition-all cursor-pointer bg-white flex flex-col justify-between group"
                 >
                   <div>
@@ -258,7 +259,7 @@ export const HomePage: React.FC<HomePageProps> = ({ lang, onNavigate }) => {
                     <span>{lang === 'ar' ? `إنشاء ${card.titleKey}` : `Create ${card.titleKey}`}</span>
                     <ChevronRight className="w-3.5 h-3.5 ml-1 transition-transform group-hover:translate-x-0.5 rtl:group-hover:-translate-x-0.5" />
                   </div>
-                </div>
+                </a>
               );
             })}
           </div>
