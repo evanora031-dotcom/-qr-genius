@@ -4,7 +4,6 @@ import { updateDocumentSEO } from './utils/seo';
 import { getStoredHistory, setStoredLanguage } from './utils/storage';
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
-import { HistoryDrawer } from './components/QRStudio/HistoryDrawer';
 
 
 
@@ -17,6 +16,8 @@ import { HistoryDrawer } from './components/QRStudio/HistoryDrawer';
 
 
 
+
+const HistoryDrawer = lazy(() => import('./components/QRStudio/HistoryDrawer').then(module => ({ default: module.HistoryDrawer })));
 const HomePage = lazy(() => import('./pages/HomePage').then(module => ({ default: module.HomePage })));
 const GeneratorPage = lazy(() => import('./pages/GeneratorPage').then(module => ({ default: module.GeneratorPage })));
 const ToolLandingPage = lazy(() => import('./pages/ToolLandingPage').then(module => ({ default: module.ToolLandingPage })));
@@ -176,14 +177,18 @@ export default function App() {
         </Suspense>
       </main>
       <Footer lang={lang} onNavigate={handleNavigate} />
-      <HistoryDrawer
-        isOpen={isHistoryOpen}
-        onClose={() => setIsHistoryOpen(false)}
-        history={historyItems}
-        onHistoryUpdated={refreshHistory}
-        onLoadItem={handleLoadHistoryItem}
-        lang={lang}
-      />
+      {isHistoryOpen && (
+        <Suspense fallback={null}>
+          <HistoryDrawer
+            isOpen={isHistoryOpen}
+            onClose={() => setIsHistoryOpen(false)}
+            history={historyItems}
+            onHistoryUpdated={refreshHistory}
+            onLoadItem={handleLoadHistoryItem}
+            lang={lang}
+          />
+        </Suspense>
+      )}
     </div>
   );
 }
