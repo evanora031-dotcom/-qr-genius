@@ -4,6 +4,12 @@ interface ContactEnv {
 }
 
 const MAX_BODY_BYTES = 12 * 1024;
+const ALLOWED_TOPICS = new Set([
+  "Feedback / Suggestion",
+  "Technical Support",
+  "Enterprise Solution",
+  "Sponsorship & Partnership"
+]);
 
 const json = (body: Record<string, unknown>, status = 200) =>
   new Response(JSON.stringify(body), {
@@ -122,7 +128,7 @@ export async function onRequestPost(context: {
     !name || name.length > 100 ||
     !email || email.length > 254 ||
     !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) ||
-    !topic || topic.length > 100 ||
+    !topic || topic.length > 100 || !ALLOWED_TOPICS.has(topic) ||
     !message || message.length > 5000
   ) {
     return json({ error: "Please check the submitted fields" }, 400);
