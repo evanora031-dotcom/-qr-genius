@@ -172,6 +172,8 @@ export const ContactPage: React.FC<ContactPageProps> = ({ lang }) => {
                   <input
                     type="text"
                     required
+                    maxLength={100}
+                    autoComplete="name"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     placeholder={text('Jane Doe', 'الاسم الكامل', 'Jean Dupont', 'Nombre y apellidos')}
@@ -186,6 +188,8 @@ export const ContactPage: React.FC<ContactPageProps> = ({ lang }) => {
                   <input
                     type="email"
                     required
+                    maxLength={254}
+                    autoComplete="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="name@example.com"
@@ -216,6 +220,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ lang }) => {
                   <textarea
                     rows={4}
                     required
+                    maxLength={5000}
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}
                     placeholder={text('Tell us how we can help...', 'أخبرنا كيف يمكننا مساعدتك...', 'Dites-nous comment nous pouvons vous aider...', 'Cuéntanos cómo podemos ayudarte...')}
@@ -224,7 +229,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ lang }) => {
                 </div>
 
                 {formError && (
-                  <p className="text-xs text-rose-600 font-medium bg-rose-50 p-2.5 rounded-lg border border-rose-200">
+                  <p role="alert" aria-live="polite" className="text-xs text-rose-600 font-medium bg-rose-50 p-2.5 rounded-lg border border-rose-200">
                     {formError}
                   </p>
                 )}
@@ -232,6 +237,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ lang }) => {
                 <button
                   type="submit"
                   disabled={loading}
+                  aria-busy={loading}
                   className="w-full py-3 px-4 bg-indigo-600 hover:bg-indigo-700 active:bg-indigo-800 text-white rounded-xl text-xs font-bold transition-colors flex items-center justify-center gap-2 shadow-sm disabled:opacity-50"
                 >
                   {loading ? (
