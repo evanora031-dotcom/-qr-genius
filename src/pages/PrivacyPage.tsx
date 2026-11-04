@@ -56,7 +56,6 @@ export const PrivacyPage: React.FC<PrivacyPageProps> = ({ lang }) => {
             </p>
             <ul className="list-disc pl-5 space-y-1 text-slate-600">
               <li>{text('Your Wi-Fi network name or Wi-Fi passwords', 'اسم شبكة Wi-Fi أو كلمات مرور تشفيرها', 'Le nom de votre réseau Wi-Fi ou ses mots de passe', 'El nombre de tu red Wi-Fi ni sus contraseñas')}</li>
-              <li>{text('Personal contact details such as names, phone numbers, and addresses', 'بيانات الاتصال الشخصية مثل الأسماء وأرقام الهواتف والعناوين', 'Vos coordonnées personnelles, telles que les noms, numéros de téléphone et adresses', 'Tus datos de contacto personales, como nombres, teléfonos y direcciones')}</li>
               <li>{text('Destination URLs, UTM tracking codes, or text messages entered for QR generation', 'روابط الوجهة أو رموز تتبع UTM أو الرسائل النصية', 'Les URL de destination, les codes de suivi UTM ou les messages texte saisis pour générer un QR', 'Las URL de destino, los códigos de seguimiento UTM o los mensajes de texto introducidos para generar un QR')}</li>
               <li>{text('The contents or scan counts of static QR codes you create', 'محتوى الرموز الثابتة التي تنشئها أو عدد مرات مسحها', 'Le contenu ou le nombre de scans des codes QR statiques que vous créez', 'El contenido o el número de escaneos de los códigos QR estáticos que creas')}</li>
             </ul>
@@ -64,7 +63,21 @@ export const PrivacyPage: React.FC<PrivacyPageProps> = ({ lang }) => {
 
           <section className="space-y-2">
             <h2 className="text-base font-bold text-slate-900">
-              {text('2. Local Browser Storage (localStorage)', '2. التخزين المحلي في المتصفح (localStorage)', '2. Stockage local dans le navigateur (localStorage)', '2. Almacenamiento local del navegador (localStorage)')}
+              {text('2. Information You Send Through the Contact Form', '2. المعلومات التي ترسلها عبر نموذج التواصل', '2. Informations envoyées via le formulaire de contact', '2. Información que envías mediante el formulario de contacto')}
+            </h2>
+            <p>
+              {text(
+                'If you contact us through the website form, we collect the name, email address, topic, and message that you submit. We use these details only to review and respond to your inquiry and to provide support. The message is transmitted through our email delivery provider, Resend, to our support inbox at support@getqrgenius.com. Do not include passwords or other sensitive information in your message. Contact messages may remain in the email systems used to deliver and respond to them; we do not use the contact form to create a marketing mailing list.',
+                'إذا تواصلت معنا عبر نموذج الموقع، فإننا نجمع الاسم والبريد الإلكتروني وموضوع الرسالة ومحتواها الذي ترسله. نستخدم هذه البيانات لمراجعة استفسارك والرد عليه وتقديم الدعم فقط. تُرسل الرسالة عبر مزود خدمة البريد الإلكتروني Resend إلى صندوق الدعم support@getqrgenius.com. يرجى عدم تضمين كلمات المرور أو أي معلومات حساسة أخرى في رسالتك. قد تبقى رسائل التواصل في أنظمة البريد الإلكتروني المستخدمة لإرسالها والرد عليها، ولا نستخدم نموذج التواصل لإنشاء قائمة بريدية تسويقية.',
+                'Si vous nous contactez via le formulaire du site, nous recueillons le nom, l’adresse e-mail, le sujet et le message que vous envoyez. Nous utilisons ces informations uniquement pour examiner votre demande, y répondre et fournir une assistance. Le message est transmis par notre prestataire d’envoi d’e-mails, Resend, à notre boîte de support support@getqrgenius.com. N’incluez pas de mots de passe ni d’autres informations sensibles dans votre message. Les messages peuvent rester dans les systèmes de messagerie utilisés pour leur transmission et leur traitement ; le formulaire ne sert pas à créer une liste de marketing.',
+                'Si nos contactas mediante el formulario del sitio, recopilamos el nombre, la dirección de correo electrónico, el asunto y el mensaje que envías. Utilizamos estos datos únicamente para revisar y responder a tu consulta y ofrecer asistencia. El mensaje se transmite a través de nuestro proveedor de correo electrónico, Resend, a la bandeja de soporte support@getqrgenius.com. No incluyas contraseñas ni otra información sensible en tu mensaje. Los mensajes pueden permanecer en los sistemas de correo utilizados para enviarlos y responderlos; no utilizamos el formulario para crear una lista de marketing.'
+              )}
+            </p>
+          </section>
+
+          <section className="space-y-2">
+            <h2 className="text-base font-bold text-slate-900">
+              {text('3. Local Browser Storage (localStorage)', '2. التخزين المحلي في المتصفح (localStorage)', '2. Stockage local dans le navigateur (localStorage)', '2. Almacenamiento local del navegador (localStorage)')}
             </h2>
             <p>
               {text(
@@ -78,7 +91,7 @@ export const PrivacyPage: React.FC<PrivacyPageProps> = ({ lang }) => {
 
           <section className="space-y-2">
             <h2 className="text-base font-bold text-slate-900">
-              {text('3. Third-Party Services and Advertising', '3. خدمات الجهات الخارجية والإعلانات', '3. Services tiers et publicité', '3. Servicios de terceros y publicidad')}
+              {text('4. Third-Party Services and Advertising', '4. خدمات الجهات الخارجية والإعلانات', '4. Services tiers et publicité', '4. Servicios de terceros y publicidad')}
             </h2>
             <p>
               {text(
@@ -92,7 +105,7 @@ export const PrivacyPage: React.FC<PrivacyPageProps> = ({ lang }) => {
 
           <section className="space-y-2">
             <h2 className="text-base font-bold text-slate-900">
-              {text('4. Privacy-Focused Website Analytics', '4. تحليلات الموقع مع مراعاة الخصوصية', '4. Mesure d’audience respectueuse de la vie privée', '4. Analítica web respetuosa con la privacidad')}
+              {text('5. Privacy-Focused Website Analytics', '5. تحليلات الموقع مع مراعاة الخصوصية', '5. Mesure d’audience respectueuse de la vie privée', '5. Analítica web respetuosa con la privacidad')}
             </h2>
             <p>
               {text(
@@ -106,7 +119,7 @@ export const PrivacyPage: React.FC<PrivacyPageProps> = ({ lang }) => {
 
           <section className="space-y-2">
             <h2 className="text-base font-bold text-slate-900">
-              {text('5. Data Security', '5. أمن البيانات', '5. Sécurité des données', '5. Seguridad de los datos')}
+              {text('6. Data Security', '6. أمن البيانات', '6. Sécurité des données', '6. Seguridad de los datos')}
             </h2>
             <p>
               {text(
@@ -120,7 +133,7 @@ export const PrivacyPage: React.FC<PrivacyPageProps> = ({ lang }) => {
 
           <section className="space-y-2">
             <h2 className="text-base font-bold text-slate-900">
-              {text('6. Contact About Privacy', '6. التواصل بشأن الخصوصية', '6. Contact au sujet de la confidentialité', '6. Contacto sobre privacidad')}
+              {text('7. Contact About Privacy', '7. التواصل بشأن الخصوصية', '7. Contact au sujet de la confidentialité', '7. Contacto sobre privacidad')}
             </h2>
             <p>
               {text(
