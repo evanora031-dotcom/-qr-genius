@@ -195,14 +195,14 @@ export const GeneratorPage: React.FC<GeneratorPageProps> = ({
               <span className="text-slate-700 font-bold">{t.qrTypes[selectedType].label}</span>
             </div>
             <h1 className="text-xl sm:text-2xl lg:text-3xl font-extrabold text-slate-900 tracking-tight">
-              QR Code Studio &amp; Designer
+              {lang === 'ar' ? 'استوديو تصميم رموز QR' : lang === 'fr' ? 'Studio de création de QR codes' : lang === 'es' ? 'Estudio de diseño de códigos QR' : 'QR Code Studio & Designer'}
             </h1>
           </div>
 
           <div className="flex items-center gap-2 self-start sm:self-auto">
             <div className="inline-flex items-center gap-1.5 px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-xl bg-white border border-slate-200 text-[11px] sm:text-xs font-semibold text-slate-700 shadow-xs">
               <ShieldCheck className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-emerald-600" />
-              <span>Client-Side Local Engine</span>
+              <span>{lang === 'ar' ? 'محرك معالجة محلي' : lang === 'fr' ? 'Traitement local dans le navigateur' : lang === 'es' ? 'Procesamiento local en el navegador' : 'Client-Side Local Engine'}</span>
             </div>
           </div>
         </div>
