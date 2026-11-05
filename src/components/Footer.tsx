@@ -18,14 +18,14 @@ function localizedHref(page: PageId, lang: Language): string {
 
 interface FooterProps {
   lang: Language;
-  setCurrentPage: (page: PageId) => void;
+  onNavigate: (page: PageId) => void;
 }
 
-export const Footer: React.FC<FooterProps> = ({ lang, setCurrentPage }) => {
+export const Footer: React.FC<FooterProps> = ({ lang, onNavigate }) => {
   const t = translations[lang];
 
   const handleLink = (page: PageId) => {
-    setCurrentPage(page);
+    onNavigate(page);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
