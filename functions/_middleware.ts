@@ -1,0 +1,38 @@
+interface PagesMiddlewareContext {
+  request: Request;
+  next: () => Promise<Response>;
+}
+
+/**
+ * Keep one public hostname for indexing.
+ * - Redirect the default Pages hostname and www to the canonical apex domain.
+ * - Mark unique Pages deployment/preview hosts as non-indexable.
+ */
+export const onRequest = async ({
+  request,
+  next,
+}: PagesMiddlewareContext): Promise<Response> => {
+  const url = new URL(request.url);
+  const hostname = url.hostname.toLowerCase();
+
+  if (hostname === 'www.getqrgenius.com' || hostname === 'qr-genius-1on.pages.dev') {
+    url.protocol = 'https:';
+    url.hostname = 'getqrgenius.com';
+    url.port = '';
+    return Response.redirect(url.toString(), 308);
+  }
+
+  const response = await next();
+
+  if (hostname.endsWith('.pages.dev')) {
+    const headers = new Headers(response.headers);
+    headers.set('X-Robots-Tag', 'noindex, nofollow');
+    return new Response(response.body, {
+      status: response.status,
+      statusText: response.statusText,
+      headers,
+    });
+  }
+
+  return response;
+};
