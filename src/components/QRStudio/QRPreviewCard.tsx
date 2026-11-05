@@ -82,7 +82,7 @@ export const QRPreviewCard: React.FC<QRPreviewCardProps> = ({
     return () => {
       active = false;
     };
-  }, [config, hasContent];
+  }, [config, hasContent]);
 
   // Handle PNG Download at selected resolution
   const handleDownloadPNG = async (resolution: number = pngResolution) => {
