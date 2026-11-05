@@ -42,7 +42,7 @@ export const SEO_METADATA: Record<PageId, Record<Language, PageMeta>> = {
   generator: {
     en: {
       title: "QR Studio – Full Custom QR Code Generator & Designer | QR GENIUS",
-      description: "Design custom QR codes with company logos, modern dot styles, custom colors, gradients, and error correction. 100% free with instant downloads.",
+      description: "Design custom QR codes with logos, modern dot styles, colors, gradients, and error correction. Create and download QR codes in your browser.",
       keywords: "qr code studio, qr designer, custom qr dots, qr logo generator, free high res qr",
       canonicalPath: "/generator",
       h1: "QR Code Studio & Custom Designer"
@@ -281,8 +281,8 @@ export const SEO_METADATA: Record<PageId, Record<Language, PageMeta>> = {
   },
   terms: {
     en: {
-      title: "Terms of Service – Free Commercial & Personal Usage | QR GENIUS",
-      description: "Terms and conditions for using QR GENIUS. All generated QR codes are free for both commercial, non-profit, and personal use with zero royalties.",
+      title: "Terms of Service – Personal and Commercial Use | QR GENIUS",
+      description: "Terms and conditions for creating and using QR codes with QR GENIUS for personal or commercial purposes.",
       keywords: "qr genius terms, commercial use qr code, free qr license",
       canonicalPath: "/terms",
       h1: "Terms of Service"
