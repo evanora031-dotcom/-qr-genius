@@ -213,7 +213,7 @@ export const QRPreviewCard: React.FC<QRPreviewCardProps> = ({
           <p className="mt-3 max-w-xs text-center text-xs text-slate-500" role="status">
             {lang === 'ar' ? 'أدخل بياناتك أولاً لعرض رمز QR.' : lang === 'fr' ? 'Saisissez vos données pour afficher votre QR code.' : lang === 'es' ? 'Introduce tus datos para mostrar el código QR.' : 'Enter your details to preview your QR code.'}
           </p>
-        )
+        )}
 
         <div className="mt-4 text-center">
           <p className="text-[11px] text-slate-500 flex items-center justify-center gap-1">
