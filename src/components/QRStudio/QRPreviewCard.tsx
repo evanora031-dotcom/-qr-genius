@@ -22,6 +22,7 @@ import {
   copyCanvasToClipboard 
 } from '../../utils/qrRenderer';
 import { saveToHistory } from '../../utils/storage';
+import { trackEvent } from '../../utils/analytics';
 
 interface QRPreviewCardProps {
   config: QRConfig;
@@ -92,6 +93,8 @@ export const QRPreviewCard: React.FC<QRPreviewCardProps> = ({
       const exportCanvas = await renderQRToCanvas(config, resolution);
       const filename = `qrgenius_${type}_${Date.now()}.png`;
       downloadCanvasPNG(exportCanvas, filename);
+      trackEvent('qr_code_downloaded', { qr_type: type, format: 'png', resolution });
+      trackEvent('qr_code_downloaded', { qr_type: type, format: 'pdf' });
       autoSaveHistory(exportCanvas);
     } catch (e) {
       console.error(e);
@@ -107,6 +110,7 @@ export const QRPreviewCard: React.FC<QRPreviewCardProps> = ({
     const svgStr = renderQRToSVG(config, 1000);
     const filename = `qrgenius_${type}_${Date.now()}.svg`;
     downloadSVG(svgStr, filename);
+    trackEvent('qr_code_downloaded', { qr_type: type, format: 'svg' });
     if (canvasRef.current) autoSaveHistory(canvasRef.current);
   };
 
@@ -164,6 +168,7 @@ export const QRPreviewCard: React.FC<QRPreviewCardProps> = ({
   const handleManualSave = () => {
     if (!hasContent || !canvasRef.current) return;
     autoSaveHistory(canvasRef.current);
+    trackEvent('qr_code_saved', { qr_type: type });
     setSaveSuccess(true);
     setTimeout(() => setSaveSuccess(false), 2000);
   };
