@@ -30,7 +30,7 @@ jobs:
         run: bun run build
 
   turnstile-preview-negative-tests:
-    if: github.event_name == 'push' && github.ref == 'refs/heads/feature/site-redesign'
+    if: (github.event_name == 'push' && github.ref == 'refs/heads/feature/site-redesign') || github.event_name == 'pull_request'
     needs: quality
     runs-on: ubuntu-latest
     timeout-minutes: 10
@@ -94,7 +94,7 @@ jobs:
           fi
 
   turnstile-preview-browser-tests:
-    if: github.event_name == 'push' && github.ref == 'refs/heads/feature/site-redesign'
+    if: (github.event_name == 'push' && github.ref == 'refs/heads/feature/site-redesign') || github.event_name == 'pull_request'
     needs: [quality, turnstile-preview-negative-tests]
     runs-on: ubuntu-latest
     timeout-minutes: 15
