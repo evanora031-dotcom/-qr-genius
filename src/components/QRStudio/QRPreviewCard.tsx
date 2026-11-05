@@ -94,7 +94,6 @@ export const QRPreviewCard: React.FC<QRPreviewCardProps> = ({
       const filename = `qrgenius_${type}_${Date.now()}.png`;
       downloadCanvasPNG(exportCanvas, filename);
       trackEvent('qr_code_downloaded', { qr_type: type, format: 'png', resolution });
-      trackEvent('qr_code_downloaded', { qr_type: type, format: 'pdf' });
       autoSaveHistory(exportCanvas);
     } catch (e) {
       console.error(e);
@@ -126,6 +125,7 @@ export const QRPreviewCard: React.FC<QRPreviewCardProps> = ({
         typeLabel: t.qrTypes[type].label,
         content: config.content
       });
+      trackEvent('qr_code_downloaded', { qr_type: type, format: 'pdf' });
       autoSaveHistory(exportCanvas);
     } catch (e) {
       console.error(e);
