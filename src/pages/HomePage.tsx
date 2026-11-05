@@ -54,7 +54,7 @@ export const HomePage: React.FC<HomePageProps> = ({ lang, onNavigate }) => {
                 <Sparkles className="w-4 h-4 text-indigo-600 shrink-0" />
                 <span>{lang === 'ar' ? 'تقنية رموز QR من الجيل الجديد' : lang === 'fr' ? 'Technologie QR de nouvelle génération' : lang === 'es' ? 'Tecnología QR de nueva generación' : 'Next-Generation QR Technology'}</span>
                 <span className="text-slate-300">·</span>
-                <span className="text-slate-500 font-medium">{lang === 'ar' ? 'مجاني 100% إلى الأبد' : lang === 'fr' ? '100 % gratuit, pour toujours' : lang === 'es' ? '100 % gratis para siempre' : '100% Free Forever'}</span>
+                <span className="text-slate-500 font-medium">{lang === 'ar' ? 'أدوات QR متاحة للاستخدام' : lang === 'fr' ? 'Outils QR accessibles en ligne' : lang === 'es' ? 'Herramientas QR disponibles en línea' : 'QR tools available online'}</span>
               </div>
 
               <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 tracking-tight leading-[1.18] text-balance">
@@ -93,11 +93,11 @@ export const HomePage: React.FC<HomePageProps> = ({ lang, onNavigate }) => {
               <div className="pt-4 flex flex-wrap items-center gap-x-6 gap-y-2 text-xs text-slate-500">
                 <div className="flex items-center gap-1.5">
                   <ShieldCheck className="w-4 h-4 text-emerald-600" />
-                  <span>{lang === 'ar' ? 'خصوصية كاملة على جهازك' : lang === 'fr' ? 'Confidentialité 100 % sur votre appareil' : lang === 'es' ? 'Privacidad 100 % en tu dispositivo' : '100% Client-Side Privacy'}</span>
+                  <span>{lang === 'ar' ? 'إنشاء الرمز داخل متصفحك' : lang === 'fr' ? 'Génération dans votre navigateur' : lang === 'es' ? 'Generación en tu navegador' : 'QR generation in your browser'}</span>
                 </div>
                 <div className="flex items-center gap-1.5">
                   <Zap className="w-4 h-4 text-indigo-600" />
-                  <span>{lang === 'ar' ? 'مسح دون حدود' : lang === 'fr' ? 'Scans illimités' : lang === 'es' ? 'Escaneos ilimitados' : 'No Scan Limits'}</span>
+                  <span>{lang === 'ar' ? 'رموز ثابتة بلا عدّاد مسح من QR Genius' : lang === 'fr' ? 'Codes statiques sans compteur de scans QR GENIUS' : lang === 'es' ? 'Códigos estáticos sin contador de escaneos de QR GENIUS' : 'Static codes with no QR GENIUS scan counter'}</span>
                 </div>
                 <div className="flex items-center gap-1.5">
                   <Download className="w-4 h-4 text-purple-600" />
@@ -341,12 +341,12 @@ export const HomePage: React.FC<HomePageProps> = ({ lang, onNavigate }) => {
                 {lang === 'ar' ? 'مصمم للطباعة عالية الدقة واللوحات والتسويق اليومي' : lang === 'fr' ? 'Conçu pour l’impression haute résolution, les panneaux et le marketing quotidien' : lang === 'es' ? 'Diseñado para impresión de alta resolución, carteles y marketing diario' : 'Built for High-DPI Print, Billboards, and Daily Marketing'}
               </h2>
               <p className="text-sm text-slate-600 leading-relaxed">
-                {lang === 'ar' ? 'على عكس الخدمات التي تقيّد التنزيل أو تستخدم روابط تتبع مؤقتة، ينشئ QR GENIUS رموز QR ثابتة ومتوافقة مع معيار ISO وتظل صالحة ما دامت وجهتها متاحة.' : lang === 'fr' ? 'Contrairement aux services qui limitent les téléchargements ou utilisent des liens temporaires, QR GENIUS crée des QR codes statiques conformes à la norme ISO, qui restent fonctionnels tant que leur destination est disponible.' : lang === 'es' ? 'A diferencia de los servicios que limitan las descargas o usan enlaces temporales, QR GENIUS crea códigos QR estáticos compatibles con ISO que siguen funcionando mientras el destino esté disponible.' : 'Unlike services that lock your downloads behind paywalls or insert temporary tracking links that break when subscriptions expire, QR GENIUS creates permanent, static ISO-compliant QR codes that work indefinitely.'}
+                {lang === 'ar' ? 'على عكس الخدمات التي تقيّد التنزيل أو تستخدم روابط تتبع مؤقتة، ينشئ QR GENIUS رموز QR ثابتة ومتوافقة مع معيار ISO وتظل صالحة ما دامت وجهتها متاحة.' : lang === 'fr' ? 'Contrairement aux services qui limitent les téléchargements ou utilisent des liens temporaires, QR GENIUS crée des QR codes statiques conformes à la norme ISO, qui restent fonctionnels tant que leur destination est disponible.' : lang === 'es' ? 'A diferencia de los servicios que limitan las descargas o usan enlaces temporales, QR GENIUS crea códigos QR estáticos compatibles con ISO que siguen funcionando mientras el destino esté disponible.' : 'QR GENIUS creates static QR codes that encode their destination directly. They do not rely on a QR GENIUS redirect subscription and continue to work while the destination remains available and the code is readable.'}
               </p>
 
               <div className="space-y-3.5 pt-2">
                 {([
-                  lang === 'ar' ? 'مجاني مدى الحياة دون حدود لعدد مرات المسح' : lang === 'fr' ? 'Gratuit à vie avec scans illimités' : lang === 'es' ? 'Gratis de por vida y sin límites de escaneo' : '100% Free Lifetime Usage with zero scan limits',
+                  lang === 'ar' ? 'رموز ثابتة لا تعتمد على عدّاد مسح من QR Genius' : lang === 'fr' ? 'Codes statiques sans compteur de scans QR GENIUS' : lang === 'es' ? 'Códigos estáticos sin contador de escaneos de QR GENIUS' : 'Static codes without a QR GENIUS scan counter',
                   lang === 'ar' ? 'إنشاء محلي: لا تغادر البيانات متصفحك' : lang === 'fr' ? 'Génération locale : vos données ne quittent pas le navigateur' : lang === 'es' ? 'Generación local: tus datos no salen del navegador' : 'Client-side generation: payloads never leave your browser',
                   lang === 'ar' ? 'صيغة SVG متجهة قابلة للتكبير دون فقدان الوضوح' : lang === 'fr' ? 'Le SVG vectoriel s’agrandit sans perte de netteté' : lang === 'es' ? 'El SVG vectorial se amplía sin perder nitidez' : 'Vector SVG format allows infinite scaling without blurriness',
                   lang === 'ar' ? 'تصحيح أخطاء قابل للتعديل للحفاظ على قابلية المسح مع الشعارات' : lang === 'fr' ? 'Correction d’erreurs réglable pour préserver la lisibilité avec un logo' : lang === 'es' ? 'Corrección de errores ajustable para mantener la legibilidad con logotipos' : 'Adjustable Error Correction ensures readability with logos',
@@ -366,7 +366,7 @@ export const HomePage: React.FC<HomePageProps> = ({ lang, onNavigate }) => {
               <div className="p-6 rounded-2xl bg-slate-50 border border-slate-200 text-left rtl:text-right">
                 <div className="text-3xl font-extrabold text-indigo-600 mb-1">100%</div>
                 <div className="text-xs font-bold text-slate-900 mb-1">{lang === 'ar' ? 'محلي وخاص' : lang === 'fr' ? 'Local et privé' : lang === 'es' ? 'Local y privado' : 'Local &amp; Private'}</div>
-                <p className="text-[11px] text-slate-500">{lang === 'ar' ? 'تتم المعالجة بالكامل داخل المتصفح دون تسجيل البيانات في قاعدة بيانات.' : lang === 'fr' ? 'Traitement entièrement dans le navigateur, sans enregistrement dans une base de données.' : lang === 'es' ? 'Procesado íntegramente en el navegador, sin guardar datos en una base de datos.' : 'Processed entirely in-browser without database logging.'}</p>
+                <p className="text-[11px] text-slate-500">{lang === 'ar' ? 'يتم إنشاء الرمز داخل المتصفح ولا يُرسل محتواه إلى خوادمنا لغرض التوليد.' : lang === 'fr' ? 'Le code est généré dans le navigateur et son contenu n’est pas envoyé à nos serveurs pour cette opération.' : lang === 'es' ? 'El código se genera en el navegador y su contenido no se envía a nuestros servidores para generarlo.' : 'The code is generated in your browser; its content is not sent to our servers for generation.'}</p>
               </div>
 
               <div className="p-6 rounded-2xl bg-slate-50 border border-slate-200 text-left rtl:text-right">
