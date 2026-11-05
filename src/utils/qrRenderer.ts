@@ -54,7 +54,8 @@ export function isLogoArea(
 
 // Generate the matrix from content with fallback resilience for high density payloads
 export function getQRMatrix(content: string, errorCorrectionLevel: QRConfig['errorCorrectionLevel']) {
-  const safeContent = (content || '').trim() || 'https://qrgenius.app';
+  const safeContent = (content || '').trim();
+  if (!safeContent) throw new Error('QR content is required before generating a code.');
   try {
     const qr = QRCode.create(safeContent, {
       errorCorrectionLevel: errorCorrectionLevel || 'M'
@@ -70,8 +71,7 @@ export function getQRMatrix(content: string, errorCorrectionLevel: QRConfig['err
         const qrL = QRCode.create(safeContent, { errorCorrectionLevel: 'L' });
         return qrL.modules;
       } catch {
-        const fallback = QRCode.create('https://qrgenius.app', { errorCorrectionLevel: 'M' });
-        return fallback.modules;
+        throw new Error('This content is too long to encode as a QR code. Shorten it and try again.');
       }
     }
   }
