@@ -26,6 +26,34 @@ interface ToolLandingPageProps {
   onHistoryUpdated: () => void;
 }
 
+function createEmptyToolPayload(tool: keyof typeof TOOL_CONFIGS) {
+  switch (tool) {
+    case 'url':
+      return '';
+    case 'wifi':
+      return { ssid: '', password: '', encryption: 'WPA' as const, hidden: false };
+    case 'whatsapp':
+      return { countryCode: '', phoneNumber: '', message: '' };
+    case 'business':
+      return {
+        firstName: '',
+        lastName: '',
+        company: '',
+        jobTitle: '',
+        phone: '',
+        workPhone: '',
+        email: '',
+        website: '',
+        street: '',
+        city: '',
+        state: '',
+        zip: '',
+        country: '',
+        notes: ''
+      };
+  }
+}
+
 const TOOL_CONFIGS = {
   url: {
     type: 'url' as QRType,
@@ -172,35 +200,7 @@ export const ToolLandingPage: React.FC<ToolLandingPageProps> = ({
   const t = translations[lang];
 
   // Dedicated local state for instant mini-studio
-  const [payload, setPayload] = useState<any>(() => {
-    // Start with empty values so visitors never generate or download demo credentials
-    // or another person's example contact details by mistake.
-    switch (tool) {
-      case 'url':
-        return '';
-      case 'wifi':
-        return { ssid: '', password: '', encryption: 'WPA', hidden: false };
-      case 'whatsapp':
-        return { countryCode: '', phoneNumber: '', message: '' };
-      case 'business':
-        return {
-          firstName: '',
-          lastName: '',
-          company: '',
-          jobTitle: '',
-          phone: '',
-          workPhone: '',
-          email: '',
-          website: '',
-          street: '',
-          city: '',
-          state: '',
-          zip: '',
-          country: '',
-          notes: ''
-        };
-    }
-  });
+  const [payload, setPayload] = useState<any>(() => createEmptyToolPayload(tool));
 
   const formattedContent = formatPayload(toolData.type, payload);
 
@@ -260,8 +260,8 @@ export const ToolLandingPage: React.FC<ToolLandingPageProps> = ({
               lang={lang}
               rawPayload={payload}
               onChangePayload={setPayload}
-              onClear={() => setPayload('')}
-              onReset={() => {}}
+              onClear={() => setPayload(createEmptyToolPayload(tool))}
+              onReset={() => setPayload(createEmptyToolPayload(tool))}
               formattedContent={formattedContent}
             />
 
