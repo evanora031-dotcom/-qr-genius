@@ -467,7 +467,7 @@ export function updateDocumentSEO(pageId: PageId, lang: Language) {
 }
 
 export function generateSitemapXML(): string {
-  const baseUrl = typeof window !== 'undefined' ? window.location.origin : 'https://getqrgenius.com';
+  const baseUrl = https://getqrgenius.com;
   const pages: PageId[] = ['home', 'generator', 'url', 'wifi', 'whatsapp', 'business', 'about', 'contact', 'privacy', 'terms', 'faq'];
   let xml = `<?xml version="1.0" encoding="UTF-8"?>\n`;
   xml += `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n`;
@@ -490,7 +490,7 @@ export function generateSitemapXML(): string {
 }
 
 export function generateRobotsTxt(): string {
-  const baseUrl = typeof window !== 'undefined' ? window.location.origin : 'https://getqrgenius.com';
+  const baseUrl = https://getqrgenius.com;
   return `# Robots.txt for QR GENIUS
 User-agent: *
 Allow: /
