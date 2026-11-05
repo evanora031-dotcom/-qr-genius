@@ -310,11 +310,11 @@ export const translations: Record<Language, TranslationDictionary> = {
       freeTitle: "QR Genius Free",
       proTitle: "QR Genius Enterprise",
       freeFeatures: [
-        "12 QR Code Generators with 100% free lifetime access",
-        "Unlimited scans & zero expiration dates",
+        "Access to the available QR code generators",
+        "Static QR codes without a QR GENIUS scan counter",
         "High-resolution PNG, SVG vector, and PDF exports",
         "Custom colors, gradients, dot styles, and center logos",
-        "100% Private: generated locally in your browser"
+        "QR content is generated locally in your browser"
       ],
       proFeatures: [
         "Everything in Free, plus:",
@@ -324,9 +324,9 @@ export const translations: Record<Language, TranslationDictionary> = {
         "Custom branded domains (qr.yourcompany.com)",
         "CMYK print-ready vector packaging"
       ],
-      freeCta: "Currently Active (Free Forever)",
+      freeCta: "Available to use",
       proCta: "Explore Enterprise Solutions",
-      note: "All core tools on this website remain 100% free forever without registration or credit cards."
+      note: "Core QR tools are currently available without registration or a credit card."
     },
     ad: {
       label: "Advertisement / Sponsor Space",
@@ -489,11 +489,11 @@ export const translations: Record<Language, TranslationDictionary> = {
       freeTitle: "الباقة المجانية الدائمة",
       proTitle: "باقة الأعمال والشركات",
       freeFeatures: [
-        "12 نوعاً من رموز الاستجابة السريعة مجاناً للأبد",
-        "عمليات مسح غير محدودة وبدون تاريخ انتهاء",
+        "الوصول إلى أدوات إنشاء رموز QR المتاحة",
+        "رموز ثابتة لا تستخدم عدّاد مسح من QR Genius",
         "تصدير عالي الدقة بصيغ PNG وSVG المتجهي وPDF",
         "تخصيص كامل للألوان والتدرجات والأشكال وإضافة الشعار",
-        "خصوصية 100%: التوليد يتم محلياً دون رفع بياناتك"
+        "يتم إنشاء محتوى رمز QR محلياً داخل متصفحك"
       ],
       proFeatures: [
         "جميع مميزات الباقة المجانية بالإضافة إلى:",
@@ -503,9 +503,9 @@ export const translations: Record<Language, TranslationDictionary> = {
         "نطاق مخصص لعلامتك التجارية (qr.company.com)",
         "ملفات متجهة مجهزة لمطابع الأوفست CMYK"
       ],
-      freeCta: "مفعلة حالياً (مجانية للأبد)",
+      freeCta: "متاحة للاستخدام",
       proCta: "استكشف حلول المؤسسات",
-      note: "جميع الأدوات الأساسية على هذا الموقع ستبقى مجانية 100% بدون تسجيل أو بطاقات بنكية."
+      note: "الأدوات الأساسية متاحة حالياً دون تسجيل أو بطاقة بنكية."
     },
     ad: {
       label: "مساحة إعلانية / رعاية",
@@ -668,11 +668,11 @@ export const translations: Record<Language, TranslationDictionary> = {
       freeTitle: "QR Genius Gratuit",
       proTitle: "QR Genius Entreprise",
       freeFeatures: [
-        "12 générateurs de QR codes gratuits à vie",
-        "Scans illimités et sans date d'expiration",
+        "Accès aux générateurs de QR codes disponibles",
+        "Codes statiques sans compteur de scans QR GENIUS",
         "Téléchargements haute résolution PNG, vectoriel SVG et PDF",
         "Personnalisation totale des couleurs, formes et logos",
-        "100% privé : généré localement dans votre navigateur"
+        "Le contenu du QR code est généré localement dans votre navigateur"
       ],
       proFeatures: [
         "Tout ce qui est inclus dans le plan Gratuit, plus :",
@@ -682,9 +682,9 @@ export const translations: Record<Language, TranslationDictionary> = {
         "Domaine personnalisé avec votre marque",
         "Exports vectoriels adaptés à l'impression CMJN"
       ],
-      freeCta: "Actuellement actif (Gratuit à vie)",
+      freeCta: "Disponible",
       proCta: "Découvrir l'offre Entreprise",
-      note: "Toutes les fonctions essentielles de ce site restent 100% gratuites sans inscription."
+      note: "Les outils QR essentiels sont actuellement accessibles sans inscription."
     },
     ad: {
       label: "Espace Publicitaire / Sponsor",
@@ -847,11 +847,11 @@ export const translations: Record<Language, TranslationDictionary> = {
       freeTitle: "QR Genius Gratis",
       proTitle: "QR Genius Enterprise",
       freeFeatures: [
-        "12 generadores de códigos QR gratis para siempre",
-        "Escaneos ilimitados sin fecha de caducidad",
+        "Acceso a los generadores de códigos QR disponibles",
+        "Códigos estáticos sin contador de escaneos de QR GENIUS",
         "Descargas en alta resolución PNG, vectorial SVG y PDF",
         "Personalización de colores, degradados, formas y logos",
-        "100% privado: generado localmente en su propio navegador"
+        "El contenido del código QR se genera localmente en su navegador"
       ],
       proFeatures: [
         "Todo lo incluido en el plan Gratuito, más:",
@@ -861,9 +861,9 @@ export const translations: Record<Language, TranslationDictionary> = {
         "Dominio personalizado con su propia marca",
         "Archivos vectoriales preparados para imprenta CMYK"
       ],
-      freeCta: "Actualmente Activo (Gratis para siempre)",
+      freeCta: "Disponible para usar",
       proCta: "Explorar Soluciones Enterprise",
-      note: "Todas las herramientas principales de este sitio web seguirán siendo 100% gratuitas."
+      note: "Las herramientas QR principales están disponibles actualmente sin registro."
     },
     ad: {
       label: "Espacio Publicitario / Patrocinio",
