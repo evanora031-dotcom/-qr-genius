@@ -1,7 +1,7 @@
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { SEO_METADATA } from '../src/utils/seo.ts';
+import { SEO_METADATA, generateRobotsTxt } from '../src/utils/seo.ts';
 
 const projectRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const distDir = path.join(projectRoot, 'dist');
@@ -206,3 +206,7 @@ const sitemap = [
 
 await writeFile(path.join(distDir, 'sitemap.xml'), sitemap, 'utf8');
 console.log(`Generated sitemap.xml with ${sitemapEntries.length} canonical localized URLs.`);
+
+// Publish the robots.txt generated from the same canonical site configuration.
+await writeFile(path.join(distDir, 'robots.txt'), generateRobotsTxt(), 'utf8');
+console.log('Generated robots.txt with the canonical sitemap URL.');
