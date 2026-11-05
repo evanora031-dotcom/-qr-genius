@@ -49,21 +49,21 @@ export const SEO_METADATA: Record<PageId, Record<Language, PageMeta>> = {
     },
     ar: {
       title: "استوديو QR – صمم وخصص رموز الاستجابة السريعة بالكامل | كيو آر جينيوس",
-      description: "صمم رموز QR احترافية مع إضافة الشعار وتخصيص الألوان والنقاط والتدرجات. مجاني 100% مع تنزيل فوري.",
+      description: "صمم رموز QR مع إضافة الشعار وتخصيص الألوان والنقاط والتدرجات، ثم نزّل الرمز فوراً.",
       keywords: "استوديو كيو ار, مصمم باركود, كيو ار مع لوجو, تخصيص الباركود",
       canonicalPath: "/generator",
       h1: "استوديو تصميم وتخصيص رموز QR"
     },
     fr: {
       title: "Studio QR – Générateur & Créateur de QR Code Sur-Mesure | QR GENIUS",
-      description: "Concevez des QR codes sur-mesure avec logos d'entreprise, styles de points variés, couleurs et dégradés. 100% gratuit et sans inscription.",
+      description: "Concevez des QR codes sur-mesure avec logos, styles de points, couleurs et dégradés, puis téléchargez votre création.",
       keywords: "studio qr code, createur qr sur mesure, qr avec logo, export qr haute resolution",
       canonicalPath: "/generator",
       h1: "Studio de Création & Personnalisation de QR Codes"
     },
     es: {
       title: "Estudio QR – Generador y Diseñador Completo de Códigos QR | QR GENIUS",
-      description: "Diseñe códigos QR a medida con logotipos empresariales, estilos de puntos modernos, degradados y colores. 100% gratuito.",
+      description: "Diseñe códigos QR a medida con logotipos, estilos de puntos, degradados y colores, y descargue su creación.",
       keywords: "estudio qr, disenador de qr, qr con logotipo, descargar qr vector",
       canonicalPath: "/generator",
       h1: "Estudio y Diseñador Completo de Códigos QR"
