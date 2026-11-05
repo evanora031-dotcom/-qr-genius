@@ -34,7 +34,7 @@ export const PricingSection: React.FC<PricingSectionProps> = ({ lang, onSelectFr
           {/* Free Plan */}
           <div className="bg-white rounded-2xl border-2 border-indigo-600/30 p-5 sm:p-8 shadow-sm flex flex-col justify-between relative overflow-hidden">
             <div className="absolute top-0 right-0 rtl:right-auto rtl:left-0 bg-indigo-600 text-white text-[11px] font-bold px-4 py-1 rounded-bl-xl rtl:rounded-bl-none rtl:rounded-br-xl uppercase tracking-wider">
-              {lang === 'ar' ? 'مجاني إلى الأبد' : 'Forever Free'}
+              {lang === 'ar' ? 'الباقة المجانية' : lang === 'fr' ? 'Offre gratuite' : lang === 'es' ? 'Plan gratuito' : 'Free plan'}
             </div>
 
             <div>
@@ -42,12 +42,12 @@ export const PricingSection: React.FC<PricingSectionProps> = ({ lang, onSelectFr
                 {t.pro.freeTitle}
               </div>
               <p className="text-xs text-slate-500 mb-6">
-                {lang === 'ar' ? 'جميع الأدوات الاثنتي عشرة مع مسح غير محدود وتخصيص كامل وتنزيل SVG وPDF.' : 'All 12 generators with unlimited scans, full customization, and SVG/PDF downloads.'}
+                {lang === 'ar' ? 'استخدم أدوات إنشاء QR المتاحة وخصّص رموزك ونزّلها بالصيغ المدعومة.' : lang === 'fr' ? 'Utilisez les outils QR disponibles, personnalisez vos codes et téléchargez-les dans les formats pris en charge.' : lang === 'es' ? 'Utilice las herramientas QR disponibles, personalice sus códigos y descárguelos en los formatos compatibles.' : 'Use the available QR tools, customize your codes, and download them in supported formats.'}
               </p>
 
               <div className="flex items-baseline gap-1 mb-8">
                 <span className="text-4xl font-extrabold text-slate-900">$0</span>
-                <span className="text-xs text-slate-500 font-medium">{lang === 'ar' ? '/ مدى الحياة' : '/ forever'}</span>
+                <span className="text-xs text-slate-500 font-medium">{lang === 'ar' ? '/ بدون رسوم حالياً' : lang === 'fr' ? '/ actuellement sans frais' : lang === 'es' ? '/ actualmente sin coste' : '/ currently at no charge'}</span>
               </div>
 
               <ul className="space-y-3.5 text-xs text-slate-700 mb-8">
@@ -130,11 +130,11 @@ export const PricingSection: React.FC<PricingSectionProps> = ({ lang, onSelectFr
               </div>
               <h3 className="text-lg font-bold mb-2">{lang === 'ar' ? 'معاينة QR GENIUS للمؤسسات' : 'QR GENIUS Enterprise Preview'}</h3>
               <p className="text-xs text-slate-600 leading-relaxed mb-4">
-                {lang === 'ar' ? 'أداة إنشاء QR GENIUS الأساسية مجانية وتعمل بالكامل. أما استضافة إعادة توجيه الرموز الديناميكية والنطاقات الفرعية المخصصة وتتبع Webhook فهي مخصصة لعملاء المؤسسات.' : 'QR GENIUS core generator is 100% free and functional. Dynamic QR code redirect hosting, custom subdomains, and webhook tracking are prepared for enterprise SLA clients.'}
+                {lang === 'ar' ? 'هذه معاينة لخيارات المؤسسات. ميزات الرموز الديناميكية والتحليلات والاستضافة المخصصة ليست متاحة للاستخدام حالياً.' : lang === 'fr' ? 'Ceci est un aperçu des options entreprise. Les QR dynamiques, les statistiques et l’hébergement personnalisé ne sont pas disponibles actuellement.' : lang === 'es' ? 'Esta es una vista previa de las opciones empresariales. Los códigos dinámicos, las analíticas y el alojamiento personalizado no están disponibles actualmente.' : 'This is a preview of enterprise options. Dynamic QR codes, analytics, and custom hosting are not currently available.'}
               </p>
               <div className="p-3 bg-slate-50 rounded-xl border border-slate-200 text-xs text-slate-700 mb-6 space-y-1.5">
-                <div>✓ {lang === 'ar' ? 'لا تحتاج الميزات المجانية إلى بطاقة ائتمان أو تسجيل.' : 'No credit card or registration is needed for any free features.'}</div>
-                <div>✓ {lang === 'ar' ? 'جميع التنزيلات القياسية (SVG وPNG وPDF) صالحة مدى الحياة.' : 'All standard downloads (SVG, PNG, PDF) have lifetime validity.'}</div>
+                <div>✓ {lang === 'ar' ? 'يمكنك تجربة أدوات QR المتاحة دون إنشاء حساب.' : lang === 'fr' ? 'Vous pouvez essayer les outils QR disponibles sans créer de compte.' : lang === 'es' ? 'Puede probar las herramientas QR disponibles sin crear una cuenta.' : 'You can try the available QR tools without creating an account.'}</div>
+                <div>✓ {lang === 'ar' ? 'تعتمد صلاحية رمز QR على محتواه وبقاء الوجهة متاحة، وليس على تاريخ تنزيل الملف.' : lang === 'fr' ? 'La validité d’un QR code dépend de son contenu et de la disponibilité de sa destination, pas de la date de téléchargement.' : lang === 'es' ? 'La validez de un código QR depende de su contenido y de que el destino siga disponible, no de la fecha de descarga.' : 'A QR code’s usefulness depends on its content and destination availability, not on its download date.'}</div>
               </div>
               <div className="flex gap-3">
                 <button
