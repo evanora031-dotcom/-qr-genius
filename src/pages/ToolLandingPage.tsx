@@ -173,25 +173,31 @@ export const ToolLandingPage: React.FC<ToolLandingPageProps> = ({
 
   // Dedicated local state for instant mini-studio
   const [payload, setPayload] = useState<any>(() => {
+    // Start with empty values so visitors never generate or download demo credentials
+    // or another person's example contact details by mistake.
     switch (tool) {
       case 'url':
-        return 'https://yourwebsite.com';
+        return '';
       case 'wifi':
-        return { ssid: 'Guest_WiFi', password: 'WelcomeGuest2026', encryption: 'WPA', hidden: false };
+        return { ssid: '', password: '', encryption: 'WPA', hidden: false };
       case 'whatsapp':
-        return { countryCode: '+1', phoneNumber: '5550192834', message: 'Hello! I am interested in your services.' };
+        return { countryCode: '', phoneNumber: '', message: '' };
       case 'business':
         return {
-          firstName: 'Jordan',
-          lastName: 'Lee',
-          company: 'Nexus Creative',
-          jobTitle: 'Creative Director',
-          phone: '+1 (555) 789-0123',
-          email: 'jordan@nexuscreative.com',
-          website: 'https://nexuscreative.com',
-          city: 'Chicago',
-          country: 'USA',
-          notes: 'Connect with me on LinkedIn'
+          firstName: '',
+          lastName: '',
+          company: '',
+          jobTitle: '',
+          phone: '',
+          workPhone: '',
+          email: '',
+          website: '',
+          street: '',
+          city: '',
+          state: '',
+          zip: '',
+          country: '',
+          notes: ''
         };
     }
   });
