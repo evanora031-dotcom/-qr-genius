@@ -25,7 +25,7 @@ function localizedHref(page: PageId, lang: Language): string {
 
 interface NavbarProps {
   currentPage: PageId;
-  setCurrentPage: (page: PageId) => void;
+  onNavigate: (page: PageId) => void;
   lang: Language;
   setLang: (lang: Language) => void;
   openHistory: () => void;
@@ -41,7 +41,7 @@ const LANGUAGE_LABELS: Record<Language, { label: string; flag: string; native: s
 
 export const Navbar: React.FC<NavbarProps> = ({
   currentPage,
-  setCurrentPage,
+  onNavigate,
   lang,
   setLang,
   openHistory,
@@ -52,7 +52,7 @@ export const Navbar: React.FC<NavbarProps> = ({
   const t = translations[lang];
 
   const handleNavClick = (page: PageId) => {
-    setCurrentPage(page);
+    onNavigate(page);
     setMobileMenuOpen(false);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };

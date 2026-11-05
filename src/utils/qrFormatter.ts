@@ -14,7 +14,7 @@ export function escapeWifiString(str: string): string {
 
 export function formatUrl(url: string): string {
   const trimmed = url.trim();
-  if (!trimmed) return 'https://';
+  if (!trimmed) return '';
   if (/^https?:\/\//i.test(trimmed)) {
     return trimmed;
   }
@@ -23,6 +23,7 @@ export function formatUrl(url: string): string {
 
 export function formatWifi(data: WifiData): string {
   const { ssid, password, encryption, hidden } = data;
+  if (!ssid?.trim()) return '';
   const safeSsid = escapeWifiString(ssid || '');
   const safePassword = escapeWifiString(password || '');
   return `WIFI:T:${encryption};S:${safeSsid};P:${safePassword};H:${hidden ? 'true' : 'false'};;`;
@@ -31,14 +32,16 @@ export function formatWifi(data: WifiData): string {
 export function formatWhatsapp(data: WhatsappData): string {
   const cleanPhone = (data.phoneNumber || '').replace(/[^\d+]/g, '');
   const cleanCode = (data.countryCode || '').replace(/[^\d+]/g, '');
+  if (!cleanPhone) return '';
   const fullNumber = cleanPhone.startsWith('+') ? cleanPhone.slice(1) : `${cleanCode.replace('+', '')}${cleanPhone}`;
   const msg = (data.message || '').trim();
-  if (!fullNumber) return 'https://wa.me/';
+  if (!fullNumber) return '';
   return msg ? `https://wa.me/${fullNumber}?text=${encodeURIComponent(msg)}` : `https://wa.me/${fullNumber}`;
 }
 
 export function formatEmail(data: EmailData): string {
   const { email, subject, body } = data;
+  if (!email?.trim()) return '';
   const params: string[] = [];
   if (subject) params.push(`subject=${encodeURIComponent(subject)}`);
   if (body) params.push(`body=${encodeURIComponent(body)}`);
@@ -48,17 +51,18 @@ export function formatEmail(data: EmailData): string {
 
 export function formatPhone(phone: string): string {
   const clean = phone.trim().replace(/[^\d+]/g, '');
-  return clean ? `tel:${clean}` : 'tel:';
+  return clean ? `tel:${clean}` : '';
 }
 
 export function formatSms(data: SmsData): string {
   const cleanPhone = (data.phoneNumber || '').trim().replace(/[^\d+]/g, '');
   const msg = (data.message || '').trim();
-  return `smsto:${cleanPhone}:${msg}`;
+  return cleanPhone ? `smsto:${cleanPhone}:${msg}` : '';
 }
 
 export function formatInstagram(handleOrUrl: string): string {
   const trimmed = handleOrUrl.trim();
+  if (!trimmed) return '';
   if (trimmed.startsWith('http://') || trimmed.startsWith('https://')) {
     return trimmed;
   }
@@ -68,6 +72,7 @@ export function formatInstagram(handleOrUrl: string): string {
 
 export function formatFacebook(handleOrUrl: string): string {
   const trimmed = handleOrUrl.trim();
+  if (!trimmed) return '';
   if (trimmed.startsWith('http://') || trimmed.startsWith('https://')) {
     return trimmed;
   }
@@ -76,6 +81,7 @@ export function formatFacebook(handleOrUrl: string): string {
 
 export function formatYouTube(urlOrId: string): string {
   const trimmed = urlOrId.trim();
+  if (!trimmed) return '';
   if (trimmed.startsWith('http://') || trimmed.startsWith('https://')) {
     return trimmed;
   }
@@ -89,13 +95,15 @@ export function formatMaps(data: MapsData): string {
   if (data.locationType === 'coordinates') {
     const lat = data.latitude.trim();
     const lng = data.longitude.trim();
+    if (!lat || !lng) return '';
     return `https://www.google.com/maps/search/?api=1&query=${lat},${lng}`;
   }
   const addr = data.address.trim();
-  return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(addr)}`;
+  return addr ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(addr)}` : '';
 }
 
 export function formatVCard(data: VCardData): string {
+  if (![data.firstName, data.lastName, data.company, data.phone, data.workPhone, data.email, data.website].some(value => value?.trim())) return '';
   const lines: string[] = [
     'BEGIN:VCARD',
     'VERSION:3.0',
@@ -121,7 +129,7 @@ export function formatVCard(data: VCardData): string {
 export function formatPayload(type: QRType, raw: any): string {
   switch (type) {
     case 'url':
-      return typeof raw === 'string' ? formatUrl(raw) : 'https://qrgenius.app';
+      return typeof raw === 'string' ? formatUrl(raw) : '';
     case 'text':
       return typeof raw === 'string' ? raw : '';
     case 'wifi':

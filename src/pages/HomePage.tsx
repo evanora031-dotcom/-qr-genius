@@ -115,12 +115,12 @@ export const HomePage: React.FC<HomePageProps> = ({ lang, onNavigate }) => {
                       <QrCode className="w-4 h-4" />
                     </div>
                     <div>
-                      <div className="text-xs font-bold text-slate-900">{lang === 'ar' ? 'معاينة تفاعلية' : lang === 'fr' ? 'Aperçu interactif' : lang === 'es' ? 'Vista previa interactiva' : 'Interactive Preview'}</div>
-                      <div className="text-[10px] text-slate-400">{lang === 'ar' ? 'قابل للمسح وفق ISO/IEC 18004' : lang === 'fr' ? 'Scannable selon ISO/IEC 18004' : lang === 'es' ? 'Escaneable según ISO/IEC 18004' : 'Scannable ISO/IEC 18004'}</div>
+                      <div className="text-xs font-bold text-slate-900">{lang === 'ar' ? 'معاينة التصميم' : lang === 'fr' ? 'Aperçu du design' : lang === 'es' ? 'Vista previa del diseño' : 'QR Design Preview'}</div>
+                      <div className="text-[10px] text-slate-400">{lang === 'ar' ? 'عينة بصرية — أنشئ رمزك الفعلي في الاستوديو' : lang === 'fr' ? 'Exemple visuel — créez votre vrai code dans le studio' : lang === 'es' ? 'Muestra visual: crea tu código real en el estudio' : 'Visual sample — create your actual code in the studio'}</div>
                     </div>
                   </div>
                   <span className="text-[10px] font-semibold text-indigo-600 bg-indigo-50 px-2 py-0.5 rounded-full">
-                    {lang === 'ar' ? 'جاهز للمسح' : lang === 'fr' ? 'Prêt à scanner' : lang === 'es' ? 'Listo para escanear' : 'Ready to Scan'}
+                    {lang === 'ar' ? 'نموذج تصميم' : lang === 'fr' ? 'Exemple de style' : lang === 'es' ? 'Muestra de estilo' : 'Style Sample'}
                   </span>
                 </div>
 
@@ -240,7 +240,7 @@ export const HomePage: React.FC<HomePageProps> = ({ lang, onNavigate }) => {
               return (
                 <a
                   key={card.type}
-                  href={`/${lang}/${card.type === 'url' ? 'tools/url' : card.type === 'wifi' ? 'tools/wifi' : card.type === 'whatsapp' ? 'tools/whatsapp' : 'tools/business-vcard'}`}
+                  href={`${lang === 'en' ? '' : `/${lang}`}/${card.type === 'url' ? 'tools/url' : card.type === 'wifi' ? 'tools/wifi' : card.type === 'whatsapp' ? 'tools/whatsapp' : 'tools/business-vcard'}`}
                   onClick={(event) => { event.preventDefault(); onNavigate(card.type === 'url' ? 'url' : card.type === 'wifi' ? 'wifi' : card.type === 'whatsapp' ? 'whatsapp' : 'business'); }}
                   className="p-6 rounded-2xl border border-slate-200 hover:border-indigo-400 hover:shadow-xl transition-all cursor-pointer bg-white flex flex-col justify-between group"
                 >

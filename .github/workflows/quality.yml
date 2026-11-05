@@ -1,0 +1,115 @@
+name: Quality checks
+
+on:
+  push:
+    branches:
+      - main
+      - feature/site-redesign
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Set up Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+      - name: Type-check
+        run: bun run lint
+      - name: Production build
+        run: bun run build
+
+  turnstile-preview-negative-tests:
+    if: (github.event_name == 'push' && github.ref == 'refs/heads/feature/site-redesign') || github.event_name == 'pull_request'
+    needs: quality
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Reject missing Turnstile token
+        shell: bash
+        run: |
+          url="https://feature-site-redesign.qr-genius-1on.pages.dev/api/contact"
+          payload='{"name":"Turnstile Test","email":"test@example.com","topic":"Feedback / Suggestion","message":"Automated negative test: missing token must be rejected."}'
+          for attempt in $(seq 1 36); do
+            status=$(curl --silent --show-error --max-time 10 --output /tmp/response.json --write-out '%{http_code}' \
+              --request POST "$url" \
+              --header 'Content-Type: application/json' \
+              --header 'Origin: https://feature-site-redesign.qr-genius-1on.pages.dev' \
+              --data "$payload" || true)
+            if [ "$status" = "403" ] && grep -q 'Security verification failed' /tmp/response.json; then
+              echo "PASS: missing Turnstile token rejected (403)"
+              exit 0
+            fi
+            echo "Waiting for preview to enforce Turnstile (attempt $attempt, HTTP $status)"
+            sleep 10
+          done
+          echo "FAIL: preview did not reject a missing token as expected"
+          cat /tmp/response.json || true
+          exit 1
+
+      - name: Ensure honeypot cannot bypass Turnstile
+        shell: bash
+        run: |
+          url="https://feature-site-redesign.qr-genius-1on.pages.dev/api/contact"
+          payload='{"name":"Turnstile Test","email":"test@example.com","topic":"Feedback / Suggestion","message":"Automated test: honeypot must not bypass Turnstile.","company":"bot"}'
+          status=$(curl --silent --show-error --max-time 15 --output /tmp/response.json --write-out '%{http_code}' \
+            --request POST "$url" \
+            --header 'Content-Type: application/json' \
+            --header 'Origin: https://feature-site-redesign.qr-genius-1on.pages.dev' \
+            --data "$payload" || true)
+          if [ "$status" = "403" ] && grep -q 'Security verification failed' /tmp/response.json; then
+            echo "PASS: honeypot cannot bypass Turnstile (403)"
+          else
+            echo "FAIL: honeypot bypass test returned HTTP $status"
+            cat /tmp/response.json || true
+            exit 1
+          fi
+
+      - name: Reject invalid Turnstile token
+        shell: bash
+        run: |
+          url="https://feature-site-redesign.qr-genius-1on.pages.dev/api/contact"
+          payload='{"name":"Turnstile Test","email":"test@example.com","topic":"Feedback / Suggestion","message":"Automated negative test: invalid token must be rejected.","turnstileToken":"invalid-turnstile-token"}'
+          status=$(curl --silent --show-error --max-time 15 --output /tmp/response.json --write-out '%{http_code}' \
+            --request POST "$url" \
+            --header 'Content-Type: application/json' \
+            --header 'Origin: https://feature-site-redesign.qr-genius-1on.pages.dev' \
+            --data "$payload" || true)
+          if [ "$status" = "403" ] && grep -q 'Security verification failed' /tmp/response.json; then
+            echo "PASS: invalid Turnstile token rejected (403)"
+          else
+            echo "FAIL: invalid token response was HTTP $status"
+            cat /tmp/response.json || true
+            exit 1
+          fi
+
+  turnstile-preview-browser-tests:
+    if: (github.event_name == 'push' && github.ref == 'refs/heads/feature/site-redesign') || github.event_name == 'pull_request'
+    needs: [quality, turnstile-preview-negative-tests]
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install Playwright
+        run: |
+          npm install --no-save --no-package-lock --legacy-peer-deps playwright
+          npx playwright install --with-deps chromium
+      - name: Verify Turnstile callback integration in browser
+        env:
+          PREVIEW_URL: https://feature-site-redesign.qr-genius-1on.pages.dev
+        run: node scripts/turnstile-preview-e2e.mjs
