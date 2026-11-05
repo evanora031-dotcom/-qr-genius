@@ -54,7 +54,8 @@ export function isLogoArea(
 
 // Generate the matrix from content with fallback resilience for high density payloads
 export function getQRMatrix(content: string, errorCorrectionLevel: QRConfig['errorCorrectionLevel']) {
-  const safeContent = (content || '').trim() || 'https://qrgenius.app';
+  const safeContent = (content || '').trim();
+  if (!safeContent) throw new Error('QR content is required before generating a code.');
   try {
     const qr = QRCode.create(safeContent, {
       errorCorrectionLevel: errorCorrectionLevel || 'M'
