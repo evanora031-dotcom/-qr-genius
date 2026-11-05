@@ -48,10 +48,18 @@ export const QRPreviewCard: React.FC<QRPreviewCardProps> = ({
   const [showScanModal, setShowScanModal] = useState(false);
 
   const t = translations[lang];
+  const hasContent = Boolean(config.content && config.content.trim());
 
   // Render QR Code onto DOM
   useEffect(() => {
     let active = true;
+    if (!hasContent) {
+      canvasRef.current = null;
+      if (containerRef.current) containerRef.current.innerHTML = '';
+      setLoading(false);
+      return () => { active = false; };
+    }
+
     setLoading(true);
 
     renderQRToCanvas(config, 512)
@@ -74,10 +82,11 @@ export const QRPreviewCard: React.FC<QRPreviewCardProps> = ({
     return () => {
       active = false;
     };
-  }, [config]);
+  }, [config, hasContent];
 
   // Handle PNG Download at selected resolution
   const handleDownloadPNG = async (resolution: number = pngResolution) => {
+    if (!hasContent) return;
     setLoading(true);
     try {
       const exportCanvas = await renderQRToCanvas(config, resolution);
@@ -94,6 +103,7 @@ export const QRPreviewCard: React.FC<QRPreviewCardProps> = ({
 
   // Handle SVG Download
   const handleDownloadSVG = () => {
+    if (!hasContent) return;
     const svgStr = renderQRToSVG(config, 1000);
     const filename = `qrgenius_${type}_${Date.now()}.svg`;
     downloadSVG(svgStr, filename);
@@ -102,6 +112,7 @@ export const QRPreviewCard: React.FC<QRPreviewCardProps> = ({
 
   // Handle PDF Download
   const handleDownloadPDF = async () => {
+    if (!hasContent) return;
     setLoading(true);
     try {
       const exportCanvas = await renderQRToCanvas(config, 1500);
@@ -121,7 +132,7 @@ export const QRPreviewCard: React.FC<QRPreviewCardProps> = ({
 
   // Copy Image to Clipboard
   const handleCopyImage = async () => {
-    if (!canvasRef.current) return;
+    if (!hasContent || !canvasRef.current) return;
     const ok = await copyCanvasToClipboard(canvasRef.current);
     if (ok) {
       setCopySuccess(true);
@@ -151,7 +162,7 @@ export const QRPreviewCard: React.FC<QRPreviewCardProps> = ({
   };
 
   const handleManualSave = () => {
-    if (!canvasRef.current) return;
+    if (!hasContent || !canvasRef.current) return;
     autoSaveHistory(canvasRef.current);
     setSaveSuccess(true);
     setTimeout(() => setSaveSuccess(false), 2000);
@@ -198,6 +209,11 @@ export const QRPreviewCard: React.FC<QRPreviewCardProps> = ({
         )}
 
         <div ref={containerRef} className="flex items-center justify-center" />
+        {!hasContent && (
+          <p className="mt-3 max-w-xs text-center text-xs text-slate-500" role="status">
+            {lang === 'ar' ? 'أدخل بياناتك أولاً لعرض رمز QR.' : lang === 'fr' ? 'Saisissez vos données pour afficher votre QR code.' : lang === 'es' ? 'Introduce tus datos para mostrar el código QR.' : 'Enter your details to preview your QR code.'}
+          </p>
+        )
 
         <div className="mt-4 text-center">
           <p className="text-[11px] text-slate-500 flex items-center justify-center gap-1">
