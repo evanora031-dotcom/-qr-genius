@@ -161,7 +161,7 @@ export default function App() {
         {currentPage === 'sitemap' && <SitemapView />}
         {currentPage === 'robots' && <RobotsView />}
       </main>
-      <Footer lang={lang} setCurrentPage={setCurrentPage} />
+      <Footer lang={lang} onNavigate={handleNavigate} />
       <HistoryDrawer
         isOpen={isHistoryOpen}
         onClose={() => setIsHistoryOpen(false)}
