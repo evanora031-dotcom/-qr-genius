@@ -410,7 +410,7 @@ function getLocalizedPath(path: string, lang: Language): string {
 
 export function updateDocumentSEO(pageId: PageId, lang: Language) {
   const meta = SEO_METADATA[pageId]?.[lang] || SEO_METADATA.home.en;
-  const baseUrl = typeof window !== 'undefined' ? window.location.origin : 'https://getqrgenius.com';
+  const baseUrl = 'https://getqrgenius.com';
   const canonicalUrl = `${baseUrl}${getLocalizedPath(meta.canonicalPath, lang)}`;
 
   document.title = meta.title;
