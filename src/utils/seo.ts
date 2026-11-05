@@ -192,28 +192,28 @@ export const SEO_METADATA: Record<PageId, Record<Language, PageMeta>> = {
   about: {
     en: {
       title: "About QR GENIUS – Our Mission & Client-Side Privacy Architecture",
-      description: "Learn how QR GENIUS creates QR codes locally in your browser and uses privacy-focused Cloudflare Web Analytics to measure website performance.",
+      description: "Learn how QR GENIUS creates QR codes in your browser and stores recent-code history locally on your device.",
       keywords: "about qr genius, private qr code generator, client side qr, free safe qr codes",
       canonicalPath: "/about",
       h1: "About QR GENIUS & Our Privacy Commitment"
     },
     ar: {
       title: "عن كيو آر جينيوس – مهمتنا وبنيتنا البرمجية القائمة على حماية الخصوصية",
-      description: "تعرف على كيفية إنشاء رموز QR محلياً داخل متصفحك، وكيف نستخدم تحليلات Cloudflare التي تراعي الخصوصية لقياس أداء الموقع.",
+      description: "تعرف على كيفية إنشاء رموز QR داخل متصفحك وحفظ سجل الرموز الأخيرة محلياً على جهازك.",
       keywords: "عن كيو ار جينيوس, خصوصية الباركود, امان توليد qr",
       canonicalPath: "/about",
       h1: "عن كيو آر جينيوس والتزامنا بحماية الخصوصية"
     },
     fr: {
       title: "À propos de QR GENIUS – Notre Mission & Confidentialité Locale",
-      description: "Découvrez la création locale des QR codes dans votre navigateur et l’utilisation de Cloudflare Web Analytics pour mesurer les performances du site.",
+      description: "Découvrez comment QR GENIUS crée les codes QR dans votre navigateur et conserve localement l’historique récent sur votre appareil.",
       keywords: "a propos qr genius, generateur qr prive, confidentialite qr code",
       canonicalPath: "/about",
       h1: "À propos de QR GENIUS & Confidentialité"
     },
     es: {
       title: "Sobre QR GENIUS – Nuestra Misión y Privacidad en el Navegador",
-      description: "Descubra cómo QR GENIUS crea códigos QR localmente en su navegador y utiliza Cloudflare Web Analytics para medir el rendimiento del sitio.",
+      description: "Descubra cómo QR GENIUS crea códigos QR en su navegador y guarda localmente el historial reciente en su dispositivo.",
       keywords: "sobre qr genius, privacidad qr, generador qr seguro",
       canonicalPath: "/about",
       h1: "Sobre QR GENIUS y Nuestro Compromiso de Privacidad"
@@ -251,29 +251,29 @@ export const SEO_METADATA: Record<PageId, Record<Language, PageMeta>> = {
   },
   privacy: {
     en: {
-      title: "Privacy Policy – 100% In-Browser QR Generation | QR GENIUS",
-      description: "Read how QR GENIUS processes QR content locally and uses privacy-focused Cloudflare Web Analytics for website performance measurements.",
+      title: "Privacy Policy – QR Data, Browser Storage & Contact Form | QR GENIUS",
+      description: "Learn how QR GENIUS processes QR content in your browser, stores history locally, and handles contact form messages.",
       keywords: "qr genius privacy policy, no tracking qr, client side security",
       canonicalPath: "/privacy",
       h1: "Privacy Policy"
     },
     ar: {
-      title: "سياسة الخصوصية – معالجة محلية 100% داخل المتصفح | كيو آر جينيوس",
-      description: "توضح سياسة الخصوصية كيفية معالجة محتوى رموز QR محلياً واستخدام تحليلات Cloudflare لقياس أداء الموقع مع مراعاة الخصوصية.",
+      title: "سياسة الخصوصية – بيانات QR والتخزين المحلي ونموذج التواصل | كيو آر جينيوس",
+      description: "توضح السياسة معالجة محتوى QR في المتصفح، وحفظ السجل محلياً، والتعامل مع رسائل نموذج التواصل.",
       keywords: "سياسة خصوصية qr, حماية بيانات الباركود",
       canonicalPath: "/privacy",
       h1: "سياسة الخصوصية"
     },
     fr: {
-      title: "Politique de Confidentialité – Traitement 100% Local | QR GENIUS",
-      description: "Notre politique explique le traitement local du contenu des QR codes et l’utilisation de Cloudflare Web Analytics pour mesurer les performances.",
+      title: "Politique de Confidentialité – Données QR, Stockage et Contact | QR GENIUS",
+      description: "Découvrez comment le contenu QR est traité dans le navigateur, comment l’historique y est stocké et comment les messages de contact sont traités.",
       keywords: "politique confidentialite qr code, securite donnees qr",
       canonicalPath: "/privacy",
       h1: "Politique de Confidentialité"
     },
     es: {
-      title: "Política de Privacidad – Procesamiento Local en Navegador | QR GENIUS",
-      description: "Nuestra política explica el procesamiento local del contenido QR y el uso de Cloudflare Web Analytics para medir el rendimiento del sitio.",
+      title: "Política de Privacidad – Datos QR, Almacenamiento y Contacto | QR GENIUS",
+      description: "Conoce cómo se procesa el contenido QR en el navegador, cómo se guarda el historial localmente y cómo se gestionan los mensajes de contacto.",
       keywords: "politica privacidad qr, seguridad codigo qr local",
       canonicalPath: "/privacy",
       h1: "Política de Privacidad"
