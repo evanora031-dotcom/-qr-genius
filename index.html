@@ -13,6 +13,48 @@
     <meta name="twitter:title" content="QR GENIUS – Create. Scan. Connect. | Free Multilingual QR Code Generator" />
     <meta name="twitter:description" content="Free multilingual QR code generator. Create, customize with colors and logos, and export vector SVG, PNG, and PDF for URLs, Wi-Fi, WhatsApp, vCards, and more." />
     
+    <script>
+      (function (document, window) {
+        var posthog = window.posthog || [];
+        if (posthog.__SV) return;
+        window.posthog = posthog;
+        posthog._i = [];
+        posthog.init = function (token, options, name) {
+          function stub(target, method) {
+            target[method] = function () {
+              target.push([method].concat(Array.prototype.slice.call(arguments)));
+            };
+          }
+          var script = document.createElement('script');
+          script.type = 'text/javascript';
+          script.crossOrigin = 'anonymous';
+          script.async = true;
+          script.src = options.api_host.replace('.i.posthog.com', '-assets.i.posthog.com') + '/static/array.js';
+          var first = document.getElementsByTagName('script')[0];
+          first.parentNode.insertBefore(script, first);
+          var client = posthog;
+          client.people = client.people || [];
+          client.toString = function () { return 'posthog (stub)'; };
+          var methods = 'capture identify alias people.set people.set_once people.unset people.increment people.append people.remove people.clear_opt_in_capturing people.opt_in_capturing people.opt_out_capturing reset group setPersonProperties setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags startSessionRecording stopSessionRecording sessionRecordingStarted get_session_id get_distinct_id getGroups get_session_replay_url captureException getFeatureFlag getFeatureFlagPayload isFeatureEnabled reloadFeatureFlags onFeatureFlags onSessionId'.split(' ');
+          methods.forEach(function (method) { stub(client, method); });
+          posthog._i.push([token, options, name]);
+        };
+        posthog.__SV = 1;
+      })(document, window);
+      (function () {
+        var token = '%VITE_POSTHOG_PROJECT_TOKEN%';
+        if (!token || token.indexOf('%VITE_') === 0) return;
+        window.posthog.init(token, {
+          api_host: 'https://us.i.posthog.com',
+          defaults: '2026-08-30',
+          autocapture: false,
+          capture_pageview: false,
+          disable_session_recording: true,
+          person_profiles: 'never',
+          persistence: 'memory'
+        });
+      })();
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
