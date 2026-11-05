@@ -71,8 +71,7 @@ export function getQRMatrix(content: string, errorCorrectionLevel: QRConfig['err
         const qrL = QRCode.create(safeContent, { errorCorrectionLevel: 'L' });
         return qrL.modules;
       } catch {
-        const fallback = QRCode.create('https://qrgenius.app', { errorCorrectionLevel: 'M' });
-        return fallback.modules;
+        throw new Error('This content is too long to encode as a QR code. Shorten it and try again.');
       }
     }
   }
