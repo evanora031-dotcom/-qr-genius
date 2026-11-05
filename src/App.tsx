@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { PageId, Language, QRType, QRConfig, QRHistoryItem } from './types';
 import { updateDocumentSEO } from './utils/seo';
+import { trackPageView } from './utils/analytics';
 import { getStoredHistory, setStoredLanguage } from './utils/storage';
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
@@ -99,6 +100,7 @@ export default function App() {
 
   useEffect(() => {
     updateDocumentSEO(currentPage, lang);
+    trackPageView(localizedPath(currentPage, lang));
     const expectedPath = localizedPath(currentPage, lang);
     if (window.location.pathname !== expectedPath) {
       window.history.replaceState(null, '', expectedPath);
