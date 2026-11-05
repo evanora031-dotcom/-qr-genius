@@ -132,7 +132,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ lang }) => {
                     {text('Privacy First', 'الخصوصية أولاً', 'Confidentialité avant tout', 'La privacidad es lo primero')}
                   </span>
                   <span className="text-white">
-                    {text('Your email is never shared', 'لن تتم مشاركة بريدك الإلكتروني', 'Votre adresse e-mail ne sera jamais partagée', 'Tu correo electrónico nunca se comparte')}
+                    {text('Your email is used only to respond to your inquiry', 'يُستخدم بريدك الإلكتروني للرد على استفسارك فقط', 'Votre adresse e-mail sert uniquement à répondre à votre demande', 'Tu correo electrónico se utiliza únicamente para responder a tu consulta')}
                   </span>
                 </div>
               </div>
