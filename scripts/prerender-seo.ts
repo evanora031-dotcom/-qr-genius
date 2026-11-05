@@ -138,6 +138,18 @@ function renderStaticContent(locale: typeof locales[number], page: typeof pages[
     const href = localizedPath(toolMeta.canonicalPath, locale);
     return '<li><a href="' + escapeHtml(href) + '">' + escapeHtml(toolMeta.h1) + '</a></li>';
   }).join('');
+  const resourcePages = ['about', 'faq', 'contact', 'privacy', 'terms'] as const;
+  const resourceLabels: Record<typeof locales[number], Record<typeof resourcePages[number], string>> = {
+    en: { about: 'About QR GENIUS', faq: 'Frequently asked questions', contact: 'Contact support', privacy: 'Privacy policy', terms: 'Terms of use' },
+    ar: { about: 'من نحن', faq: 'الأسئلة الشائعة', contact: 'اتصل بالدعم', privacy: 'سياسة الخصوصية', terms: 'شروط الاستخدام' },
+    fr: { about: 'À propos de QR GENIUS', faq: 'Questions fréquentes', contact: 'Contacter le support', privacy: 'Politique de confidentialité', terms: 'Conditions d’utilisation' },
+    es: { about: 'Acerca de QR GENIUS', faq: 'Preguntas frecuentes', contact: 'Contactar con soporte', privacy: 'Política de privacidad', terms: 'Condiciones de uso' }
+  };
+  const resourceLinks = resourcePages.map((resource) => {
+    const resourceMeta = SEO_METADATA[resource][locale];
+    const href = localizedPath(resourceMeta.canonicalPath, locale);
+    return '<li><a href="' + escapeHtml(href) + '">' + escapeHtml(resourceLabels[locale][resource]) + '</a></li>';
+  }).join('');
   const copy = supportingCopy[page]?.[locale];
   const supportingSection = copy
     ? '<section><h2>' + escapeHtml(copy.heading) + '</h2><p>' + escapeHtml(copy.body) + '</p><h3>' +
@@ -150,7 +162,9 @@ function renderStaticContent(locale: typeof locales[number], page: typeof pages[
     '<h1>' + escapeHtml(meta.h1) + '</h1>' +
     '<p>' + escapeHtml(meta.description) + '</p>' + supportingSection +
     '<nav aria-label="' + escapeHtml(labels[locale]) + '">' +
-    '<h2>' + escapeHtml(labels[locale]) + '</h2><ul>' + links + '</ul></nav></section>';
+    '<h2>' + escapeHtml(labels[locale]) + '</h2><ul>' + links + '</ul></nav>' +
+    '<nav aria-label="' + escapeHtml(resourceLabels[locale].about) + '">' +
+    '<h2>' + escapeHtml(locale === 'ar' ? 'معلومات ومساعدة' : locale === 'fr' ? 'Informations et assistance' : locale === 'es' ? 'Información y ayuda' : 'Information and help') + '</h2><ul>' + resourceLinks + '</ul></nav></section>';
 }
 
 function renderPage(locale: typeof locales[number], page: typeof pages[number]): string {
