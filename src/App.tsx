@@ -131,7 +131,7 @@ export default function App() {
     <div className="min-h-screen flex flex-col bg-white text-slate-900 selection:bg-indigo-100 selection:text-indigo-950">
       <Navbar
         currentPage={currentPage}
-        setCurrentPage={setCurrentPage}
+        onNavigate={handleNavigate}
         lang={lang}
         setLang={setLang}
         openHistory={() => setIsHistoryOpen(true)}
