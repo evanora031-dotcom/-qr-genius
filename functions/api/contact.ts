@@ -115,7 +115,7 @@ export async function onRequestPost(context: {
   const email = typeof data.email === "string" ? data.email.trim() : "";
   // Prevent control characters from appearing in outgoing email subjects.
   const topic = typeof data.topic === "string"
-    ? data.topic.replace(/[\\u0000-\\u001F\\u007F]/g, " ").replace(/\\s+/g, " ").trim()
+    ? data.topic.replace(/[\u0000-\u001F\u007F]/g, " ").replace(/\s+/g, " ").trim()
     : "";
   const message = typeof data.message === "string" ? data.message.trim() : "";
 
