@@ -18,6 +18,8 @@ import { FormInputs } from '../components/QRStudio/FormInputs';
 import { QRPreviewCard } from '../components/QRStudio/QRPreviewCard';
 import { formatPayload } from '../utils/qrFormatter';
 import { Category3DIcon } from '../components/icons/Category3DIcon';
+import { getToolShareUrl } from '../utils/toolShare';
+import { trackEvent } from '../utils/analytics';
 
 interface ToolLandingPageProps {
   tool: 'url' | 'wifi' | 'whatsapp' | 'business';
@@ -183,10 +185,10 @@ whatsapp:{type:'whatsapp',badge:'Chat directo',title:'Generador de códigos QR p
 business:{type:'vcard',badge:'Tarjeta de visita digital',title:'Generador de códigos QR para vCard',subtitle:'Convierte tus datos de contacto en una tarjeta digital que se puede guardar en la agenda al escanear.',benefits:['Evita las tarjetas de papel y la introducción manual','Guarda nombre, cargo, empresa, teléfono y correo','Formato vCard 3.0 compatible con iOS y Google','Ideal para eventos y firmas de correo'],faqs:[{q:'¿Cómo funciona una vCard?',a:'El teléfono ofrece añadir el contacto y completa los campos disponibles.'},{q:'¿Hay un límite de escaneos?',a:'El código QR estático no incluye un contador de escaneos; la lectura depende de la calidad del código y del dispositivo.'},{q:'¿Puedo añadir un logotipo?',a:'Sí, abre el estudio completo para añadir tu logotipo y personalizar los colores.'}]}
 };
 const TOOL_UI = {
-en:{online:'Free Online Tool',customTitle:'Need full custom colors, logos & shapes?',customText:'Open our studio to access all custom options.',studio:'Full Studio',why:'Why Use Our',security:'Client-Side Security Guarantee',securityText:'QR GENIUS processes QR data locally in your browser; payloads are not sent to or logged on our servers.',customize:'Customize in Studio',faqs:'Frequently Asked Questions'},
-ar:{online:'أداة مجانية عبر الإنترنت',customTitle:'هل تريد تخصيص الألوان والشعارات والأشكال؟',customText:'افتح الاستوديو للوصول إلى جميع خيارات التخصيص.',studio:'الاستوديو الكامل',why:'لماذا تستخدم',security:'ضمان الأمان والمعالجة المحلية',securityText:'يعالج QR GENIUS بيانات الرمز محلياً داخل متصفحك ولا يرسلها إلى خوادمه أو يسجلها.',customize:'خصص الرمز في الاستوديو',faqs:'الأسئلة الشائعة'},
-fr:{online:'Outil gratuit en ligne',customTitle:'Personnalisez couleurs, logos et formes',customText:'Ouvrez le studio pour accéder à toutes les options.',studio:'Studio complet',why:'Pourquoi utiliser',security:'Protection et traitement local',securityText:'QR GENIUS traite les données localement dans votre navigateur, sans les envoyer ni les enregistrer sur ses serveurs.',customize:'Personnaliser dans le studio',faqs:'Questions fréquentes'},
-es:{online:'Herramienta gratuita en línea',customTitle:'Personaliza colores, logotipos y formas',customText:'Abre el estudio para acceder a todas las opciones.',studio:'Estudio completo',why:'Por qué usar',security:'Protección y procesamiento local',securityText:'QR GENIUS procesa los datos localmente en tu navegador, sin enviarlos ni guardarlos en sus servidores.',customize:'Personalizar en el estudio',faqs:'Preguntas frecuentes'}
+en:{online:'Free Online Tool',customTitle:'Need full custom colors, logos & shapes?',customText:'Open our studio to access all custom options.',studio:'Full Studio',why:'Why Use Our',security:'Client-Side Security Guarantee',securityText:'QR GENIUS processes QR data locally in your browser; payloads are not sent to or logged on our servers.',customize:'Customize in Studio',faqs:'Frequently Asked Questions',sharePrompt:'Know someone who needs a QR code?',shareTool:'Share this free tool',shareCopied:'Tool link copied.',shareManual:'Copy this tool link to share it:',shareLinkLabel:'Shareable tool link'},
+ar:{online:'أداة مجانية عبر الإنترنت',customTitle:'هل تريد تخصيص الألوان والشعارات والأشكال؟',customText:'افتح الاستوديو للوصول إلى جميع خيارات التخصيص.',studio:'الاستوديو الكامل',why:'لماذا تستخدم',security:'ضمان الأمان والمعالجة المحلية',securityText:'يعالج QR GENIUS بيانات الرمز محلياً داخل متصفحك ولا يرسلها إلى خوادمه أو يسجلها.',customize:'خصص الرمز في الاستوديو',faqs:'الأسئلة الشائعة',sharePrompt:'هل تعرف شخصاً يحتاج إلى إنشاء رمز QR؟',shareTool:'شارك هذه الأداة المجانية',shareCopied:'تم نسخ رابط الأداة.',shareManual:'انسخ رابط الأداة لمشاركته:',shareLinkLabel:'رابط الأداة للمشاركة'},
+fr:{online:'Outil gratuit en ligne',customTitle:'Personnalisez couleurs, logos et formes',customText:'Ouvrez le studio pour accéder à toutes les options.',studio:'Studio complet',why:'Pourquoi utiliser',security:'Protection et traitement local',securityText:'QR GENIUS traite les données localement dans votre navigateur, sans les envoyer ni les enregistrer sur ses serveurs.',customize:'Personnaliser dans le studio',faqs:'Questions fréquentes',sharePrompt:'Vous connaissez quelqu’un qui a besoin d’un QR code ?',shareTool:'Partager cet outil gratuit',shareCopied:'Lien de l’outil copié.',shareManual:'Copiez ce lien pour partager l’outil :',shareLinkLabel:'Lien de partage de l’outil'},
+es:{online:'Herramienta gratuita en línea',customTitle:'Personaliza colores, logotipos y formas',customText:'Abre el estudio para acceder a todas las opciones.',studio:'Estudio completo',why:'Por qué usar',security:'Protección y procesamiento local',securityText:'QR GENIUS procesa los datos localmente en tu navegador, sin enviarlos ni guardarlos en sus servidores.',customize:'Personalizar en el estudio',faqs:'Preguntas frecuentes',sharePrompt:'¿Conoces a alguien que necesite un código QR?',shareTool:'Compartir esta herramienta gratis',shareCopied:'Enlace de la herramienta copiado.',shareManual:'Copia este enlace para compartir la herramienta:',shareLinkLabel:'Enlace para compartir la herramienta'}
 };
 
 export const ToolLandingPage: React.FC<ToolLandingPageProps> = ({
@@ -201,6 +203,27 @@ export const ToolLandingPage: React.FC<ToolLandingPageProps> = ({
 
   // Dedicated local state for instant mini-studio
   const [payload, setPayload] = useState<any>(() => createEmptyToolPayload(tool));
+  const [shareFeedback, setShareFeedback] = useState<'copied' | 'manual' | null>(null);
+  const shareUrl = getToolShareUrl(tool, lang);
+
+  const handleShareTool = async () => {
+    setShareFeedback(null);
+    trackEvent('tool_share_clicked', { tool, lang });
+    try {
+      if (typeof navigator.share === 'function') {
+        await navigator.share({ title: toolData.title, text: toolData.subtitle, url: shareUrl });
+        return;
+      }
+      if (navigator.clipboard?.writeText) {
+        await navigator.clipboard.writeText(shareUrl);
+        setShareFeedback('copied');
+        return;
+      }
+    } catch (error) {
+      if (error instanceof Error && error.name === 'AbortError') return;
+    }
+    setShareFeedback('manual');
+  };
 
   const formattedContent = formatPayload(toolData.type, payload);
 
@@ -245,6 +268,34 @@ export const ToolLandingPage: React.FC<ToolLandingPageProps> = ({
             <p className="mt-2.5 sm:mt-4 text-sm sm:text-base lg:text-lg text-slate-600 leading-relaxed">
               {toolData.subtitle}
             </p>
+            <div className="mt-4 flex flex-wrap items-center gap-3">
+              <button
+                type="button"
+                onClick={handleShareTool}
+                className="inline-flex min-h-11 items-center gap-2 rounded-xl border border-indigo-200 bg-indigo-50 px-4 py-2.5 text-sm font-semibold text-indigo-700 hover:bg-indigo-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-600"
+              >
+                <Share2 className="h-4 w-4" aria-hidden="true" />
+                {ui.shareTool}
+              </button>
+              <span className="text-xs text-slate-600">{ui.sharePrompt}</span>
+            </div>
+            {shareFeedback === 'copied' && (
+              <p className="mt-2 text-sm font-medium text-emerald-700" role="status">{ui.shareCopied}</p>
+            )}
+            {shareFeedback === 'manual' && (
+              <div className="mt-2 max-w-md space-y-1">
+                <label htmlFor="tool-share-link" className="block text-xs font-medium text-slate-700">{ui.shareManual}</label>
+                <input
+                  id="tool-share-link"
+                  aria-label={ui.shareLinkLabel}
+                  type="text"
+                  readOnly
+                  value={shareUrl}
+                  onFocus={(event) => event.currentTarget.select()}
+                  className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm text-slate-700"
+                />
+              </div>
+            )}
           </div>
 
           <div className="shrink-0 self-start sm:self-center p-3 sm:p-4 bg-slate-50 border border-slate-200/80 rounded-2xl sm:rounded-3xl shadow-sm">

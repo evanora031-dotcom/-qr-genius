@@ -34,6 +34,8 @@ jobs:
         run: bunx tsx --test tests/qr-preview.test.ts
       - name: Mobile contact form accessibility tests
         run: bunx tsx --test tests/contact-mobile.test.ts
+      - name: Localized tool sharing and privacy tests
+        run: bunx tsx --test tests/tool-share.test.ts
       - name: Production build
         run: bun run build
       - name: Search discoverability and canonical sitemap tests
