@@ -80,11 +80,8 @@ try {
     throw new Error('The browser did not submit the official Cloudflare test token.');
   }
   if (apiResponse.status() !== 502) {
-    const body = await Promise.race([
-      apiResponse.text(),
-      new Promise((resolve) => setTimeout(() => resolve('Response body read timed out'), 3_000))
-    ]);
-    throw new Error(`Expected 502 from the deliberately invalid Preview email provider after Siteverify, got ${apiResponse.status()}: ${body}`);
+    const diagnostic = (await apiResponse.allHeaders())['x-preview-diagnostic'] || 'NO_PREVIEW_DIAGNOSTIC_HEADER';
+    throw new Error(`Expected 502 from the deliberately invalid Preview email provider after Siteverify, got ${apiResponse.status()} (diagnostic: ${diagnostic}).`);
   }
 
   console.log('PASS: Contact page rendered Turnstile with action=contact.');
