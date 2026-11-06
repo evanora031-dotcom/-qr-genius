@@ -1,4 +1,4 @@
-type AnalyticsEvent = 'qr_code_downloaded' | 'qr_code_saved';
+type AnalyticsEvent = 'qr_code_downloaded' | 'qr_code_saved' | 'tool_share_clicked';
 
 declare global {
   interface Window {
