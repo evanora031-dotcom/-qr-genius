@@ -156,7 +156,7 @@ test("sends valid verified message with sanitized subject", async () => {
   try {
     const response = await submit(JSON.stringify({
       ...validMessage,
-      topic: "Feedback / Suggestion\\r\\n"
+      topic: "Feedback / Suggestion\r\n"
     }));
     assert.equal(response.status, 200);
     assert.deepEqual(await response.json(), { ok: true });
