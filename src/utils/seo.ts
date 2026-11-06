@@ -1,4 +1,5 @@
 import { Language, PageId } from '../types';
+import { EXTRA_TOOLS, EXTRA_TOOL_IDS, EXTRA_TOOL_PATHS, type ExtraToolId } from '../data/extraTools';
 
 export interface PageMeta {
   title: string;
@@ -8,31 +9,43 @@ export interface PageMeta {
   h1: string;
 }
 
+const ALL_LANGUAGES: Language[] = ['en', 'ar', 'fr', 'es'];
+
+// Landing pages for the extra QR types (text, email, phone, SMS, social, maps).
+const EXTRA_SEO = Object.fromEntries(
+  EXTRA_TOOL_IDS.map((id) => [
+    id,
+    Object.fromEntries(
+      ALL_LANGUAGES.map((lang) => [lang, { ...EXTRA_TOOLS[lang][id].meta, canonicalPath: EXTRA_TOOL_PATHS[id] }])
+    )
+  ])
+) as Record<ExtraToolId, Record<Language, PageMeta>>;
+
 export const SEO_METADATA: Record<PageId, Record<Language, PageMeta>> = {
   home: {
     en: {
-      title: "QR GENIUS – Free Multilingual QR Code Generator | Create. Scan. Connect.",
+      title: "Free QR Code Generator – URL, Wi-Fi, WhatsApp, vCard | QR GENIUS",
       description: "Generate free, customizable QR codes instantly. Support for URLs, Wi-Fi, WhatsApp, vCards, and social media with vector SVG, high-res PNG, and PDF downloads.",
       keywords: "free qr code generator, custom qr code, vector qr svg, wifi qr code, whatsapp qr, vcard qr code",
       canonicalPath: "/",
       h1: "Create. Scan. Connect. The Free High-Speed QR Generator"
     },
     ar: {
-      title: "كيو آر جينيوس – مولد رموز QR مجاني متعدد اللغات | أنشئ. امسح. تواصل.",
+      title: "مولد QR مجاني – رابط، واي فاي، واتساب، بطاقة عمل | QR Genius",
       description: "أنشئ رموز QR مجانية ومخصصة فوراً. دعم روابط المواقع، شبكات الواي فاي، محادثات الواتساب، وبطاقات العمل مع تصدير عالي الدقة بصيغ SVG وPNG وPDF.",
       keywords: "مولد باركود مجاني, تصميم باركود qr, كيو ار واي فاي, كود واتساب, بطاقة عمل qr",
       canonicalPath: "/",
       h1: "أنشئ. امسح. تواصل. المولد المجاني فائق السرعة لرموز QR"
     },
     fr: {
-      title: "QR GENIUS – Générateur de QR Code Gratuit & Multilingue | Créer. Scanner. Connecter.",
+      title: "Générateur de QR Code Gratuit – URL, Wi-Fi, WhatsApp, vCard | QR GENIUS",
       description: "Générez des QR codes gratuits et personnalisés instantanément. Compatible URLs, Wi-Fi, WhatsApp, vCards avec exports vectoriels SVG, PNG haute définition et PDF.",
       keywords: "generateur qr code gratuit, qr code vectoriel svg, qr wifi, qr whatsapp, vcard qr",
       canonicalPath: "/",
       h1: "Créer. Scanner. Connecter. Le générateur de QR code rapide et gratuit"
     },
     es: {
-      title: "QR GENIUS – Generador de Códigos QR Gratis y Multilingüe | Crear. Escanear. Conectar.",
+      title: "Generador de Códigos QR Gratis – URL, Wi-Fi, WhatsApp, vCard | QR GENIUS",
       description: "Genere códigos QR gratuitos y personalizados al instante. Compatible con URLs, Wi-Fi, WhatsApp, vCards y redes sociales con descargas en SVG, PNG de alta resolución y PDF.",
       keywords: "generador codigo qr gratis, crear qr personalizado, qr wifi, qr whatsapp, tarjeta vcard qr",
       canonicalPath: "/",
@@ -398,7 +411,8 @@ export const SEO_METADATA: Record<PageId, Record<Language, PageMeta>> = {
       canonicalPath: "/robots.txt",
       h1: "Directivas de Robots.txt"
     }
-  }
+  },
+  ...EXTRA_SEO
 };
 
 const SEO_LANGUAGES: Language[] = ['en', 'ar', 'fr', 'es'];
@@ -468,7 +482,7 @@ export function updateDocumentSEO(pageId: PageId, lang: Language) {
 
 export function generateSitemapXML(): string {
   const baseUrl = typeof window !== 'undefined' ? window.location.origin : 'https://getqrgenius.com';
-  const pages: PageId[] = ['home', 'generator', 'url', 'wifi', 'whatsapp', 'business', 'about', 'contact', 'privacy', 'terms', 'faq'];
+  const pages: PageId[] = ['home', 'generator', 'url', 'wifi', 'whatsapp', 'business', ...EXTRA_TOOL_IDS, 'about', 'contact', 'privacy', 'terms', 'faq'];
   let xml = `<?xml version="1.0" encoding="UTF-8"?>\n`;
   xml += `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n`;
 

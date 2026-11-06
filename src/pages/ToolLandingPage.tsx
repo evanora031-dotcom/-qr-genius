@@ -18,18 +18,55 @@ import { FormInputs } from '../components/QRStudio/FormInputs';
 import { QRPreviewCard } from '../components/QRStudio/QRPreviewCard';
 import { formatPayload } from '../utils/qrFormatter';
 import { Category3DIcon } from '../components/icons/Category3DIcon';
+import {
+  EXTRA_TOOL_IDS,
+  EXTRA_TOOL_PATHS,
+  EXTRA_TOOL_QR_TYPES,
+  getExtraTool,
+  isExtraTool,
+  type ExtraToolId
+} from '../data/extraTools';
+
+type CoreToolId = 'url' | 'wifi' | 'whatsapp' | 'business';
+type ToolId = CoreToolId | ExtraToolId;
 
 interface ToolLandingPageProps {
-  tool: 'url' | 'wifi' | 'whatsapp' | 'business';
+  tool: ToolId;
   lang: Language;
   onNavigate: (page: PageId, type?: QRType) => void;
   onHistoryUpdated: () => void;
 }
 
-function createEmptyToolPayload(tool: keyof typeof TOOL_CONFIGS) {
+const CORE_TOOL_PATHS: Record<CoreToolId, string> = {
+  url: '/tools/url',
+  wifi: '/tools/wifi',
+  whatsapp: '/tools/whatsapp',
+  business: '/tools/business-vcard'
+};
+
+const MORE_TOOLS_HEADING: Record<Language, string> = {
+  en: 'More QR code types',
+  ar: 'أنواع أخرى من رموز QR',
+  fr: 'Autres types de QR codes',
+  es: 'Más tipos de códigos QR'
+};
+
+function createEmptyToolPayload(tool: ToolId) {
   switch (tool) {
     case 'url':
       return '';
+    case 'text':
+    case 'phone':
+    case 'instagram':
+    case 'facebook':
+    case 'youtube':
+      return '';
+    case 'email':
+      return { email: '', subject: '', body: '' };
+    case 'sms':
+      return { phoneNumber: '', message: '' };
+    case 'maps':
+      return { locationType: 'address' as const, address: '', latitude: '', longitude: '' };
     case 'wifi':
       return { ssid: '', password: '', encryption: 'WPA' as const, hidden: false };
     case 'whatsapp':
@@ -195,9 +232,32 @@ export const ToolLandingPage: React.FC<ToolLandingPageProps> = ({
   onNavigate,
   onHistoryUpdated
 }) => {
-  const toolData = lang === 'ar' ? TOOL_CONFIGS_AR[tool] : lang === 'fr' ? TOOL_CONFIGS_FR[tool] : lang === 'es' ? TOOL_CONFIGS_ES[tool] : TOOL_CONFIGS[tool];
+  const toolData = isExtraTool(tool)
+    ? { type: EXTRA_TOOL_QR_TYPES[tool], ...getExtraTool(tool, lang).page }
+    : lang === 'ar' ? TOOL_CONFIGS_AR[tool] : lang === 'fr' ? TOOL_CONFIGS_FR[tool] : lang === 'es' ? TOOL_CONFIGS_ES[tool] : TOOL_CONFIGS[tool];
   const ui = TOOL_UI[lang];
   const t = translations[lang];
+
+  // Real crawlable links to every other tool page (helps discovery and internal linking).
+  const coreLabels: Record<CoreToolId, string> = {
+    url: t.nav.urlQr,
+    wifi: t.nav.wifiQr,
+    whatsapp: t.nav.whatsappQr,
+    business: t.nav.businessQr
+  };
+  const toHref = (path: string) => (lang === 'en' ? path : `/${lang}${path}`);
+  const relatedTools: { id: PageId; href: string; label: string }[] = [
+    ...(Object.keys(CORE_TOOL_PATHS) as CoreToolId[]).map((id) => ({
+      id: id as PageId,
+      href: toHref(CORE_TOOL_PATHS[id]),
+      label: coreLabels[id]
+    })),
+    ...EXTRA_TOOL_IDS.map((id) => ({
+      id: id as PageId,
+      href: toHref(EXTRA_TOOL_PATHS[id]),
+      label: getExtraTool(id, lang).label
+    }))
+  ].filter((item) => item.id !== tool);
 
   // Dedicated local state for instant mini-studio
   const [payload, setPayload] = useState<any>(() => createEmptyToolPayload(tool));
@@ -347,6 +407,26 @@ export const ToolLandingPage: React.FC<ToolLandingPageProps> = ({
             ))}
           </div>
         </div>
+
+        {/* Other QR code tools */}
+        <nav aria-label={MORE_TOOLS_HEADING[lang]} className="pt-8 border-t border-slate-200">
+          <h2 className="text-xl font-bold text-slate-900 tracking-tight mb-4">
+            {MORE_TOOLS_HEADING[lang]}
+          </h2>
+          <ul className="flex flex-wrap gap-2.5">
+            {relatedTools.map((item) => (
+              <li key={item.id}>
+                <a
+                  href={item.href}
+                  onClick={(event) => { event.preventDefault(); onNavigate(item.id); }}
+                  className="inline-flex items-center px-3.5 py-2 rounded-full border border-slate-200 bg-white text-xs font-semibold text-slate-700 hover:border-indigo-400 hover:text-indigo-600 transition-colors"
+                >
+                  {item.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
 
         {/* Ad Placement */}
         <AdPlacement lang={lang} format="horizontal-leaderboard" />

@@ -2,10 +2,11 @@ import React from 'react';
 import { QrCode, ShieldCheck, Heart } from 'lucide-react';
 import { Language, PageId } from '../types';
 import { translations } from '../i18n/translations';
+import { EXTRA_TOOL_IDS, EXTRA_TOOL_PATHS, getExtraTool } from '../data/extraTools';
 
 const PAGE_PATHS: Partial<Record<PageId, string>> = {
   home: '/', generator: '/generator', url: '/tools/url', wifi: '/tools/wifi',
-  whatsapp: '/tools/whatsapp', business: '/tools/business-vcard', about: '/about',
+  whatsapp: '/tools/whatsapp', business: '/tools/business-vcard', ...EXTRA_TOOL_PATHS, about: '/about',
   contact: '/contact', privacy: '/privacy', terms: '/terms', faq: '/faq',
   sitemap: '/sitemap', robots: '/robots'
 };
@@ -84,6 +85,13 @@ export const Footer: React.FC<FooterProps> = ({ lang, onNavigate }) => {
                   {t.nav.businessQr}
                 </a>
               </li>
+              {EXTRA_TOOL_IDS.map((id) => (
+                <li key={id}>
+                  <a href={localizedHref(id, lang)} onClick={(event) => { event.preventDefault(); handleLink(id); }} className="hover:text-indigo-400 transition-colors">
+                    {getExtraTool(id, lang).label}
+                  </a>
+                </li>
+              ))}
             </ul>
           </div>
 

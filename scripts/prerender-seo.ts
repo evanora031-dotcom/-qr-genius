@@ -2,6 +2,7 @@ import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { SEO_METADATA, generateRobotsTxt } from '../src/utils/seo.ts';
+import { EXTRA_TOOLS, EXTRA_TOOL_IDS } from '../src/data/extraTools.ts';
 
 const projectRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const distDir = path.join(projectRoot, 'dist');
@@ -45,7 +46,7 @@ const fallbackStyles = `<style>
 const template = rawTemplate.replace('</head>', '<script>document.documentElement.classList.add("js-enabled");</script>' + fallbackStyles + '\\n</head>');
 
 const locales = ['en', 'ar', 'fr', 'es'] as const;
-const pages = ['home', 'generator', 'url', 'wifi', 'whatsapp', 'business', 'about', 'contact', 'privacy', 'terms', 'faq'] as const;
+const pages = ['home', 'generator', 'url', 'wifi', 'whatsapp', 'business', ...EXTRA_TOOL_IDS, 'about', 'contact', 'privacy', 'terms', 'faq'] as const;
 const baseUrl = 'https://getqrgenius.com';
 
 function escapeHtml(value: string): string {
@@ -64,7 +65,7 @@ function setHeadTag(html: string, pattern: RegExp, tag: string): string {
 
 function renderStaticContent(locale: typeof locales[number], page: typeof pages[number]): string {
   const meta = SEO_METADATA[page][locale];
-  const toolPages = ['url', 'wifi', 'whatsapp', 'business'] as const;
+  const toolPages = ['url', 'wifi', 'whatsapp', 'business', ...EXTRA_TOOL_IDS] as const;
   const labels: Record<typeof locales[number], string> = {
     en: 'Explore QR code tools',
     ar: 'استكشف أدوات رموز QR',
@@ -133,6 +134,12 @@ function renderStaticContent(locale: typeof locales[number], page: typeof pages[
       es: { heading: 'Respuestas sobre códigos QR, privacidad e impresión', body: 'QR GENIUS ofrece códigos QR estáticos para usos habituales como enlaces web, acceso Wi-Fi, chats de WhatsApp y tarjetas de contacto. Los códigos estáticos contienen sus datos directamente y no dependen de un servicio de redirección que caduque. Las preguntas frecuentes explican los formatos, la preparación para impresión, la corrección de errores y el tratamiento de la información.', steps: ['Utiliza SVG cuando necesites un archivo vectorial escalable para impresión profesional.', 'Mantén un buen contraste y prueba el tamaño impreso con los teléfonos que utilizará tu público.', 'Si añades un logotipo o el código puede dañarse, elige una corrección adecuada y pruébalo antes de distribuirlo.'], tip: 'Si no encuentras tu respuesta, contacta con support@getqrgenius.com.' }
     }
   };
+  // Landing pages for the extra QR types share the same fallback copy structure.
+  for (const id of EXTRA_TOOL_IDS) {
+    supportingCopy[id] = Object.fromEntries(
+      locales.map((loc) => [loc, EXTRA_TOOLS[loc][id].copy])
+    ) as Record<typeof locales[number], { heading: string; body: string; steps: string[]; tip: string }>;
+  }
   const links = toolPages.map((tool) => {
     const toolMeta = SEO_METADATA[tool][locale];
     const href = localizedPath(toolMeta.canonicalPath, locale);

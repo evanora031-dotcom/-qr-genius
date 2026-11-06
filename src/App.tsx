@@ -16,6 +16,7 @@ import { TermsPage } from './pages/TermsPage';
 import { FAQPage } from './pages/FAQPage';
 import { SitemapView } from './pages/SitemapView';
 import { RobotsView } from './pages/RobotsView';
+import { EXTRA_TOOL_IDS, EXTRA_TOOL_PATHS, isExtraTool } from './data/extraTools';
 
 const ROUTES: Record<string, PageId> = {
   '/': 'home',
@@ -24,6 +25,7 @@ const ROUTES: Record<string, PageId> = {
   '/tools/wifi': 'wifi',
   '/tools/whatsapp': 'whatsapp',
   '/tools/business-vcard': 'business',
+  ...Object.fromEntries(EXTRA_TOOL_IDS.map((id) => [EXTRA_TOOL_PATHS[id], id])),
   '/about': 'about',
   '/contact': 'contact',
   '/privacy': 'privacy',
@@ -55,7 +57,7 @@ function getRouteFromLocation(): { page: PageId; lang: Language } {
   // Keep old hash links working while moving to crawlable localized paths.
   const hash = window.location.hash.replace(/^#\/?/, '').toLowerCase() as PageId;
   const validPages: PageId[] = [
-    'home', 'generator', 'url', 'wifi', 'whatsapp', 'business',
+    'home', 'generator', 'url', 'wifi', 'whatsapp', 'business', ...EXTRA_TOOL_IDS,
     'about', 'contact', 'privacy', 'terms', 'faq', 'sitemap', 'robots'
   ];
   return { page: validPages.includes(hash) ? hash : 'home', lang };
@@ -155,6 +157,7 @@ export default function App() {
         {currentPage === 'wifi' && <ToolLandingPage tool="wifi" lang={lang} onNavigate={handleNavigate} onHistoryUpdated={refreshHistory} />}
         {currentPage === 'whatsapp' && <ToolLandingPage tool="whatsapp" lang={lang} onNavigate={handleNavigate} onHistoryUpdated={refreshHistory} />}
         {currentPage === 'business' && <ToolLandingPage tool="business" lang={lang} onNavigate={handleNavigate} onHistoryUpdated={refreshHistory} />}
+        {isExtraTool(currentPage) && <ToolLandingPage key={currentPage} tool={currentPage} lang={lang} onNavigate={handleNavigate} onHistoryUpdated={refreshHistory} />}
         {currentPage === 'about' && <AboutPage lang={lang} onNavigate={handleNavigate} />}
         {currentPage === 'contact' && <ContactPage lang={lang} />}
         {currentPage === 'privacy' && <PrivacyPage lang={lang} />}
