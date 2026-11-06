@@ -284,7 +284,7 @@ export const GeneratorPage: React.FC<GeneratorPageProps> = ({
               <span className="text-slate-700 font-bold">{t.qrTypes[selectedType].label}</span>
             </div>
             <h1 className="text-xl sm:text-2xl lg:text-3xl font-extrabold text-slate-900 tracking-tight">
-              {lang === 'ar' ? 'استوديو تصميم رموز QR' : lang === 'fr' ? 'Studio de création de QR codes' : lang === 'es' ? 'Estudio de diseño de códigos QR' : 'QR Code Studio & Designer'}
+              {lang === 'ar' ? 'مولد رموز QR مجاني مع تخصيص التصميم' : lang === 'fr' ? 'Générateur de QR codes gratuit et personnalisable' : lang === 'es' ? 'Generador de códigos QR gratis y personalizable' : 'Free QR Code Generator & Designer'}
             </h1>
           </div>
 
