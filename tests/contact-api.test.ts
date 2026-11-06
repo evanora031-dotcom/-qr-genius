@@ -64,7 +64,7 @@ test("silently accepts honeypot submissions without sending", async () => {
 
 test("sends a valid message with a sanitized email subject", async () => {
   const originalFetch = globalThis.fetch;
-  let sent: Record<string, unknown> | null = null;
+  let sent: Record<string, unknown> = {};
   globalThis.fetch = async (input, init) => {
     assert.equal(String(input), "https://api.resend.com/emails");
     sent = JSON.parse(String(init?.body)) as Record<string, unknown>;
