@@ -58,9 +58,10 @@ export const ContactPage: React.FC<ContactPageProps> = ({ lang }) => {
   const [formError, setFormError] = useState<string | null>(null);
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
-  const turnstileSiteKey = import.meta.env.VITE_TURNSTILE_SITE_KEY || '';
+  const turnstileSiteKey = import.meta.env?.VITE_TURNSTILE_SITE_KEY || '';
   const turnstileContainer = useRef<HTMLDivElement>(null);
   const turnstileWidgetId = useRef<string | null>(null);
+  const successHeadingRef = useRef<HTMLHeadingElement>(null);
   const [turnstileToken, setTurnstileToken] = useState('');
 
   useEffect(() => {
@@ -96,6 +97,10 @@ export const ContactPage: React.FC<ContactPageProps> = ({ lang }) => {
       turnstileWidgetId.current = null;
     };
   }, [turnstileSiteKey, lang, submitted]);
+
+  useEffect(() => {
+    if (submitted) successHeadingRef.current?.focus();
+  }, [submitted]);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -144,8 +149,8 @@ export const ContactPage: React.FC<ContactPageProps> = ({ lang }) => {
   };
 
   return (
-    <div className="py-12 sm:py-16 bg-white min-h-[80vh] overflow-x-hidden">
-      <div className="max-w-4xl mx-auto px-3 sm:px-6 lg:px-8 space-y-8 sm:space-y-12">
+    <div className="py-8 sm:py-16 bg-white overflow-x-hidden">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 sm:space-y-12">
         <div className="text-center max-w-2xl mx-auto space-y-3">
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-indigo-50 border border-indigo-200 text-xs font-semibold text-indigo-700">
             <Mail className="w-3.5 h-3.5" />
@@ -164,8 +169,133 @@ export const ContactPage: React.FC<ContactPageProps> = ({ lang }) => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
-          <div className="md:col-span-5 bg-slate-900 text-white rounded-2xl p-6 sm:p-8 space-y-6">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-5 sm:gap-8 items-start">
+          <div className="md:col-span-7 md:col-start-6 md:row-start-1 bg-slate-50 rounded-2xl p-5 sm:p-8 border border-slate-200">
+            {submitted ? (
+              <div className="py-5 sm:py-8 text-center space-y-4" role="status" aria-live="polite">
+                <div className="w-12 h-12 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto">
+                  <CheckCircle2 className="w-7 h-7" />
+                </div>
+                <h2 ref={successHeadingRef} tabIndex={-1} className="text-xl font-bold text-slate-900 focus:outline-none">
+                  {text('Message Received!', 'تم استلام رسالتك!', 'Message reçu !', '¡Mensaje recibido!')}
+                </h2>
+                <p className="text-sm text-slate-600 max-w-sm mx-auto leading-relaxed break-words">
+                  {text('Thank you,', 'شكراً لك،', 'Merci,', 'Gracias,')} <strong>{name}</strong>. {text('Your message about', 'تم استلام رسالتك بخصوص', 'Votre message concernant', 'Hemos recibido tu mensaje sobre')} “{topic}”. {text('We will reply to', 'سنرد على', 'Nous répondrons à', 'Responderemos a')} <strong className="break-all">{email}</strong>.
+                </p>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setSubmitted(false);
+                    setMessage('');
+                  }}
+                  className="mt-4 min-h-11 px-5 py-2.5 bg-white border border-slate-200 text-sm font-bold text-slate-700 rounded-xl hover:bg-slate-100 transition-colors"
+                >
+                  {text('Send Another Message', 'إرسال رسالة أخرى', 'Envoyer un autre message', 'Enviar otro mensaje')}
+                </button>
+              </div>
+            ) : (
+              <form onSubmit={handleSubmit} className="space-y-4">
+                <input type="text" name="company" tabIndex={-1} autoComplete="off" aria-hidden="true" className="hidden" />
+                {turnstileSiteKey && (
+                  <div className="space-y-2">
+                    <div ref={turnstileContainer} aria-label={text('Security verification', 'التحقق الأمني', 'Vérification de sécurité', 'Verificación de seguridad')} />
+                    <p className="text-xs text-slate-500">
+                      {text('Complete the security check before sending.', 'أكمل التحقق الأمني قبل الإرسال.', 'Terminez la vérification de sécurité avant l’envoi.', 'Completa la verificación de seguridad antes de enviar.')}
+                    </p>
+                  </div>
+                )}
+                <div>
+                  <label htmlFor="contact-name" className="block text-xs font-semibold text-slate-700 mb-1.5">
+                    {text('Your Full Name', 'اسمك الكامل', 'Votre nom complet', 'Nombre completo')} <span className="text-rose-500">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    id="contact-name"
+                    required
+                    maxLength={100}
+                    autoComplete="name"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    placeholder={text('Jane Doe', 'الاسم الكامل', 'Jean Dupont', 'Nombre y apellidos')}
+                    className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm text-slate-900 bg-white focus:outline-none focus:ring-2 focus:ring-indigo-600/30 focus:border-indigo-600"
+                  />
+                </div>
+
+                <div>
+                  <label htmlFor="contact-email" className="block text-xs font-semibold text-slate-700 mb-1.5">
+                    {text('Email Address', 'البريد الإلكتروني', 'Adresse e-mail', 'Correo electrónico')} <span className="text-rose-500">*</span>
+                  </label>
+                  <input
+                    type="email"
+                    id="contact-email"
+                    required
+                    maxLength={254}
+                    autoComplete="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="name@example.com"
+                    className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm text-slate-900 bg-white focus:outline-none focus:ring-2 focus:ring-indigo-600/30 focus:border-indigo-600"
+                  />
+                </div>
+
+                <div>
+                  <label htmlFor="contact-topic" className="block text-xs font-semibold text-slate-700 mb-1.5">
+                    {text('Topic / Category', 'الموضوع / التصنيف', 'Sujet / Catégorie', 'Asunto / Categoría')}
+                  </label>
+                  <select
+                    id="contact-topic"
+                    value={topic}
+                    onChange={(e) => setTopic(e.target.value)}
+                    className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm text-slate-900 bg-white focus:outline-none focus:ring-2 focus:ring-indigo-600/30 focus:border-indigo-600"
+                  >
+                    <option value="Feedback / Suggestion">{text('Feedback / Suggestion', 'اقتراح أو ملاحظة', 'Avis / Suggestion', 'Opinión / Sugerencia')}</option>
+                    <option value="Technical Support">{text('Technical Support', 'الدعم التقني', 'Assistance technique', 'Soporte técnico')}</option>
+                    <option value="Enterprise Solution">{text('Business Inquiry', 'استفسار تجاري أو مؤسسي', 'Demande commerciale', 'Consulta comercial')}</option>
+                    <option value="Sponsorship & Partnership">{text('Partnership', 'الشراكات', 'Partenariat', 'Colaboración')}</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label htmlFor="contact-message" className="block text-xs font-semibold text-slate-700 mb-1.5">
+                    {text('Message', 'الرسالة', 'Message', 'Mensaje')} <span className="text-rose-500">*</span>
+                  </label>
+                  <textarea
+                    id="contact-message"
+                    rows={4}
+                    required
+                    maxLength={5000}
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
+                    placeholder={text('Tell us how we can help...', 'أخبرنا كيف يمكننا مساعدتك...', 'Dites-nous comment nous pouvons vous aider...', 'Cuéntanos cómo podemos ayudarte...')}
+                    className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm text-slate-900 bg-white focus:outline-none focus:ring-2 focus:ring-indigo-600/30 focus:border-indigo-600 resize-y"
+                  />
+                </div>
+
+                {formError && (
+                  <p role="alert" aria-live="polite" className="text-xs text-rose-600 font-medium bg-rose-50 p-2.5 rounded-lg border border-rose-200">
+                    {formError}
+                  </p>
+                )}
+
+                <button
+                  type="submit"
+                  disabled={loading || Boolean(turnstileSiteKey && !turnstileToken)}
+                  aria-busy={loading}
+                  className="w-full min-h-11 py-3 px-4 bg-indigo-600 hover:bg-indigo-700 active:bg-indigo-800 text-white rounded-xl text-sm font-bold transition-colors flex items-center justify-center gap-2 shadow-sm disabled:opacity-50"
+                >
+                  {loading ? (
+                    <span>{text('Sending message...', 'جارٍ إرسال الرسالة...', 'Envoi du message...', 'Enviando mensaje...')}</span>
+                  ) : (
+                    <>
+                      <Send className="w-3.5 h-3.5" />
+                      <span>{text('Send Message', 'إرسال الرسالة', 'Envoyer le message', 'Enviar mensaje')}</span>
+                    </>
+                  )}
+                </button>
+              </form>
+            )}
+          </div>
+          <div className="md:col-span-5 md:col-start-1 md:row-start-1 bg-slate-900 text-white rounded-2xl p-5 sm:p-8 space-y-6">
             <div>
               <h3 className="text-base font-bold text-white mb-2">
                 {text('We Love Hearing From You', 'يسعدنا التواصل معك', 'Votre avis nous intéresse', 'Nos encanta saber de ti')}
@@ -223,127 +353,6 @@ export const ContactPage: React.FC<ContactPageProps> = ({ lang }) => {
             </div>
           </div>
 
-          <div className="md:col-span-7 bg-slate-50 rounded-2xl p-6 sm:p-8 border border-slate-200">
-            {submitted ? (
-              <div className="py-8 text-center space-y-4">
-                <div className="w-12 h-12 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto">
-                  <CheckCircle2 className="w-7 h-7" />
-                </div>
-                <h3 className="text-lg font-bold text-slate-900">
-                  {text('Message Received!', 'تم استلام رسالتك!', 'Message reçu !', '¡Mensaje recibido!')}
-                </h3>
-                <p className="text-xs text-slate-600 max-w-sm mx-auto leading-relaxed">
-                  {text('Thank you,', 'شكراً لك،', 'Merci,', 'Gracias,')} <strong>{name}</strong>. {text('Your message about', 'تم استلام رسالتك بخصوص', 'Votre message concernant', 'Hemos recibido tu mensaje sobre')} “{topic}”. {text('We will reply to', 'سنرد على', 'Nous répondrons à', 'Responderemos a')} <strong>{email}</strong>.
-                </p>
-                <button
-                  type="button"
-                  onClick={() => {
-                    setSubmitted(false);
-                    setMessage('');
-                  }}
-                  className="mt-4 px-4 py-2 bg-white border border-slate-200 text-xs font-bold text-slate-700 rounded-xl hover:bg-slate-100 transition-colors"
-                >
-                  {text('Send Another Message', 'إرسال رسالة أخرى', 'Envoyer un autre message', 'Enviar otro mensaje')}
-                </button>
-              </div>
-            ) : (
-              <form onSubmit={handleSubmit} className="space-y-4">
-                <input type="text" name="company" tabIndex={-1} autoComplete="off" aria-hidden="true" className="hidden" />
-                {turnstileSiteKey && (
-                  <div className="space-y-2">
-                    <div ref={turnstileContainer} aria-label={text('Security verification', 'التحقق الأمني', 'Vérification de sécurité', 'Verificación de seguridad')} />
-                    <p className="text-xs text-slate-500">
-                      {text('Complete the security check before sending.', 'أكمل التحقق الأمني قبل الإرسال.', 'Terminez la vérification de sécurité avant l’envoi.', 'Completa la verificación de seguridad antes de enviar.')}
-                    </p>
-                  </div>
-                )}
-                <div>
-                  <label className="block text-xs font-semibold text-slate-700 mb-1.5">
-                    {text('Your Full Name', 'اسمك الكامل', 'Votre nom complet', 'Nombre completo')} <span className="text-rose-500">*</span>
-                  </label>
-                  <input
-                    type="text"
-                    required
-                    maxLength={100}
-                    autoComplete="name"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    placeholder={text('Jane Doe', 'الاسم الكامل', 'Jean Dupont', 'Nombre y apellidos')}
-                    className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm text-slate-900 bg-white focus:outline-none focus:ring-2 focus:ring-indigo-600/30 focus:border-indigo-600"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-xs font-semibold text-slate-700 mb-1.5">
-                    {text('Email Address', 'البريد الإلكتروني', 'Adresse e-mail', 'Correo electrónico')} <span className="text-rose-500">*</span>
-                  </label>
-                  <input
-                    type="email"
-                    required
-                    maxLength={254}
-                    autoComplete="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder="name@example.com"
-                    className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm text-slate-900 bg-white focus:outline-none focus:ring-2 focus:ring-indigo-600/30 focus:border-indigo-600"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-xs font-semibold text-slate-700 mb-1.5">
-                    {text('Topic / Category', 'الموضوع / التصنيف', 'Sujet / Catégorie', 'Asunto / Categoría')}
-                  </label>
-                  <select
-                    value={topic}
-                    onChange={(e) => setTopic(e.target.value)}
-                    className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm text-slate-900 bg-white focus:outline-none focus:ring-2 focus:ring-indigo-600/30 focus:border-indigo-600"
-                  >
-                    <option value="Feedback / Suggestion">{text('Feedback / Suggestion', 'اقتراح أو ملاحظة', 'Avis / Suggestion', 'Opinión / Sugerencia')}</option>
-                    <option value="Technical Support">{text('Technical Support', 'الدعم التقني', 'Assistance technique', 'Soporte técnico')}</option>
-                    <option value="Enterprise Solution">{text('Business Inquiry', 'استفسار تجاري أو مؤسسي', 'Demande commerciale', 'Consulta comercial')}</option>
-                    <option value="Sponsorship & Partnership">{text('Partnership', 'الشراكات', 'Partenariat', 'Colaboración')}</option>
-                  </select>
-                </div>
-
-                <div>
-                  <label className="block text-xs font-semibold text-slate-700 mb-1.5">
-                    {text('Message', 'الرسالة', 'Message', 'Mensaje')} <span className="text-rose-500">*</span>
-                  </label>
-                  <textarea
-                    rows={4}
-                    required
-                    maxLength={5000}
-                    value={message}
-                    onChange={(e) => setMessage(e.target.value)}
-                    placeholder={text('Tell us how we can help...', 'أخبرنا كيف يمكننا مساعدتك...', 'Dites-nous comment nous pouvons vous aider...', 'Cuéntanos cómo podemos ayudarte...')}
-                    className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm text-slate-900 bg-white focus:outline-none focus:ring-2 focus:ring-indigo-600/30 focus:border-indigo-600 resize-y"
-                  />
-                </div>
-
-                {formError && (
-                  <p role="alert" aria-live="polite" className="text-xs text-rose-600 font-medium bg-rose-50 p-2.5 rounded-lg border border-rose-200">
-                    {formError}
-                  </p>
-                )}
-
-                <button
-                  type="submit"
-                  disabled={loading || Boolean(turnstileSiteKey && !turnstileToken)}
-                  aria-busy={loading}
-                  className="w-full py-3 px-4 bg-indigo-600 hover:bg-indigo-700 active:bg-indigo-800 text-white rounded-xl text-xs font-bold transition-colors flex items-center justify-center gap-2 shadow-sm disabled:opacity-50"
-                >
-                  {loading ? (
-                    <span>{text('Sending message...', 'جارٍ إرسال الرسالة...', 'Envoi du message...', 'Enviando mensaje...')}</span>
-                  ) : (
-                    <>
-                      <Send className="w-3.5 h-3.5" />
-                      <span>{text('Send Message', 'إرسال الرسالة', 'Envoyer le message', 'Enviar mensaje')}</span>
-                    </>
-                  )}
-                </button>
-              </form>
-            )}
-          </div>
         </div>
       </div>
     </div>

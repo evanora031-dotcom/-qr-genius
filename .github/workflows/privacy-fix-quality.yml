@@ -32,6 +32,8 @@ jobs:
         run: bunx tsx --test tests/qr-formatter.test.ts
       - name: QR preview interaction tests
         run: bunx tsx --test tests/qr-preview.test.ts
+      - name: Mobile contact form accessibility tests
+        run: bunx tsx --test tests/contact-mobile.test.ts
       - name: Production build
         run: bun run build
       - name: Preview Turnstile live smoke test (no email sent)
@@ -110,3 +112,22 @@ jobs:
           npx playwright install --with-deps chromium
       - name: Verify contact form Turnstile in browser (no email sent)
         run: node scripts/contact-turnstile-preview-browser.mjs
+
+  contact-mobile-browser:
+    if: github.head_ref == 'fix/mobile-contact-form-first'
+    needs: quality
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install Playwright
+        run: |
+          npm install --no-save --no-package-lock --legacy-peer-deps playwright@1.56.1
+          npx playwright install --with-deps chromium
+      - name: Check mobile and desktop contact layout on Cloudflare preview
+        run: node scripts/contact-mobile-layout-browser.mjs
