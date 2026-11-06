@@ -41,32 +41,32 @@ export const SEO_METADATA: Record<PageId, Record<Language, PageMeta>> = {
   },
   generator: {
     en: {
-      title: "QR Studio – Full Custom QR Code Generator & Designer | QR GENIUS",
-      description: "Design custom QR codes with logos, modern dot styles, colors, gradients, and error correction. Create and download QR codes in your browser.",
+      title: "Free QR Code Generator & Custom Designer | QR GENIUS",
+      description: "Create free QR codes for links, Wi-Fi, WhatsApp and contacts. Customize colors and logos, then download PNG, SVG or PDF in your browser.",
       keywords: "qr code studio, qr designer, custom qr dots, qr logo generator, free high res qr",
       canonicalPath: "/generator",
-      h1: "QR Code Studio & Custom Designer"
+      h1: "Free QR Code Generator & Custom Designer"
     },
     ar: {
-      title: "استوديو QR – صمم وخصص رموز الاستجابة السريعة بالكامل | كيو آر جينيوس",
-      description: "صمم رموز QR مع إضافة الشعار وتخصيص الألوان والنقاط والتدرجات، ثم نزّل الرمز فوراً.",
+      title: "مولد رموز QR مجاني مع تخصيص الشعار والألوان | كيو آر جينيوس",
+      description: "أنشئ رمز QR مجاناً للرابط أو الواي فاي أو واتساب أو بطاقة الاتصال، وخصّص الألوان والشعار ثم نزّله بصيغة PNG أو SVG أو PDF.",
       keywords: "استوديو كيو ار, مصمم باركود, كيو ار مع لوجو, تخصيص الباركود",
       canonicalPath: "/generator",
-      h1: "استوديو تصميم وتخصيص رموز QR"
+      h1: "مولد رموز QR مجاني مع تخصيص التصميم"
     },
     fr: {
-      title: "Studio QR – Générateur & Créateur de QR Code Sur-Mesure | QR GENIUS",
-      description: "Concevez des QR codes sur-mesure avec logos, styles de points, couleurs et dégradés, puis téléchargez votre création.",
+      title: "Générateur de QR Code Gratuit et Personnalisable | QR GENIUS",
+      description: "Créez gratuitement un QR code pour URL, Wi-Fi, WhatsApp ou vCard. Personnalisez les couleurs et le logo, puis téléchargez en PNG, SVG ou PDF.",
       keywords: "studio qr code, createur qr sur mesure, qr avec logo, export qr haute resolution",
       canonicalPath: "/generator",
-      h1: "Studio de Création & Personnalisation de QR Codes"
+      h1: "Générateur de QR Codes Gratuit et Personnalisable"
     },
     es: {
-      title: "Estudio QR – Generador y Diseñador Completo de Códigos QR | QR GENIUS",
-      description: "Diseñe códigos QR a medida con logotipos, estilos de puntos, degradados y colores, y descargue su creación.",
+      title: "Generador de Códigos QR Gratis y Personalizable | QR GENIUS",
+      description: "Crea códigos QR gratis para enlaces, Wi-Fi, WhatsApp o vCard. Personaliza colores y logotipos y descarga en PNG, SVG o PDF.",
       keywords: "estudio qr, disenador de qr, qr con logotipo, descargar qr vector",
       canonicalPath: "/generator",
-      h1: "Estudio y Diseñador Completo de Códigos QR"
+      h1: "Generador de Códigos QR Gratis y Personalizable"
     }
   },
   url: {

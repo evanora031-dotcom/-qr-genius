@@ -36,6 +36,8 @@ jobs:
         run: bunx tsx --test tests/contact-mobile.test.ts
       - name: Production build
         run: bun run build
+      - name: Search discoverability and canonical sitemap tests
+        run: bunx tsx --test tests/seo-discovery.test.ts
       - name: Preview Turnstile live smoke test (no email sent)
         if: github.head_ref == 'feat/contact-turnstile-production'
         shell: bash

@@ -27,6 +27,94 @@ import { QRPreviewCard } from '../components/QRStudio/QRPreviewCard';
 import { formatPayload } from '../utils/qrFormatter';
 import { AdPlacement } from '../components/AdPlacement';
 
+
+type GuideTool = 'url' | 'wifi' | 'whatsapp' | 'business';
+
+const GUIDE_LINKS: { page: GuideTool; path: string }[] = [
+  { page: 'url', path: '/tools/url' },
+  { page: 'wifi', path: '/tools/wifi' },
+  { page: 'whatsapp', path: '/tools/whatsapp' },
+  { page: 'business', path: '/tools/business-vcard' }
+];
+
+const GENERATOR_GUIDE: Record<Language, {
+  heading: string;
+  intro: string;
+  steps: [string, string, string];
+  relatedHeading: string;
+  relatedIntro: string;
+  tools: Record<GuideTool, { title: string; description: string }>;
+}> = {
+  en: {
+    heading: 'How to create a QR code for free',
+    intro: 'Create a static QR code for a link, Wi-Fi network, WhatsApp conversation or contact card. Your QR content is generated in your browser; you can customize its appearance before downloading it.',
+    steps: [
+      'Choose a QR code type and enter the destination or details you want to share.',
+      'Customize the colors, dot style or logo, then check the preview for readability.',
+      'Download the QR code as PNG, SVG or PDF, and scan it with your phone before sharing or printing.'
+    ],
+    relatedHeading: 'Choose the right QR code generator',
+    relatedIntro: 'Prefer a simpler form? Open a dedicated tool for the information you want to share.',
+    tools: {
+      url: { title: 'URL to QR code', description: 'Turn a website or online menu link into a scannable code.' },
+      wifi: { title: 'Wi-Fi QR code', description: 'Help guests connect to your wireless network.' },
+      whatsapp: { title: 'WhatsApp QR code', description: 'Open a chat with an optional pre-filled message.' },
+      business: { title: 'vCard QR code', description: 'Share a digital contact card with your details.' }
+    }
+  },
+  ar: {
+    heading: 'كيفية إنشاء رمز QR مجاناً',
+    intro: 'أنشئ رمز QR ثابتاً لرابط أو شبكة واي فاي أو محادثة واتساب أو بطاقة اتصال. تتم معالجة محتوى الرمز داخل متصفحك، ويمكنك تخصيص شكله قبل تنزيله.',
+    steps: [
+      'اختر نوع رمز QR وأدخل الرابط أو المعلومات التي تريد مشاركتها.',
+      'خصّص الألوان أو شكل النقاط أو الشعار، وتحقق من وضوح المعاينة.',
+      'نزّل الرمز بصيغة PNG أو SVG أو PDF، وامسحه بهاتفك قبل المشاركة أو الطباعة.'
+    ],
+    relatedHeading: 'اختر أداة إنشاء رمز QR المناسبة',
+    relatedIntro: 'هل تريد نموذجاً أبسط؟ انتقل إلى الأداة المتخصصة حسب نوع المعلومات.',
+    tools: {
+      url: { title: 'تحويل الرابط إلى QR', description: 'حوّل رابط موقع أو قائمة طعام إلكترونية إلى رمز قابل للمسح.' },
+      wifi: { title: 'رمز QR للواي فاي', description: 'سهّل اتصال الضيوف بشبكتك اللاسلكية.' },
+      whatsapp: { title: 'رمز QR لواتساب', description: 'افتح محادثة مع رسالة اختيارية جاهزة.' },
+      business: { title: 'رمز QR لبطاقة vCard', description: 'شارك بطاقة اتصال رقمية تتضمن بياناتك.' }
+    }
+  },
+  fr: {
+    heading: 'Comment créer un QR code gratuit',
+    intro: 'Créez un QR code statique pour un lien, un réseau Wi-Fi, une conversation WhatsApp ou une carte de contact. Le contenu est généré dans votre navigateur et vous pouvez personnaliser le code avant de le télécharger.',
+    steps: [
+      'Choisissez un type de QR code et saisissez le lien ou les informations à partager.',
+      'Personnalisez les couleurs, les points ou le logo, puis vérifiez la lisibilité de l’aperçu.',
+      'Téléchargez le code en PNG, SVG ou PDF et scannez-le avec votre téléphone avant de le partager ou de l’imprimer.'
+    ],
+    relatedHeading: 'Choisissez le générateur de QR code adapté',
+    relatedIntro: 'Vous préférez un formulaire plus simple ? Utilisez un outil dédié.',
+    tools: {
+      url: { title: 'QR code pour URL', description: 'Transformez un site ou un menu en ligne en QR code.' },
+      wifi: { title: 'QR code Wi-Fi', description: 'Facilitez la connexion de vos invités au réseau.' },
+      whatsapp: { title: 'QR code WhatsApp', description: 'Ouvrez une conversation avec un message facultatif.' },
+      business: { title: 'QR code vCard', description: 'Partagez une carte de contact numérique.' }
+    }
+  },
+  es: {
+    heading: 'Cómo crear un código QR gratis',
+    intro: 'Crea un código QR estático para un enlace, una red Wi-Fi, una conversación de WhatsApp o una tarjeta de contacto. El contenido se genera en tu navegador y puedes personalizarlo antes de descargarlo.',
+    steps: [
+      'Elige el tipo de código QR e introduce el enlace o los datos que quieras compartir.',
+      'Personaliza los colores, los puntos o el logotipo y comprueba la vista previa.',
+      'Descarga el código en PNG, SVG o PDF y escanéalo con tu teléfono antes de compartirlo o imprimirlo.'
+    ],
+    relatedHeading: 'Elige el generador de códigos QR adecuado',
+    relatedIntro: '¿Prefieres un formulario sencillo? Abre una herramienta especializada.',
+    tools: {
+      url: { title: 'QR para enlaces URL', description: 'Convierte un sitio web o menú digital en un código QR.' },
+      wifi: { title: 'Código QR Wi-Fi', description: 'Facilita la conexión de invitados a tu red.' },
+      whatsapp: { title: 'Código QR WhatsApp', description: 'Abre un chat con un mensaje opcional.' },
+      business: { title: 'Código QR vCard', description: 'Comparte una tarjeta de contacto digital.' }
+    }
+  }
+};
+
 interface GeneratorPageProps {
   initialType?: QRType;
   lang: Language;
@@ -103,6 +191,7 @@ export const GeneratorPage: React.FC<GeneratorPageProps> = ({
   const [config, setConfig] = useState<QRConfig>(DEFAULT_CONFIG);
 
   const t = translations[lang];
+  const guide = GENERATOR_GUIDE[lang];
 
   // Handle external loading from history
   useEffect(() => {
@@ -195,7 +284,7 @@ export const GeneratorPage: React.FC<GeneratorPageProps> = ({
               <span className="text-slate-700 font-bold">{t.qrTypes[selectedType].label}</span>
             </div>
             <h1 className="text-xl sm:text-2xl lg:text-3xl font-extrabold text-slate-900 tracking-tight">
-              {lang === 'ar' ? 'استوديو تصميم رموز QR' : lang === 'fr' ? 'Studio de création de QR codes' : lang === 'es' ? 'Estudio de diseño de códigos QR' : 'QR Code Studio & Designer'}
+              {lang === 'ar' ? 'مولد رموز QR مجاني مع تخصيص التصميم' : lang === 'fr' ? 'Générateur de QR codes gratuit et personnalisable' : lang === 'es' ? 'Generador de códigos QR gratis y personalizable' : 'Free QR Code Generator & Designer'}
             </h1>
           </div>
 
@@ -248,6 +337,40 @@ export const GeneratorPage: React.FC<GeneratorPageProps> = ({
             />
           </div>
         </div>
+
+        {/* Crawlable, helpful guidance and direct links to specialized QR tools. */}
+        <section aria-labelledby="generator-guide-heading" className="rounded-2xl border border-slate-200 bg-white p-5 sm:p-8 space-y-5">
+          <div className="max-w-3xl space-y-3">
+            <h2 id="generator-guide-heading" className="text-xl sm:text-2xl font-bold text-slate-900">
+              {guide.heading}
+            </h2>
+            <p className="text-sm text-slate-600 leading-relaxed">{guide.intro}</p>
+            <ol className="list-decimal list-inside space-y-2 text-sm text-slate-700 leading-relaxed">
+              {guide.steps.map((step) => <li key={step}>{step}</li>)}
+            </ol>
+          </div>
+          <nav aria-label={guide.relatedHeading} className="border-t border-slate-200 pt-5 space-y-3">
+            <h2 className="text-lg sm:text-xl font-bold text-slate-900">{guide.relatedHeading}</h2>
+            <p className="text-sm text-slate-600">{guide.relatedIntro}</p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              {GUIDE_LINKS.map(({ page, path }) => (
+                <a
+                  key={page}
+                  href={lang === 'en' ? path : `/${lang}${path}`}
+                  onClick={(event) => {
+                    if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+                    event.preventDefault();
+                    onNavigate(page);
+                  }}
+                  className="block rounded-xl border border-slate-200 p-4 hover:border-indigo-300 hover:bg-indigo-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-600 transition-colors"
+                >
+                  <span className="block text-sm font-semibold text-indigo-700">{guide.tools[page].title}</span>
+                  <span className="block mt-1 text-xs text-slate-600 leading-relaxed">{guide.tools[page].description}</span>
+                </a>
+              ))}
+            </div>
+          </nav>
+        </section>
 
         {/* Monetization Slot */}
         <AdPlacement lang={lang} format="horizontal-leaderboard" />
