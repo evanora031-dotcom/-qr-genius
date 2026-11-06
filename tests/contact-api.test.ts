@@ -6,7 +6,7 @@ const env = {
   RESEND_API_KEY: "test-key",
   RESEND_FROM_EMAIL: "test@mail.getqrgenius.com",
   TURNSTILE_SECRET_KEY: "test-secret",
-  TURNSTILE_HOSTNAMES: "getqrgenius.com,www.getqrgenius.com,feat-contact-turnstile-production.qr-genius-1on.pages.dev"
+  TURNSTILE_HOSTNAMES: "getqrgenius.com,www.getqrgenius.com,feat-contact-turnstile-produ.qr-genius-1on.pages.dev"
 };
 
 const validMessage = {
@@ -179,7 +179,7 @@ test("permits official test token response only on Pages preview", async () => {
       JSON.stringify({ ...validMessage, company: "bot" }),
       {},
       env,
-      "https://feat-contact-turnstile-production.qr-genius-1on.pages.dev/api/contact"
+      "https://feat-contact-turnstile-produ.qr-genius-1on.pages.dev/api/contact"
     );
     assert.equal(response.status, 200);
   } finally {
