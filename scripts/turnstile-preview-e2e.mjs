@@ -90,6 +90,11 @@ try {
   console.log('NOTE: this deterministic test stubs the browser widget API; it does not validate the live production widget or token replay.');
   console.log('PASS: no real email was sent.');
 } finally {
+  if (browser) {
+    await Promise.race([
+      browser.close(),
+      new Promise((resolve) => setTimeout(resolve, 5_000))
+    ]);
+  }
   clearTimeout(watchdog);
-  if (browser) await browser.close();
 }
