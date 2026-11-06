@@ -4,12 +4,10 @@ const baseUrl = process.env.PREVIEW_URL || 'https://feature-site-redesign.qr-gen
 const testSiteKey = '1x00000000000000000000AA';
 const testToken = 'XXXX.DUMMY.TOKEN.XXXX';
 
-// Fail with a useful diagnostic instead of letting the GitHub job consume its
-// entire 15-minute allowance if Chromium or a remote request becomes stuck.
 const watchdog = setTimeout(() => {
-  console.error('FAIL: browser verification exceeded the 120-second overall limit.');
+  console.error('FAIL: browser verification exceeded the 90-second overall limit.');
   process.exit(1);
-}, 120_000);
+}, 90_000);
 watchdog.unref();
 
 let browser;
@@ -18,7 +16,7 @@ try {
   browser = await chromium.launch({ headless: true, timeout: 20_000 });
   const page = await browser.newPage();
   page.setDefaultTimeout(10_000);
-  page.setDefaultNavigationTimeout(45_000);
+  page.setDefaultNavigationTimeout(30_000);
 
   let submittedPayload;
   page.on('pageerror', (error) => console.error(`Browser page error: ${error.message}`));
@@ -27,12 +25,14 @@ try {
   });
   page.on('request', (request) => {
     if (request.url().endsWith('/api/contact') && request.method() === 'POST') {
+      console.log('Observed browser POST /api/contact');
       try { submittedPayload = request.postDataJSON(); } catch {}
     }
   });
+  page.on('response', (response) => {
+    if (response.url().endsWith('/api/contact')) console.log(`Contact API responded: HTTP ${response.status()}`);
+  });
 
-  // Stub only the browser widget API. The real Preview API still verifies the
-  // official Cloudflare test token with its configured test secret.
   await page.addInitScript(({ token }) => {
     window.turnstile = {
       render: (container, options) => {
@@ -68,12 +68,12 @@ try {
     throw new Error(`Unexpected Turnstile configuration: ${JSON.stringify(widgetConfig)}`);
   }
 
-  console.log('Submitting form and checking the Preview API response...');
+  console.log('Clicking the actual submit button...');
   const responsePromise = page.waitForResponse(
     (response) => response.url().endsWith('/api/contact') && response.request().method() === 'POST',
     { timeout: 20_000 }
   );
-  await page.locator('form').evaluate((form) => form.requestSubmit());
+  await page.getByRole('button', { name: /send message/i }).click({ noWaitAfter: true });
   const apiResponse = await responsePromise;
 
   if (submittedPayload?.turnstileToken !== testToken) {
