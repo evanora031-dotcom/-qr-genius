@@ -30,3 +30,79 @@ jobs:
         run: bunx tsx --test tests/contact-api.test.ts
       - name: Production build
         run: bun run build
+      - name: Preview Turnstile live smoke test (no email sent)
+        if: github.head_ref == 'feat/contact-turnstile-production'
+        shell: bash
+        run: |
+          set -euo pipefail
+          url="https://feat-contact-turnstile-produ.qr-genius-1on.pages.dev/api/contact"
+          origin="https://feat-contact-turnstile-produ.qr-genius-1on.pages.dev"
+          missing='{"name":"Smoke Test","email":"test@example.com","topic":"Feedback / Suggestion","message":"Negative test only","company":"bot"}'
+          for attempt in $(seq 1 24); do
+            status=$(curl --silent --show-error --max-time 10 --output /tmp/contact-negative.json --write-out '%{http_code}' \
+              -X POST "$url" -H "Origin: $origin" -H 'Content-Type: application/json' --data "$missing" || true)
+            if [ "$status" = "403" ] && grep -q 'Security verification failed' /tmp/contact-negative.json; then
+              echo "PASS: missing Turnstile token blocked before honeypot."
+              break
+            fi
+            if [ "$attempt" = "24" ]; then
+              echo "FAIL: missing token not blocked (HTTP $status)."
+              exit 1
+            fi
+            sleep 5
+          done
+
+          valid='{"name":"Smoke Test","email":"test@example.com","topic":"Feedback / Suggestion","message":"Preview-only test; no email","company":"bot","turnstileToken":"XXXX.DUMMY.TOKEN.XXXX"}'
+          status=$(curl --silent --show-error --max-time 15 --output /tmp/contact-positive.json --write-out '%{http_code}' \
+            -X POST "$url" -H "Origin: $origin" -H 'Content-Type: application/json' --data "$valid" || true)
+          if [ "$status" = "200" ] && grep -q '"ok":true' /tmp/contact-positive.json; then
+            echo "PASS: official preview test token accepted; honeypot prevented email."
+          else
+            echo "FAIL: preview token verification returned HTTP $status."
+            exit 1
+          fi
+
+
+  contact-turnstile-production-smoke:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: quality
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Verify production rejects tokenless honeypot without sending email
+        shell: bash
+        run: |
+          set -euo pipefail
+          url="https://getqrgenius.com/api/contact"
+          payload='{"name":"Smoke Test","email":"test@example.com","topic":"Feedback / Suggestion","message":"Production security check","company":"bot"}'
+          for attempt in $(seq 1 36); do
+            status=$(curl --silent --show-error --max-time 10 --output /tmp/production-contact.json --write-out '%{http_code}' \
+              -X POST "$url" -H 'Origin: https://getqrgenius.com' -H 'Content-Type: application/json' --data "$payload" || true)
+            if [ "$status" = "403" ] && grep -q 'Security verification failed' /tmp/production-contact.json; then
+              echo "PASS: production rejects missing Turnstile token before honeypot."
+              exit 0
+            fi
+            echo "Waiting for new production deployment (attempt $attempt, HTTP $status)"
+            sleep 5
+          done
+          echo "FAIL: production did not enforce Turnstile."
+          exit 1
+
+  contact-turnstile-preview-browser:
+    if: github.head_ref == 'feat/contact-turnstile-production'
+    needs: quality
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install Playwright browser
+        run: |
+          npm install --no-save --no-package-lock --legacy-peer-deps playwright
+          npx playwright install --with-deps chromium
+      - name: Verify contact form Turnstile in browser (no email sent)
+        run: node scripts/contact-turnstile-preview-browser.mjs
