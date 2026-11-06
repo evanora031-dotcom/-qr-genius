@@ -182,7 +182,12 @@ export async function onRequestPost(context: {
         (isPreviewHostname &&
           (verificationResult.action === "test" || !verificationResult.action));
 
-      const hostnameAllowed = expectedHostnames.has(verificationResult.hostname || "");
+      const returnedHostname = (verificationResult.hostname || "").toLowerCase();
+      // Cloudflare's official test secret returns "example.com" regardless
+      // of the Preview request hostname. Accept it only on Pages Preview.
+      const hostnameAllowed =
+        expectedHostnames.has(returnedHostname) ||
+        (isPreviewHostname && returnedHostname === "example.com");
       if (
         verificationResult.success !== true ||
         !validAction ||
