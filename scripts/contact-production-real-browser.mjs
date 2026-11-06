@@ -22,7 +22,7 @@ try {
     await page.waitForFunction(() => {
       const b = [...document.querySelectorAll('button')].find(el => /send message/i.test(el.textContent || ''));
       return Boolean(b && !b.disabled);
-    }, { timeout: 30000 });
+    }, null, { timeout: 30000 });
     ready = true;
   } catch {
     console.log('INCONCLUSIVE: Real Turnstile did not issue a token in the headless browser. No message sent.');
