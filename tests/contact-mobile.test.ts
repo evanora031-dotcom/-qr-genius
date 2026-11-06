@@ -37,5 +37,9 @@ test('contact form remains available in four supported languages', () => {
 
 test('honeypot field remains hidden and does not enter keyboard navigation', () => {
   const html = render();
-  assert.match(html, /name="company"[^>]*tabindex="-1"[^>]*aria-hidden="true"/);
+  const honeypot = html.match(/<input[^>]*name="company"[^>]*\/>/)?.[0];
+  assert.ok(honeypot, 'Honeypot must be present');
+  assert.ok(honeypot.includes('tabindex="-1"'));
+  assert.ok(honeypot.includes('aria-hidden="true"'));
+  assert.ok(honeypot.includes('class="hidden"'));
 });
