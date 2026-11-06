@@ -11,8 +11,8 @@ export interface PageMeta {
 export const SEO_METADATA: Record<PageId, Record<Language, PageMeta>> = {
   home: {
     en: {
-      title: "QR GENIUS – Free Multilingual QR Code Generator | Create. Scan. Connect.",
-      description: "Generate free, customizable QR codes instantly. Support for URLs, Wi-Fi, WhatsApp, vCards, and social media with vector SVG, high-res PNG, and PDF downloads.",
+      title: "Free QR Code Generator Online – Custom QR Codes | QR Genius",
+      description: "Create a free QR code online for a URL, Wi-Fi network, WhatsApp chat, or vCard. Customize colors and download crisp PNG, print-ready SVG, or PDF. Private, browser-based generation.",
       keywords: "free qr code generator, custom qr code, vector qr svg, wifi qr code, whatsapp qr, vcard qr code",
       canonicalPath: "/",
       h1: "Create. Scan. Connect. The Free High-Speed QR Generator"
@@ -71,8 +71,8 @@ export const SEO_METADATA: Record<PageId, Record<Language, PageMeta>> = {
   },
   url: {
     en: {
-      title: "Free URL to QR Code Generator | Website Link QR | QR GENIUS",
-      description: "Turn a website URL into a customizable QR code. Add colors or a logo, then download your code for digital sharing or print.",
+      title: "Free URL QR Code Generator – Website Link to QR | QR Genius",
+      description: "Convert any website link into a free URL QR code. Customize its colors, test the destination, and download PNG, SVG, or PDF for print and digital sharing.",
       keywords: "url to qr code, link qr code generator, website qr code, free webpage qr",
       canonicalPath: "/tools/url",
       h1: "Website URL QR Code Generator"
@@ -101,8 +101,8 @@ export const SEO_METADATA: Record<PageId, Record<Language, PageMeta>> = {
   },
   wifi: {
     en: {
-      title: "Free Wi-Fi QR Code Generator | Scan to Connect | QR GENIUS",
-      description: "Create a Wi-Fi QR code so guests can join your network without typing the password. Customize the code and share it at home, work, or your café.",
+      title: "Free WiFi QR Code Generator – Scan to Connect | QR Genius",
+      description: "Create a free WiFi QR code so guests can connect without typing your password. Supports common Wi-Fi security types; customize and download a code for home, work, or your café.",
       keywords: "wifi qr code, scan to connect wifi, guest wifi qr code, generate wifi qr, free wifi barcode",
       canonicalPath: "/tools/wifi",
       h1: "Scan-to-Connect Wi-Fi QR Code Generator"
