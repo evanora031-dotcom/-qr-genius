@@ -1,4 +1,4 @@
-name: Diagnose production contact response (after credential refresh)
+name: Diagnose production contact response (after 20:09 redeploy)
 
 on:
   push:
