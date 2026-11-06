@@ -37,7 +37,7 @@ interface GeneratorPageProps {
 }
 
 const DEFAULT_CONFIG: QRConfig = {
-  content: 'https://qrgenius.app',
+  content: 'https://getqrgenius.com',
   errorCorrectionLevel: 'M',
   margin: 2,
   fgColor: '#4F46E5',
@@ -61,11 +61,11 @@ const DEFAULT_CONFIG: QRConfig = {
 };
 
 const DEFAULT_PAYLOADS: Record<QRType, any> = {
-  url: 'https://qrgenius.app',
+  url: 'https://getqrgenius.com',
   text: 'Hello from QR GENIUS! Create. Scan. Connect.',
   wifi: { ssid: 'MyHomeWiFi', password: 'SecretPassword123', encryption: 'WPA', hidden: false } as WifiData,
   whatsapp: { countryCode: '+1', phoneNumber: '5550192834', message: 'Hello! I scanned your QR code.' } as WhatsappData,
-  email: { email: 'hello@qrgenius.app', subject: 'Inquiry from QR Code', body: 'Hello QR GENIUS team,' } as EmailData,
+  email: { email: 'support@getqrgenius.com', subject: 'Inquiry from QR Code', body: 'Hello QR GENIUS team,' } as EmailData,
   phone: '+15552345678',
   sms: { phoneNumber: '+15559876543', message: 'Hi there! Scanned your SMS QR code.' } as SmsData,
   instagram: 'qrgeniusapp',
