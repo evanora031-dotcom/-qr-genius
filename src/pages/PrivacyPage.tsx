@@ -22,7 +22,7 @@ export const PrivacyPage: React.FC<PrivacyPageProps> = ({ lang }) => {
             {text('Privacy Policy', 'سياسة الخصوصية', 'Politique de confidentialité', 'Política de privacidad')}
           </h1>
           <p className="text-xs text-slate-500">
-            {text('Effective Date: November 1, 2026 · Version 2.0', 'تاريخ السريان: 1 نوفمبر 2026 · الإصدار 2.0', 'Date d’entrée en vigueur : 1 novembre 2026 · Version 2.0', 'Fecha de entrada en vigor: 1 de noviembre de 2026 · Versión 2.0')}
+            {text('Updated: November 6, 2026 · Version 2.1', 'آخر تحديث: 6 نوفمبر 2026 · الإصدار 2.1', 'Mise à jour : 6 novembre 2026 · Version 2.1', 'Actualizada: 6 de noviembre de 2026 · Versión 2.1')}
           </p>
         </div>
 
@@ -72,6 +72,17 @@ export const PrivacyPage: React.FC<PrivacyPageProps> = ({ lang }) => {
                 'Si vous nous contactez via le formulaire du site, nous recueillons le nom, l’adresse e-mail, le sujet et le message que vous envoyez. Nous utilisons ces informations uniquement pour examiner votre demande, y répondre et fournir une assistance. Le message est transmis par notre prestataire d’envoi d’e-mails, Resend, à notre boîte de support support@getqrgenius.com. N’incluez pas de mots de passe ni d’autres informations sensibles dans votre message. Les messages peuvent rester dans les systèmes de messagerie utilisés pour leur transmission et leur traitement ; le formulaire ne sert pas à créer une liste de marketing.',
                 'Si nos contactas mediante el formulario del sitio, recopilamos el nombre, la dirección de correo electrónico, el asunto y el mensaje que envías. Utilizamos estos datos únicamente para revisar y responder a tu consulta y ofrecer asistencia. El mensaje se transmite a través de nuestro proveedor de correo electrónico, Resend, a la bandeja de soporte support@getqrgenius.com. No incluyas contraseñas ni otra información sensible en tu mensaje. Los mensajes pueden permanecer en los sistemas de correo utilizados para enviarlos y responderlos; no utilizamos el formulario para crear una lista de marketing.'
               )}
+            </p>
+            <p>
+              {text(
+                'To protect the contact form against spam and automated abuse, we use Cloudflare Turnstile. Cloudflare may process technical information, including IP address, browser signals, and the verification response, to assess whether a submission is automated. Our server verifies the resulting token with Cloudflare before processing the message. For more information, see Cloudflare\'s privacy policy.',
+                'لحماية نموذج التواصل من الرسائل المزعجة والاستخدام الآلي، نستخدم Cloudflare Turnstile. قد تعالج Cloudflare معلومات تقنية، منها عنوان IP وإشارات المتصفح ونتيجة التحقق، لتقييم ما إذا كان الإرسال آلياً. يتحقق خادمنا من رمز التحقق لدى Cloudflare قبل معالجة الرسالة. للمزيد، راجع سياسة خصوصية Cloudflare.',
+                'Pour protéger le formulaire contre le spam et les soumissions automatisées, nous utilisons Cloudflare Turnstile. Cloudflare peut traiter des informations techniques, notamment l’adresse IP, des signaux du navigateur et la réponse de vérification, afin de détecter les soumissions automatisées. Notre serveur vérifie le jeton auprès de Cloudflare avant de traiter le message. Pour en savoir plus, consultez la politique de confidentialité de Cloudflare.',
+                'Para proteger el formulario frente al spam y los envíos automatizados, utilizamos Cloudflare Turnstile. Cloudflare puede tratar información técnica, como la dirección IP, señales del navegador y la respuesta de verificación, para detectar envíos automatizados. Nuestro servidor verifica el token con Cloudflare antes de procesar el mensaje. Para más información, consulta la política de privacidad de Cloudflare.'
+              )}{' '}
+              <a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noreferrer" className="text-indigo-700 underline underline-offset-2">
+                {text('Cloudflare Privacy Policy', 'سياسة خصوصية Cloudflare', 'Politique de confidentialité de Cloudflare', 'Política de privacidad de Cloudflare')}
+              </a>
             </p>
           </section>
 
