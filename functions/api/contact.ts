@@ -196,17 +196,25 @@ export async function onRequestPost(context: {
             : !validAction
               ? "TURNSTILE_ACTION_MISMATCH"
               : "TURNSTILE_HOSTNAME_MISMATCH";
+          const safeHostname = (verificationResult.hostname || "")
+            .toLowerCase()
+            .replace(/[^a-z0-9.-]/g, "")
+            .slice(0, 253);
           return json({
             error: "Security verification failed",
             diagnostic: {
               reason,
-              returnedHostname: verificationResult.hostname || null,
+              returnedHostname: safeHostname || null,
               hostnameAllowed,
               returnedAction: verificationResult.action || null,
               actionAllowed: validAction,
               success: verificationResult.success === true
             }
-          }, 403, previewDiagnostic(reason));
+          }, 403, previewDiagnostic(
+            reason === "TURNSTILE_HOSTNAME_MISMATCH" && safeHostname
+              ? `${reason}:${safeHostname}`
+              : reason
+          ));
         }
         return json({ error: "Security verification failed" }, 403);
       }
