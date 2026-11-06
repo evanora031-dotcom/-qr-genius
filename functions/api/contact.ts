@@ -88,7 +88,7 @@ export async function onRequestPost(context: {
 
   const requestHostname = new URL(request.url).hostname;
   const isPreviewHostname = requestHostname.endsWith(".pages.dev");
-  const previewDiagnostic = (reason: string) =>
+  const previewDiagnostic = (reason: string): Record<string, string> =>
     isPreviewHostname ? { "X-Preview-Diagnostic": reason } : {};
 
   const origin = request.headers.get("Origin");
