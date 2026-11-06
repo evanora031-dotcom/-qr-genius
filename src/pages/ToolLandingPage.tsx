@@ -39,7 +39,7 @@ const TOOL_CONFIGS = {
       'No scan limits, no monthly subscriptions, and no expiration dates'
     ],
     faqs: [
-      { q: 'How do I turn a URL into a QR code for free?', a: 'No! QR GENIUS generates standard static ISO QR codes containing your direct web address. As long as your website stays online, your QR code will work forever.' },
+      { q: 'How do I turn a URL into a QR code for free?', a: 'Paste your full website address into the URL field, customize the design if you like, then generate and download your QR code. The code contains your direct link.' },
       { q: 'Can I include UTM tracking parameters in the URL?', a: 'Yes! Simply append your UTM parameters (e.g. ?utm_source=flyer&utm_medium=qr) directly into the URL input field.' },
       { q: 'What is the best format to print on physical flyers?', a: 'We recommend downloading the Vector SVG format or the Ultra High-Res 2048px PNG. Both ensure crisp sharpness even on large outdoor banners.' }
     ]
@@ -56,7 +56,7 @@ const TOOL_CONFIGS = {
       '100% private: your Wi-Fi password is only encoded in the QR code, never stored on servers'
     ],
     faqs: [
-      { q: 'How do I create a free WiFi QR code?', a: 'No! Both modern iOS (iPhone Camera) and Android (Google Lens / Camera) automatically recognize Wi-Fi QR codes and prompt the user to join the network.' },
+      { q: 'How do I create a free WiFi QR code?', a: 'Enter your Wi-Fi network name (SSID), password, and security type, then generate the code. Guests can scan it with a compatible phone camera to join the network.' },
       { q: 'Is it safe to generate my Wi-Fi QR code here?', a: 'Yes. QR GENIUS processes your Wi-Fi credentials 100% locally in your browser JavaScript. Your Wi-Fi password never leaves your device.' },
       { q: 'What happens if I change my Wi-Fi password in the future?', a: 'Static Wi-Fi QR codes contain the exact password you entered. If you change your router password, simply generate and print a new code.' }
     ]
