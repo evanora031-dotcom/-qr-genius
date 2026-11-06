@@ -15,8 +15,10 @@ const url = (path: string, lang: Language) =>
 
 test('tracked sitemap exactly matches the sitemap published by the build', () => {
   const tracked = read('../sitemap.xml');
+  const publishedSource = read('../public/sitemap.xml');
   const generated = read('../dist/sitemap.xml');
-  assert.equal(tracked, generated);
+  assert.equal(tracked, publishedSource);
+  assert.equal(publishedSource, generated);
   assert.doesNotMatch(generated, /pages\.dev/);
   assert.equal((generated.match(/<loc>/g) || []).length, 44);
   for (const page of pages) {
