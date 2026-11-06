@@ -131,8 +131,8 @@ export const SEO_METADATA: Record<PageId, Record<Language, PageMeta>> = {
   },
   whatsapp: {
     en: {
-      title: "Free WhatsApp QR Code Generator | Scan to Chat | QR GENIUS",
-      description: "Create a WhatsApp QR code that opens a chat with your number and an optional pre-filled message. Share it on flyers, menus, or business materials.",
+      title: "Free WhatsApp QR Code Generator – Create a Chat Link | QR Genius",
+      description: "Create a WhatsApp QR code that opens a direct chat with your number and an optional pre-filled message. Download it for customer support, menus, flyers, and business profiles.",
       keywords: "whatsapp qr code, wa me qr generator, whatsapp direct chat qr, scan to message whatsapp",
       canonicalPath: "/tools/whatsapp",
       h1: "Direct Chat WhatsApp QR Code Generator"
@@ -161,8 +161,8 @@ export const SEO_METADATA: Record<PageId, Record<Language, PageMeta>> = {
   },
   business: {
     en: {
-      title: "Free vCard QR Code Generator | Digital Business Card | QR GENIUS",
-      description: "Create a vCard QR code with your contact details. People can scan it to open a contact card and save the information on a compatible phone.",
+      title: "Free vCard QR Code Generator – Digital Business Card | QR Genius",
+      description: "Turn your name, phone, email, and company details into a vCard QR code. Let people scan and save your contact card on a compatible iPhone or Android phone.",
       keywords: "vcard qr code, digital business card qr, contact qr generator, save contact qr",
       canonicalPath: "/tools/business-vcard",
       h1: "Digital vCard Business Card QR Generator"
