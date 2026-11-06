@@ -1,4 +1,4 @@
-name: Diagnose production contact response (after 20:09 redeploy)
+name: Verify production contact form after credential rotation
 
 on:
   push:
@@ -9,21 +9,35 @@ permissions:
   contents: read
 
 jobs:
-  probe:
+  safe-http-probe:
     runs-on: ubuntu-latest
     steps:
-      - name: Read-only HTTP status and safe honeypot response
+      - name: Verify homepage and reject missing Turnstile token
         shell: bash
         run: |
           set -euo pipefail
-          curl --silent --show-error --max-time 15 -o /tmp/home.html -w 'Homepage HTTP: %{http_code}\n' https://getqrgenius.com/
+          status=$(curl --silent --show-error --max-time 15 -o /dev/null -w '%{http_code}' https://getqrgenius.com/)
+          echo "Homepage HTTP: $status"
+          test "$status" = "200"
           payload='{"name":"Diagnostic","email":"test@example.com","topic":"Feedback / Suggestion","message":"No email: honeypot set","company":"bot"}'
           status=$(curl --silent --show-error --max-time 15 -o /tmp/contact.json -w '%{http_code}' \
             -X POST https://getqrgenius.com/api/contact \
             -H 'Origin: https://getqrgenius.com' \
             -H 'Content-Type: application/json' \
             --data "$payload")
-          echo "Contact HTTP: $status"
-          echo "Contact response body (no credentials submitted):"
-          head -c 500 /tmp/contact.json
-          echo
+          echo "Missing token HTTP: $status"
+          test "$status" = "403"
+  real-browser-probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install temporary browser test dependency
+        run: npm install --no-save --ignore-scripts playwright@1.56.1
+      - name: Install browser
+        run: npx playwright install --with-deps chromium
+      - name: Verify live contact form with genuine Turnstile
+        run: node scripts/contact-production-real-browser.mjs
