@@ -153,9 +153,15 @@ export async function onRequestPost(context: {
         hostname?: string;
         action?: string;
       };
+      const requestHostname = new URL(request.url).hostname;
+      const isPreviewHostname = requestHostname.endsWith(".pages.dev");
+      const validAction =
+        verificationResult.action === "contact" ||
+        (isPreviewHostname && verificationResult.action === "test");
+
       if (
         verificationResult.success !== true ||
-        verificationResult.action !== "contact" ||
+        !validAction ||
         !expectedHostnames.has(verificationResult.hostname || "")
       ) {
         return json({ error: "Security verification failed" }, 403);
