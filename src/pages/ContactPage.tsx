@@ -1,6 +1,47 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Mail, Send, CheckCircle2, Shield, Clock } from 'lucide-react';
 import { Language } from '../types';
+
+
+type TurnstileOptions = {
+  sitekey: string;
+  action: string;
+  callback: (token: string) => void;
+  'expired-callback': () => void;
+  'error-callback': () => void;
+};
+
+declare global {
+  interface Window {
+    turnstile?: {
+      render: (container: HTMLElement, options: TurnstileOptions) => string;
+      remove: (widgetId: string) => void;
+      reset: (widgetId?: string) => void;
+    };
+  }
+}
+
+let turnstileScriptPromise: Promise<void> | null = null;
+
+const loadTurnstileScript = (): Promise<void> => {
+  if (window.turnstile) return Promise.resolve();
+  if (!turnstileScriptPromise) {
+    turnstileScriptPromise = new Promise((resolve, reject) => {
+      let script = document.getElementById('cf-turnstile-api') as HTMLScriptElement | null;
+      if (!script) {
+        script = document.createElement('script');
+        script.id = 'cf-turnstile-api';
+        script.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';
+        script.async = true;
+        script.defer = true;
+        document.head.appendChild(script);
+      }
+      script.addEventListener('load', () => resolve(), { once: true });
+      script.addEventListener('error', () => reject(new Error('Turnstile failed to load')), { once: true });
+    });
+  }
+  return turnstileScriptPromise;
+};
 
 interface ContactPageProps {
   lang: Language;
@@ -17,6 +58,44 @@ export const ContactPage: React.FC<ContactPageProps> = ({ lang }) => {
   const [formError, setFormError] = useState<string | null>(null);
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const turnstileSiteKey = import.meta.env.VITE_TURNSTILE_SITE_KEY || '';
+  const turnstileContainer = useRef<HTMLDivElement>(null);
+  const turnstileWidgetId = useRef<string | null>(null);
+  const [turnstileToken, setTurnstileToken] = useState('');
+
+  useEffect(() => {
+    if (!turnstileSiteKey || submitted) return;
+    let active = true;
+    let widgetId: string | null = null;
+
+    loadTurnstileScript()
+      .then(() => {
+        if (!active || !turnstileContainer.current || !window.turnstile) return;
+        widgetId = window.turnstile.render(turnstileContainer.current, {
+          sitekey: turnstileSiteKey,
+          action: 'contact',
+          callback: (token) => setTurnstileToken(token),
+          'expired-callback': () => setTurnstileToken(''),
+          'error-callback': () => setTurnstileToken('')
+        });
+        turnstileWidgetId.current = widgetId;
+      })
+      .catch(() => {
+        if (!active) return;
+        setFormError(text(
+          'Security verification could not load. Please refresh and try again.',
+          'تعذّر تحميل التحقق الأمني. حدّث الصفحة وحاول مرة أخرى.',
+          'La vérification de sécurité n’a pas pu se charger. Actualisez la page et réessayez.',
+          'No se pudo cargar la verificación de seguridad. Actualiza la página e inténtalo de nuevo.'
+        ));
+      });
+
+    return () => {
+      active = false;
+      if (widgetId && window.turnstile) window.turnstile.remove(widgetId);
+      turnstileWidgetId.current = null;
+    };
+  }, [turnstileSiteKey, lang, submitted]);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -42,12 +121,17 @@ export const ContactPage: React.FC<ContactPageProps> = ({ lang }) => {
           email: email.trim(),
           topic,
           message: message.trim(),
-          company: String(formData.get('company') || '')
+          company: String(formData.get('company') || ''),
+          turnstileToken
         })
       });
       if (!response.ok) throw new Error('Contact request failed');
       setSubmitted(true);
     } catch {
+      setTurnstileToken('');
+      if (turnstileWidgetId.current && window.turnstile) {
+        window.turnstile.reset(turnstileWidgetId.current);
+      }
       setFormError(text(
         'We could not send your message right now. Please try again or email support@getqrgenius.com.',
         'تعذّر إرسال رسالتك الآن. حاول مرة أخرى أو راسل support@getqrgenius.com.',
@@ -132,7 +216,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ lang }) => {
                     {text('Privacy First', 'الخصوصية أولاً', 'Confidentialité avant tout', 'La privacidad es lo primero')}
                   </span>
                   <span className="text-white">
-                    {text('Your email is used only to respond to your inquiry', 'يُستخدم بريدك الإلكتروني للرد على استفسارك فقط', 'Votre adresse e-mail sert uniquement à répondre à votre demande', 'Tu correo electrónico se utiliza únicamente para responder a tu consulta')}
+                    {text('Your email is never shared', 'لن تتم مشاركة بريدك الإلكتروني', 'Votre adresse e-mail ne sera jamais partagée', 'Tu correo electrónico nunca se comparte')}
                   </span>
                 </div>
               </div>
@@ -165,6 +249,14 @@ export const ContactPage: React.FC<ContactPageProps> = ({ lang }) => {
             ) : (
               <form onSubmit={handleSubmit} className="space-y-4">
                 <input type="text" name="company" tabIndex={-1} autoComplete="off" aria-hidden="true" className="hidden" />
+                {turnstileSiteKey && (
+                  <div className="space-y-2">
+                    <div ref={turnstileContainer} aria-label={text('Security verification', 'التحقق الأمني', 'Vérification de sécurité', 'Verificación de seguridad')} />
+                    <p className="text-xs text-slate-500">
+                      {text('Complete the security check before sending.', 'أكمل التحقق الأمني قبل الإرسال.', 'Terminez la vérification de sécurité avant l’envoi.', 'Completa la verificación de seguridad antes de enviar.')}
+                    </p>
+                  </div>
+                )}
                 <div>
                   <label className="block text-xs font-semibold text-slate-700 mb-1.5">
                     {text('Your Full Name', 'اسمك الكامل', 'Votre nom complet', 'Nombre completo')} <span className="text-rose-500">*</span>
@@ -172,6 +264,8 @@ export const ContactPage: React.FC<ContactPageProps> = ({ lang }) => {
                   <input
                     type="text"
                     required
+                    maxLength={100}
+                    autoComplete="name"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     placeholder={text('Jane Doe', 'الاسم الكامل', 'Jean Dupont', 'Nombre y apellidos')}
@@ -186,6 +280,8 @@ export const ContactPage: React.FC<ContactPageProps> = ({ lang }) => {
                   <input
                     type="email"
                     required
+                    maxLength={254}
+                    autoComplete="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="name@example.com"
@@ -216,6 +312,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ lang }) => {
                   <textarea
                     rows={4}
                     required
+                    maxLength={5000}
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}
                     placeholder={text('Tell us how we can help...', 'أخبرنا كيف يمكننا مساعدتك...', 'Dites-nous comment nous pouvons vous aider...', 'Cuéntanos cómo podemos ayudarte...')}
@@ -224,14 +321,15 @@ export const ContactPage: React.FC<ContactPageProps> = ({ lang }) => {
                 </div>
 
                 {formError && (
-                  <p className="text-xs text-rose-600 font-medium bg-rose-50 p-2.5 rounded-lg border border-rose-200">
+                  <p role="alert" aria-live="polite" className="text-xs text-rose-600 font-medium bg-rose-50 p-2.5 rounded-lg border border-rose-200">
                     {formError}
                   </p>
                 )}
 
                 <button
                   type="submit"
-                  disabled={loading}
+                  disabled={loading || Boolean(turnstileSiteKey && !turnstileToken)}
+                  aria-busy={loading}
                   className="w-full py-3 px-4 bg-indigo-600 hover:bg-indigo-700 active:bg-indigo-800 text-white rounded-xl text-xs font-bold transition-colors flex items-center justify-center gap-2 shadow-sm disabled:opacity-50"
                 >
                   {loading ? (
