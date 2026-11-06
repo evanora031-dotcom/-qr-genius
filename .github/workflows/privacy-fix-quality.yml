@@ -112,3 +112,22 @@ jobs:
           npx playwright install --with-deps chromium
       - name: Verify contact form Turnstile in browser (no email sent)
         run: node scripts/contact-turnstile-preview-browser.mjs
+
+  contact-mobile-browser:
+    if: github.head_ref == 'fix/mobile-contact-form-first'
+    needs: quality
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install Playwright
+        run: |
+          npm install --no-save --no-package-lock --legacy-peer-deps playwright@1.56.1
+          npx playwright install --with-deps chromium
+      - name: Check mobile and desktop contact layout on Cloudflare preview
+        run: node scripts/contact-mobile-layout-browser.mjs
