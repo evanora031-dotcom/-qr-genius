@@ -159,11 +159,32 @@ export async function onRequestPost(context: {
         verificationResult.action === "contact" ||
         (isPreviewHostname && verificationResult.action === "test");
 
+      const hostnameAllowed = expectedHostnames.has(verificationResult.hostname || "");
       if (
         verificationResult.success !== true ||
         !validAction ||
-        !expectedHostnames.has(verificationResult.hostname || "")
+        !hostnameAllowed
       ) {
+        // Expose non-sensitive diagnostics only on Pages Preview to identify
+        // configuration mismatches without logging or returning tokens/secrets.
+        if (isPreviewHostname) {
+          const reason = verificationResult.success !== true
+            ? "TURNSTILE_NOT_SUCCESS"
+            : !validAction
+              ? "TURNSTILE_ACTION_MISMATCH"
+              : "TURNSTILE_HOSTNAME_MISMATCH";
+          return json({
+            error: "Security verification failed",
+            diagnostic: {
+              reason,
+              returnedHostname: verificationResult.hostname || null,
+              hostnameAllowed,
+              returnedAction: verificationResult.action || null,
+              actionAllowed: validAction,
+              success: verificationResult.success === true
+            }
+          }, 403);
+        }
         return json({ error: "Security verification failed" }, 403);
       }
     } catch {
