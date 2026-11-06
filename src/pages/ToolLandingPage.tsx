@@ -30,8 +30,8 @@ const TOOL_CONFIGS = {
   url: {
     type: 'url' as QRType,
     badge: 'Official Web Tool',
-    title: 'Free Website URL QR Code Generator',
-    subtitle: 'Convert any website, landing page, blog post, or e-commerce shop into a permanent, scan-ready QR code with custom colors and logo embedding.',
+    title: 'Free URL QR Code Generator',
+    subtitle: 'Turn any website link into a free, scan-ready URL QR code. Customize its colors, add a logo, test the destination, and download a sharp code for print or digital sharing.',
     benefits: [
       'Instant redirects to any web address with zero middleman redirection',
       'Fully compatible with Google Analytics and UTM campaign tracking tags',
@@ -39,7 +39,7 @@ const TOOL_CONFIGS = {
       'No scan limits, no monthly subscriptions, and no expiration dates'
     ],
     faqs: [
-      { q: 'Do URL QR codes generated here ever expire?', a: 'No! QR GENIUS generates standard static ISO QR codes containing your direct web address. As long as your website stays online, your QR code will work forever.' },
+      { q: 'How do I turn a URL into a QR code for free?', a: 'No! QR GENIUS generates standard static ISO QR codes containing your direct web address. As long as your website stays online, your QR code will work forever.' },
       { q: 'Can I include UTM tracking parameters in the URL?', a: 'Yes! Simply append your UTM parameters (e.g. ?utm_source=flyer&utm_medium=qr) directly into the URL input field.' },
       { q: 'What is the best format to print on physical flyers?', a: 'We recommend downloading the Vector SVG format or the Ultra High-Res 2048px PNG. Both ensure crisp sharpness even on large outdoor banners.' }
     ]
@@ -47,8 +47,8 @@ const TOOL_CONFIGS = {
   wifi: {
     type: 'wifi' as QRType,
     badge: 'Connect Without Passwords',
-    title: 'Wi-Fi Network QR Code Generator',
-    subtitle: 'Create a clean scan-to-connect Wi-Fi QR code for your guests, Airbnb, café, or office. Works natively on iPhone and Android with zero typing required.',
+    title: 'Free WiFi QR Code Generator',
+    subtitle: 'Create a free WiFi QR code so guests can connect without typing your password. Ideal for home, Airbnb, cafés, and offices; compatible with modern iPhone and Android cameras.',
     benefits: [
       'Guests scan with their built-in camera and tap "Join Network" immediately',
       'Supports WPA, WPA2, WPA3 personal security, WEP, and Open networks',
@@ -56,7 +56,7 @@ const TOOL_CONFIGS = {
       '100% private: your Wi-Fi password is only encoded in the QR code, never stored on servers'
     ],
     faqs: [
-      { q: 'Do guests need an app to scan the Wi-Fi code?', a: 'No! Both modern iOS (iPhone Camera) and Android (Google Lens / Camera) automatically recognize Wi-Fi QR codes and prompt the user to join the network.' },
+      { q: 'How do I create a free WiFi QR code?', a: 'No! Both modern iOS (iPhone Camera) and Android (Google Lens / Camera) automatically recognize Wi-Fi QR codes and prompt the user to join the network.' },
       { q: 'Is it safe to generate my Wi-Fi QR code here?', a: 'Yes. QR GENIUS processes your Wi-Fi credentials 100% locally in your browser JavaScript. Your Wi-Fi password never leaves your device.' },
       { q: 'What happens if I change my Wi-Fi password in the future?', a: 'Static Wi-Fi QR codes contain the exact password you entered. If you change your router password, simply generate and print a new code.' }
     ]
