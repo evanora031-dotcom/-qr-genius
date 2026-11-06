@@ -30,3 +30,35 @@ jobs:
         run: bunx tsx --test tests/contact-api.test.ts
       - name: Production build
         run: bun run build
+      - name: Preview Turnstile live smoke test (no email sent)
+        if: github.head_ref == 'feat/contact-turnstile-production'
+        shell: bash
+        run: |
+          set -euo pipefail
+          url="https://feat-contact-turnstile-produ.qr-genius-1on.pages.dev/api/contact"
+          origin="https://feat-contact-turnstile-produ.qr-genius-1on.pages.dev"
+          missing='{"name":"Smoke Test","email":"test@example.com","topic":"Feedback / Suggestion","message":"Negative test only","company":"bot"}'
+          for attempt in $(seq 1 24); do
+            status=$(curl --silent --show-error --max-time 10 --output /tmp/contact-negative.json --write-out '%{http_code}' \
+              -X POST "$url" -H "Origin: $origin" -H 'Content-Type: application/json' --data "$missing" || true)
+            if [ "$status" = "403" ] && grep -q 'Security verification failed' /tmp/contact-negative.json; then
+              echo "PASS: missing Turnstile token blocked before honeypot."
+              break
+            fi
+            if [ "$attempt" = "24" ]; then
+              echo "FAIL: missing token not blocked (HTTP $status)."
+              exit 1
+            fi
+            sleep 5
+          done
+
+          valid='{"name":"Smoke Test","email":"test@example.com","topic":"Feedback / Suggestion","message":"Preview-only test; no email","company":"bot","turnstileToken":"XXXX.DUMMY.TOKEN.XXXX"}'
+          status=$(curl --silent --show-error --max-time 15 --output /tmp/contact-positive.json --write-out '%{http_code}' \
+            -X POST "$url" -H "Origin: $origin" -H 'Content-Type: application/json' --data "$valid" || true)
+          if [ "$status" = "200" ] && grep -q '"ok":true' /tmp/contact-positive.json; then
+            echo "PASS: official preview test token accepted; honeypot prevented email."
+          else
+            echo "FAIL: preview token verification returned HTTP $status."
+            exit 1
+          fi
+
