@@ -47,9 +47,19 @@ export const QRPreviewCard: React.FC<QRPreviewCardProps> = ({
   const [pngResolution, setPngResolution] = useState<number>(1024);
   const [showResMenu, setShowResMenu] = useState(false);
   const [showScanModal, setShowScanModal] = useState(false);
+  const [renderError, setRenderError] = useState(false);
+  const [actionError, setActionError] = useState('');
 
   const t = translations[lang];
   const hasContent = Boolean(config.content && config.content.trim());
+  const canUseQR = hasContent && !loading && !renderError && Boolean(canvasRef.current);
+  const exportErrorText = lang === 'ar'
+    ? 'تعذّر تنفيذ العملية. حاول مجدداً.'
+    : lang === 'fr'
+      ? 'Impossible de terminer cette action. Réessayez.'
+      : lang === 'es'
+        ? 'No se pudo completar la acción. Inténtalo de nuevo.'
+        : 'Could not complete this action. Please try again.';
 
   // Render QR Code onto DOM
   useEffect(() => {
@@ -57,11 +67,17 @@ export const QRPreviewCard: React.FC<QRPreviewCardProps> = ({
     if (!hasContent) {
       canvasRef.current = null;
       if (containerRef.current) containerRef.current.innerHTML = '';
+      setRenderError(false);
+      setActionError('');
+      setShowResMenu(false);
+      setShowScanModal(false);
       setLoading(false);
       return () => { active = false; };
     }
 
     setLoading(true);
+    setRenderError(false);
+    setActionError('');
 
     renderQRToCanvas(config, 512)
       .then((generatedCanvas) => {
@@ -76,7 +92,11 @@ export const QRPreviewCard: React.FC<QRPreviewCardProps> = ({
         setLoading(false);
       })
       .catch((err) => {
+        if (!active) return;
         console.error('QR Render error:', err);
+        canvasRef.current = null;
+        if (containerRef.current) containerRef.current.innerHTML = '';
+        setRenderError(true);
         setLoading(false);
       });
 
@@ -87,7 +107,8 @@ export const QRPreviewCard: React.FC<QRPreviewCardProps> = ({
 
   // Handle PNG Download at selected resolution
   const handleDownloadPNG = async (resolution: number = pngResolution) => {
-    if (!hasContent) return;
+    if (!canUseQR) return;
+    setActionError('');
     setLoading(true);
     try {
       const exportCanvas = await renderQRToCanvas(config, resolution);
@@ -97,6 +118,7 @@ export const QRPreviewCard: React.FC<QRPreviewCardProps> = ({
       autoSaveHistory(exportCanvas);
     } catch (e) {
       console.error(e);
+      setActionError(exportErrorText);
     } finally {
       setLoading(false);
       setShowResMenu(false);
@@ -105,17 +127,24 @@ export const QRPreviewCard: React.FC<QRPreviewCardProps> = ({
 
   // Handle SVG Download
   const handleDownloadSVG = () => {
-    if (!hasContent) return;
-    const svgStr = renderQRToSVG(config, 1000);
-    const filename = `qrgenius_${type}_${Date.now()}.svg`;
-    downloadSVG(svgStr, filename);
-    trackEvent('qr_code_downloaded', { qr_type: type, format: 'svg' });
-    if (canvasRef.current) autoSaveHistory(canvasRef.current);
+    if (!canUseQR) return;
+    setActionError('');
+    try {
+      const svgStr = renderQRToSVG(config, 1000);
+      const filename = `qrgenius_${type}_${Date.now()}.svg`;
+      downloadSVG(svgStr, filename);
+      trackEvent('qr_code_downloaded', { qr_type: type, format: 'svg' });
+      if (canvasRef.current) autoSaveHistory(canvasRef.current);
+    } catch (e) {
+      console.error(e);
+      setActionError(exportErrorText);
+    }
   };
 
   // Handle PDF Download
   const handleDownloadPDF = async () => {
-    if (!hasContent) return;
+    if (!canUseQR) return;
+    setActionError('');
     setLoading(true);
     try {
       const exportCanvas = await renderQRToCanvas(config, 1500);
@@ -129,6 +158,7 @@ export const QRPreviewCard: React.FC<QRPreviewCardProps> = ({
       autoSaveHistory(exportCanvas);
     } catch (e) {
       console.error(e);
+      setActionError(exportErrorText);
     } finally {
       setLoading(false);
     }
@@ -136,15 +166,26 @@ export const QRPreviewCard: React.FC<QRPreviewCardProps> = ({
 
   // Copy Image to Clipboard
   const handleCopyImage = async () => {
-    if (!hasContent || !canvasRef.current) return;
-    const ok = await copyCanvasToClipboard(canvasRef.current);
-    if (ok) {
-      setCopySuccess(true);
-      setTimeout(() => setCopySuccess(false), 2500);
-    } else {
-      // Fallback: copy content
-      navigator.clipboard.writeText(config.content);
-      alert('QR content copied to clipboard (Image copy not supported in this browser version).');
+    if (!canUseQR || !canvasRef.current) return;
+    setActionError('');
+    try {
+      const ok = await copyCanvasToClipboard(canvasRef.current);
+      if (ok) {
+        setCopySuccess(true);
+        setTimeout(() => setCopySuccess(false), 2500);
+      } else {
+        await navigator.clipboard.writeText(config.content);
+        setActionError(lang === 'ar'
+          ? 'تعذّر نسخ الصورة، فتم نسخ بيانات الرمز كنص بدلاً منها.'
+          : lang === 'fr'
+            ? 'Image non prise en charge : les données ont été copiées en texte.'
+            : lang === 'es'
+              ? 'No se pudo copiar la imagen; se copiaron los datos como texto.'
+              : 'Image copy unavailable; QR data was copied as text instead.');
+      }
+    } catch (e) {
+      console.error(e);
+      setActionError(exportErrorText);
     }
   };
 
@@ -160,17 +201,23 @@ export const QRPreviewCard: React.FC<QRPreviewCardProps> = ({
         config
       });
       onHistoryUpdated();
+      return true;
     } catch (e) {
       console.warn('Could not auto-save to history:', e);
+      return false;
     }
   };
 
   const handleManualSave = () => {
-    if (!hasContent || !canvasRef.current) return;
-    autoSaveHistory(canvasRef.current);
-    trackEvent('qr_code_saved', { qr_type: type });
-    setSaveSuccess(true);
-    setTimeout(() => setSaveSuccess(false), 2000);
+    if (!canUseQR || !canvasRef.current) return;
+    setActionError('');
+    if (autoSaveHistory(canvasRef.current)) {
+      trackEvent('qr_code_saved', { qr_type: type });
+      setSaveSuccess(true);
+      setTimeout(() => setSaveSuccess(false), 2000);
+    } else {
+      setActionError(exportErrorText);
+    }
   };
 
   return (
