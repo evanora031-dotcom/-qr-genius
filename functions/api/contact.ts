@@ -13,13 +13,18 @@ const ALLOWED_TOPICS = new Set([
   "Sponsorship & Partnership"
 ]);
 
-const json = (body: Record<string, unknown>, status = 200) =>
+const json = (
+  body: Record<string, unknown>,
+  status = 200,
+  extraHeaders: Record<string, string> = {}
+) =>
   new Response(JSON.stringify(body), {
     status,
     headers: {
       "Content-Type": "application/json; charset=utf-8",
       "Cache-Control": "no-store",
-      "X-Content-Type-Options": "nosniff"
+      "X-Content-Type-Options": "nosniff",
+      ...extraHeaders
     }
   });
 
@@ -81,14 +86,19 @@ export async function onRequestPost(context: {
     return json({ error: "Method not allowed" }, 405);
   }
 
+  const requestHostname = new URL(request.url).hostname;
+  const isPreviewHostname = requestHostname.endsWith(".pages.dev");
+  const previewDiagnostic = (reason: string) =>
+    isPreviewHostname ? { "X-Preview-Diagnostic": reason } : {};
+
   const origin = request.headers.get("Origin");
   if (origin) {
     try {
       if (new URL(origin).origin !== new URL(request.url).origin) {
-        return json({ error: "Forbidden" }, 403);
+        return json({ error: "Forbidden" }, 403, previewDiagnostic("ORIGIN_MISMATCH"));
       }
     } catch {
-      return json({ error: "Forbidden" }, 403);
+      return json({ error: "Forbidden" }, 403, previewDiagnostic("ORIGIN_INVALID"));
     }
   }
 
@@ -123,9 +133,20 @@ export async function onRequestPost(context: {
       !turnstileToken ||
       turnstileToken.length > 2048 ||
       expectedHostnames.size === 0 ||
-      !expectedHostnames.has(new URL(request.url).hostname)
+      !expectedHostnames.has(requestHostname)
     ) {
-      return json({ error: "Security verification failed" }, 403);
+      const reason = !turnstileToken
+        ? "TURNSTILE_TOKEN_MISSING"
+        : turnstileToken.length > 2048
+          ? "TURNSTILE_TOKEN_TOO_LONG"
+          : expectedHostnames.size === 0
+            ? "TURNSTILE_HOST_ALLOWLIST_EMPTY"
+            : "REQUEST_HOSTNAME_NOT_ALLOWED";
+      return json(
+        { error: "Security verification failed" },
+        403,
+        previewDiagnostic(reason)
+      );
     }
 
     try {
@@ -153,8 +174,6 @@ export async function onRequestPost(context: {
         hostname?: string;
         action?: string;
       };
-      const requestHostname = new URL(request.url).hostname;
-      const isPreviewHostname = requestHostname.endsWith(".pages.dev");
       const validAction =
         verificationResult.action === "contact" ||
         (isPreviewHostname && verificationResult.action === "test");
@@ -183,7 +202,7 @@ export async function onRequestPost(context: {
               actionAllowed: validAction,
               success: verificationResult.success === true
             }
-          }, 403);
+          }, 403, previewDiagnostic(reason));
         }
         return json({ error: "Security verification failed" }, 403);
       }
