@@ -3,6 +3,47 @@ interface ContactEnv {
   RESEND_FROM_EMAIL: string;
 }
 
+// Bound request memory usage even when Content-Length is absent or incorrect.
+const MAX_BODY_BYTES = 32 * 1024;
+const ALLOWED_TOPICS = new Set([
+  "Feedback / Suggestion",
+  "Technical Support",
+  "Enterprise Solution",
+  "Sponsorship & Partnership"
+]);
+
+async function readBoundedBody(request: Request): Promise<string> {
+  const declaredLength = Number(request.headers.get("content-length") || 0);
+  if (declaredLength > MAX_BODY_BYTES) throw new Error("BODY_TOO_LARGE");
+  if (!request.body) return "";
+
+  const reader = request.body.getReader();
+  const chunks: Uint8Array[] = [];
+  let totalBytes = 0;
+  try {
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      totalBytes += value.byteLength;
+      if (totalBytes > MAX_BODY_BYTES) {
+        await reader.cancel();
+        throw new Error("BODY_TOO_LARGE");
+      }
+      chunks.push(value);
+    }
+  } finally {
+    reader.releaseLock();
+  }
+
+  const body = new Uint8Array(totalBytes);
+  let offset = 0;
+  for (const chunk of chunks) {
+    body.set(chunk, offset);
+    offset += chunk.byteLength;
+  }
+  return new TextDecoder("utf-8", { fatal: true }).decode(body);
+}
+
 const json = (body: Record<string, unknown>, status = 200) =>
   new Response(JSON.stringify(body), {
     status,
@@ -43,7 +84,7 @@ export async function onRequestPost(context: {
     }
   }
 
-  if (!request.headers.get("content-type")?.includes("application/json")) {
+  if (!/^application\/json(?:\s*;|$)/i.test(request.headers.get("content-type") || "")) {
     return json({ error: "Unsupported content type" }, 415);
   }
 
@@ -53,8 +94,15 @@ export async function onRequestPost(context: {
 
   let data: Record<string, unknown>;
   try {
-    data = await request.json() as Record<string, unknown>;
-  } catch {
+    const parsed: unknown = JSON.parse(await readBoundedBody(request));
+    if (!parsed || typeof parsed !== "object" || Array.isArray(parsed)) {
+      return json({ error: "Invalid request" }, 400);
+    }
+    data = parsed as Record<string, unknown>;
+  } catch (error) {
+    if (error instanceof Error && error.message === "BODY_TOO_LARGE") {
+      return json({ error: "Request body is too large" }, 413);
+    }
     return json({ error: "Invalid request" }, 400);
   }
 
@@ -65,14 +113,17 @@ export async function onRequestPost(context: {
 
   const name = typeof data.name === "string" ? data.name.trim() : "";
   const email = typeof data.email === "string" ? data.email.trim() : "";
-  const topic = typeof data.topic === "string" ? data.topic.trim() : "";
+  // Prevent control characters from appearing in outgoing email subjects.
+  const topic = typeof data.topic === "string"
+    ? data.topic.replace(/[\\u0000-\\u001F\\u007F]/g, " ").replace(/\\s+/g, " ").trim()
+    : "";
   const message = typeof data.message === "string" ? data.message.trim() : "";
 
   if (
     !name || name.length > 100 ||
     !email || email.length > 254 ||
     !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) ||
-    !topic || topic.length > 100 ||
+    !topic || topic.length > 100 || !ALLOWED_TOPICS.has(topic) ||
     !message || message.length > 5000
   ) {
     return json({ error: "Please check the submitted fields" }, 400);
