@@ -174,9 +174,13 @@ export async function onRequestPost(context: {
         hostname?: string;
         action?: string;
       };
+      // Cloudflare's official always-pass test secret may omit the action
+      // field. Permit that omission only on Pages Preview; production still
+      // requires the exact "contact" action.
       const validAction =
         verificationResult.action === "contact" ||
-        (isPreviewHostname && verificationResult.action === "test");
+        (isPreviewHostname &&
+          (verificationResult.action === "test" || !verificationResult.action));
 
       const hostnameAllowed = expectedHostnames.has(verificationResult.hostname || "");
       if (
