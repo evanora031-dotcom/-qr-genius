@@ -1,0 +1,29 @@
+name: Diagnose production contact response
+
+on:
+  push:
+    branches:
+      - diagnostic/contact-production-response
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Read-only HTTP status and safe honeypot response
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl --silent --show-error --max-time 15 -o /tmp/home.html -w 'Homepage HTTP: %{http_code}\n' https://getqrgenius.com/
+          payload='{"name":"Diagnostic","email":"test@example.com","topic":"Feedback / Suggestion","message":"No email: honeypot set","company":"bot"}'
+          status=$(curl --silent --show-error --max-time 15 -o /tmp/contact.json -w '%{http_code}' \
+            -X POST https://getqrgenius.com/api/contact \
+            -H 'Origin: https://getqrgenius.com' \
+            -H 'Content-Type: application/json' \
+            --data "$payload")
+          echo "Contact HTTP: $status"
+          echo "Contact response body (no credentials submitted):"
+          head -c 500 /tmp/contact.json
+          echo
