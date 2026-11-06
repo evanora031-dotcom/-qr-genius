@@ -240,7 +240,7 @@ export const HomePage: React.FC<HomePageProps> = ({ lang, onNavigate }) => {
               return (
                 <a
                   key={card.type}
-                  href={`/${lang}/${card.type === 'url' ? 'tools/url' : card.type === 'wifi' ? 'tools/wifi' : card.type === 'whatsapp' ? 'tools/whatsapp' : 'tools/business-vcard'}`}
+                  href={`${lang === 'en' ? '' : `/${lang}`}/${card.type === 'url' ? 'tools/url' : card.type === 'wifi' ? 'tools/wifi' : card.type === 'whatsapp' ? 'tools/whatsapp' : 'tools/business-vcard'}`}
                   onClick={(event) => { event.preventDefault(); onNavigate(card.type === 'url' ? 'url' : card.type === 'wifi' ? 'wifi' : card.type === 'whatsapp' ? 'whatsapp' : 'business'); }}
                   className="p-6 rounded-2xl border border-slate-200 hover:border-indigo-400 hover:shadow-xl transition-all cursor-pointer bg-white flex flex-col justify-between group"
                 >
