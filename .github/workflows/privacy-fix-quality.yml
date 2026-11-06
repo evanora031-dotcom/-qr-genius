@@ -1,9 +1,10 @@
-name: Privacy fix quality checks
+name: Quality and contact security checks
 
 on:
   push:
     branches:
-      - fix/privacy-analytics-disclosure
+      - main
+      - fix/contact-input-hardening
   pull_request:
     branches:
       - main
@@ -25,5 +26,7 @@ jobs:
         run: bun install --frozen-lockfile
       - name: Type-check
         run: bun run lint
+      - name: Contact endpoint tests
+        run: bunx tsx --test tests/contact-api.test.ts
       - name: Production build
         run: bun run build
