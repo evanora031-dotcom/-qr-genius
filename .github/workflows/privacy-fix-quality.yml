@@ -28,6 +28,8 @@ jobs:
         run: bun run lint
       - name: Contact endpoint tests
         run: bunx tsx --test tests/contact-api.test.ts
+      - name: QR payload validation tests
+        run: bunx tsx --test tests/qr-formatter.test.ts
       - name: Production build
         run: bun run build
       - name: Preview Turnstile live smoke test (no email sent)
