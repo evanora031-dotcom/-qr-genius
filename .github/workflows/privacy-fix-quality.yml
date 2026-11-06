@@ -62,6 +62,32 @@ jobs:
             exit 1
           fi
 
+
+  contact-turnstile-production-smoke:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: quality
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Verify production rejects tokenless honeypot without sending email
+        shell: bash
+        run: |
+          set -euo pipefail
+          url="https://getqrgenius.com/api/contact"
+          payload='{"name":"Smoke Test","email":"test@example.com","topic":"Feedback / Suggestion","message":"Production security check","company":"bot"}'
+          for attempt in $(seq 1 36); do
+            status=$(curl --silent --show-error --max-time 10 --output /tmp/production-contact.json --write-out '%{http_code}' \
+              -X POST "$url" -H 'Origin: https://getqrgenius.com' -H 'Content-Type: application/json' --data "$payload" || true)
+            if [ "$status" = "403" ] && grep -q 'Security verification failed' /tmp/production-contact.json; then
+              echo "PASS: production rejects missing Turnstile token before honeypot."
+              exit 0
+            fi
+            echo "Waiting for new production deployment (attempt $attempt, HTTP $status)"
+            sleep 5
+          done
+          echo "FAIL: production did not enforce Turnstile."
+          exit 1
+
   contact-turnstile-preview-browser:
     if: github.head_ref == 'feat/contact-turnstile-production'
     needs: quality
