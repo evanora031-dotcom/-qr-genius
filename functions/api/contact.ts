@@ -1,6 +1,8 @@
 interface ContactEnv {
   RESEND_API_KEY: string;
   RESEND_FROM_EMAIL: string;
+  TURNSTILE_SECRET_KEY?: string;
+  TURNSTILE_HOSTNAMES?: string;
 }
 
 // Bound request memory usage even when Content-Length is absent or incorrect.
@@ -104,6 +106,64 @@ export async function onRequestPost(context: {
       return json({ error: "Request body is too large" }, 413);
     }
     return json({ error: "Invalid request" }, 400);
+  }
+
+  // Fail closed: no contact messages are accepted without a configured Turnstile secret.
+  // Verify before the honeypot so automated submissions cannot bypass the challenge.
+  const requestHostname = new URL(request.url).hostname.toLowerCase();
+  const allowedHostnames = new Set(
+    (env.TURNSTILE_HOSTNAMES || "")
+      .split(",")
+      .map((hostname) => hostname.trim().toLowerCase())
+      .filter(Boolean)
+  );
+  if (!env.TURNSTILE_SECRET_KEY || allowedHostnames.size === 0) {
+    return json({ error: "Security verification unavailable" }, 503);
+  }
+  if (!allowedHostnames.has(requestHostname)) {
+    return json({ error: "Forbidden" }, 403);
+  }
+
+  const turnstileToken = typeof data.turnstileToken === "string" ? data.turnstileToken : "";
+  if (!turnstileToken || turnstileToken.length > 2048) {
+    return json({ error: "Security verification failed" }, 403);
+  }
+
+  try {
+    const verificationBody = new URLSearchParams();
+    verificationBody.set("secret", env.TURNSTILE_SECRET_KEY);
+    verificationBody.set("response", turnstileToken);
+    const clientIp = request.headers.get("CF-Connecting-IP");
+    if (clientIp) verificationBody.set("remoteip", clientIp);
+
+    const verificationResponse = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: verificationBody,
+      signal: AbortSignal.timeout(10_000)
+    });
+    if (!verificationResponse.ok) {
+      return json({ error: "Security verification unavailable" }, 503);
+    }
+
+    const verification = await verificationResponse.json() as {
+      success?: boolean;
+      hostname?: string;
+      action?: string;
+    };
+    const isPreview = requestHostname.endsWith(".pages.dev");
+    const verifiedHostname = (verification.hostname || "").toLowerCase();
+    // The official Cloudflare test secret returns example.com and may omit action.
+    // Those exceptions are restricted to Pages preview hosts, never production.
+    const validHostname = verifiedHostname === requestHostname ||
+      (isPreview && verifiedHostname === "example.com");
+    const validAction = verification.action === "contact" ||
+      (isPreview && (verification.action === "test" || !verification.action));
+    if (verification.success !== true || !validHostname || !validAction) {
+      return json({ error: "Security verification failed" }, 403);
+    }
+  } catch {
+    return json({ error: "Security verification unavailable" }, 503);
   }
 
   // Honeypot: silently accept automated submissions without sending email.
