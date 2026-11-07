@@ -86,7 +86,7 @@ const TOOL_CONFIGS = {
       'Wi-Fi details are encoded in the QR code and are not sent to our servers for QR generation'
     ],
     faqs: [
-      { q: 'Do guests need an app to scan the Wi-Fi code?', a: 'No! Both modern iOS (iPhone Camera) and Android (Google Lens / Camera) automatically recognize Wi-Fi QR codes and prompt the user to join the network.' },
+      { q: 'Do guests need an app to scan the Wi-Fi code?', a: 'Many recent iPhone and Android devices recognize Wi-Fi QR codes in the camera or QR scanner. Scan the code, review the network name, and follow the device prompt to connect. Support varies by device and operating system.' },
       { q: 'Is it safe to generate my Wi-Fi QR code here?', a: 'QR generation takes place in your browser. The Wi-Fi details entered for generation are not sent to our servers.' },
       { q: 'What happens if I change my Wi-Fi password in the future?', a: 'Static Wi-Fi QR codes contain the exact password you entered. If you change your router password, simply generate and print a new code.' }
     ]
@@ -103,8 +103,8 @@ const TOOL_CONFIGS = {
       'Embed official WhatsApp logo inside the QR code with one click'
     ],
     faqs: [
-      { q: 'How does WhatsApp QR code routing work?', a: 'The QR code encodes a standard https://wa.me/number link. When scanned by a phone camera, it immediately launches the WhatsApp app with your designated recipient.' },
-      { q: 'Do I need to include the country code?', a: 'Yes! Always include the full international country calling code (e.g. +1 for USA/Canada, +44 for UK, +971 for UAE) without dashes or spaces.' },
+      { q: 'How does WhatsApp QR code routing work?', a: 'The QR code contains a wa.me link for the phone number you enter. Scanning opens the chat in WhatsApp when available, or a compatible browser flow. The visitor must choose to send any message.' },
+      { q: 'Do I need to include the country code?', a: 'Yes. Enter the country calling code and phone number in international format. WhatsApp wa.me links use digits only, without a leading plus sign, spaces, brackets, or dashes.' },
       { q: 'Can users edit the pre-filled message before sending?', a: 'Yes. The pre-filled message appears in their text box, and they can freely modify it before hitting the send button.' }
     ]
   },
@@ -144,7 +144,7 @@ const TOOL_CONFIGS_AR: typeof TOOL_CONFIGS = {
     subtitle: 'أنشئ رمز Wi-Fi يتيح لضيوفك الاتصال بسهولة في المنزل أو المقهى أو المكتب. يعمل مع أجهزة iPhone وAndroid دون الحاجة إلى كتابة كلمة المرور.',
     benefits: ['يمسح الضيف الرمز بكاميرا الهاتف ثم يختار الاتصال بالشبكة', 'يدعم أنواع الحماية WPA وWPA2 وWPA3 وWEP والشبكات المفتوحة', 'يدعم خيار الشبكات المخفية التي لا تبث اسمها', 'تُضمّن بيانات Wi-Fi في الرمز ولا تُرسل إلى خوادمنا أثناء إنشاء الرمز'],
     faqs: [
-      { q: 'هل يحتاج الضيوف إلى تطبيق لمسح رمز Wi-Fi؟', a: 'لا. تتعرف معظم أجهزة iPhone وAndroid الحديثة على رموز Wi-Fi باستخدام الكاميرا أو Google Lens وتعرض خيار الاتصال.' },
+      { q: 'هل يحتاج الضيوف إلى تطبيق لمسح رمز Wi-Fi؟', a: 'تتعرف أجهزة iPhone وAndroid الحديثة في الغالب على رموز Wi-Fi بالكاميرا أو ماسح QR. امسح الرمز وتحقق من اسم الشبكة ثم اتبع تعليمات الاتصال؛ وقد يختلف الدعم حسب الجهاز والنظام.' },
       { q: 'هل إنشاء رمز Wi-Fi هنا آمن؟', a: 'تتم معالجة بيانات الشبكة محلياً داخل متصفحك، ولا تُرسل إلى خوادمنا لإنشاء الرمز.' },
       { q: 'ماذا أفعل إذا غيّرت كلمة مرور الشبكة؟', a: 'يتضمن الرمز الثابت كلمة المرور القديمة؛ أنشئ رمزاً جديداً باستخدام كلمة المرور المحدّثة ثم اطبعه.' }
     ]
@@ -154,8 +154,8 @@ const TOOL_CONFIGS_AR: typeof TOOL_CONFIGS = {
     subtitle: 'أنشئ رمز واتساب يفتح محادثة مباشرة مع رسالة ترحيب جاهزة. مناسب لخدمة العملاء والمنشورات وعلب المنتجات والقوائم.',
     benefits: ['يفتح للعملاء محادثة مباشرة في واتساب عند مسح الرمز', 'أضف رسالة ترحيب مسبقة لتسهيل استقبال الاستفسارات', 'يعمل دولياً مع أرقام الهواتف من مختلف البلدان', 'أضف شعار واتساب الرسمي داخل رمز QR بنقرة واحدة'],
     faqs: [
-      { q: 'كيف يعمل رمز QR الخاص بواتساب؟', a: 'يحتوي الرمز على رابط wa.me القياسي. عند مسحه، يفتح الهاتف تطبيق واتساب للمحادثة مع الرقم المحدد.' },
-      { q: 'هل يجب تضمين رمز الدولة؟', a: 'نعم. أدخل رمز الاتصال الدولي كاملاً مع الرقم، دون شرطات أو مسافات.' },
+      { q: 'كيف يعمل رمز QR الخاص بواتساب؟', a: 'يحتوي الرمز على رابط wa.me للرقم الذي تدخله. يفتح المسح محادثة واتساب عند توفر التطبيق أو مسارًا مناسبًا في المتصفح، ولا تُرسل الرسالة إلا بعد تأكيد المستخدم.' },
+      { q: 'هل يجب تضمين رمز الدولة؟', a: 'نعم. استخدم رمز الدولة والرقم بالصيغة الدولية. روابط wa.me تتطلب أرقامًا فقط دون علامة + أو مسافات أو أقواس أو شرطات.' },
       { q: 'هل يستطيع المستخدم تعديل الرسالة قبل إرسالها؟', a: 'نعم. تظهر الرسالة الجاهزة في مربع الكتابة ويمكن للمستخدم تعديلها قبل الإرسال.' }
     ]
   },
