@@ -11,9 +11,9 @@ export interface PageMeta {
 export const SEO_METADATA: Record<PageId, Record<Language, PageMeta>> = {
   home: {
     en: {
-      title: "QR GENIUS – Free Multilingual QR Code Generator | Create. Scan. Connect.",
-      description: "Generate free, customizable QR codes instantly. Support for URLs, Wi-Fi, WhatsApp, vCards, and social media with vector SVG, high-res PNG, and PDF downloads.",
-      keywords: "free qr code generator, custom qr code, vector qr svg, wifi qr code, whatsapp qr, vcard qr code",
+      title: "Free QR Code Generator Online | QR Genius",
+      description: "Create free QR codes online for links, Wi-Fi, WhatsApp, and more. Customize colors and logos, then download PNG, SVG, or PDF with QR Genius.",
+      keywords: "free qr code generator online, qr code generator free online, create qr code free, website qr code",
       canonicalPath: "/",
       h1: "Create. Scan. Connect. The Free High-Speed QR Generator"
     },
@@ -71,9 +71,9 @@ export const SEO_METADATA: Record<PageId, Record<Language, PageMeta>> = {
   },
   url: {
     en: {
-      title: "URL to QR Code Generator – Free Website Link QR | QR GENIUS",
-      description: "Convert any URL to a free QR code online. Paste a website link, customize colors or add a logo, and download a printable PNG or SVG QR code.",
-      keywords: "url to qr code, link qr code generator, website qr code, free webpage qr",
+      title: "QR Code for Website – Free URL QR Generator | QR Genius",
+      description: "Create a QR code for your website free. Turn a link into a static QR code, customize its colors or logo, and download PNG or SVG with QR Genius.",
+      keywords: "qr code for website, turn link into qr code, create qr code for website, url to qr code",
       canonicalPath: "/tools/url",
       h1: "URL to QR Code Generator for Website Links"
     },
