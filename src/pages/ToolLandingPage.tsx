@@ -60,18 +60,20 @@ const TOOL_CONFIGS = {
   url: {
     type: 'url' as QRType,
     badge: 'Official Web Tool',
-    title: 'Free Website URL QR Code Generator',
-    subtitle: 'Turn any website, landing page, blog post, or online shop URL into a static QR code with custom colors and an optional logo.',
+    title: 'Free QR Code for Website Links',
+    subtitle: 'Turn a link into a QR code for your website, online store, portfolio, or menu. Create a static code for free, customize its colors or logo, and download it for print or sharing.',
     benefits: [
-      'Instant redirects to any web address with zero middleman redirection',
-      'Fully compatible with Google Analytics and UTM campaign tracking tags',
-      'Download infinite-resolution vector SVG for banners and packaging',
+      'The QR code contains your website URL directly, without a QR Genius redirect',
+      'Add UTM parameters to your URL before generating the code to track visits in your own analytics',
+      'Download a scalable SVG or high-resolution PNG for flyers, business cards, and packaging',
       'Static QR codes contain your URL directly and do not depend on a QR Genius redirect subscription'
     ],
     faqs: [
       { q: 'Do URL QR codes generated here ever expire?', a: 'QR GENIUS creates a static QR code containing your web address. The code itself has no built-in expiry, but it will only open the page while that address and website remain available.' },
       { q: 'Can I include UTM tracking parameters in the URL?', a: 'Yes! Simply append your UTM parameters (e.g. ?utm_source=flyer&utm_medium=qr) directly into the URL input field.' },
-      { q: 'What is the best format to print on physical flyers?', a: 'We recommend downloading the Vector SVG format or the Ultra High-Res 2048px PNG. Both ensure crisp sharpness even on large outdoor banners.' }
+      { q: 'What is the best format to print on physical flyers?', a: 'Use SVG for a scalable vector file, or a high-resolution PNG for print. Test the finished code at its intended printed size before distributing it.' },
+      { q: 'How do I turn a website link into a QR code?', a: 'Paste the full website address into the URL field, generate the QR code, scan it with your phone to verify the destination, and download the result.' },
+      { q: 'Can I change the website address after printing?', a: 'A static QR code stores the original link. To point it to a different URL, create and print a new code, or manage the destination on a URL you control.' }
     ]
   },
   wifi: {
