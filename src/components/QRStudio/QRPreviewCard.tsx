@@ -113,7 +113,7 @@ export const QRPreviewCard: React.FC<QRPreviewCardProps> = ({
     try {
       const exportCanvas = await renderQRToCanvas(config, resolution);
       const filename = `qrgenius_${type}_${Date.now()}.png`;
-      downloadCanvasPNG(exportCanvas, filename);
+      await downloadCanvasPNG(exportCanvas, filename);
       trackEvent('qr_code_downloaded', { qr_type: type, format: 'png', resolution });
       autoSaveHistory(exportCanvas);
     } catch (e) {

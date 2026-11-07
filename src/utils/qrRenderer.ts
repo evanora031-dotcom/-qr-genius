@@ -579,14 +579,22 @@ export function renderQRToSVG(config: QRConfig, size: number = 1000): string {
 }
 
 // Download Canvas as PNG
-export function downloadCanvasPNG(canvas: HTMLCanvasElement, filename: string = 'qrgenius-code.png') {
-  const url = canvas.toDataURL('image/png');
+export async function downloadCanvasPNG(canvas: HTMLCanvasElement, filename: string = 'qrgenius-code.png'): Promise<void> {
+  const blob = await new Promise<Blob | null>((resolve) => canvas.toBlob(resolve, 'image/png'));
+  if (!blob) throw new Error('Could not encode QR code as PNG');
+
+  const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
   a.href = url;
   a.download = filename;
   document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
+  try {
+    a.click();
+  } finally {
+    a.remove();
+    // Give the browser time to begin reading the object URL before releasing it.
+    window.setTimeout(() => URL.revokeObjectURL(url), 60_000);
+  }
 }
 
 // Download SVG String as File
