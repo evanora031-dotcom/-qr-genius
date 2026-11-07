@@ -1,0 +1,48 @@
+name: Render QR Genius Facebook promo video
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - scripts/render-qr-genius-reel.py
+      - .github/workflows/render-qr-genius-reel.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - name: Check out current site
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install media dependencies
+        run: |
+          python -m pip install --disable-pip-version-check pillow qrcode
+          command -v ffmpeg || (sudo apt-get update && sudo apt-get install -y ffmpeg)
+      - name: Render original 18-second MP4
+        run: python scripts/render-qr-genius-reel.py
+      - name: Validate MP4
+        run: |
+          test -s public/media/qr-genius-intro.mp4
+          ffprobe -v error -select_streams v:0 -show_entries stream=codec_name,width,height -of csv=p=0 public/media/qr-genius-intro.mp4
+      - name: Publish video asset to the website
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add public/media/qr-genius-intro.mp4
+          if git diff --cached --quiet; then
+            echo "Video is already current."
+            exit 0
+          fi
+          git commit -m "Publish QR Genius Facebook intro video"
+          git push origin HEAD:main
