@@ -58,7 +58,7 @@ export const HistoryDrawer: React.FC<HistoryDrawerProps> = ({
     e.stopPropagation();
     try {
       const canvas = await renderQRToCanvas(item.config, 1024);
-      downloadCanvasPNG(canvas, `qrgenius_${item.type}_${Date.now()}.png`);
+      await downloadCanvasPNG(canvas, `qrgenius_${item.type}_${Date.now()}.png`);
     } catch (err) {
       console.error(err);
     }
