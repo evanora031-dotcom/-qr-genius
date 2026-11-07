@@ -96,18 +96,20 @@ const TOOL_CONFIGS = {
   whatsapp: {
     type: 'whatsapp' as QRType,
     badge: 'Direct Click-to-Chat',
-    title: 'WhatsApp Direct Chat QR Code Generator',
-    subtitle: 'Generate a click-to-message WhatsApp QR code with a pre-filled greeting. Ideal for customer service desks, flyers, product boxes, and menus.',
+    title: 'Free WhatsApp QR Code Generator for Direct Chat',
+    subtitle: 'Create a free WhatsApp QR code for your phone number, with an optional pre-filled message. Let customers scan your code to open a WhatsApp chat from flyers, menus, business cards, or packaging.',
     benefits: [
-      'Customers tap or scan to open a conversation directly in WhatsApp',
-      'Pre-fill custom greeting messages to triage inquiries quickly',
-      'Works internationally across all countries and mobile carriers',
+      'Share a WhatsApp click-to-chat link through a scannable QR code',
+      'Add an optional pre-filled message that visitors can edit before sending',
+      'Use your WhatsApp number in international format, including its country calling code',
       'Embed official WhatsApp logo inside the QR code with one click'
     ],
     faqs: [
       { q: 'How does WhatsApp QR code routing work?', a: 'The QR code contains a wa.me link for the phone number you enter. Scanning opens the chat in WhatsApp when available, or a compatible browser flow. The visitor must choose to send any message.' },
       { q: 'Do I need to include the country code?', a: 'Yes. Enter the country calling code and phone number in international format. WhatsApp wa.me links use digits only, without a leading plus sign, spaces, brackets, or dashes.' },
-      { q: 'Can users edit the pre-filled message before sending?', a: 'Yes. The pre-filled message appears in their text box, and they can freely modify it before hitting the send button.' }
+      { q: 'Can users edit the pre-filled message before sending?', a: 'Yes. The pre-filled message appears in their text box, and they can modify it before choosing to send.' },
+      { q: 'How do I create a WhatsApp QR code for free?', a: 'Enter your WhatsApp phone number with the country code, optionally add a message, generate the QR code, and scan-test it before downloading or printing.' },
+      { q: 'Does scanning a WhatsApp QR code send a message automatically?', a: 'No. Scanning opens the WhatsApp chat or a compatible link flow. The visitor decides whether to send the message.' }
     ]
   },
   business: {
