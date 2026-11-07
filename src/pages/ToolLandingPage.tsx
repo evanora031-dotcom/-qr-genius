@@ -399,6 +399,26 @@ export const ToolLandingPage: React.FC<ToolLandingPageProps> = ({
           </div>
         </div>
 
+        {/* Crawlable, localized links to related QR tools */}
+        <nav aria-label={lang === 'ar' ? 'أدوات QR ذات صلة' : lang === 'fr' ? 'Outils QR associés' : lang === 'es' ? 'Herramientas QR relacionadas' : 'Related QR code tools'} className="pt-8 border-t border-slate-200">
+          <h2 className="text-xl font-bold text-slate-900 mb-4">
+            {lang === 'ar' ? 'جرّب أدوات QR أخرى' : lang === 'fr' ? 'Découvrez d’autres outils QR' : lang === 'es' ? 'Prueba otras herramientas QR' : 'Explore more free QR code tools'}
+          </h2>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            {(['url', 'wifi', 'whatsapp', 'business'] as const).filter((related) => related !== tool).map((related) => {
+              const relatedPage: PageId = related === 'business' ? 'business' : related;
+              const path = related === 'business' ? '/tools/business-vcard' : `/tools/${related}`;
+              const href = `${lang === 'en' ? '' : `/${lang}`}${path}`;
+              const label = lang === 'ar' ? TOOL_CONFIGS_AR[related].title : lang === 'fr' ? TOOL_CONFIGS_FR[related].title : lang === 'es' ? TOOL_CONFIGS_ES[related].title : TOOL_CONFIGS[related].title;
+              return (
+                <a key={related} href={href} onClick={(event) => { event.preventDefault(); onNavigate(relatedPage); }} className="rounded-xl border border-slate-200 bg-white p-4 text-sm font-semibold text-indigo-700 hover:border-indigo-300 hover:bg-indigo-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-600">
+                  {label} <ArrowRight className="inline-block w-4 h-4 ms-1" aria-hidden="true" />
+                </a>
+              );
+            })}
+          </div>
+        </nav>
+
         {/* Ad Placement */}
         <AdPlacement lang={lang} format="horizontal-leaderboard" />
       </div>
