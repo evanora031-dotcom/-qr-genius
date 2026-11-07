@@ -25,15 +25,15 @@ export const SEO_METADATA: Record<PageId, Record<Language, PageMeta>> = {
       h1: "أنشئ. امسح. تواصل. المولد المجاني فائق السرعة لرموز QR"
     },
     fr: {
-      title: "QR GENIUS – Générateur de QR Code Gratuit & Multilingue | Créer. Scanner. Connecter.",
-      description: "Générez des QR codes gratuits et personnalisés instantanément. Compatible URLs, Wi-Fi, WhatsApp, vCards avec exports vectoriels SVG, PNG haute définition et PDF.",
+      title: "Générateur de QR Code Gratuit en Ligne | QR Genius",
+      description: "Créez un QR code gratuit en ligne pour un lien, le Wi-Fi ou WhatsApp. Personnalisez couleurs et logo, puis téléchargez en PNG, SVG ou PDF sans inscription.",
       keywords: "generateur qr code gratuit, qr code vectoriel svg, qr wifi, qr whatsapp, vcard qr",
       canonicalPath: "/",
       h1: "Créer. Scanner. Connecter. Le générateur de QR code rapide et gratuit"
     },
     es: {
-      title: "QR GENIUS – Generador de Códigos QR Gratis y Multilingüe | Crear. Escanear. Conectar.",
-      description: "Genere códigos QR gratuitos y personalizados al instante. Compatible con URLs, Wi-Fi, WhatsApp, vCards y redes sociales con descargas en SVG, PNG de alta resolución y PDF.",
+      title: "Generador de Códigos QR Gratis Online | QR Genius",
+      description: "Crea códigos QR gratis online para enlaces, Wi-Fi o WhatsApp. Personaliza colores y logotipo, y descarga PNG, SVG o PDF sin registrarte.",
       keywords: "generador codigo qr gratis, crear qr personalizado, qr wifi, qr whatsapp, tarjeta vcard qr",
       canonicalPath: "/",
       h1: "Crear. Escanear. Conectar. El generador de códigos QR gratuito de alta velocidad"
@@ -85,15 +85,15 @@ export const SEO_METADATA: Record<PageId, Record<Language, PageMeta>> = {
       h1: "مولد رموز QR لروابط المواقع الإلكترونية"
     },
     fr: {
-      title: "Générateur QR Code URL Gratuit | Lien de Site Web | QR GENIUS",
-      description: "Convertissez une adresse web en QR code personnalisable. Ajoutez des couleurs ou un logo, puis téléchargez-le pour le partager ou l’imprimer.",
+      title: "QR Code pour Site Web Gratuit | QR Genius",
+      description: "Transformez un lien de site web en QR code gratuit. Ajoutez vos couleurs ou un logo et téléchargez-le en PNG ou SVG pour le partager ou l’imprimer.",
       keywords: "lien vers qr code, generateur qr url, qr code site internet",
       canonicalPath: "/tools/url",
       h1: "Générateur de QR Code pour URL de Site Web"
     },
     es: {
-      title: "Generador QR para URL Gratis | Código para Enlaces Web | QR GENIUS",
-      description: "Convierte una dirección web en un código QR personalizable. Añade colores o un logotipo y descárgalo para compartir o imprimir.",
+      title: "Crear Código QR para un Enlace Gratis | QR Genius",
+      description: "Convierte el enlace de tu web en un código QR gratis. Personaliza los colores o añade un logotipo y descárgalo en PNG o SVG.",
       keywords: "convertir enlace a qr, generador qr url, qr pagina web",
       canonicalPath: "/tools/url",
       h1: "Generador de Códigos QR para Enlaces Web"
