@@ -71,11 +71,11 @@ export const SEO_METADATA: Record<PageId, Record<Language, PageMeta>> = {
   },
   url: {
     en: {
-      title: "Free URL to QR Code Generator | Website Link QR | QR GENIUS",
-      description: "Turn a website URL into a customizable QR code. Add colors or a logo, then download your code for digital sharing or print.",
+      title: "URL to QR Code Generator – Free Website Link QR | QR GENIUS",
+      description: "Convert any URL to a free QR code online. Paste a website link, customize colors or add a logo, and download a printable PNG or SVG QR code.",
       keywords: "url to qr code, link qr code generator, website qr code, free webpage qr",
       canonicalPath: "/tools/url",
-      h1: "Website URL QR Code Generator"
+      h1: "URL to QR Code Generator for Website Links"
     },
     ar: {
       title: "مولد QR للرابط والموقع الإلكتروني مجاناً | QR Genius",
@@ -161,11 +161,11 @@ export const SEO_METADATA: Record<PageId, Record<Language, PageMeta>> = {
   },
   business: {
     en: {
-      title: "Free vCard QR Code Generator | Digital Business Card | QR GENIUS",
-      description: "Create a vCard QR code with your contact details. People can scan it to open a contact card and save the information on a compatible phone.",
+      title: "Business Card QR Code Generator – Free vCard | QR GENIUS",
+      description: "Make a free business card QR code with a vCard. Add your name, company, phone and email so people can scan and save your contact details.",
       keywords: "vcard qr code, digital business card qr, contact qr generator, save contact qr",
       canonicalPath: "/tools/business-vcard",
-      h1: "Digital vCard Business Card QR Generator"
+      h1: "Business Card QR Code Generator (vCard)"
     },
     ar: {
       title: "مولد QR لبطاقة العمل الرقمية vCard مجاناً | QR Genius",
