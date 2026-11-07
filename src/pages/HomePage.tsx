@@ -101,7 +101,7 @@ export const HomePage: React.FC<HomePageProps> = ({ lang, onNavigate }) => {
                 </div>
                 <div className="flex items-center gap-1.5">
                   <Download className="w-4 h-4 text-purple-600" />
-                  <span>{lang === 'ar' ? 'يتضمن SVG وPDF متجهيين' : lang === 'fr' ? 'SVG vectoriel et PDF inclus' : lang === 'es' ? 'Incluye SVG vectorial y PDF' : 'Vector SVG &amp; PDF Included'}</span>
+                  <span>{lang === 'ar' ? 'يتضمن SVG وPDF متجهيين' : lang === 'fr' ? 'SVG vectoriel et PDF inclus' : lang === 'es' ? 'Incluye SVG vectorial y PDF' : 'Vector SVG & PDF Included'}</span>
                 </div>
               </div>
             </div>
