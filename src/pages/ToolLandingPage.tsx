@@ -79,18 +79,20 @@ const TOOL_CONFIGS = {
   wifi: {
     type: 'wifi' as QRType,
     badge: 'Connect Without Passwords',
-    title: 'Wi-Fi Network QR Code Generator',
-    subtitle: 'Create a clean scan-to-connect Wi-Fi QR code for your guests, Airbnb, café, or office. Works natively on iPhone and Android with zero typing required.',
+    title: 'Free WiFi QR Code Generator for Guests',
+    subtitle: 'Create a free WiFi QR code for your network name and password. Guests can scan it to join your home, café, office, or rental Wi-Fi network on compatible iPhone and Android devices.',
     benefits: [
-      'Guests scan with their built-in camera and tap "Join Network" immediately',
-      'Supports WPA, WPA2, WPA3 personal security, WEP, and Open networks',
+      'Let guests scan a QR code instead of manually typing a Wi-Fi password on supported phones',
+      'Encode supported Wi-Fi network security settings, including personal WPA/WPA2, WEP, and open networks',
       'Option to support hidden SSIDs (non-broadcasted networks)',
       'Wi-Fi details are encoded in the QR code and are not sent to our servers for QR generation'
     ],
     faqs: [
       { q: 'Do guests need an app to scan the Wi-Fi code?', a: 'Many recent iPhone and Android devices recognize Wi-Fi QR codes in the camera or QR scanner. Scan the code, review the network name, and follow the device prompt to connect. Support varies by device and operating system.' },
       { q: 'Is it safe to generate my Wi-Fi QR code here?', a: 'QR generation takes place in your browser. The Wi-Fi details entered for generation are not sent to our servers.' },
-      { q: 'What happens if I change my Wi-Fi password in the future?', a: 'Static Wi-Fi QR codes contain the exact password you entered. If you change your router password, simply generate and print a new code.' }
+      { q: 'What happens if I change my Wi-Fi password in the future?', a: 'Static Wi-Fi QR codes contain the exact password you entered. If you change your router password, generate and print a new code.' },
+      { q: 'How do I make a WiFi QR code for free?', a: 'Enter your Wi-Fi network name (SSID), select its security type, add the password if needed, and generate the code. Test it with a compatible phone before sharing it.' },
+      { q: 'Can I print a WiFi QR code for guests?', a: 'Yes. Download the QR code and place it where guests can scan it, such as a reception desk or guest information card. Remember that anyone who can scan it may be able to access the encoded Wi-Fi credentials.' }
     ]
   },
   whatsapp: {
