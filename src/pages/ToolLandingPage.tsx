@@ -113,18 +113,20 @@ const TOOL_CONFIGS = {
   business: {
     type: 'vcard' as QRType,
     badge: 'Digital Business Card',
-    title: 'vCard Digital Business Card QR Code Generator',
-    subtitle: 'Turn your contact info into a modern digital business card. When colleagues or clients scan your code, your name, phone, email, company, and website are saved directly to their phonebook.',
+    title: 'Free Business Card QR Code Generator (vCard)',
+    subtitle: 'Create a free QR code for your business card using the vCard format. Add your name, company, phone number, email, and website so people can scan your card and save your contact details.',
     benefits: [
-      'Eliminates lost paper business cards and manual contact typing errors',
+      'Share your contact details from printed business cards, badges, and digital profiles',
       'Stores full contact profiles: Name, Job Title, Company, Phone, Email, Address & Notes',
-      'Industry-standard vCard 3.0 format recognized by iOS Contacts and Google Contacts',
+      'Uses the vCard 3.0 format supported by many smartphone contact apps',
       'Ideal for conferences, badges, email signatures, and resume portfolios'
     ],
     faqs: [
-      { q: 'How does vCard scanning work on smartphones?', a: 'When scanned with an iPhone or Android camera, a prompt appears: "Add to Contacts". Tapping it immediately fills in all contact fields for one-tap saving.' },
+      { q: 'How does vCard scanning work on smartphones?', a: 'Compatible phones and contact apps can recognize the vCard data and offer to create a new contact. The exact prompt and supported fields depend on the device.' },
       { q: 'Is there a limit on how many people can scan my vCard QR?', a: 'The QR code itself does not impose a scan counter. Successful scanning depends on the printed or displayed code and the device used.' },
-      { q: 'Can I add my company logo to the center of the vCard QR?', a: 'Yes! Open our Full Studio designer to upload your company logo and adjust custom colors.' }
+      { q: 'Can I add my company logo to the center of the vCard QR?', a: 'Yes. Open our Full Studio designer to upload your company logo and adjust custom colors. Scan-test the finished QR code before printing.' },
+      { q: 'How do I make a QR code for my business card?', a: 'Enter your contact details, generate the vCard QR code, scan it with a phone to check the information, and download the code for your business card design.' },
+      { q: 'Can I update my contact details after printing?', a: 'A static vCard QR code stores the contact details in the code itself. If your phone number or email changes, generate and print a new QR code.' }
     ]
   }
 };
