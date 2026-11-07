@@ -55,3 +55,21 @@ test('QR Studio guide links to four specialized tools in all supported languages
     assert.match(html, /<ol\b/);
   }
 });
+
+import { ToolLandingPage } from '../src/pages/ToolLandingPage';
+
+test('related tool pages expose crawlable localized links to the other three tools', () => {
+  const toolPaths = { url: '/tools/url', wifi: '/tools/wifi', whatsapp: '/tools/whatsapp', business: '/tools/business-vcard' } as const;
+  for (const lang of languages) {
+    for (const tool of Object.keys(toolPaths) as Array<keyof typeof toolPaths>) {
+      const html = renderToStaticMarkup(React.createElement(ToolLandingPage, {
+        tool, lang, onNavigate: () => {}, onHistoryUpdated: () => {}
+      }));
+      for (const [other, path] of Object.entries(toolPaths)) {
+        if (other === tool) continue;
+        const href = lang === 'en' ? path : `/${lang}${path}`;
+        assert.ok(html.includes(`href="${href}"`), `Missing related link from ${lang}/${tool} to ${href}`);
+      }
+    }
+  }
+});
