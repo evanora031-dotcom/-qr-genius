@@ -30,6 +30,8 @@ jobs:
         run: bunx tsx --test tests/contact-api.test.ts
       - name: QR payload validation tests
         run: bunx tsx --test tests/qr-formatter.test.ts
+      - name: PNG download regression tests
+        run: bunx tsx --test tests/qr-download.test.ts
       - name: QR preview interaction tests
         run: bunx tsx --test tests/qr-preview.test.ts
       - name: Mobile contact form accessibility tests
