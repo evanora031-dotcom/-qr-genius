@@ -578,15 +578,26 @@ export function renderQRToSVG(config: QRConfig, size: number = 1000): string {
   </svg>`;
 }
 
-// Download Canvas as PNG
-export function downloadCanvasPNG(canvas: HTMLCanvasElement, filename: string = 'qrgenius-code.png') {
-  const url = canvas.toDataURL('image/png');
+// Use a Blob URL so PNG exports do not depend on large data-URL downloads.
+export async function downloadCanvasPNG(canvas: HTMLCanvasElement, filename: string = 'qrgenius-code.png'): Promise<void> {
+  const blob = await new Promise<Blob>((resolve, reject) => {
+    canvas.toBlob((result) => {
+      if (result) resolve(result);
+      else reject(new Error('PNG export failed: canvas returned no image.'));
+    }, 'image/png');
+  });
+  const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
-  a.href = url;
-  a.download = filename;
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
+  try {
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+  } finally {
+    a.remove();
+    // Allow the browser to consume the download before releasing its URL.
+    setTimeout(() => URL.revokeObjectURL(url), 60_000);
+  }
 }
 
 // Download SVG String as File
