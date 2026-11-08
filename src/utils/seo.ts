@@ -101,11 +101,11 @@ export const SEO_METADATA: Record<PageId, Record<Language, PageMeta>> = {
   },
   wifi: {
     en: {
-      title: "Free Wi-Fi QR Code Generator | Scan to Connect | QR GENIUS",
-      description: "Create a Wi-Fi QR code so guests can join your network without typing the password. Customize the code and share it at home, work, or your café.",
+      title: "Free WiFi QR Code Generator for Guests | QR Genius",
+      description: "Make a free WiFi QR code for guests. Enter your network name, security type and password, then download a scannable code for your home, café or office.",
       keywords: "wifi qr code, scan to connect wifi, guest wifi qr code, generate wifi qr, free wifi barcode",
       canonicalPath: "/tools/wifi",
-      h1: "Scan-to-Connect Wi-Fi QR Code Generator"
+      h1: "Free WiFi QR Code Generator for Guests"
     },
     ar: {
       title: "مولد QR للواي فاي مجاناً | مشاركة الشبكة بالمسح | QR Genius",
