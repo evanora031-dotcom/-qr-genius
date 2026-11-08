@@ -290,7 +290,8 @@ const blogEntries = [
   ...blogSlugs.map(slug => `  <url>\n    <loc>${baseUrl}/blog/${slug}</loc>\n    <xhtml:link rel="alternate" hreflang="ar" href="${baseUrl}/blog/${slug}" />\n  </url>`),
   `  <url>\n    <loc>${baseUrl}/en/blog/</loc>\n  </url>`,
   `  <url>\n    <loc>${baseUrl}/en/blog/how-to-make-wifi-qr-code-for-guests.html</loc>\n  </url>`,
-  `  <url>\n    <loc>${baseUrl}/en/blog/how-to-create-whatsapp-qr-code-for-customers.html</loc>\n  </url>`
+  `  <url>\n    <loc>${baseUrl}/en/blog/how-to-create-whatsapp-qr-code-for-customers.html</loc>\n  </url>`,
+  `  <url>\n    <loc>${baseUrl}/en/blog/how-to-make-business-card-qr-code.html</loc>\n  </url>`
 ];
 
 const sitemap = [
