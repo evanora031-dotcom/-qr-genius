@@ -70,7 +70,7 @@ export const TypeSelector: React.FC<TypeSelectorProps> = ({
           <label className="text-xs font-bold uppercase tracking-wider text-slate-700">
             {lang === 'ar' ? 'اختر نوع رمز QR' : 'Select QR Code Type'}
           </label>
-          <span className="hidden sm:inline text-slate-400 text-xs ml-2">· {lang === 'ar' ? '12 فئة' : '12 Categories'}</span>
+          <span className="hidden sm:inline text-slate-600 text-xs ml-2">· {lang === 'ar' ? '12 فئة' : '12 Categories'}</span>
         </div>
 
         {/* 3D vs Flat Style Toggle */}
@@ -145,7 +145,7 @@ export const TypeSelector: React.FC<TypeSelectorProps> = ({
                 <div className="text-xs font-bold truncate text-slate-900 group-hover:text-indigo-600 transition-colors">
                   {info.label}
                 </div>
-                <div className="text-[10px] text-slate-400 truncate mt-0.5">
+                <div className="text-[10px] text-slate-600 truncate mt-0.5">
                   {info.desc}
                 </div>
               </div>
