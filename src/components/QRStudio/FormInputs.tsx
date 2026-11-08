@@ -108,10 +108,10 @@ export const FormInputs: React.FC<FormInputsProps> = ({
                 value={typeof rawPayload === 'string' ? rawPayload : ''}
                 onChange={(e) => onChangePayload(e.target.value)}
                 placeholder={t.forms.urlPlaceholder}
-                className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-600/30 focus:border-indigo-600 transition-colors"
+                className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm text-slate-900 placeholder:text-slate-600 focus:outline-none focus:ring-2 focus:ring-indigo-600/30 focus:border-indigo-600 transition-colors"
               />
             </div>
-            <p className="mt-1 text-[11px] text-slate-400">
+            <p className="mt-1 text-[11px] text-slate-600">
               Enter any standard webpage link (e.g. https://yourdomain.com/landing).
             </p>
           </div>
@@ -128,9 +128,9 @@ export const FormInputs: React.FC<FormInputsProps> = ({
               value={typeof rawPayload === 'string' ? rawPayload : ''}
               onChange={(e) => onChangePayload(e.target.value)}
               placeholder={t.forms.textPlaceholder}
-              className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-600/30 focus:border-indigo-600 transition-colors resize-y"
+              className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm text-slate-900 placeholder:text-slate-600 focus:outline-none focus:ring-2 focus:ring-indigo-600/30 focus:border-indigo-600 transition-colors resize-y"
             />
-            <div className="flex justify-between items-center mt-1 text-[11px] text-slate-400">
+            <div className="flex justify-between items-center mt-1 text-[11px] text-slate-600">
               <span>{ui.plainHint}</span>
               <span>{(rawPayload || '').length} {t.forms.characterCount}</span>
             </div>
@@ -152,7 +152,7 @@ export const FormInputs: React.FC<FormInputsProps> = ({
                     value={wifi.ssid || ''}
                     onChange={(e) => updateField('ssid', e.target.value)}
                     placeholder={ui.ssid}
-                    className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-600/30 focus:border-indigo-600"
+                    className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm text-slate-900 placeholder:text-slate-600 focus:outline-none focus:ring-2 focus:ring-indigo-600/30 focus:border-indigo-600"
                   />
                 </div>
 
@@ -168,7 +168,7 @@ export const FormInputs: React.FC<FormInputsProps> = ({
                         disabled={wifi.encryption === 'nopass'}
                         onChange={(e) => updateField('password', e.target.value)}
                         placeholder={ui.password}
-                        className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-600/30 focus:border-indigo-600 disabled:bg-slate-100"
+                        className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm text-slate-900 placeholder:text-slate-600 focus:outline-none focus:ring-2 focus:ring-indigo-600/30 focus:border-indigo-600 disabled:bg-slate-100"
                       />
                       {wifi.encryption !== 'nopass' && (
                         <button
@@ -325,7 +325,7 @@ export const FormInputs: React.FC<FormInputsProps> = ({
               placeholder="+1 (555) 234-5678"
               className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-indigo-600/30 focus:border-indigo-600"
             />
-            <p className="mt-1 text-[11px] text-slate-400">
+            <p className="mt-1 text-[11px] text-slate-600">
               {ui.dialHint}
             </p>
           </div>
