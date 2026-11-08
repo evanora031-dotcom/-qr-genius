@@ -180,6 +180,8 @@ function renderPage(locale: typeof locales[number], page: typeof pages[number]):
   html = setHeadTag(html, /<meta\s+property="og:title"[^>]*>/, `<meta property="og:title" content="${escapeHtml(meta.title)}" />`);
   html = setHeadTag(html, /<meta\s+property="og:description"[^>]*>/, `<meta property="og:description" content="${escapeHtml(meta.description)}" />`);
   html = setHeadTag(html, /<meta\s+property="og:url"[^>]*>/, `<meta property="og:url" content="${canonicalUrl}" />`);
+  html = setHeadTag(html, /<meta\s+property="og:image"[^>]*>/, `<meta property="og:image" content="${baseUrl}/og-image.png" />`);
+  html = setHeadTag(html, /<meta\s+name="twitter:image"[^>]*>/, `<meta name="twitter:image" content="${baseUrl}/og-image.png" />`);
   html = setHeadTag(html, /<meta\s+name="twitter:title"[^>]*>/, `<meta name="twitter:title" content="${escapeHtml(meta.title)}" />`);
   html = setHeadTag(html, /<meta\s+name="twitter:description"[^>]*>/, `<meta name="twitter:description" content="${escapeHtml(meta.description)}" />`);
   html = setHeadTag(html, /<link\s+rel="canonical"[^>]*>/, `<link rel="canonical" href="${canonicalUrl}" />`);

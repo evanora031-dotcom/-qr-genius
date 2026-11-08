@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-label="QR Genius free QR code generator">
+<defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#101b4b"/><stop offset=".65" stop-color="#263fbd"/><stop offset="1" stop-color="#6635cb"/></linearGradient></defs>
+<rect width="1200" height="630" fill="url(#bg)"/><circle cx="1090" cy="70" r="290" fill="#fff" opacity=".04"/><circle cx="820" cy="640" r="300" fill="#fff" opacity=".04"/>
+<g fill="none" stroke="#8dbaff" stroke-width="13"><rect x="75" y="76" width="39" height="39" rx="6"/><rect x="129" y="76" width="39" height="39" rx="6"/><rect x="75" y="130" width="39" height="39" rx="6"/><rect x="129" y="130" width="39" height="39" rx="6"/></g>
+<text x="194" y="143" font-family="Arial,Helvetica,sans-serif" font-size="51" font-weight="bold" fill="white">QR Genius</text>
+<text x="76" y="295" font-family="Arial,Helvetica,sans-serif" font-size="67" font-weight="bold" fill="white">Free QR Code</text><text x="76" y="371" font-family="Arial,Helvetica,sans-serif" font-size="67" font-weight="bold" fill="white">Generator</text>
+<text x="78" y="434" font-family="Arial,Helvetica,sans-serif" font-size="29" fill="#e3eaff">Wi-Fi · WhatsApp · Business Cards · Links</text>
+<rect x="76" y="482" width="407" height="69" rx="18" fill="#e9edff"/><text x="107" y="527" font-family="Arial,Helvetica,sans-serif" font-size="29" font-weight="bold" fill="#202d7c">getqrgenius.com</text>
+<g transform="translate(806 160)"><rect x="0" y="0" width="282" height="282" rx="28" fill="white"/><g fill="#263fbd"><path d="M33 33h70v70H33zM47 47v42h42V47zM179 33h70v70h-70zM193 47v42h42V47zM33 179h70v70H33zM47 193v42h42v-42z" fill-rule="evenodd"/><path d="M126 33h20v20h-20zM146 74h20v20h-20zM126 115h20v20h-20zM166 115h20v20h-20zM207 125h20v20h-20zM125 155h20v20h-20zM155 180h20v20h-20zM195 165h20v20h-20zM228 198h20v20h-20zM125 225h20v20h-20zM175 225h20v20h-20zM225 240h20v20h-20z"/></g></g>
+</svg>
