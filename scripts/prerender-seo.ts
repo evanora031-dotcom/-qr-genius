@@ -234,16 +234,23 @@ const sitemapEntries = pages.flatMap((page) =>
   })
 );
 
+const blogSlugs = ['business-card-qr-code-guide', 'wifi-qr-code-for-guests', 'whatsapp-qr-code-for-customers'];
+const blogEntries = [
+  `  <url>\n    <loc>${baseUrl}/blog/</loc>\n  </url>`,
+  ...blogSlugs.map(slug => `  <url>\n    <loc>${baseUrl}/blog/${slug}</loc>\n    <xhtml:link rel="alternate" hreflang="ar" href="${baseUrl}/blog/${slug}" />\n  </url>`)
+];
+
 const sitemap = [
   '<?xml version="1.0" encoding="UTF-8"?>',
   '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">',
   ...sitemapEntries,
+  ...blogEntries,
   '</urlset>',
   ''
 ].join('\n');
 
 await writeFile(path.join(distDir, 'sitemap.xml'), sitemap, 'utf8');
-console.log(`Generated sitemap.xml with ${sitemapEntries.length} canonical localized URLs.`);
+console.log(`Generated sitemap.xml with ${sitemapEntries.length + blogEntries.length} canonical URLs.`);
 
 // Publish the robots.txt generated from the same canonical site configuration.
 await writeFile(path.join(distDir, 'robots.txt'), generateRobotsTxt(), 'utf8');
