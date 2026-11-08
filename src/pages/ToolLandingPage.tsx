@@ -448,6 +448,21 @@ export const ToolLandingPage: React.FC<ToolLandingPageProps> = ({
           </section>
         )}
 
+        {/* Crawlable contextual English guides for the matching tools. */}
+        {lang === 'en' && (tool === 'business' || tool === 'wifi' || tool === 'whatsapp') && (
+          <section className="pt-8 border-t border-slate-200" aria-labelledby="english-related-guide-title">
+            <h2 id="english-related-guide-title" className="text-xl font-bold text-slate-900 mb-3">Step-by-step QR code guide</h2>
+            <p className="text-sm text-slate-600 mb-3">Learn how to prepare, scan-test and print your QR code before sharing it.</p>
+            <a
+              href={tool === 'business' ? '/en/blog/how-to-make-business-card-qr-code.html' : tool === 'wifi' ? '/en/blog/how-to-make-wifi-qr-code-for-guests.html' : '/en/blog/how-to-create-whatsapp-qr-code-for-customers.html'}
+              className="inline-flex items-center gap-2 text-sm font-semibold text-indigo-700 underline underline-offset-4 hover:text-indigo-900"
+            >
+              {tool === 'business' ? 'How to make a business card QR code' : tool === 'wifi' ? 'How to make a Wi-Fi QR code for guests' : 'How to create a WhatsApp QR code for customers'}
+              <ArrowRight className="w-4 h-4" aria-hidden="true" />
+            </a>
+          </section>
+        )}
+
         {/* Ad Placement */}
         <AdPlacement lang={lang} format="horizontal-leaderboard" />
       </div>

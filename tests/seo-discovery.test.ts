@@ -121,3 +121,19 @@ test('English blog index and first guide are built with matching canonical links
   assert.ok(vcard.includes('rel="canonical" href="https://getqrgenius.com/en/blog/how-to-make-business-card-qr-code.html"'));
   assert.ok(vcard.includes('href="/tools/business-vcard"'));
 });
+
+
+test('English specialized tool pages link to their matching published blog guides', () => {
+  const guidePaths = {
+    wifi: '/en/blog/how-to-make-wifi-qr-code-for-guests.html',
+    whatsapp: '/en/blog/how-to-create-whatsapp-qr-code-for-customers.html',
+    business: '/en/blog/how-to-make-business-card-qr-code.html'
+  } as const;
+  for (const [tool, href] of Object.entries(guidePaths)) {
+    const html = renderToStaticMarkup(React.createElement(ToolLandingPage, {
+      tool: tool as keyof typeof guidePaths, lang: 'en', onNavigate: () => {}, onHistoryUpdated: () => {}
+    }));
+    assert.ok(html.includes('href="' + href + '"'), 'Missing English guide link on ' + tool);
+    assert.ok(read('../dist' + href).includes('rel="canonical" href="https://getqrgenius.com' + href + '"'));
+  }
+});
