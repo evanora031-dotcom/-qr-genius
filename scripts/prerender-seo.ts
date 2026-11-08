@@ -287,7 +287,9 @@ const sitemapEntries = pages.flatMap((page) =>
 const blogSlugs = ['business-card-qr-code-guide', 'wifi-qr-code-for-guests', 'whatsapp-qr-code-for-customers'];
 const blogEntries = [
   `  <url>\n    <loc>${baseUrl}/blog/</loc>\n  </url>`,
-  ...blogSlugs.map(slug => `  <url>\n    <loc>${baseUrl}/blog/${slug}</loc>\n    <xhtml:link rel="alternate" hreflang="ar" href="${baseUrl}/blog/${slug}" />\n  </url>`)
+  ...blogSlugs.map(slug => `  <url>\n    <loc>${baseUrl}/blog/${slug}</loc>\n    <xhtml:link rel="alternate" hreflang="ar" href="${baseUrl}/blog/${slug}" />\n  </url>`),
+  `  <url>\n    <loc>${baseUrl}/en/blog/</loc>\n  </url>`,
+  `  <url>\n    <loc>${baseUrl}/en/blog/how-to-make-wifi-qr-code-for-guests.html</loc>\n  </url>`
 ];
 
 const sitemap = [

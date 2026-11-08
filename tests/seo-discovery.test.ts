@@ -20,7 +20,12 @@ test('tracked sitemap exactly matches the sitemap published by the build', () =>
   assert.equal(tracked, publishedSource);
   assert.equal(publishedSource, generated);
   assert.doesNotMatch(generated, /pages\.dev/);
-  assert.equal((generated.match(/<loc>/g) || []).length, 48);
+  const canonicalUrls = [...generated.matchAll(/<loc>([^<]+)<\/loc>/g)].map(match => match[1]);
+  assert.equal(canonicalUrls.length, 50);
+  assert.equal(new Set(canonicalUrls).size, canonicalUrls.length, 'Sitemap contains duplicate canonical URLs');
+  for (const blogPath of ['/en/blog/', '/en/blog/how-to-make-wifi-qr-code-for-guests.html']) {
+    assert.ok(canonicalUrls.includes('https://getqrgenius.com' + blogPath), `Missing English blog URL ${blogPath}`);
+  }
   for (const page of pages) {
     for (const lang of languages) {
       const expected = url(SEO_METADATA[page][lang].canonicalPath, lang);
@@ -96,4 +101,15 @@ test('blog index and all three Arabic articles are discoverable and canonical', 
     assert.equal(article.mainEntityOfPage, canonical);
     assert.equal(article.inLanguage, 'ar');
   }
+});
+
+
+test('English blog index and first guide are built with matching canonical links', () => {
+  const index = read('../dist/en/blog/index.html');
+  const article = read('../dist/en/blog/how-to-make-wifi-qr-code-for-guests.html');
+  assert.match(index, /<html lang="en">/);
+  assert.ok(index.includes('rel="canonical" href="https://getqrgenius.com/en/blog/"'));
+  assert.ok(index.includes('href="/en/blog/how-to-make-wifi-qr-code-for-guests.html"'));
+  assert.ok(article.includes('rel="canonical" href="https://getqrgenius.com/en/blog/how-to-make-wifi-qr-code-for-guests.html"'));
+  assert.ok(article.includes('href="/tools/wifi"'));
 });
