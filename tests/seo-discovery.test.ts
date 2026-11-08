@@ -73,3 +73,27 @@ test('related tool pages expose crawlable localized links to the other three too
     }
   }
 });
+
+
+test('blog index and all three Arabic articles are discoverable and canonical', () => {
+  const slugs = ['business-card-qr-code-guide', 'wifi-qr-code-for-guests', 'whatsapp-qr-code-for-customers'];
+  const sitemap = read('../dist/sitemap.xml');
+  const index = read('../dist/blog/index.html');
+  assert.match(index, /<link rel="canonical" href="https:\/\/getqrgenius.com\/blog\/"\s*\/?\s*>/);
+  assert.ok(sitemap.includes('<loc>https://getqrgenius.com/blog/</loc>'));
+  for (const slug of slugs) {
+    const canonical = 'https://getqrgenius.com/blog/' + slug;
+    const html = read('../dist/blog/' + slug + '.html');
+    assert.ok(sitemap.includes('<loc>' + canonical + '</loc>'));
+    assert.ok(html.includes('rel="canonical" href="' + canonical + '"'));
+    const scripts = [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)];
+    const objects = scripts.flatMap(match => {
+      const value = JSON.parse(match[1]);
+      return Array.isArray(value) ? value : [value];
+    });
+    const article = objects.find(value => value['@type'] === 'Article');
+    assert.ok(article, 'Missing Article JSON-LD for ' + slug);
+    assert.equal(article.mainEntityOfPage, canonical);
+    assert.equal(article.inLanguage, 'ar');
+  }
+});
