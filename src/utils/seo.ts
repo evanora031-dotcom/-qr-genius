@@ -131,11 +131,11 @@ export const SEO_METADATA: Record<PageId, Record<Language, PageMeta>> = {
   },
   whatsapp: {
     en: {
-      title: "Free WhatsApp QR Code Generator | Scan to Chat | QR GENIUS",
-      description: "Create a WhatsApp QR code that opens a chat with your number and an optional pre-filled message. Share it on flyers, menus, or business materials.",
+      title: "Free WhatsApp QR Code Generator for Direct Chat | QR Genius",
+      description: "Make a free WhatsApp QR code with your phone number and an optional pre-filled message. Let customers scan to open a chat from menus, flyers or business cards.",
       keywords: "whatsapp qr code, wa me qr generator, whatsapp direct chat qr, scan to message whatsapp",
       canonicalPath: "/tools/whatsapp",
-      h1: "Direct Chat WhatsApp QR Code Generator"
+      h1: "Free WhatsApp QR Code Generator for Direct Chat"
     },
     ar: {
       title: "مولد QR لواتساب مجاناً | رابط محادثة مباشرة | QR Genius",
