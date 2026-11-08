@@ -217,7 +217,7 @@ function renderPage(locale: typeof locales[number], page: typeof pages[number]):
   const canonicalUrl = `${baseUrl}${canonicalPath}`;
   // Remove the generic WebApplication JSON-LD inherited from index.html:
   // structured data below is generated per page and locale instead.
-  let html = template.replace(/<script\\s+type="application\\/ld\\+json">[\\s\\S]*?<\\/script>/g, '').replace(/<html\\s+lang="[^"]*">/, `<html lang="${locale}" dir="${locale === 'ar' ? 'rtl' : 'ltr'}">`);
+  let html = template.replace(/<script\s+type="application\/ld\+json">[\s\S]*?<\/script>/g, '').replace(/<html\\s+lang="[^"]*">/, `<html lang="${locale}" dir="${locale === 'ar' ? 'rtl' : 'ltr'}">`);
   // Put meaningful, crawlable page content in the initial HTML response.
   // React replaces this lightweight fallback when the application mounts.
   html = html.replace('<div id="root"></div>', '<div id="root">' + renderStaticContent(locale, page) + '</div>');
