@@ -465,7 +465,7 @@ export const CustomizationPanel: React.FC<CustomizationPanelProps> = ({
                 <label className="flex-1 flex flex-col items-center justify-center p-4 border-2 border-dashed border-slate-300 hover:border-indigo-500 rounded-xl cursor-pointer bg-slate-50/50 hover:bg-indigo-50/30 transition-colors">
                   <Upload className="w-5 h-5 text-indigo-600 mb-1" />
                   <span className="text-xs font-semibold text-slate-700">Choose image file</span>
-                  <span className="text-[10px] text-slate-400 mt-0.5">{t.customizer.uploadHint}</span>
+                  <span className="text-[10px] text-slate-600 mt-0.5">{t.customizer.uploadHint}</span>
                   <input
                     type="file"
                     accept="image/*"
@@ -540,7 +540,7 @@ export const CustomizationPanel: React.FC<CustomizationPanelProps> = ({
                     onChange={(e) => onChangeConfig({ logoSize: Number(e.target.value) })}
                     className="w-full accent-indigo-600"
                   />
-                  <span className="text-[10px] text-slate-400">Keep under 26% for 100% scan reliability</span>
+                  <span className="text-[10px] text-slate-600">Keep under 26% for 100% scan reliability</span>
                 </div>
 
                 <div>
@@ -639,7 +639,7 @@ export const CustomizationPanel: React.FC<CustomizationPanelProps> = ({
                       />
                       <span className="text-xs font-semibold">{item.label}</span>
                     </div>
-                    <span className="text-[11px] font-mono text-slate-400 font-bold">
+                    <span className="text-[11px] font-mono text-slate-600 font-bold">
                       {item.level}
                     </span>
                   </label>
@@ -662,7 +662,7 @@ export const CustomizationPanel: React.FC<CustomizationPanelProps> = ({
                 onChange={(e) => onChangeConfig({ margin: Number(e.target.value) })}
                 className="w-full accent-indigo-600"
               />
-              <p className="mt-1 text-[11px] text-slate-400">
+              <p className="mt-1 text-[11px] text-slate-600">
                 Quiet zone provides white padding around the QR code so mobile scanners easily separate it from background text.
               </p>
             </div>

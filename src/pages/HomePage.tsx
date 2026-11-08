@@ -116,7 +116,7 @@ export const HomePage: React.FC<HomePageProps> = ({ lang, onNavigate }) => {
                     </div>
                     <div>
                       <div className="text-xs font-bold text-slate-900">{lang === 'ar' ? 'معاينة تفاعلية' : lang === 'fr' ? 'Aperçu interactif' : lang === 'es' ? 'Vista previa interactiva' : 'Interactive Preview'}</div>
-                      <div className="text-[10px] text-slate-400">{lang === 'ar' ? 'قابل للمسح وفق ISO/IEC 18004' : lang === 'fr' ? 'Scannable selon ISO/IEC 18004' : lang === 'es' ? 'Escaneable según ISO/IEC 18004' : 'Scannable ISO/IEC 18004'}</div>
+                      <div className="text-[10px] text-slate-600">{lang === 'ar' ? 'قابل للمسح وفق ISO/IEC 18004' : lang === 'fr' ? 'Scannable selon ISO/IEC 18004' : lang === 'es' ? 'Escaneable según ISO/IEC 18004' : 'Scannable ISO/IEC 18004'}</div>
                     </div>
                   </div>
                   <span className="text-[10px] font-semibold text-indigo-600 bg-indigo-50 px-2 py-0.5 rounded-full">
@@ -190,7 +190,7 @@ export const HomePage: React.FC<HomePageProps> = ({ lang, onNavigate }) => {
                     <span className="text-xs font-mono font-bold text-slate-800">
                       https://getqrgenius.com
                     </span>
-                    <p className="text-[10px] text-slate-400 mt-0.5">
+                    <p className="text-[10px] text-slate-600 mt-0.5">
                       {lang === 'ar' ? 'تصميم بلون نيلي وزوايا مستديرة' : lang === 'fr' ? 'Style indigo SaaS et coins arrondis' : lang === 'es' ? 'Estilo índigo SaaS y esquinas redondeadas' : 'Styled with SaaS Indigo &amp; Rounded Corners'}
                     </p>
                   </div>

@@ -89,7 +89,7 @@ export const PricingSection: React.FC<PricingSectionProps> = ({ lang, onSelectFr
 
               <div className="flex items-baseline gap-1 mb-8">
                 <span className="text-4xl font-extrabold text-white">$19</span>
-                <span className="text-xs text-slate-400 font-medium">{lang === 'ar' ? '/ شهرياً (تُدفع سنوياً)' : '/ month (billed annually)'}</span>
+                <span className="text-xs text-slate-200 font-medium">{lang === 'ar' ? '/ شهرياً (تُدفع سنوياً)' : '/ month (billed annually)'}</span>
               </div>
 
               <ul className="space-y-3.5 text-xs text-slate-200 mb-8">
