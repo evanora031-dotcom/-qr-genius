@@ -36,9 +36,9 @@
       // Keep analytics off the critical rendering path: wait for load, then idle.
       function schedulePostHogWhenIdle() {
         if ('requestIdleCallback' in window) {
-          window.requestIdleCallback(initializePostHogAfterLoad, { timeout: 4000 });
+          window.requestIdleCallback(initializePostHogAfterLoad, { timeout: 2500 });
         } else {
-          window.setTimeout(initializePostHogAfterLoad, 1500);
+          window.setTimeout(initializePostHogAfterLoad, 2500);
         }
       }
       if (document.readyState === 'complete') {
