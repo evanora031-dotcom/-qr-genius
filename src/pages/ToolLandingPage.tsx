@@ -92,7 +92,9 @@ const TOOL_CONFIGS = {
       { q: 'Is it safe to generate my Wi-Fi QR code here?', a: 'QR generation takes place in your browser. The Wi-Fi details entered for generation are not sent to our servers.' },
       { q: 'What happens if I change my Wi-Fi password in the future?', a: 'Static Wi-Fi QR codes contain the exact password you entered. If you change your router password, generate and print a new code.' },
       { q: 'How do I make a WiFi QR code for free?', a: 'Enter your Wi-Fi network name (SSID), select its security type, add the password if needed, and generate the code. Test it with a compatible phone before sharing it.' },
-      { q: 'Can I print a WiFi QR code for guests?', a: 'Yes. Download the QR code and place it where guests can scan it, such as a reception desk or guest information card. Remember that anyone who can scan it may be able to access the encoded Wi-Fi credentials.' }
+      { q: 'Can I print a WiFi QR code for guests?', a: 'Yes. Download the QR code and place it where guests can scan it, such as a reception desk or guest information card. Remember that anyone who can scan it may be able to access the encoded Wi-Fi credentials.' },
+      { q: 'How can I create a QR code to connect to Wi-Fi?', a: 'Enter the network name (SSID), choose its security type, and add the current Wi-Fi password when required. Generate the QR code, then scan it with a compatible phone to check that it offers the correct network before printing.' },
+      { q: 'Can I share a Wi-Fi password using a QR code?', a: 'Yes. A Wi-Fi QR code can store the network name and password so supported phones can offer to join without manual typing. Treat the printed QR code like the password itself: anyone who can scan it may be able to read or use those credentials.' }
     ]
   },
   whatsapp: {
@@ -111,7 +113,9 @@ const TOOL_CONFIGS = {
       { q: 'Do I need to include the country code?', a: 'Yes. Enter the country calling code and phone number in international format. WhatsApp wa.me links use digits only, without a leading plus sign, spaces, brackets, or dashes.' },
       { q: 'Can users edit the pre-filled message before sending?', a: 'Yes. The pre-filled message appears in their text box, and they can modify it before choosing to send.' },
       { q: 'How do I create a WhatsApp QR code for free?', a: 'Enter your WhatsApp phone number with the country code, optionally add a message, generate the QR code, and scan-test it before downloading or printing.' },
-      { q: 'Does scanning a WhatsApp QR code send a message automatically?', a: 'No. Scanning opens the WhatsApp chat or a compatible link flow. The visitor decides whether to send the message.' }
+      { q: 'Does scanning a WhatsApp QR code send a message automatically?', a: 'No. Scanning opens the WhatsApp chat or a compatible link flow. The visitor decides whether to send the message.' },
+      { q: 'Can I make a free WhatsApp QR code for customer support?', a: 'Yes. Enter your business WhatsApp number in international format, optionally add a pre-filled question, and generate a static QR code. Put it on a sign, receipt, or business card and scan-test the link before sharing it.' },
+      { q: 'Will a WhatsApp QR code work without a QR Genius subscription?', a: 'The static QR code stores a wa.me link directly and does not rely on a QR Genius redirect subscription. The destination still depends on WhatsApp and the phone number remaining available.' }
     ]
   },
   business: {
