@@ -98,6 +98,7 @@ export const Footer: React.FC<FooterProps> = ({ lang, onNavigate }) => {
                   {t.footer.aboutUs}
                 </a>
               </li>
+              <li><a href="/blog/" className="hover:text-indigo-400 transition-colors">{lang === 'ar' ? 'المدونة' : lang === 'fr' ? 'Blog (arabe)' : lang === 'es' ? 'Blog (árabe)' : 'Blog (Arabic)'}</a></li>
               <li>
                 <a href={localizedHref('faq', lang)} onClick={(event) => { event.preventDefault(); handleLink('faq'); }} className="hover:text-indigo-400 transition-colors">
                   {t.footer.faq}
