@@ -33,10 +33,18 @@
         });
       })();
       }
+      // Keep analytics off the critical rendering path: wait for load, then idle.
+      function schedulePostHogWhenIdle() {
+        if ('requestIdleCallback' in window) {
+          window.requestIdleCallback(initializePostHogAfterLoad, { timeout: 4000 });
+        } else {
+          window.setTimeout(initializePostHogAfterLoad, 1500);
+        }
+      }
       if (document.readyState === 'complete') {
-        initializePostHogAfterLoad();
+        schedulePostHogWhenIdle();
       } else {
-        window.addEventListener('load', initializePostHogAfterLoad, { once: true });
+        window.addEventListener('load', schedulePostHogWhenIdle, { once: true });
       }
     </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
