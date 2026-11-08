@@ -171,7 +171,7 @@ export const HistoryDrawer: React.FC<HistoryDrawerProps> = ({
                       <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-md bg-indigo-50 text-indigo-700">
                         {item.type}
                       </span>
-                      <span className="text-[10px] text-slate-400">
+                      <span className="text-[10px] text-slate-600">
                         {new Date(item.createdAt).toLocaleDateString()}
                       </span>
                     </div>
