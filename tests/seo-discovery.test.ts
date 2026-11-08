@@ -160,3 +160,12 @@ test('English blog articles expose valid Article JSON-LD and social previews', (
     assert.equal(article.datePublished, '2026-11-08');
   }
 });
+
+
+test('Arabic and English blog indexes provide reciprocal language navigation', () => {
+  const arabic = read('../dist/blog/index.html');
+  const english = read('../dist/en/blog/index.html');
+  assert.ok(arabic.includes('href="/en/blog/"'), 'Arabic blog lacks English navigation');
+  assert.ok(english.includes('href="/blog/"'), 'English blog lacks Arabic navigation');
+  assert.ok(arabic.includes('lang="en" hreflang="en"'), 'English switch lacks language annotation');
+});
