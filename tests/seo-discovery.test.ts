@@ -91,7 +91,7 @@ test('blog index and all three Arabic articles are discoverable and canonical', 
     const html = read('../dist/blog/' + slug + '.html');
     assert.ok(sitemap.includes('<loc>' + canonical + '</loc>'));
     assert.ok(html.includes('rel="canonical" href="' + canonical + '"'));
-    const scripts = [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)];
+    const scripts = [...html.matchAll(new RegExp('<script type="application/ld\\+json">([\\s\\S]*?)</script>', 'g'))];
     const objects = scripts.flatMap(match => {
       const value = JSON.parse(match[1]);
       return Array.isArray(value) ? value : [value];
@@ -135,5 +135,28 @@ test('English specialized tool pages link to their matching published blog guide
     }));
     assert.ok(html.includes('href="' + href + '"'), 'Missing English guide link on ' + tool);
     assert.ok(read('../dist' + href).includes('rel="canonical" href="https://getqrgenius.com' + href + '"'));
+  }
+});
+
+
+test('English blog articles expose valid Article JSON-LD and social previews', () => {
+  const slugs = ['how-to-make-wifi-qr-code-for-guests', 'how-to-create-whatsapp-qr-code-for-customers', 'how-to-make-business-card-qr-code'];
+  for (const slug of slugs) {
+    const canonical = 'https://getqrgenius.com/en/blog/' + slug + '.html';
+    const html = read('../dist/en/blog/' + slug + '.html');
+    assert.ok(html.includes('property="og:type" content="article"'));
+    assert.ok(html.includes('property="og:url" content="' + canonical + '"'));
+    assert.ok(html.includes('property="og:image" content="https://getqrgenius.com/og-image.png"'));
+    assert.ok(html.includes('name="twitter:card" content="summary_large_image"'));
+    const scripts = [...html.matchAll(new RegExp('<script type="application/ld\\+json">([\\s\\S]*?)</script>', 'g'))];
+    const objects = scripts.flatMap(match => {
+      const parsed = JSON.parse(match[1]);
+      return Array.isArray(parsed) ? parsed : [parsed];
+    });
+    const article = objects.find(value => value['@type'] === 'Article');
+    assert.ok(article, 'Missing Article JSON-LD: ' + slug);
+    assert.equal(article.mainEntityOfPage, canonical);
+    assert.equal(article.inLanguage, 'en');
+    assert.equal(article.datePublished, '2026-11-08');
   }
 });
