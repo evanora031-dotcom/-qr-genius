@@ -21,9 +21,9 @@ test('tracked sitemap exactly matches the sitemap published by the build', () =>
   assert.equal(publishedSource, generated);
   assert.doesNotMatch(generated, /pages\.dev/);
   const canonicalUrls = [...generated.matchAll(/<loc>([^<]+)<\/loc>/g)].map(match => match[1]);
-  assert.equal(canonicalUrls.length, 50);
+  assert.equal(canonicalUrls.length, 51);
   assert.equal(new Set(canonicalUrls).size, canonicalUrls.length, 'Sitemap contains duplicate canonical URLs');
-  for (const blogPath of ['/en/blog/', '/en/blog/how-to-make-wifi-qr-code-for-guests.html']) {
+  for (const blogPath of ['/en/blog/', '/en/blog/how-to-make-wifi-qr-code-for-guests.html', '/en/blog/how-to-create-whatsapp-qr-code-for-customers.html']) {
     assert.ok(canonicalUrls.includes('https://getqrgenius.com' + blogPath), `Missing English blog URL ${blogPath}`);
   }
   for (const page of pages) {
@@ -112,4 +112,8 @@ test('English blog index and first guide are built with matching canonical links
   assert.ok(index.includes('href="/en/blog/how-to-make-wifi-qr-code-for-guests.html"'));
   assert.ok(article.includes('rel="canonical" href="https://getqrgenius.com/en/blog/how-to-make-wifi-qr-code-for-guests.html"'));
   assert.ok(article.includes('href="/tools/wifi"'));
+  const whatsapp = read('../dist/en/blog/how-to-create-whatsapp-qr-code-for-customers.html');
+  assert.ok(index.includes('href="/en/blog/how-to-create-whatsapp-qr-code-for-customers.html"'));
+  assert.ok(whatsapp.includes('rel="canonical" href="https://getqrgenius.com/en/blog/how-to-create-whatsapp-qr-code-for-customers.html"'));
+  assert.ok(whatsapp.includes('href="/tools/whatsapp"'));
 });
