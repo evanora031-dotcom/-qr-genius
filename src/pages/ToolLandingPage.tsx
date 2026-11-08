@@ -130,7 +130,9 @@ const TOOL_CONFIGS = {
       { q: 'Is there a limit on how many people can scan my vCard QR?', a: 'The QR code itself does not impose a scan counter. Successful scanning depends on the printed or displayed code and the device used.' },
       { q: 'Can I add my company logo to the center of the vCard QR?', a: 'Yes. Open our Full Studio designer to upload your company logo and adjust custom colors. Scan-test the finished QR code before printing.' },
       { q: 'How do I make a QR code for my business card?', a: 'Enter your contact details, generate the vCard QR code, scan it with a phone to check the information, and download the code for your business card design.' },
-      { q: 'Can I update my contact details after printing?', a: 'A static vCard QR code stores the contact details in the code itself. If your phone number or email changes, generate and print a new QR code.' }
+      { q: 'Can I update my contact details after printing?', a: 'A static vCard QR code stores the contact details in the code itself. If your phone number or email changes, generate and print a new QR code.' },
+      { q: 'Can I make a QR code for a name card or visiting card?', a: 'Yes. A name card, visiting card, and business card can all use a vCard QR code. Enter your contact details, generate the code, and place the downloaded image on your card design. Test the printed code with a phone before sharing it.' },
+      { q: 'Does a vCard QR code need internet access to scan?', a: 'The contact details are stored inside the static QR code, so reading those details does not require a QR Genius redirect or internet connection. The phone still needs a compatible QR scanner or contacts app to offer to save the contact.' }
     ]
   }
 };
