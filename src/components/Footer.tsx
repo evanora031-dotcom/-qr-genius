@@ -49,7 +49,7 @@ export const Footer: React.FC<FooterProps> = ({ lang, onNavigate }) => {
             </p>
             <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-800/80 border border-slate-700/60 text-xs text-emerald-400">
               <ShieldCheck className="w-4 h-4" />
-              <span>{lang === 'ar' ? 'خصوصية كاملة: المعالجة على جهازك' : '100% Client-Side Privacy'}</span>
+              <span>{lang === 'ar' ? 'إنشاء رموز QR داخل متصفحك' : lang === 'fr' ? 'Création de QR codes dans votre navigateur' : lang === 'es' ? 'Códigos QR creados en tu navegador' : 'QR codes generated in your browser'}</span>
             </div>
           </div>
 
