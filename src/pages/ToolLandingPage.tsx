@@ -427,6 +427,21 @@ export const ToolLandingPage: React.FC<ToolLandingPageProps> = ({
           </div>
         </nav>
 
+        {/* Contextual links to published Arabic guides; no false translated equivalents. */}
+        {lang === 'ar' && (tool === 'business' || tool === 'wifi' || tool === 'whatsapp') && (
+          <section className="pt-8 border-t border-slate-200" aria-labelledby="related-guide-title">
+            <h2 id="related-guide-title" className="text-xl font-bold text-slate-900 mb-3">دليل عملي لاستخدام هذه الأداة</h2>
+            <p className="text-sm text-slate-600 mb-3">تعرّف على الخطوات والنصائح قبل إنشاء رمز QR وطباعته.</p>
+            <a
+              href={tool === 'business' ? '/blog/business-card-qr-code-guide' : tool === 'wifi' ? '/blog/wifi-qr-code-for-guests' : '/blog/whatsapp-qr-code-for-customers'}
+              className="inline-flex items-center gap-2 text-sm font-semibold text-indigo-700 underline underline-offset-4 hover:text-indigo-900"
+            >
+              {tool === 'business' ? 'كيفية إنشاء رمز QR لبطاقة العمل' : tool === 'wifi' ? 'كيفية إنشاء رمز Wi-Fi QR للضيوف' : 'كيفية إنشاء رمز QR لواتساب للعملاء'}
+              <ArrowRight className="w-4 h-4" aria-hidden="true" />
+            </a>
+          </section>
+        )}
+
         {/* Ad Placement */}
         <AdPlacement lang={lang} format="horizontal-leaderboard" />
       </div>
