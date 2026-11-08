@@ -167,6 +167,50 @@ function renderStaticContent(locale: typeof locales[number], page: typeof pages[
     '<h2>' + escapeHtml(locale === 'ar' ? 'معلومات ومساعدة' : locale === 'fr' ? 'Informations et assistance' : locale === 'es' ? 'Información y ayuda' : 'Information and help') + '</h2><ul>' + resourceLinks + '</ul></nav></section>';
 }
 
+
+// Keep FAQ structured data sourced from the same visible FAQ entries in ToolLandingPage.
+// The first question for each tool is copied verbatim; do not invent answers.
+const toolFaqs: Partial<Record<typeof pages[number], { question: string; answer: string }>> = {
+  wifi: {
+    question: 'Do guests need an app to scan the Wi-Fi code?',
+    answer: 'Many recent iPhone and Android devices recognize Wi-Fi QR codes in the camera or QR scanner. Scan the code, review the network name, and follow the device prompt to connect. Support varies by device and operating system.'
+  },
+  whatsapp: {
+    question: 'How does WhatsApp QR code routing work?',
+    answer: 'The QR code contains a wa.me link for the phone number you enter. Scanning opens the chat in WhatsApp when available, or a compatible browser flow. The visitor must choose to send any message.'
+  },
+  business: {
+    question: 'How does vCard scanning work on smartphones?',
+    answer: 'Compatible phones and contact apps can recognize the vCard data and offer to create a new contact. The exact prompt and supported fields depend on the device.'
+  }
+};
+function structuredData(locale: typeof locales[number], page: typeof pages[number], canonicalUrl: string) {
+  const objects: Record<string, unknown>[] = [];
+  if (page === 'home') objects.push({
+    '@context': 'https://schema.org', '@type': 'SoftwareApplication',
+    name: 'QR GENIUS', applicationCategory: 'UtilitiesApplication',
+    operatingSystem: 'Web', url: canonicalUrl,
+    description: SEO_METADATA.home[locale].description,
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD', description: 'Free QR code generator' }
+  });
+  if (['url', 'wifi', 'whatsapp', 'business'].includes(page)) {
+    objects.push({
+      '@context': 'https://schema.org', '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'QR GENIUS', item: baseUrl + localizedPath('/', locale) },
+        { '@type': 'ListItem', position: 2, name: SEO_METADATA[page][locale].h1, item: canonicalUrl }
+      ]
+    });
+  }
+  const faq = toolFaqs[page];
+  // Only English tool pages currently render these exact English FAQ strings.
+  if (faq && locale === 'en') objects.push({
+    '@context': 'https://schema.org', '@type': 'FAQPage',
+    mainEntity: [{ '@type': 'Question', name: faq.question, acceptedAnswer: { '@type': 'Answer', text: faq.answer } }]
+  });
+  return objects.map(obj => '<script type="application/ld+json">' + JSON.stringify(obj).replaceAll('<', '\\u003c') + '</script>').join('\\n');
+}
+
 function renderPage(locale: typeof locales[number], page: typeof pages[number]): string {
   const meta = SEO_METADATA[page][locale];
   const canonicalPath = localizedPath(meta.canonicalPath, locale);
@@ -192,6 +236,7 @@ function renderPage(locale: typeof locales[number], page: typeof pages[number]):
   alternates.push(`  <link rel="alternate" hreflang="x-default" href="${baseUrl}${localizedPath(meta.canonicalPath, 'en')}" />`);
   html = html.replace('</head>', `${alternates.join('\n')}\n</head>`);
   html = html.replace('"url": "https://qr-genius-1on.pages.dev/"', '"url": "https://getqrgenius.com/"');
+  html = html.replace('</head>', structuredData(locale, page, canonicalUrl) + '\n</head>');
   return html;
 }
 
