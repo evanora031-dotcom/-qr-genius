@@ -91,7 +91,7 @@ test('blog index and all three Arabic articles are discoverable and canonical', 
     const html = read('../dist/blog/' + slug + '.html');
     assert.ok(sitemap.includes('<loc>' + canonical + '</loc>'));
     assert.ok(html.includes('rel="canonical" href="' + canonical + '"'));
-    const scripts = [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)];
+    const scripts = [...html.matchAll(new RegExp('<script type="application/ld\\+json">([\\s\\S]*?)</script>', 'g'))];
     const objects = scripts.flatMap(match => {
       const value = JSON.parse(match[1]);
       return Array.isArray(value) ? value : [value];
