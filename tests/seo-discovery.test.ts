@@ -148,7 +148,7 @@ test('English blog articles expose valid Article JSON-LD and social previews', (
     assert.ok(html.includes('property="og:url" content="' + canonical + '"'));
     assert.ok(html.includes('property="og:image" content="https://getqrgenius.com/og-image.png"'));
     assert.ok(html.includes('name="twitter:card" content="summary_large_image"'));
-    const scripts = [...html.matchAll(/<script type="application\\/ld\\+json">([\\s\\S]*?)<\\/script>/g)];
+    const scripts = [...html.matchAll(new RegExp('<script type="application/ld\\+json">([\\s\\S]*?)</script>', 'g'))];
     const objects = scripts.flatMap(match => {
       const parsed = JSON.parse(match[1]);
       return Array.isArray(parsed) ? parsed : [parsed];
