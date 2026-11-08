@@ -169,3 +169,15 @@ test('Arabic and English blog indexes provide reciprocal language navigation', (
   assert.ok(english.includes('href="/blog/"'), 'English blog lacks Arabic navigation');
   assert.ok(arabic.includes('lang="en" hreflang="en"'), 'English switch lacks language annotation');
 });
+
+
+test('footer blog navigation respects available content languages', () => {
+  const footer = read('../src/components/Footer.tsx');
+  assert.ok(footer.includes("lang === 'ar' ? '/blog/' : '/en/blog/'"));
+  assert.ok(footer.includes("Blog (English)"));
+  assert.ok(footer.includes("Blog (inglés)"));
+  const arabic = read('../dist/blog/index.html');
+  const english = read('../dist/en/blog/index.html');
+  assert.ok(arabic.includes('href="/en/blog/"'));
+  assert.ok(english.includes('href="/blog/"'));
+});
