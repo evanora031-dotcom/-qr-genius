@@ -20,7 +20,7 @@ test('tracked sitemap exactly matches the sitemap published by the build', () =>
   assert.equal(tracked, publishedSource);
   assert.equal(publishedSource, generated);
   assert.doesNotMatch(generated, /pages\.dev/);
-  assert.equal((generated.match(/<loc>/g) || []).length, 44);
+  assert.equal((generated.match(/<loc>/g) || []).length, 48);
   for (const page of pages) {
     for (const lang of languages) {
       const expected = url(SEO_METADATA[page][lang].canonicalPath, lang);
