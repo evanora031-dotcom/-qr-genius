@@ -316,7 +316,7 @@ export const QRPreviewCard: React.FC<QRPreviewCardProps> = ({
                   className="w-full text-left rtl:text-right px-4 py-2 hover:bg-indigo-50 hover:text-indigo-700 flex justify-between"
                 >
                   <span>{t.preview.resolutionStandard}</span>
-                  <span className="text-slate-400 font-mono">512×512</span>
+                  <span className="text-slate-600 font-mono">512×512</span>
                 </button>
                 <button
                   type="button"
@@ -332,7 +332,7 @@ export const QRPreviewCard: React.FC<QRPreviewCardProps> = ({
                   className="w-full text-left rtl:text-right px-4 py-2 hover:bg-indigo-50 hover:text-indigo-700 flex justify-between"
                 >
                   <span>{t.preview.resolutionUltra}</span>
-                  <span className="text-slate-400 font-mono">2048×2048</span>
+                  <span className="text-slate-600 font-mono">2048×2048</span>
                 </button>
               </div>
             </>
@@ -415,7 +415,7 @@ export const QRPreviewCard: React.FC<QRPreviewCardProps> = ({
               <button
                 type="button"
                 onClick={() => setShowScanModal(false)}
-                className="text-slate-400 hover:text-slate-600 text-sm font-bold"
+                className="text-slate-600 hover:text-slate-800 text-sm font-bold"
               >
                 ✕
               </button>
