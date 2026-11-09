@@ -37,6 +37,22 @@ const COLOR_PRESETS = [
   { name: 'Modern Noir', fg: '#0F172A', grad: '#334155', bg: '#FFFFFF' },
 ];
 
+// Advisory only: scan reliability also depends on size, lighting, and logo coverage.
+const qrContrastRatio = (foreground: string, background: string): number | null => {
+  const luminance = (hex: string): number | null => {
+    if (!/^#[0-9a-fA-F]{6}$/.test(hex)) return null;
+    const rgb = [1, 3, 5].map((index) => {
+      const channel = parseInt(hex.slice(index, index + 2), 16) / 255;
+      return channel <= 0.04045 ? channel / 12.92 : ((channel + 0.055) / 1.055) ** 2.4;
+    });
+    return rgb[0] * 0.2126 + rgb[1] * 0.7152 + rgb[2] * 0.0722;
+  };
+  const fg = luminance(foreground);
+  const bg = luminance(background);
+  if (fg === null || bg === null) return null;
+  return (Math.max(fg, bg) + 0.05) / (Math.min(fg, bg) + 0.05);
+};
+
 export const CustomizationPanel: React.FC<CustomizationPanelProps> = ({
   config,
   onChangeConfig,
@@ -45,6 +61,13 @@ export const CustomizationPanel: React.FC<CustomizationPanelProps> = ({
   const [activeTab, setActiveTab] = useState<TabType>('colors');
   const [uploadError, setUploadError] = useState<string | null>(null);
   const t = translations[lang];
+  const contrast = config.transparentBg ? null : qrContrastRatio(config.fgColor, config.bgColor);
+  const gradientContrast = config.useGradient && !config.transparentBg
+    ? qrContrastRatio(config.gradientColor, config.bgColor)
+    : null;
+  const lowContrast = (contrast !== null && contrast < 4.5)
+    || (gradientContrast !== null && gradientContrast < 4.5);
+
 
   const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -149,6 +172,17 @@ export const CustomizationPanel: React.FC<CustomizationPanelProps> = ({
         {/* TAB 1: COLORS */}
         {activeTab === 'colors' && (
           <div className="space-y-6">
+            {lowContrast && (
+              <p role="status" className="rounded-xl border border-amber-300 bg-amber-50 px-3 py-2 text-xs leading-relaxed text-amber-900">
+                {lang === 'ar'
+                  ? 'تنبيه: التباين بين ألوان الرمز والخلفية منخفض. قد يصعب مسح QR؛ جرّب لوناً داكناً على خلفية فاتحة واختبره بهاتفك.'
+                  : lang === 'fr'
+                    ? 'Attention : contraste faible. Le QR code peut être difficile à scanner. Essayez un premier plan foncé sur fond clair et testez-le.'
+                    : lang === 'es'
+                      ? 'Aviso: contraste bajo. El QR puede ser difícil de escanear. Prueba un color oscuro sobre fondo claro y escanéalo.'
+                      : 'Low contrast: this QR code may be hard to scan. Try a dark foreground on a light background and test it with your phone.'}
+              </p>
+            )}
             {/* Quick Palettes */}
             <div>
               <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2.5">
