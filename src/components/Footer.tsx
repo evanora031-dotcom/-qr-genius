@@ -139,7 +139,7 @@ export const Footer: React.FC<FooterProps> = ({ lang, onNavigate }) => {
                 </a>
               </li>
             </ul>
-            <div className="mt-6 p-3 bg-slate-800/50 rounded-xl border border-slate-700/50 text-[11px] text-slate-400 leading-normal">
+            <div className="mt-6 p-3 bg-slate-800/50 rounded-xl border border-slate-700/50 text-xs text-slate-200 leading-normal">
               {t.footer.privacyNotice}
             </div>
           </div>

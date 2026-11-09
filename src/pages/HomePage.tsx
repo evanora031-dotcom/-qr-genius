@@ -289,7 +289,7 @@ export const HomePage: React.FC<HomePageProps> = ({ lang, onNavigate }) => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {/* Step 1 */}
             <div className="bg-white rounded-2xl border border-slate-200 p-8 shadow-xs relative">
-              <span className="text-3xl font-extrabold text-indigo-600/30 block mb-4">
+              <span className="text-3xl font-extrabold text-indigo-700 block mb-4">
                 01.
               </span>
               <h3 className="text-lg font-bold text-slate-900 mb-2">
@@ -302,7 +302,7 @@ export const HomePage: React.FC<HomePageProps> = ({ lang, onNavigate }) => {
 
             {/* Step 2 */}
             <div className="bg-white rounded-2xl border border-slate-200 p-8 shadow-xs relative">
-              <span className="text-3xl font-extrabold text-indigo-600/30 block mb-4">
+              <span className="text-3xl font-extrabold text-indigo-700 block mb-4">
                 02.
               </span>
               <h3 className="text-lg font-bold text-slate-900 mb-2">
@@ -315,7 +315,7 @@ export const HomePage: React.FC<HomePageProps> = ({ lang, onNavigate }) => {
 
             {/* Step 3 */}
             <div className="bg-white rounded-2xl border border-slate-200 p-8 shadow-xs relative">
-              <span className="text-3xl font-extrabold text-indigo-600/30 block mb-4">
+              <span className="text-3xl font-extrabold text-indigo-700 block mb-4">
                 03.
               </span>
               <h3 className="text-lg font-bold text-slate-900 mb-2">
@@ -366,25 +366,25 @@ export const HomePage: React.FC<HomePageProps> = ({ lang, onNavigate }) => {
               <div className="p-6 rounded-2xl bg-slate-50 border border-slate-200 text-left rtl:text-right">
                 <div className="text-3xl font-extrabold text-indigo-600 mb-1">100%</div>
                 <div className="text-xs font-bold text-slate-900 mb-1">{lang === 'ar' ? 'محلي وخاص' : lang === 'fr' ? 'Local et privé' : lang === 'es' ? 'Local y privado' : 'Local &amp; Private'}</div>
-                <p className="text-[11px] text-slate-500">{lang === 'ar' ? 'يتم إنشاء الرمز داخل المتصفح ولا يُرسل محتواه إلى خوادمنا لغرض التوليد.' : lang === 'fr' ? 'Le code est généré dans le navigateur et son contenu n’est pas envoyé à nos serveurs pour cette opération.' : lang === 'es' ? 'El código se genera en el navegador y su contenido no se envía a nuestros servidores para generarlo.' : 'The code is generated in your browser; its content is not sent to our servers for generation.'}</p>
+                <p className="text-xs text-slate-600">{lang === 'ar' ? 'يتم إنشاء الرمز داخل المتصفح ولا يُرسل محتواه إلى خوادمنا لغرض التوليد.' : lang === 'fr' ? 'Le code est généré dans le navigateur et son contenu n’est pas envoyé à nos serveurs pour cette opération.' : lang === 'es' ? 'El código se genera en el navegador y su contenido no se envía a nuestros servidores para generarlo.' : 'The code is generated in your browser; its content is not sent to our servers for generation.'}</p>
               </div>
 
               <div className="p-6 rounded-2xl bg-slate-50 border border-slate-200 text-left rtl:text-right">
                 <div className="text-3xl font-extrabold text-indigo-600 mb-1">2048px</div>
                 <div className="text-xs font-bold text-slate-900 mb-1">{lang === 'ar' ? 'دقة فائقة' : lang === 'fr' ? 'Ultra haute résolution' : lang === 'es' ? 'Ultra resolución' : 'Ultra Resolution'}</div>
-                <p className="text-[11px] text-slate-500">{lang === 'ar' ? 'ملفات PNG واضحة وجاهزة للوحات والعبوات.' : lang === 'fr' ? 'Exports PNG nets, prêts pour les panneaux et emballages.' : lang === 'es' ? 'Exportaciones PNG nítidas, listas para carteles y embalajes.' : 'Crystal-clear raster PNG exports ready for signs &amp; packaging.'}</p>
+                <p className="text-xs text-slate-600">{lang === 'ar' ? 'ملفات PNG واضحة وجاهزة للوحات والعبوات.' : lang === 'fr' ? 'Exports PNG nets, prêts pour les panneaux et emballages.' : lang === 'es' ? 'Exportaciones PNG nítidas, listas para carteles y embalajes.' : 'Crystal-clear raster PNG exports ready for signs &amp; packaging.'}</p>
               </div>
 
               <div className="p-6 rounded-2xl bg-slate-50 border border-slate-200 text-left rtl:text-right">
                 <div className="text-3xl font-extrabold text-indigo-600 mb-1">SVG</div>
                 <div className="text-xs font-bold text-slate-900 mb-1">{lang === 'ar' ? 'رسومات متجهية حقيقية' : lang === 'fr' ? 'Véritable format vectoriel' : lang === 'es' ? 'Vectorial auténtico' : 'True Vector'}</div>
-                <p className="text-[11px] text-slate-500">{lang === 'ar' ? 'مسارات SVG دقيقة ومتوافقة مع Illustrator وFigma.' : lang === 'fr' ? 'Tracés SVG précis, compatibles avec Illustrator et Figma.' : lang === 'es' ? 'Trazados SVG precisos, compatibles con Illustrator y Figma.' : 'Clean mathematical SVG paths for Illustrator and Figma.'}</p>
+                <p className="text-xs text-slate-600">{lang === 'ar' ? 'مسارات SVG دقيقة ومتوافقة مع Illustrator وFigma.' : lang === 'fr' ? 'Tracés SVG précis, compatibles avec Illustrator et Figma.' : lang === 'es' ? 'Trazados SVG precisos, compatibles con Illustrator y Figma.' : 'Clean mathematical SVG paths for Illustrator and Figma.'}</p>
               </div>
 
               <div className="p-6 rounded-2xl bg-slate-50 border border-slate-200 text-left rtl:text-right">
                 <div className="text-3xl font-extrabold text-indigo-600 mb-1">4</div>
                 <div className="text-xs font-bold text-slate-900 mb-1">{lang === 'ar' ? 'اللغات واتجاه RTL' : lang === 'fr' ? 'Langues et RTL' : lang === 'es' ? 'Idiomas y RTL' : 'Languages + RTL'}</div>
-                <p className="text-[11px] text-slate-500">{lang === 'ar' ? 'الإنجليزية والعربية باتجاه RTL والفرنسية والإسبانية.' : lang === 'fr' ? 'Anglais, arabe avec prise en charge RTL, français et espagnol.' : lang === 'es' ? 'Inglés, árabe con compatibilidad RTL, francés y español.' : 'English, Arabic with full RTL mirroring, French, and Spanish.'}</p>
+                <p className="text-xs text-slate-600">{lang === 'ar' ? 'الإنجليزية والعربية باتجاه RTL والفرنسية والإسبانية.' : lang === 'fr' ? 'Anglais, arabe avec prise en charge RTL, français et espagnol.' : lang === 'es' ? 'Inglés, árabe con compatibilidad RTL, francés y español.' : 'English, Arabic with full RTL mirroring, French, and Spanish.'}</p>
               </div>
             </div>
           </div>
