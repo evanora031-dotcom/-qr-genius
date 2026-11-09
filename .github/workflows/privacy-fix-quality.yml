@@ -141,7 +141,7 @@ jobs:
   qr-contrast-preview-browser:
     if: github.head_ref == 'improve/qr-color-contrast-warning'
     needs: quality
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 10
     steps:
       - name: Check out repository
