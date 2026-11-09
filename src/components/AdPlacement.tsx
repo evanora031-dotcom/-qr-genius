@@ -28,10 +28,10 @@ export const AdPlacement: React.FC<AdPlacementProps> = ({
       className={`my-8 mx-auto w-full max-w-5xl rounded-xl border border-dashed border-slate-300 bg-slate-50/70 p-4 transition-colors ${className}`}
     >
       <div className="flex items-center justify-between pb-2 mb-2 border-b border-slate-200/80">
-        <span className="text-[10px] font-semibold tracking-wider uppercase text-slate-400">
+        <span className="text-xs font-semibold tracking-wider uppercase text-slate-600">
           {t.ad.label}
         </span>
-        <span className="text-[10px] text-slate-400">
+        <span className="text-xs text-slate-600">
           {previewLabel}
         </span>
       </div>
@@ -40,7 +40,7 @@ export const AdPlacement: React.FC<AdPlacementProps> = ({
         <div className="text-xs font-semibold text-slate-600 mb-0.5">
           {t.ad.placeholderTitle}
         </div>
-        <p className="text-[11px] text-slate-400 max-w-md">
+        <p className="text-xs text-slate-600 max-w-md">
           {t.ad.placeholderDesc}
         </p>
       </div>
