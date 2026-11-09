@@ -162,11 +162,11 @@ test('English blog articles expose valid Article JSON-LD and social previews', (
 });
 
 
-test('Arabic blog header omits English link while English blog retains Arabic navigation', () => {
+test('blog headers omit cross-language switch links', () => {
   const arabic = read('../dist/blog/index.html');
   const english = read('../dist/en/blog/index.html');
   assert.ok(!arabic.includes('href="/en/blog/"'), 'Arabic blog unexpectedly shows English navigation');
-  assert.ok(english.includes('href="/blog/"'), 'English blog lacks Arabic navigation');
+  assert.ok(!english.includes('href="/blog/"'), 'English blog unexpectedly shows Arabic navigation');
   assert.ok(!arabic.includes('>English Blog</a>'), 'English Blog link remains in Arabic blog');
 });
 
@@ -179,5 +179,5 @@ test('footer blog navigation respects available content languages', () => {
   const arabic = read('../dist/blog/index.html');
   const english = read('../dist/en/blog/index.html');
   assert.ok(!arabic.includes('href="/en/blog/"'));
-  assert.ok(english.includes('href="/blog/"'));
+  assert.ok(!english.includes('href="/blog/"'));
 });
