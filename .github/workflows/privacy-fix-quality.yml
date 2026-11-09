@@ -137,3 +137,22 @@ jobs:
           npx playwright install --with-deps chromium
       - name: Check mobile and desktop contact layout on Cloudflare preview
         run: node scripts/contact-mobile-layout-browser.mjs
+
+  qr-contrast-preview-browser:
+    if: github.head_ref == 'improve/qr-color-contrast-warning'
+    needs: quality
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install Playwright Chromium
+        run: |
+          npm install --no-save --no-package-lock --legacy-peer-deps playwright@1.56.1
+          npx playwright install --with-deps chromium
+      - name: Check contrast warning on mobile and desktop preview
+        run: node scripts/qr-contrast-preview-browser.mjs
