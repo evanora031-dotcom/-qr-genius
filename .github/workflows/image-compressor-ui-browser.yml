@@ -29,6 +29,14 @@ jobs:
         run: npm run build
       - name: Start local preview and run real download smoke
         run: |
-          (npm run preview -- --host 127.0.0.1 --port 4173 > /tmp/preview.log 2>&1 &)
-          for i in $(seq 1 30); do if curl -fsS http://127.0.0.1:4173/tools/image-compressor > /dev/null; then break; fi; sleep 1; done
+          npm run preview -- --host 127.0.0.1 --port 4173 > /tmp/preview.log 2>&1 &
+          preview_pid=$!
+          trap 'kill "$preview_pid" 2>/dev/null || true' EXIT
+          ready=0
+          for i in $(seq 1 30); do
+            if curl -fsS http://127.0.0.1:4173/tools/image-compressor > /dev/null; then ready=1; break; fi
+            if ! kill -0 "$preview_pid" 2>/dev/null; then break; fi
+            sleep 1
+          done
+          if [ "$ready" -ne 1 ]; then cat /tmp/preview.log; exit 1; fi
           PREVIEW_URL=http://127.0.0.1:4173 node scripts/image-compressor-ui-browser.mjs
