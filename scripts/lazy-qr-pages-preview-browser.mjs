@@ -15,8 +15,11 @@ try {
     }
     if (!ready) throw new Error('Preview unavailable: ' + route);
     await page.locator('#root').waitFor();
-    if (route !== '/') {
+    if (route === '/generator') {
       await page.locator('canvas').first().waitFor({ timeout: 15000 });
+    } else if (route.includes('/tools/')) {
+      await page.locator('h1').first().waitFor({ timeout: 15000 });
+      await page.locator('button[title*="PDF"], button[title*="pdf"]').first().waitFor({ timeout: 15000 });
     }
     if (new URL(page.url()).pathname !== route) throw new Error('Route changed unexpectedly: ' + route + ' => ' + page.url());
     const width = await page.evaluate(() => document.documentElement.scrollWidth);
