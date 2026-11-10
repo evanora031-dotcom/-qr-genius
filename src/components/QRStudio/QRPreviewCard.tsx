@@ -149,7 +149,7 @@ export const QRPreviewCard: React.FC<QRPreviewCardProps> = ({
     try {
       const exportCanvas = await renderQRToCanvas(config, 1500);
       const filename = `qrgenius_${type}_${Date.now()}.pdf`;
-      downloadPrintablePDF(exportCanvas, filename, {
+      await downloadPrintablePDF(exportCanvas, filename, {
         title: title || 'Scan QR Code',
         typeLabel: t.qrTypes[type].label,
         content: config.content
