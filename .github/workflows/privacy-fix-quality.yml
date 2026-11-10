@@ -177,3 +177,22 @@ jobs:
           npx playwright install --with-deps chromium
       - name: Verify downloaded PDF in Chromium preview
         run: node scripts/pdf-export-preview-browser.mjs
+
+  lazy-qr-pages-preview-browser:
+    if: github.head_ref == 'perf/lazy-load-qr-pages'
+    needs: quality
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install Playwright Chromium
+        run: |
+          npm install --no-save --no-package-lock --legacy-peer-deps playwright@1.56.1
+          npx playwright install --with-deps chromium
+      - name: Verify lazy routes in Chromium preview
+        run: node scripts/lazy-qr-pages-preview-browser.mjs

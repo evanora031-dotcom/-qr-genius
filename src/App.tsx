@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { lazy, Suspense, useState, useEffect } from 'react';
 import { PageId, Language, QRType, QRConfig, QRHistoryItem } from './types';
 import { updateDocumentSEO } from './utils/seo';
 import { trackPageView } from './utils/analytics';
@@ -7,8 +7,6 @@ import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
 import { HistoryDrawer } from './components/QRStudio/HistoryDrawer';
 import { HomePage } from './pages/HomePage';
-import { GeneratorPage } from './pages/GeneratorPage';
-import { ToolLandingPage } from './pages/ToolLandingPage';
 import { AboutPage } from './pages/AboutPage';
 import { ContactPage } from './pages/ContactPage';
 import { PrivacyPage } from './pages/PrivacyPage';
@@ -16,6 +14,9 @@ import { TermsPage } from './pages/TermsPage';
 import { FAQPage } from './pages/FAQPage';
 import { SitemapView } from './pages/SitemapView';
 import { RobotsView } from './pages/RobotsView';
+
+const GeneratorPage = lazy(() => import('./pages/GeneratorPage').then(module => ({ default: module.GeneratorPage })));
+const ToolLandingPage = lazy(() => import('./pages/ToolLandingPage').then(module => ({ default: module.ToolLandingPage })));
 
 const ROUTES: Record<string, PageId> = {
   '/': 'home',
@@ -140,6 +141,7 @@ export default function App() {
         historyCount={historyItems.length}
       />
       <main className="flex-1">
+        <Suspense fallback={<div role="status" className="mx-auto max-w-5xl px-6 py-16 text-sm text-slate-600">{lang === 'ar' ? 'جارٍ تحميل الأداة…' : lang === 'fr' ? 'Chargement de l’outil…' : lang === 'es' ? 'Cargando herramienta…' : 'Loading tool…'}</div>}>
         {currentPage === 'home' && <HomePage lang={lang} onNavigate={handleNavigate} />}
         {currentPage === 'generator' && (
           <GeneratorPage
@@ -162,6 +164,7 @@ export default function App() {
         {currentPage === 'faq' && <FAQPage lang={lang} onNavigate={handleNavigate} />}
         {currentPage === 'sitemap' && <SitemapView />}
         {currentPage === 'robots' && <RobotsView />}
+        </Suspense>
       </main>
       <Footer lang={lang} onNavigate={handleNavigate} />
       <HistoryDrawer
