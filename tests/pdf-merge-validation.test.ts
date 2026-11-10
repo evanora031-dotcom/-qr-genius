@@ -19,7 +19,7 @@ test('rejects invalid count, types, sizes and total', () => {
   assert.throws(() => validateMergeFiles(Array.from({ length: 4 }, (_, i) => pdf(i + '.pdf', 19 * 1024 * 1024))));
 });
 test('rejects files without a PDF header even if named .pdf', async () => {
-  const make = (bytes: string) => ({ ...pdf('test.pdf', bytes.length), slice: () => ({ arrayBuffer: async () => new TextEncoder().encode(bytes).buffer }) }) as unknown as File;
+  const make = (bytes: string) => ({ ...pdf('test.pdf', bytes.length), slice: () => ({ arrayBuffer: async () => new TextEncoder().encode(bytes.slice(0, 5)).buffer }) }) as unknown as File;
   await assert.doesNotReject(validatePdfSignatures([make('%PDF-1.7'), make('%PDF-1.4')]));
   await assert.rejects(validatePdfSignatures([make('%PDF-1.7'), make('hello world')]));
 });
