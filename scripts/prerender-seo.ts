@@ -45,7 +45,7 @@ const fallbackStyles = `<style>
 const template = rawTemplate.replace('</head>', '<script>document.documentElement.classList.add("js-enabled");</script>' + fallbackStyles + '\n</head>');
 
 const locales = ['en', 'ar', 'fr', 'es'] as const;
-const pages = ['home', 'generator', 'url', 'wifi', 'whatsapp', 'business', 'about', 'contact', 'privacy', 'terms', 'faq'] as const;
+const pages = ['home', 'generator', 'image-compressor', 'url', 'wifi', 'whatsapp', 'business', 'about', 'contact', 'privacy', 'terms', 'faq'] as const;
 const baseUrl = 'https://getqrgenius.com';
 
 function escapeHtml(value: string): string {

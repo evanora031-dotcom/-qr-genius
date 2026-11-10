@@ -4,7 +4,7 @@ import { Language, PageId } from '../types';
 import { translations } from '../i18n/translations';
 
 const PAGE_PATHS: Partial<Record<PageId, string>> = {
-  home: '/', generator: '/generator', url: '/tools/url', wifi: '/tools/wifi',
+  home: '/', generator: '/generator', 'image-compressor': '/tools/image-compressor', url: '/tools/url', wifi: '/tools/wifi',
   whatsapp: '/tools/whatsapp', business: '/tools/business-vcard', about: '/about',
   contact: '/contact', privacy: '/privacy', terms: '/terms', faq: '/faq',
   sitemap: '/sitemap', robots: '/robots'
@@ -62,6 +62,11 @@ export const Footer: React.FC<FooterProps> = ({ lang, onNavigate }) => {
               <li>
                 <a href={localizedHref('generator', lang)} onClick={(event) => { event.preventDefault(); handleLink('generator'); }} className="hover:text-indigo-400 transition-colors">
                   {t.nav.studio}
+                </a>
+              </li>
+              <li>
+                <a href={localizedHref('image-compressor', lang)} onClick={(event) => { event.preventDefault(); handleLink('image-compressor'); }} className="hover:text-indigo-400 transition-colors">
+                  {lang === 'ar' ? 'ضغط الصور' : lang === 'fr' ? 'Compresser une image' : lang === 'es' ? 'Comprimir imágenes' : 'Image Compressor'}
                 </a>
               </li>
               <li>
