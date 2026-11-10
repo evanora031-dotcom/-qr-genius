@@ -39,6 +39,12 @@ export const SEO_METADATA: Record<PageId, Record<Language, PageMeta>> = {
       h1: "Crear. Escanear. Conectar. El generador de códigos QR gratuito de alta velocidad"
     }
   },
+  'images-to-pdf': {
+    en: { title: 'Convert Images to PDF Free | QR Genius', description: 'Convert up to 10 JPEG or PNG images to A4 PDF privately in your browser without uploading files.', keywords: 'images to pdf, jpg to pdf, png to pdf', canonicalPath: '/tools/images-to-pdf', h1: 'Convert Images to PDF Free' },
+    ar: { title: 'تحويل الصور إلى PDF مجاناً | QR Genius', description: 'حوّل صور JPEG وPNG إلى PDF داخل متصفحك دون رفع الملفات.', keywords: 'تحويل الصور إلى pdf, jpg الى pdf', canonicalPath: '/tools/images-to-pdf', h1: 'تحويل الصور إلى PDF مجاناً' },
+    fr: { title: 'Convertir des images en PDF | QR Genius', description: 'Convertissez des images JPEG et PNG en PDF A4 directement dans votre navigateur.', keywords: 'image en pdf, jpg en pdf', canonicalPath: '/tools/images-to-pdf', h1: 'Convertir des images en PDF gratuitement' },
+    es: { title: 'Convertir imágenes a PDF gratis | QR Genius', description: 'Convierte imágenes JPEG y PNG a PDF A4 en tu navegador sin subir archivos.', keywords: 'imágenes a pdf, jpg a pdf', canonicalPath: '/tools/images-to-pdf', h1: 'Convertir imágenes a PDF gratis' }
+  },
   'image-compressor': {
     en: { title: 'Free Image Compressor Online | QR Genius', description: 'Compress JPEG, PNG and WebP images privately in your browser. Resize and download WebP or JPEG without uploading files.', keywords: 'free image compressor, compress images online, webp compressor', canonicalPath: '/tools/image-compressor', h1: 'Free Online Image Compressor' },
     ar: { title: 'ضغط الصور مجاناً عبر الإنترنت | QR Genius', description: 'اضغط صور JPEG وPNG وWebP داخل متصفحك دون رفعها إلى خادم. نزّل النتيجة بصيغة WebP أو JPEG.', keywords: 'ضغط الصور, تصغير حجم الصور, ضغط webp', canonicalPath: '/tools/image-compressor', h1: 'أداة ضغط الصور مجاناً' },
@@ -474,7 +480,7 @@ export function updateDocumentSEO(pageId: PageId, lang: Language) {
 
 export function generateSitemapXML(): string {
   const baseUrl = 'https://getqrgenius.com';
-  const pages: PageId[] = ['home', 'generator', 'image-compressor', 'url', 'wifi', 'whatsapp', 'business', 'about', 'contact', 'privacy', 'terms', 'faq'];
+  const pages: PageId[] = ['home', 'generator', 'image-compressor', 'images-to-pdf', 'url', 'wifi', 'whatsapp', 'business', 'about', 'contact', 'privacy', 'terms', 'faq'];
   let xml = `<?xml version="1.0" encoding="UTF-8"?>\n`;
   xml += `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n`;
 

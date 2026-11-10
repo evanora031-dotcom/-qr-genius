@@ -1,0 +1,43 @@
+name: Images to PDF browser smoke
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'src/pages/ImagesToPdf.tsx'
+      - 'src/utils/imagesToPdf.ts'
+      - 'scripts/images-to-pdf-browser.mjs'
+      - '.github/workflows/images-to-pdf-browser.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  images-to-pdf-browser:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install browser
+        run: |
+          npm install --no-save --no-package-lock --legacy-peer-deps playwright@1.56.1
+          npx playwright install --with-deps chromium
+      - name: Build preview
+        run: npm run build
+      - name: Start preview and verify PDF download
+        run: |
+          npm run preview -- --host 127.0.0.1 --port 4173 > /tmp/preview.log 2>&1 &
+          preview_pid=$!
+          trap 'kill "$preview_pid" 2>/dev/null || true' EXIT
+          ready=0
+          for i in $(seq 1 30); do
+            if curl -fsS http://127.0.0.1:4173/tools/images-to-pdf > /dev/null; then ready=1; break; fi
+            if ! kill -0 "$preview_pid" 2>/dev/null; then break; fi
+            sleep 1
+          done
+          if [ "$ready" -ne 1 ]; then cat /tmp/preview.log; exit 1; fi
+          PREVIEW_URL=http://127.0.0.1:4173 node scripts/images-to-pdf-browser.mjs
