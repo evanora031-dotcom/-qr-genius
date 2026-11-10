@@ -39,6 +39,12 @@ export const SEO_METADATA: Record<PageId, Record<Language, PageMeta>> = {
       h1: "Crear. Escanear. Conectar. El generador de códigos QR gratuito de alta velocidad"
     }
   },
+  'image-compressor': {
+    en: { title: 'Free Image Compressor Online | QR Genius', description: 'Compress JPEG, PNG and WebP images privately in your browser. Resize and download WebP or JPEG without uploading files.', keywords: 'free image compressor, compress images online, webp compressor', canonicalPath: '/tools/image-compressor', h1: 'Free Online Image Compressor' },
+    ar: { title: 'ضغط الصور مجاناً عبر الإنترنت | QR Genius', description: 'اضغط صور JPEG وPNG وWebP داخل متصفحك دون رفعها إلى خادم. نزّل النتيجة بصيغة WebP أو JPEG.', keywords: 'ضغط الصور, تصغير حجم الصور, ضغط webp', canonicalPath: '/tools/image-compressor', h1: 'أداة ضغط الصور مجاناً' },
+    fr: { title: 'Compresseur d’images gratuit en ligne | QR Genius', description: 'Compressez vos images JPEG, PNG et WebP dans votre navigateur, sans transfert. Téléchargez en WebP ou JPEG.', keywords: 'compresser image, compression webp, réduire taille image', canonicalPath: '/tools/image-compressor', h1: 'Compresseur d’images gratuit' },
+    es: { title: 'Compresor de imágenes gratis en línea | QR Genius', description: 'Comprime imágenes JPEG, PNG y WebP en tu navegador sin subir archivos. Descarga en WebP o JPEG.', keywords: 'comprimir imágenes, compresor webp, reducir tamaño imagen', canonicalPath: '/tools/image-compressor', h1: 'Compresor de imágenes gratis' }
+  },
   generator: {
     en: {
       title: "Free QR Code Generator & Custom Designer | QR GENIUS",
@@ -468,7 +474,7 @@ export function updateDocumentSEO(pageId: PageId, lang: Language) {
 
 export function generateSitemapXML(): string {
   const baseUrl = 'https://getqrgenius.com';
-  const pages: PageId[] = ['home', 'generator', 'url', 'wifi', 'whatsapp', 'business', 'about', 'contact', 'privacy', 'terms', 'faq'];
+  const pages: PageId[] = ['home', 'generator', 'image-compressor', 'url', 'wifi', 'whatsapp', 'business', 'about', 'contact', 'privacy', 'terms', 'faq'];
   let xml = `<?xml version="1.0" encoding="UTF-8"?>\n`;
   xml += `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n`;
 
