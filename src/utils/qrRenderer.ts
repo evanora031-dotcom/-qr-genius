@@ -1,5 +1,4 @@
 import QRCode from 'qrcode';
-import { jsPDF } from 'jspdf';
 import { QRConfig } from '../types';
 
 export interface RenderResult {
@@ -603,11 +602,12 @@ export function downloadSVG(svgString: string, filename: string = 'qrgenius-code
 }
 
 // Download Printable PDF via jsPDF
-export function downloadPrintablePDF(
+export async function downloadPrintablePDF(
   canvas: HTMLCanvasElement,
   filename: string = 'qrgenius-code.pdf',
   meta?: { title?: string; typeLabel?: string; content?: string }
 ) {
+  const { jsPDF } = await import('jspdf');
   const doc = new jsPDF({
     orientation: 'portrait',
     unit: 'mm',
