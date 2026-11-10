@@ -40,6 +40,8 @@ jobs:
         run: bunx tsx --test tests/tool-share.test.ts
       - name: Image compression validation tests
         run: bunx tsx --test tests/image-compression.test.ts
+      - name: Images to PDF validation tests
+        run: bunx tsx --test tests/images-to-pdf.test.ts
       - name: Production build
         run: bun run build
       - name: Search discoverability and canonical sitemap tests
