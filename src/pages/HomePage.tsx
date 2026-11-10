@@ -115,7 +115,7 @@ export const HomePage: React.FC<HomePageProps> = ({ lang, onNavigate }) => {
                       <QrCode className="w-4 h-4" />
                     </div>
                     <div>
-                      <div className="text-xs font-bold text-slate-900">{lang === 'ar' ? 'معاينة تفاعلية' : lang === 'fr' ? 'Aperçu interactif' : lang === 'es' ? 'Vista previa interactiva' : 'Interactive Preview'}</div>
+                      <div className="text-xs font-bold text-slate-900">{lang === 'ar' ? 'معاينة التصميم' : lang === 'fr' ? 'Aperçu du design' : lang === 'es' ? 'Vista previa del diseño' : 'Design Preview'}</div>
                       <div className="text-[10px] text-slate-600">{lang === 'ar' ? 'رسم توضيحي غير قابل للمسح' : lang === 'fr' ? 'Illustration non scannable' : lang === 'es' ? 'Ilustración no escaneable' : 'Illustration only — not scannable'}</div>
                     </div>
                   </div>
