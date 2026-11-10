@@ -9,7 +9,7 @@ import type { Language } from '../src/types';
 
 const read = (file: string) => readFileSync(new URL(file, import.meta.url), 'utf8');
 const languages: Language[] = ['en', 'ar', 'fr', 'es'];
-const pages = ['home', 'generator', 'url', 'wifi', 'whatsapp', 'business', 'about', 'contact', 'privacy', 'terms', 'faq'] as const;
+const pages = ['home', 'generator', 'image-compressor', 'url', 'wifi', 'whatsapp', 'business', 'about', 'contact', 'privacy', 'terms', 'faq'] as const;
 const url = (path: string, lang: Language) =>
   'https://getqrgenius.com' + (lang === 'en' ? path : path === '/' ? `/${lang}/` : `/${lang}${path}`);
 
@@ -21,7 +21,7 @@ test('tracked sitemap exactly matches the sitemap published by the build', () =>
   assert.equal(publishedSource, generated);
   assert.doesNotMatch(generated, /pages\.dev/);
   const canonicalUrls = [...generated.matchAll(/<loc>([^<]+)<\/loc>/g)].map(match => match[1]);
-  assert.equal(canonicalUrls.length, 52);
+  assert.equal(canonicalUrls.length, pages.length * languages.length + 8);
   assert.equal(new Set(canonicalUrls).size, canonicalUrls.length, 'Sitemap contains duplicate canonical URLs');
   for (const blogPath of ['/en/blog/', '/en/blog/how-to-make-wifi-qr-code-for-guests.html', '/en/blog/how-to-create-whatsapp-qr-code-for-customers.html', '/en/blog/how-to-make-business-card-qr-code.html']) {
     assert.ok(canonicalUrls.includes('https://getqrgenius.com' + blogPath), `Missing English blog URL ${blogPath}`);
