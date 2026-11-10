@@ -1,0 +1,30 @@
+name: Mobile CLS diagnostic
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - '.github/workflows/mobile-cls-diagnostic.yml'
+      - 'scripts/measure-mobile-cls.mjs'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  measure-cls:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install Chromium and Playwright
+        run: |
+          npm install --no-save --no-package-lock --legacy-peer-deps playwright@1.56.1
+          npx playwright install --with-deps chromium
+      - name: Measure mobile layout shifts on production
+        env:
+          BASE_URL: https://getqrgenius.com
+        run: node scripts/measure-mobile-cls.mjs
