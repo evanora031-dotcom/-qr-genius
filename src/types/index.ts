@@ -74,6 +74,7 @@ export type Language = 'en' | 'ar' | 'fr' | 'es';
 export type PageId = 
   | 'home' 
   | 'generator' 
+  | 'image-compressor'
   | 'url' 
   | 'wifi' 
   | 'whatsapp' 
