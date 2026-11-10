@@ -97,6 +97,38 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://getqrgenius.com/tools/image-compressor" />
   </url>
   <url>
+    <loc>https://getqrgenius.com/tools/images-to-pdf</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://getqrgenius.com/tools/images-to-pdf" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://getqrgenius.com/ar/tools/images-to-pdf" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://getqrgenius.com/fr/tools/images-to-pdf" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://getqrgenius.com/es/tools/images-to-pdf" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://getqrgenius.com/tools/images-to-pdf" />
+  </url>
+<url>
+    <loc>https://getqrgenius.com/ar/tools/images-to-pdf</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://getqrgenius.com/tools/images-to-pdf" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://getqrgenius.com/ar/tools/images-to-pdf" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://getqrgenius.com/fr/tools/images-to-pdf" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://getqrgenius.com/es/tools/images-to-pdf" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://getqrgenius.com/tools/images-to-pdf" />
+  </url>
+<url>
+    <loc>https://getqrgenius.com/fr/tools/images-to-pdf</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://getqrgenius.com/tools/images-to-pdf" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://getqrgenius.com/ar/tools/images-to-pdf" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://getqrgenius.com/fr/tools/images-to-pdf" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://getqrgenius.com/es/tools/images-to-pdf" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://getqrgenius.com/tools/images-to-pdf" />
+  </url>
+<url>
+    <loc>https://getqrgenius.com/es/tools/images-to-pdf</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://getqrgenius.com/tools/images-to-pdf" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://getqrgenius.com/ar/tools/images-to-pdf" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://getqrgenius.com/fr/tools/images-to-pdf" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://getqrgenius.com/es/tools/images-to-pdf" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://getqrgenius.com/tools/images-to-pdf" />
+  </url>
+  <url>
     <loc>https://getqrgenius.com/tools/url</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://getqrgenius.com/tools/url" />
     <xhtml:link rel="alternate" hreflang="ar" href="https://getqrgenius.com/ar/tools/url" />
