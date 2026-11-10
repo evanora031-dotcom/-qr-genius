@@ -15,7 +15,7 @@ export const SEO_METADATA: Record<PageId, Record<Language, PageMeta>> = {
       description: "Create free QR codes online for links, Wi-Fi, WhatsApp, and more. Customize colors and logos, then download PNG, SVG, or PDF with QR Genius.",
       keywords: "free qr code generator online, qr code generator free online, create qr code free, website qr code",
       canonicalPath: "/",
-      h1: "Create. Scan. Connect. The Free High-Speed QR Generator"
+      h1: "Create. Scan. Connect. Free QR Codes for Everyday Use"
     },
     ar: {
       title: "كيو آر جينيوس – مولد رموز QR مجاني متعدد اللغات | أنشئ. امسح. تواصل.",
