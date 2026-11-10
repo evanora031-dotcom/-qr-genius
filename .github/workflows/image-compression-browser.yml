@@ -1,0 +1,29 @@
+name: Image compression browser capability
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'src/utils/imageCompression.ts'
+      - 'scripts/image-compression-browser-smoke.mjs'
+      - '.github/workflows/image-compression-browser.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  image-compression-browser:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install Playwright Chromium
+        run: |
+          npm install --no-save --no-package-lock --legacy-peer-deps playwright@1.56.1
+          npx playwright install --with-deps chromium
+      - name: Verify browser image decode resize and encode
+        run: node scripts/image-compression-browser-smoke.mjs
