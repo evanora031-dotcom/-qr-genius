@@ -7,6 +7,8 @@ try {
   page.on('pageerror', error => console.error('PAGE ERROR:', error.message));
   const response = await page.goto(base + '/tools/image-compressor', { waitUntil: 'networkidle' });
   console.log('PAGE', response?.status(), page.url(), 'TITLE', await page.title());
+  console.log('HEADINGS', await page.locator('h1').allTextContents());
+  console.log('APP', (await page.locator('#root').innerText()).slice(0, 1000));
   await page.getByRole('heading', { name: 'Free Online Image Compressor' }).waitFor({ timeout: 15000 });
   const image = await page.evaluate(async () => {
     const canvas = document.createElement('canvas');
