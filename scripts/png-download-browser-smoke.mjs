@@ -18,7 +18,8 @@ try {
       await page.waitForFunction(() => {
         const buttons = [...document.querySelectorAll('button')];
         return buttons.some(b => /png/i.test(b.textContent || '') && !b.disabled);
-      }, { timeout: 20000 });
+      }, null, { timeout: 20000 });
+      if (!(await png.isEnabled())) throw new Error('PNG download button remains disabled');
       const [download] = await Promise.all([
         page.waitForEvent('download', { timeout: 30000 }),
         png.click()
