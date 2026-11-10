@@ -52,7 +52,7 @@ export const HomePage: React.FC<HomePageProps> = ({ lang, onNavigate }) => {
               {/* Pill-free Editorial Kicker */}
               <div className="flex items-center gap-2 text-xs font-bold text-indigo-700 tracking-wide uppercase flex-wrap">
                 <Sparkles className="w-4 h-4 text-indigo-600 shrink-0" />
-                <span>{lang === 'ar' ? 'تقنية رموز QR من الجيل الجديد' : lang === 'fr' ? 'Technologie QR de nouvelle génération' : lang === 'es' ? 'Tecnología QR de nueva generación' : 'Next-Generation QR Technology'}</span>
+                <span>{lang === 'ar' ? 'تقنية رموز QR من الجيل الجديد' : lang === 'fr' ? 'Technologie QR de nouvelle génération' : lang === 'es' ? 'Tecnología QR de nueva generación' : 'Free QR Code Generator'}</span>
                 <span className="text-slate-300">·</span>
                 <span className="text-slate-500 font-medium">{lang === 'ar' ? 'أدوات QR متاحة للاستخدام' : lang === 'fr' ? 'Outils QR accessibles en ligne' : lang === 'es' ? 'Herramientas QR disponibles en línea' : 'QR tools available online'}</span>
               </div>
@@ -60,12 +60,12 @@ export const HomePage: React.FC<HomePageProps> = ({ lang, onNavigate }) => {
               <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 tracking-tight leading-[1.18] text-balance">
                 {lang === 'ar' ? 'أنشئ. امسح. تواصل.' : lang === 'fr' ? 'Créer. Scanner. Connecter.' : lang === 'es' ? 'Crear. Escanear. Conectar.' : 'Create. Scan. Connect.'}
                 <span className="block text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 via-purple-600 to-indigo-800">
-                  {lang === 'ar' ? 'مولّد رموز QR مجاني وعصري' : lang === 'fr' ? 'Le générateur QR moderne et gratuit' : lang === 'es' ? 'El generador QR moderno y gratuito' : 'The Free Modern QR Generator'}
+                  {lang === 'ar' ? 'مولّد رموز QR مجاني وعصري' : lang === 'fr' ? 'Le générateur QR moderne et gratuit' : lang === 'es' ? 'El generador QR moderno y gratuito' : 'Free QR Codes for Everyday Use'}
                 </span>
               </h1>
 
               <p className="text-base sm:text-lg text-slate-600 leading-relaxed max-w-2xl">
-                {lang === 'ar' ? 'أنشئ رموز QR عالية الدقة ومخصصة للمواقع وشبكات Wi-Fi ومحادثات واتساب وبطاقات العمل الرقمية. حمّل ملفات SVG المتجهة أو PNG الواضحة أو PDF الجاهز للطباعة دون الحاجة إلى التسجيل.' : lang === 'fr' ? 'Créez des QR codes personnalisés haute résolution pour les sites web, le Wi-Fi, WhatsApp et les cartes de visite numériques. Téléchargez des fichiers SVG vectoriels, PNG nets ou PDF prêts à imprimer, sans inscription.' : lang === 'es' ? 'Genere códigos QR personalizados de alta resolución para sitios web, redes Wi-Fi, WhatsApp y tarjetas de visita digitales. Descargue archivos SVG vectoriales, PNG nítidos o PDF listos para imprimir, sin registrarse.' : 'Generate high-resolution, custom-styled QR codes for websites, Wi-Fi networks, WhatsApp chats, and digital business cards. Download infinite-resolution vector SVG, crisp PNG, or printable PDF sheets with zero registrations.'}
+                {lang === 'ar' ? 'أنشئ رموز QR عالية الدقة ومخصصة للمواقع وشبكات Wi-Fi ومحادثات واتساب وبطاقات العمل الرقمية. حمّل ملفات SVG المتجهة أو PNG الواضحة أو PDF الجاهز للطباعة دون الحاجة إلى التسجيل.' : lang === 'fr' ? 'Créez des QR codes personnalisés haute résolution pour les sites web, le Wi-Fi, WhatsApp et les cartes de visite numériques. Téléchargez des fichiers SVG vectoriels, PNG nets ou PDF prêts à imprimer, sans inscription.' : lang === 'es' ? 'Genere códigos QR personalizados de alta resolución para sitios web, redes Wi-Fi, WhatsApp y tarjetas de visita digitales. Descargue archivos SVG vectoriales, PNG nítidos o PDF listos para imprimir, sin registrarse.' : 'Create QR codes for links, Wi-Fi, WhatsApp, and contact cards. Customize the design, then download PNG, SVG, or PDF files. No sign-up required.'}
               </p>
 
               {/* Action Buttons */}
@@ -75,7 +75,7 @@ export const HomePage: React.FC<HomePageProps> = ({ lang, onNavigate }) => {
                   onClick={() => onNavigate('generator')}
                   className="py-3.5 px-6 rounded-xl font-bold text-sm text-white bg-indigo-600 hover:bg-indigo-700 active:bg-indigo-800 shadow-lg shadow-indigo-200 transition-all flex items-center justify-center gap-2 group"
                 >
-                  <span>{lang === 'ar' ? 'افتح استوديو QR الكامل' : lang === 'fr' ? 'Ouvrir le studio QR complet' : lang === 'es' ? 'Abrir el estudio QR completo' : 'Open Full QR Studio'}</span>
+                  <span>{lang === 'ar' ? 'افتح استوديو QR الكامل' : lang === 'fr' ? 'Ouvrir le studio QR complet' : lang === 'es' ? 'Abrir el estudio QR completo' : 'Create a QR Code'}</span>
                   <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1 rtl:group-hover:-translate-x-1" />
                 </button>
 
