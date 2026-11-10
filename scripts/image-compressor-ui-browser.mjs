@@ -4,8 +4,10 @@ const base = process.env.PREVIEW_URL || 'https://getqrgenius.com';
 const browser = await chromium.launch({ headless: true });
 try {
   const page = await browser.newPage({ viewport: { width: 390, height: 844 }, acceptDownloads: true });
-  await page.goto(base + '/tools/image-compressor', { waitUntil: 'networkidle' });
-  await page.getByRole('heading', { name: 'Free Online Image Compressor' }).waitFor();
+  page.on('pageerror', error => console.error('PAGE ERROR:', error.message));
+  const response = await page.goto(base + '/tools/image-compressor', { waitUntil: 'networkidle' });
+  console.log('PAGE', response?.status(), page.url(), 'TITLE', await page.title());
+  await page.getByRole('heading', { name: 'Free Online Image Compressor' }).waitFor({ timeout: 15000 });
   const image = await page.evaluate(async () => {
     const canvas = document.createElement('canvas');
     canvas.width = 500;
