@@ -7,9 +7,9 @@ import { ToolLandingPage } from '../src/pages/ToolLandingPage';
 
 const articles = {
   ar: {
-    wifi: '/blog/wifi-qr-code-for-guests.html',
-    whatsapp: '/blog/whatsapp-qr-code-for-customers.html',
-    business: '/blog/business-card-qr-code-guide.html'
+    wifi: '/blog/wifi-qr-code-for-guests',
+    whatsapp: '/blog/whatsapp-qr-code-for-customers',
+    business: '/blog/business-card-qr-code-guide'
   },
   en: {
     wifi: '/en/blog/how-to-make-wifi-qr-code-for-guests.html',
@@ -26,7 +26,7 @@ test('specialized QR tools link to existing canonical guides in Arabic and Engli
         tool, lang, onNavigate: () => {}, onHistoryUpdated: () => {}
       }));
       assert.ok(markup.includes('href="' + href + '"'), 'Missing ' + lang + ' guide link on ' + tool);
-      const file = new URL('../public' + href, import.meta.url);
+      const file = new URL('../public' + (lang === 'ar' ? href + '.html' : href), import.meta.url);
       assert.ok(existsSync(file), 'Missing guide file: ' + href);
       const html = readFileSync(file, 'utf8');
       assert.ok(html.includes('https://getqrgenius.com' + href), 'Missing canonical URL in ' + href);
