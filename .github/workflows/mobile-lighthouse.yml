@@ -1,0 +1,33 @@
+name: Mobile Lighthouse audit
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - '.github/workflows/mobile-lighthouse.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  lighthouse-mobile:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install Lighthouse and Chromium
+        run: |
+          npm install --no-save --no-package-lock --legacy-peer-deps lighthouse@12.8.2 playwright@1.56.1
+          npx playwright install --with-deps chromium
+      - name: Audit live homepage on mobile
+        env:
+          BASE_URL: https://getqrgenius.com
+        run: |
+          export CHROME_PATH="$(find "$HOME/.cache/ms-playwright" -path '*/chrome-linux64/chrome' -type f | head -n 1)"
+          test -x "$CHROME_PATH"
+          npx lighthouse "$BASE_URL" --chrome-flags="--headless --no-sandbox" --preset=perf --form-factor=mobile --screenEmulation.mobile=true --screenEmulation.width=390 --screenEmulation.height=844 --screenEmulation.deviceScaleFactor=2 --throttling-method=simulate --output=json --output-path=/tmp/lighthouse-mobile.json --quiet
+          node -e 'const r=require("/tmp/lighthouse-mobile.json"); console.log(JSON.stringify({url:r.finalUrl,score:r.categories.performance.score*100,metrics:Object.fromEntries(["first-contentful-paint","largest-contentful-paint","speed-index","total-blocking-time","cumulative-layout-shift"].map(k=>[k,{value:r.audits[k].numericValue,display:r.audits[k].displayValue}])),opportunities:Object.values(r.audits).filter(a=>a.details?.type==="opportunity"&&a.details.overallSavingsMs>100).map(a=>({title:a.title,savingsMs:a.details.overallSavingsMs})).slice(0,8)},null,2))'
