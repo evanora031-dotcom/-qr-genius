@@ -75,6 +75,7 @@ export type PageId =
   | 'home' 
   | 'generator' 
   | 'image-compressor'
+  | 'images-to-pdf'
   | 'url' 
   | 'wifi' 
   | 'whatsapp' 
