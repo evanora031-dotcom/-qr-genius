@@ -12,7 +12,7 @@ import { Language, PageId } from '../types';
 import { translations } from '../i18n/translations';
 
 const PAGE_PATHS: Partial<Record<PageId, string>> = {
-  home: '/', generator: '/generator', 'image-compressor': '/tools/image-compressor', url: '/tools/url', wifi: '/tools/wifi',
+  home: '/', generator: '/generator', 'image-compressor': '/tools/image-compressor', 'images-to-pdf': '/tools/images-to-pdf', url: '/tools/url', wifi: '/tools/wifi',
   whatsapp: '/tools/whatsapp', business: '/tools/business-vcard', about: '/about',
   contact: '/contact', privacy: '/privacy', terms: '/terms', faq: '/faq'
 };
