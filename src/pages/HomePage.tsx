@@ -116,18 +116,18 @@ export const HomePage: React.FC<HomePageProps> = ({ lang, onNavigate }) => {
                     </div>
                     <div>
                       <div className="text-xs font-bold text-slate-900">{lang === 'ar' ? 'معاينة تفاعلية' : lang === 'fr' ? 'Aperçu interactif' : lang === 'es' ? 'Vista previa interactiva' : 'Interactive Preview'}</div>
-                      <div className="text-[10px] text-slate-600">{lang === 'ar' ? 'قابل للمسح وفق ISO/IEC 18004' : lang === 'fr' ? 'Scannable selon ISO/IEC 18004' : lang === 'es' ? 'Escaneable según ISO/IEC 18004' : 'Scannable ISO/IEC 18004'}</div>
+                      <div className="text-[10px] text-slate-600">{lang === 'ar' ? 'رسم توضيحي غير قابل للمسح' : lang === 'fr' ? 'Illustration non scannable' : lang === 'es' ? 'Ilustración no escaneable' : 'Illustration only — not scannable'}</div>
                     </div>
                   </div>
                   <span className="text-[10px] font-semibold text-indigo-600 bg-indigo-50 px-2 py-0.5 rounded-full">
-                    {lang === 'ar' ? 'جاهز للمسح' : lang === 'fr' ? 'Prêt à scanner' : lang === 'es' ? 'Listo para escanear' : 'Ready to Scan'}
+                    {lang === 'ar' ? 'مثال تصميم' : lang === 'fr' ? 'Exemple visuel' : lang === 'es' ? 'Ejemplo visual' : 'Visual Example'}
                   </span>
                 </div>
 
                 {/* Styled Center QR Demo */}
                 <div className="flex flex-col items-center justify-center p-6 bg-gradient-to-b from-indigo-50/40 to-slate-50 rounded-xl border border-slate-100">
                   <div className="w-48 h-48 bg-white p-3 rounded-2xl shadow-sm border border-slate-200 flex items-center justify-center">
-                    {/* SVG Interactive sample */}
+                    {/* Decorative SVG illustration; not an encoded QR code. */}
                     <svg viewBox="0 0 100 100" className="w-full h-full">
                       <rect width="100" height="100" fill="#ffffff" />
                       {/* Top-Left Finder */}
