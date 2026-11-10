@@ -1,0 +1,30 @@
+name: PNG download browser smoke
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - '.github/workflows/png-download-browser-smoke.yml'
+      - 'scripts/png-download-browser-smoke.mjs'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  png-download-browser:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install Playwright Chromium
+        run: |
+          npm install --no-save --no-package-lock --legacy-peer-deps playwright@1.56.1
+          npx playwright install --with-deps chromium
+      - name: Verify actual PNG download on desktop and mobile viewports
+        env:
+          QR_TEST_BASE_URL: https://getqrgenius.com
+        run: node scripts/png-download-browser-smoke.mjs
