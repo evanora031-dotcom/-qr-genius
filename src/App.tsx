@@ -145,7 +145,7 @@ export default function App() {
       <main className="flex-1">
         <Suspense fallback={<div role="status" className="mx-auto max-w-5xl px-6 py-16 text-sm text-slate-600">{lang === 'ar' ? 'جارٍ تحميل الأداة…' : lang === 'fr' ? 'Chargement de l’outil…' : lang === 'es' ? 'Cargando herramienta…' : 'Loading tool…'}</div>}>
         {currentPage === 'home' && <HomePage lang={lang} onNavigate={handleNavigate} />}
-        {currentPage === 'image-compressor' && <ImageCompressor />}
+        {currentPage === 'image-compressor' && <ImageCompressor lang={lang} />}
         {currentPage === 'generator' && (
           <GeneratorPage
             initialType={generatorType}
