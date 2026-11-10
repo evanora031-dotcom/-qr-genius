@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { imagesToPdf, validatePdfImages } from '../utils/imagesToPdf';
 import type { Language } from '../types';
 
@@ -15,8 +15,10 @@ export const ImagesToPdf: React.FC<{ lang?: Language }> = ({ lang = 'en' }) => {
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState('');
   const [url, setUrl] = useState('');
+  const selectionVersion = useRef(0);
   useEffect(() => () => { if (url) URL.revokeObjectURL(url); }, [url]);
   const onSelect = (selected: File[]) => {
+    selectionVersion.current += 1;
     setFiles(selected);
     setUrl('');
     try { validatePdfImages(selected); setError(''); }
@@ -25,10 +27,11 @@ export const ImagesToPdf: React.FC<{ lang?: Language }> = ({ lang = 'en' }) => {
   const onConvert = async () => {
     setError('');
     setBusy(true);
+    const version = selectionVersion.current;
     try {
       const blob = await imagesToPdf(files);
-      setUrl(URL.createObjectURL(blob));
-    } catch { setError(t.error); }
+      if (version === selectionVersion.current) setUrl(URL.createObjectURL(blob));
+    } catch { if (version === selectionVersion.current) setError(t.error); }
     finally { setBusy(false); }
   };
   return (
@@ -37,7 +40,7 @@ export const ImagesToPdf: React.FC<{ lang?: Language }> = ({ lang = 'en' }) => {
       <p className="text-slate-600">{t.intro}</p>
       <section className="rounded-2xl border border-slate-200 bg-white p-6 space-y-5">
         <label className="block font-semibold text-slate-800" htmlFor="pdf-images">{t.choose}</label>
-        <input id="pdf-images" type="file" accept="image/jpeg,image/png" multiple onChange={event => onSelect(Array.from(event.target.files || []))} className="block w-full text-sm" />
+        <input id="pdf-images" type="file" accept="image/jpeg,image/png" multiple disabled={busy} onChange={event => onSelect(Array.from(event.target.files || []))} className="block w-full text-sm" />
         {files.length > 0 && <p className="text-sm text-slate-600">{files.length} {lang === 'ar' ? 'صور' : 'images'}</p>}
         {error && <p role="alert" className="text-red-700">{error}</p>}
         <button type="button" disabled={busy || !files.length || !!error} onClick={onConvert} className="rounded-xl bg-indigo-600 px-6 py-3 font-bold text-white disabled:opacity-50">{busy ? t.busy : t.convert}</button>
