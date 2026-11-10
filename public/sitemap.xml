@@ -65,6 +65,38 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://getqrgenius.com/generator" />
   </url>
   <url>
+    <loc>https://getqrgenius.com/tools/image-compressor</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://getqrgenius.com/tools/image-compressor" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://getqrgenius.com/ar/tools/image-compressor" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://getqrgenius.com/fr/tools/image-compressor" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://getqrgenius.com/es/tools/image-compressor" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://getqrgenius.com/tools/image-compressor" />
+  </url>
+  <url>
+    <loc>https://getqrgenius.com/ar/tools/image-compressor</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://getqrgenius.com/tools/image-compressor" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://getqrgenius.com/ar/tools/image-compressor" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://getqrgenius.com/fr/tools/image-compressor" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://getqrgenius.com/es/tools/image-compressor" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://getqrgenius.com/tools/image-compressor" />
+  </url>
+  <url>
+    <loc>https://getqrgenius.com/fr/tools/image-compressor</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://getqrgenius.com/tools/image-compressor" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://getqrgenius.com/ar/tools/image-compressor" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://getqrgenius.com/fr/tools/image-compressor" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://getqrgenius.com/es/tools/image-compressor" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://getqrgenius.com/tools/image-compressor" />
+  </url>
+  <url>
+    <loc>https://getqrgenius.com/es/tools/image-compressor</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://getqrgenius.com/tools/image-compressor" />
+    <xhtml:link rel="alternate" hreflang="ar" href="https://getqrgenius.com/ar/tools/image-compressor" />
+    <xhtml:link rel="alternate" hreflang="fr" href="https://getqrgenius.com/fr/tools/image-compressor" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://getqrgenius.com/es/tools/image-compressor" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://getqrgenius.com/tools/image-compressor" />
+  </url>
+  <url>
     <loc>https://getqrgenius.com/tools/url</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://getqrgenius.com/tools/url" />
     <xhtml:link rel="alternate" hreflang="ar" href="https://getqrgenius.com/ar/tools/url" />
