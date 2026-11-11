@@ -150,6 +150,19 @@ function renderStaticContent(locale: typeof locales[number], page: typeof pages[
     const href = localizedPath(resourceMeta.canonicalPath, locale);
     return '<li><a href="' + escapeHtml(href) + '">' + escapeHtml(resourceLabels[locale][resource]) + '</a></li>';
   }).join('');
+  // Mirror the existing React tool-to-guide links in the server-rendered fallback.
+  const guidePaths = {
+    en: { wifi: '/en/blog/how-to-make-wifi-qr-code-for-guests.html', whatsapp: '/en/blog/how-to-create-whatsapp-qr-code-for-customers.html', business: '/en/blog/how-to-make-business-card-qr-code.html' },
+    ar: { wifi: '/blog/wifi-qr-code-for-guests', whatsapp: '/blog/whatsapp-qr-code-for-customers', business: '/blog/business-card-qr-code-guide' }
+  } as const;
+  const guideLabels = {
+    en: { wifi: 'How to make a Wi-Fi QR code for guests', whatsapp: 'How to create a WhatsApp QR code for customers', business: 'How to make a business card QR code' },
+    ar: { wifi: 'كيفية إنشاء رمز Wi-Fi QR للضيوف', whatsapp: 'كيفية إنشاء رمز QR لواتساب للعملاء', business: 'كيفية إنشاء رمز QR لبطاقة العمل' }
+  } as const;
+  const guidePage = page === 'wifi' || page === 'whatsapp' || page === 'business' ? page : null;
+  const guideLink = guidePage && (locale === 'en' || locale === 'ar')
+    ? '<p><a href="' + escapeHtml(guidePaths[locale][guidePage]) + '">' + escapeHtml(guideLabels[locale][guidePage]) + '</a></p>'
+    : '';
   const copy = supportingCopy[page]?.[locale];
   const supportingSection = copy
     ? '<section><h2>' + escapeHtml(copy.heading) + '</h2><p>' + escapeHtml(copy.body) + '</p><h3>' +
@@ -160,7 +173,7 @@ function renderStaticContent(locale: typeof locales[number], page: typeof pages[
     : '';
   return '<section class="seo-static-content" aria-label="' + escapeHtml(meta.h1) + '">' +
     '<h1>' + escapeHtml(meta.h1) + '</h1>' +
-    '<p>' + escapeHtml(meta.description) + '</p>' + supportingSection +
+    '<p>' + escapeHtml(meta.description) + '</p>' + supportingSection + guideLink +
     '<nav aria-label="' + escapeHtml(labels[locale]) + '">' +
     '<h2>' + escapeHtml(labels[locale]) + '</h2><ul>' + links + '</ul></nav>' +
     '<nav aria-label="' + escapeHtml(resourceLabels[locale].about) + '">' +
