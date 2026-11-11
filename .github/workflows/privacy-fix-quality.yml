@@ -44,6 +44,8 @@ jobs:
         run: bunx tsx --test tests/images-to-pdf.test.ts
       - name: PDF merge validation tests
         run: bunx tsx --test tests/pdf-merge-validation.test.ts
+      - name: PDF merge engine tests
+        run: bunx tsx --test tests/pdf-merge-engine.test.ts
       - name: Production build
         run: bun run build
       - name: Search discoverability and canonical sitemap tests
