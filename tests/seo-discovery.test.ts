@@ -207,9 +207,9 @@ test('every non-home localized page includes a canonical BreadcrumbList in built
     for (const page of pages) {
       if (page === 'home') continue;
       const canonicalPath = SEO_METADATA[page][lang].canonicalPath;
-      const route = (lang === 'en' ? '' : lang + '/') + canonicalPath.replace(/^\\//, '') + '.html';
+      const route = (lang === 'en' ? '' : lang + '/') + canonicalPath.slice(1) + '.html';
       const html = read('../dist/' + route);
-      const jsonScripts = [...html.matchAll(/<script type="application\\/ld\\+json">([\\s\\S]*?)<\\/script>/g)];
+      const jsonScripts = [...html.matchAll(new RegExp('<script type="application/ld\\+json">([\\s\\S]*?)</script>', 'g'))];
       const objects = jsonScripts.flatMap(match => {
         const value = JSON.parse(match[1]);
         return Array.isArray(value) ? value : [value];
