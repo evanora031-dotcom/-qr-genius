@@ -9,7 +9,7 @@ import type { Language } from '../src/types';
 
 const read = (file: string) => readFileSync(new URL(file, import.meta.url), 'utf8');
 const languages: Language[] = ['en', 'ar', 'fr', 'es'];
-const pages = ['home', 'generator', 'image-compressor', 'images-to-pdf', 'url', 'wifi', 'whatsapp', 'business', 'about', 'contact', 'privacy', 'terms', 'faq'] as const;
+const pages = ['home', 'generator', 'image-compressor', 'images-to-pdf', 'pdf-merge', 'url', 'wifi', 'whatsapp', 'business', 'about', 'contact', 'privacy', 'terms', 'faq'] as const;
 const url = (path: string, lang: Language) =>
   'https://getqrgenius.com' + (lang === 'en' ? path : path === '/' ? `/${lang}/` : `/${lang}${path}`);
 
