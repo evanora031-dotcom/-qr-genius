@@ -40,13 +40,13 @@ export const PdfMerge: React.FC<{ lang?: Language }> = ({ lang = 'en' }) => {
     <main className="max-w-3xl mx-auto px-4 py-12 space-y-6">
       <h1 className="text-3xl font-extrabold text-slate-900">{t.title}</h1>
       <p className="text-slate-600">{t.intro}</p>
-      <section className="rounded-2xl border border-slate-200 bg-white p-6 space-y-5">
+      <section className="rounded-2xl border border-slate-200 bg-white p-4 sm:p-6 space-y-5">
         <label htmlFor="pdf-merge-files" className="block font-semibold text-slate-800">{t.choose}</label>
-        <input id="pdf-merge-files" type="file" accept=".pdf,application/pdf" multiple disabled={busy} onChange={e => select(Array.from(e.target.files || []))} className="block w-full text-sm" />
+        <input id="pdf-merge-files" type="file" accept=".pdf,application/pdf" multiple disabled={busy} onChange={e => select(Array.from(e.target.files || []))} className="block w-full min-w-0 max-w-full text-sm file:mr-3 file:rounded-lg file:border-0 file:bg-indigo-50 file:px-3 file:py-3 file:font-semibold file:text-indigo-800" />
         {files.length > 0 && <p className="text-sm text-slate-600">{files.length} {t.selected}</p>}
         {error && <p role="alert" className="text-red-700">{error}</p>}
-        <button type="button" disabled={busy || files.length < 2 || !!error} onClick={merge} className="rounded-xl bg-indigo-600 px-6 py-3 font-bold text-white disabled:opacity-50">{busy ? t.busy : t.merge}</button>
-        {url && <a href={url} download="qr-genius-merged.pdf" className="block w-fit rounded-xl bg-emerald-700 px-6 py-3 font-bold text-white">{t.download}</a>}
+        <button type="button" disabled={busy || files.length < 2 || !!error} onClick={merge} className="inline-flex min-h-12 w-full sm:w-auto items-center justify-center rounded-xl bg-indigo-600 px-6 py-3 font-bold text-white disabled:opacity-50">{busy ? t.busy : t.merge}</button>
+        {url && <a href={url} download="qr-genius-merged.pdf" className="flex min-h-12 w-full sm:w-fit items-center justify-center rounded-xl bg-emerald-700 px-6 py-3 text-center font-bold text-white">{t.download}</a>}
       </section>
       <section className="space-y-3 text-slate-600"><h2 className="text-xl font-bold text-slate-900">{t.title}</h2><p>{t.guide}</p><p>{t.privacy}</p></section>
     </main>
