@@ -152,7 +152,7 @@ function renderStaticContent(locale: typeof locales[number], page: typeof pages[
   }).join('');
   // Mirror the existing React tool-to-guide links in the server-rendered fallback.
   const guidePaths = {
-    en: { wifi: '/en/blog/how-to-make-wifi-qr-code-for-guests.html', whatsapp: '/en/blog/how-to-create-whatsapp-qr-code-for-customers.html', business: '/en/blog/how-to-make-business-card-qr-code.html' },
+    en: { wifi: '/en/blog/how-to-make-wifi-qr-code-for-guests.html', whatsapp: '/en/blog/how-to-create-whatsapp-qr-code-for-customers.html', business: '/en/blog/how-to-make-business-card-qr-code' },
     ar: { wifi: '/blog/wifi-qr-code-for-guests', whatsapp: '/blog/whatsapp-qr-code-for-customers', business: '/blog/business-card-qr-code-guide' }
   } as const;
   const guideLabels = {
@@ -304,7 +304,7 @@ const blogEntries = [
   `  <url>\n    <loc>${baseUrl}/en/blog/</loc>\n  </url>`,
   `  <url>\n    <loc>${baseUrl}/en/blog/how-to-make-wifi-qr-code-for-guests.html</loc>\n  </url>`,
   `  <url>\n    <loc>${baseUrl}/en/blog/how-to-create-whatsapp-qr-code-for-customers.html</loc>\n  </url>`,
-  `  <url>\n    <loc>${baseUrl}/en/blog/how-to-make-business-card-qr-code.html</loc>\n  </url>`
+  `  <url>\n    <loc>${baseUrl}/en/blog/how-to-make-business-card-qr-code</loc>\n  </url>`
 ];
 
 const sitemap = [
