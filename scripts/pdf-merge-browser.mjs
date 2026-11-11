@@ -16,6 +16,20 @@ try {
     await page.goto(base + path, { waitUntil: 'networkidle' });
     await page.getByRole('heading', { name: heading, exact: true }).first().waitFor();
   }
+  for (const lang of ['en', 'ar', 'fr', 'es']) {
+    const prefix = lang === 'en' ? '' : '/' + lang;
+    await page.goto(base + prefix + '/', { waitUntil: 'networkidle' });
+    for (const tool of ['image-compressor', 'images-to-pdf', 'merge-pdf']) {
+      const href = prefix + '/tools/' + tool;
+      const link = page.locator('a[href="' + href + '"]');
+      if (await link.count() < 1) throw new Error('Missing homepage link: ' + href);
+      await link.first().click();
+      await page.waitForURL('**' + href);
+      await page.goto(base + prefix + '/', { waitUntil: 'networkidle' });
+    }
+    const footerLink = page.locator('footer a[href="' + prefix + '/tools/merge-pdf"]');
+    if (await footerLink.count() !== 1) throw new Error('Missing footer PDF merge link for ' + lang);
+  }
   const makeFile = async (name, widths) => {
     const doc = await PDFDocument.create();
     for (const width of widths) doc.addPage([width, 400]);
