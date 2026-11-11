@@ -138,6 +138,13 @@ function renderStaticContent(locale: typeof locales[number], page: typeof pages[
     const href = localizedPath(toolMeta.canonicalPath, locale);
     return '<li><a href="' + escapeHtml(href) + '">' + escapeHtml(toolMeta.h1) + '</a></li>';
   }).join('');
+  // Expose PDF and image tools in the prerendered HTML, not only after React hydration.
+  const fileToolPages = ['image-compressor', 'images-to-pdf', 'pdf-merge'] as const;
+  const fileToolLinks = fileToolPages.map((tool) => {
+    const toolMeta = SEO_METADATA[tool][locale];
+    return '<li><a href="' + escapeHtml(localizedPath(toolMeta.canonicalPath, locale)) + '">' + escapeHtml(toolMeta.h1) + '</a></li>';
+  }).join('');
+  const fileToolHeading = { en: 'PDF and image tools', ar: 'أدوات PDF والصور', fr: 'Outils PDF et images', es: 'Herramientas PDF e imágenes' }[locale];
   const resourcePages = ['about', 'faq', 'contact', 'privacy', 'terms'] as const;
   const resourceLabels: Record<typeof locales[number], Record<typeof resourcePages[number], string>> = {
     en: { about: 'About QR GENIUS', faq: 'Frequently asked questions', contact: 'Contact support', privacy: 'Privacy policy', terms: 'Terms of use' },
@@ -176,6 +183,7 @@ function renderStaticContent(locale: typeof locales[number], page: typeof pages[
     '<p>' + escapeHtml(meta.description) + '</p>' + supportingSection + guideLink +
     '<nav aria-label="' + escapeHtml(labels[locale]) + '">' +
     '<h2>' + escapeHtml(labels[locale]) + '</h2><ul>' + links + '</ul></nav>' +
+    '<nav aria-label="' + escapeHtml(fileToolHeading) + '"><h2>' + escapeHtml(fileToolHeading) + '</h2><ul>' + fileToolLinks + '</ul></nav>' +
     '<nav aria-label="' + escapeHtml(resourceLabels[locale].about) + '">' +
     '<h2>' + escapeHtml(locale === 'ar' ? 'معلومات ومساعدة' : locale === 'fr' ? 'Informations et assistance' : locale === 'es' ? 'Información y ayuda' : 'Information and help') + '</h2><ul>' + resourceLinks + '</ul></nav></section>';
 }
