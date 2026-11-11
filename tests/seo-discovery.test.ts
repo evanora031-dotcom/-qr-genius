@@ -134,7 +134,8 @@ test('English specialized tool pages link to their matching published blog guide
       tool: tool as keyof typeof guidePaths, lang: 'en', onNavigate: () => {}, onHistoryUpdated: () => {}
     }));
     assert.ok(html.includes('href="' + href + '"'), 'Missing English guide link on ' + tool);
-    assert.ok(read('../dist' + href).includes('rel="canonical" href="https://getqrgenius.com' + href + '"'));
+    const builtFile = '../dist' + href + (tool === 'business' ? '.html' : '');
+    assert.ok(read(builtFile).includes('rel="canonical" href="https://getqrgenius.com' + href + '"'));
   }
 });
 
