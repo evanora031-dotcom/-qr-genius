@@ -39,6 +39,12 @@ export const SEO_METADATA: Record<PageId, Record<Language, PageMeta>> = {
       h1: "Crear. Escanear. Conectar. El generador de códigos QR gratuito de alta velocidad"
     }
   },
+  'pdf-merge': {
+    en: { title: 'Merge PDF Files Free | QR Genius', description: 'Combine 2 to 10 PDF documents privately in your browser without uploading files.', keywords: 'merge pdf, combine pdf files, join pdf', canonicalPath: '/tools/merge-pdf', h1: 'Merge PDF Files Free' },
+    ar: { title: 'دمج ملفات PDF مجاناً | QR Genius', description: 'ادمج ملفات PDF داخل متصفحك دون رفع المستندات إلى الخادم.', keywords: 'دمج pdf, جمع ملفات pdf', canonicalPath: '/tools/merge-pdf', h1: 'دمج ملفات PDF مجاناً' },
+    fr: { title: 'Fusionner des PDF gratuitement | QR Genius', description: 'Fusionnez vos fichiers PDF dans le navigateur, sans transfert vers un serveur.', keywords: 'fusionner pdf, assembler pdf', canonicalPath: '/tools/merge-pdf', h1: 'Fusionner des PDF gratuitement' },
+    es: { title: 'Unir archivos PDF gratis | QR Genius', description: 'Combina archivos PDF en tu navegador sin subir documentos.', keywords: 'unir pdf, combinar pdf', canonicalPath: '/tools/merge-pdf', h1: 'Unir archivos PDF gratis' }
+  },
   'images-to-pdf': {
     en: { title: 'Convert Images to PDF Free | QR Genius', description: 'Convert up to 10 JPEG or PNG images to A4 PDF privately in your browser without uploading files.', keywords: 'images to pdf, jpg to pdf, png to pdf', canonicalPath: '/tools/images-to-pdf', h1: 'Convert Images to PDF Free' },
     ar: { title: 'تحويل الصور إلى PDF مجاناً | QR Genius', description: 'حوّل صور JPEG وPNG إلى PDF داخل متصفحك دون رفع الملفات.', keywords: 'تحويل الصور إلى pdf, jpg الى pdf', canonicalPath: '/tools/images-to-pdf', h1: 'تحويل الصور إلى PDF مجاناً' },

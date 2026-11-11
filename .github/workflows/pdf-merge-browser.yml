@@ -1,0 +1,40 @@
+name: PDF merge browser smoke
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'src/pages/PdfMerge.tsx'
+      - 'src/utils/mergePdfFiles.ts'
+      - 'scripts/pdf-merge-browser.mjs'
+      - '.github/workflows/pdf-merge-browser.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  pdf-merge-browser:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+      - name: Install browser
+        run: |
+          bun add --no-save playwright@1.56.1
+          bunx playwright install --with-deps chromium
+      - name: Build preview
+        run: bun run build
+      - name: Start preview and verify merged PDF download
+        run: |
+          bun run preview -- --host 127.0.0.1 --port 4173 > /tmp/preview.log 2>&1 &
+          preview_pid=$!
+          trap 'kill "$preview_pid" 2>/dev/null || true' EXIT
+          ready=0
+          for i in $(seq 1 30); do
+            if curl -fsS http://127.0.0.1:4173/tools/merge-pdf > /dev/null; then ready=1; break; fi
+            if ! kill -0 "$preview_pid" 2>/dev/null; then break; fi
+            sleep 1
+          done
+          if [ "$ready" -ne 1 ]; then cat /tmp/preview.log; exit 1; fi
+          PREVIEW_URL=http://127.0.0.1:4173 bun scripts/pdf-merge-browser.mjs

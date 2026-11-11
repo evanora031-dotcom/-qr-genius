@@ -15,6 +15,7 @@ import { FAQPage } from './pages/FAQPage';
 import { SitemapView } from './pages/SitemapView';
 import { RobotsView } from './pages/RobotsView';
 
+const PdfMerge = lazy(() => import('./pages/PdfMerge').then(module => ({ default: module.PdfMerge })));
 const ImagesToPdf = lazy(() => import('./pages/ImagesToPdf').then(module => ({ default: module.ImagesToPdf })));
 const ImageCompressor = lazy(() => import('./pages/ImageCompressor').then(module => ({ default: module.ImageCompressor })));
 const GeneratorPage = lazy(() => import('./pages/GeneratorPage').then(module => ({ default: module.GeneratorPage })));
@@ -25,6 +26,7 @@ const ROUTES: Record<string, PageId> = {
   '/generator': 'generator',
   '/tools/image-compressor': 'image-compressor',
   '/tools/images-to-pdf': 'images-to-pdf',
+  '/tools/merge-pdf': 'pdf-merge',
   '/tools/url': 'url',
   '/tools/wifi': 'wifi',
   '/tools/whatsapp': 'whatsapp',
@@ -60,7 +62,7 @@ function getRouteFromLocation(): { page: PageId; lang: Language } {
   // Keep old hash links working while moving to crawlable localized paths.
   const hash = window.location.hash.replace(/^#\/?/, '').toLowerCase() as PageId;
   const validPages: PageId[] = [
-    'home', 'generator', 'image-compressor', 'images-to-pdf', 'url', 'wifi', 'whatsapp', 'business',
+    'home', 'generator', 'image-compressor', 'images-to-pdf', 'pdf-merge', 'url', 'wifi', 'whatsapp', 'business',
     'about', 'contact', 'privacy', 'terms', 'faq', 'sitemap', 'robots'
   ];
   return { page: validPages.includes(hash) ? hash : 'home', lang };
@@ -149,6 +151,7 @@ export default function App() {
         {currentPage === 'home' && <HomePage lang={lang} onNavigate={handleNavigate} />}
         {currentPage === 'image-compressor' && <ImageCompressor lang={lang} />}
         {currentPage === 'images-to-pdf' && <ImagesToPdf lang={lang} />}
+        {currentPage === 'pdf-merge' && <PdfMerge lang={lang} />}
         {currentPage === 'generator' && (
           <GeneratorPage
             initialType={generatorType}
