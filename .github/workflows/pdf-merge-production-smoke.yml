@@ -1,0 +1,24 @@
+name: PDF merge production smoke
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '23 7 * * 1'
+permissions:
+  contents: read
+jobs:
+  pdf-merge-production-smoke:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - name: Verify localized PDF merge pages on production
+        shell: bash
+        run: |
+          set -euo pipefail
+          for locale in en ar fr es; do
+            if [ "$locale" = en ]; then path=/tools/merge-pdf; else path=/$locale/tools/merge-pdf; fi
+            url="https://getqrgenius.com$path"
+            html=$(curl --fail --silent --show-error --location --retry 3 --retry-delay 5 --max-time 25 "$url")
+            printf '%s' "$html" | grep -Fq "<link rel=\"canonical\" href=\"$url\""
+            printf '%s' "$html" | grep -Fq '<h1>'
+            echo "PASS $url"
+          done
