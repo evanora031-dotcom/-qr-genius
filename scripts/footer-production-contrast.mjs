@@ -16,10 +16,22 @@ try {
     try {
       const response = await page.goto(base + route, { waitUntil: 'networkidle', timeout: 30000 });
       if (!response?.ok()) throw new Error(route + ': HTTP ' + response?.status());
-      const colors = await page.locator('footer .pt-8').first().evaluate((element) => ({
-        foreground: getComputedStyle(element).color,
-        background: getComputedStyle(element.closest('footer')).backgroundColor,
-      }));
+      const colors = await page.locator('footer .pt-8').first().evaluate((element) => {
+        const toRgb = (color) => {
+          const canvas = document.createElement('canvas');
+          canvas.width = canvas.height = 1;
+          const ctx = canvas.getContext('2d');
+          if (!ctx) throw new Error('Canvas 2D unavailable');
+          ctx.fillStyle = color;
+          ctx.fillRect(0, 0, 1, 1);
+          const [r, g, b] = ctx.getImageData(0, 0, 1, 1).data;
+          return `rgb(${r}, ${g}, ${b})`;
+        };
+        return {
+          foreground: toRgb(getComputedStyle(element).color),
+          background: toRgb(getComputedStyle(element.closest('footer')).backgroundColor),
+        };
+      });
       const a = luminance(colors.foreground), b = luminance(colors.background);
       const contrast = (Math.max(a, b) + 0.05) / (Math.min(a, b) + 0.05);
       console.log(JSON.stringify({ route, ...colors, contrast: Number(contrast.toFixed(2)) }));
