@@ -1,0 +1,26 @@
+name: Production structured data
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'scripts/verify-production-schema.mjs'
+      - '.github/workflows/production-schema.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify-schema:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Inspect production HTML responses and JSON-LD
+        env:
+          BASE_URL: https://getqrgenius.com
+        run: node scripts/verify-production-schema.mjs
