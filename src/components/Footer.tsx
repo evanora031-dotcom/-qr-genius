@@ -157,7 +157,7 @@ export const Footer: React.FC<FooterProps> = ({ lang, onNavigate }) => {
         </div>
 
         {/* Bottom bar */}
-        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
+        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-300">
           <div>
             © {new Date().getFullYear()} QR GENIUS. {t.footer.rights}
           </div>
