@@ -4,6 +4,9 @@ on:
     branches: [main]
     paths:
       - 'src/pages/PdfMerge.tsx'
+      - 'src/pages/HomePage.tsx'
+      - 'src/components/Navbar.tsx'
+      - 'src/components/Footer.tsx'
       - 'src/utils/mergePdfFiles.ts'
       - 'scripts/pdf-merge-browser.mjs'
       - '.github/workflows/pdf-merge-browser.yml'
