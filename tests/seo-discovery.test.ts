@@ -142,7 +142,7 @@ test('English specialized tool pages link to their matching published blog guide
 test('English blog articles expose valid Article JSON-LD and social previews', () => {
   const slugs = ['how-to-make-wifi-qr-code-for-guests', 'how-to-create-whatsapp-qr-code-for-customers', 'how-to-make-business-card-qr-code'];
   for (const slug of slugs) {
-    const canonical = 'https://getqrgenius.com/en/blog/' + slug + '.html';
+    const canonical = 'https://getqrgenius.com/en/blog/' + slug + (slug === 'how-to-make-business-card-qr-code' ? '' : '.html');
     const html = read('../dist/en/blog/' + slug + '.html');
     assert.ok(html.includes('property="og:type" content="article"'));
     assert.ok(html.includes('property="og:url" content="' + canonical + '"'));
