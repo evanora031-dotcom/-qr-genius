@@ -195,7 +195,7 @@ test('prerendered English and Arabic tool HTML links to its published guide', ()
       const html = read('../dist/' + route);
       const href = guideSlugs[lang][tool];
       assert.ok(html.includes('href="' + href + '"'), 'Missing prerendered guide link: ' + route);
-      const guideFile = '../dist' + href + (lang === 'ar' ? '.html' : '');
+      const guideFile = '../dist' + href + (lang === 'ar' || (lang === 'en' && tool === 'business') ? '.html' : '');
       assert.ok(read(guideFile).includes('rel="canonical" href="https://getqrgenius.com' + href + '"'));
     }
   }
