@@ -122,9 +122,9 @@ const TOOL_CONFIGS = {
     type: 'vcard' as QRType,
     badge: 'Digital Business Card',
     title: 'Free Business Card QR Code Generator (vCard)',
-    subtitle: 'Create a free QR code for your business card using the vCard format. Add your name, company, phone number, email, and website so people can scan your card and save your contact details.',
+    subtitle: 'Create a free vCard QR code for a business card, name card, or visiting card. Add your name, company, phone number, email, and website to make a scannable contact card that people can save on compatible phones.',
     benefits: [
-      'Share your contact details from printed business cards, badges, and digital profiles',
+      'Add a QR code contact card to a printed name card, visiting card, or digital business card',
       'Stores full contact profiles: Name, Job Title, Company, Phone, Email, Address & Notes',
       'Uses the vCard 3.0 format supported by many smartphone contact apps',
       'Ideal for conferences, badges, email signatures, and resume portfolios'
