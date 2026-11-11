@@ -200,3 +200,25 @@ test('prerendered English and Arabic tool HTML links to its published guide', ()
     }
   }
 });
+
+
+test('every non-home localized page includes a canonical BreadcrumbList in built HTML', () => {
+  for (const lang of languages) {
+    for (const page of pages) {
+      if (page === 'home') continue;
+      const canonicalPath = SEO_METADATA[page][lang].canonicalPath;
+      const route = (lang === 'en' ? '' : lang + '/') + canonicalPath.replace(/^\\//, '') + '.html';
+      const html = read('../dist/' + route);
+      const jsonScripts = [...html.matchAll(/<script type="application\\/ld\\+json">([\\s\\S]*?)<\\/script>/g)];
+      const objects = jsonScripts.flatMap(match => {
+        const value = JSON.parse(match[1]);
+        return Array.isArray(value) ? value : [value];
+      });
+      const breadcrumb = objects.find(value => value['@type'] === 'BreadcrumbList');
+      assert.ok(breadcrumb, 'Missing BreadcrumbList on ' + route);
+      assert.equal(breadcrumb.itemListElement.length, 2);
+      assert.equal(breadcrumb.itemListElement[0].item, url('/', lang));
+      assert.equal(breadcrumb.itemListElement[1].item, url(canonicalPath, lang));
+    }
+  }
+});
