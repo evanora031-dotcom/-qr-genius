@@ -117,8 +117,8 @@ test('English blog index and first guide are built with matching canonical links
   assert.ok(whatsapp.includes('rel="canonical" href="https://getqrgenius.com/en/blog/how-to-create-whatsapp-qr-code-for-customers.html"'));
   assert.ok(whatsapp.includes('href="/tools/whatsapp"'));
   const vcard = read('../dist/en/blog/how-to-make-business-card-qr-code.html');
-  assert.ok(index.includes('href="/en/blog/how-to-make-business-card-qr-code.html"'));
-  assert.ok(vcard.includes('rel="canonical" href="https://getqrgenius.com/en/blog/how-to-make-business-card-qr-code.html"'));
+  assert.ok(index.includes('href="/en/blog/how-to-make-business-card-qr-code"'));
+  assert.ok(vcard.includes('rel="canonical" href="https://getqrgenius.com/en/blog/how-to-make-business-card-qr-code"'));
   assert.ok(vcard.includes('href="/tools/business-vcard"'));
 });
 
@@ -127,7 +127,7 @@ test('English specialized tool pages link to their matching published blog guide
   const guidePaths = {
     wifi: '/en/blog/how-to-make-wifi-qr-code-for-guests.html',
     whatsapp: '/en/blog/how-to-create-whatsapp-qr-code-for-customers.html',
-    business: '/en/blog/how-to-make-business-card-qr-code.html'
+    business: '/en/blog/how-to-make-business-card-qr-code'
   } as const;
   for (const [tool, href] of Object.entries(guidePaths)) {
     const html = renderToStaticMarkup(React.createElement(ToolLandingPage, {
@@ -196,7 +196,7 @@ test('prerendered English and Arabic tool HTML links to its published guide', ()
       const href = guideSlugs[lang][tool];
       assert.ok(html.includes('href="' + href + '"'), 'Missing prerendered guide link: ' + route);
       const guideFile = '../dist' + href + (lang === 'ar' || (lang === 'en' && tool === 'business') ? '.html' : '');
-      const articleCanonicalPath = lang === 'en' && tool === 'business' ? href + '.html' : href;
+      const articleCanonicalPath = href;
       assert.ok(read(guideFile).includes('rel="canonical" href="https://getqrgenius.com' + articleCanonicalPath + '"'));
     }
   }
