@@ -4,7 +4,7 @@ import { Language, PageId } from '../types';
 import { translations } from '../i18n/translations';
 
 const PAGE_PATHS: Partial<Record<PageId, string>> = {
-  home: '/', generator: '/generator', 'image-compressor': '/tools/image-compressor', 'images-to-pdf': '/tools/images-to-pdf', url: '/tools/url', wifi: '/tools/wifi',
+  home: '/', generator: '/generator', 'image-compressor': '/tools/image-compressor', 'images-to-pdf': '/tools/images-to-pdf', 'pdf-merge': '/tools/merge-pdf', url: '/tools/url', wifi: '/tools/wifi',
   whatsapp: '/tools/whatsapp', business: '/tools/business-vcard', about: '/about',
   contact: '/contact', privacy: '/privacy', terms: '/terms', faq: '/faq',
   sitemap: '/sitemap', robots: '/robots'
@@ -69,6 +69,11 @@ export const Footer: React.FC<FooterProps> = ({ lang, onNavigate }) => {
                   {lang === 'ar' ? 'ضغط الصور' : lang === 'fr' ? 'Compresser une image' : lang === 'es' ? 'Comprimir imágenes' : 'Image Compressor'}
                 </a>
                 <a href={localizedHref('images-to-pdf', lang)} onClick={(event) => { event.preventDefault(); handleLink('images-to-pdf'); }} className="hover:text-indigo-400 transition-colors">{({ en: 'Images to PDF', ar: 'الصور إلى PDF', fr: 'Images en PDF', es: 'Imágenes a PDF' } as Record<Language, string>)[lang]}</a>
+              </li>
+              <li>
+                <a href={localizedHref('pdf-merge', lang)} onClick={(event) => { event.preventDefault(); handleLink('pdf-merge'); }} className="hover:text-indigo-400 transition-colors">
+                  {({ en: 'Merge PDF', ar: 'دمج PDF', fr: 'Fusionner PDF', es: 'Unir PDF' } as Record<Language, string>)[lang]}
+                </a>
               </li>
               <li>
                 <a href={localizedHref('url', lang)} onClick={(event) => { event.preventDefault(); handleLink('url'); }} className="hover:text-indigo-400 transition-colors">
