@@ -1,0 +1,30 @@
+name: Preview CLS experiment
+on:
+  push:
+    branches: [perf/keep-prerender-visible-until-react-mount]
+    paths: ['.github/workflows/preview-cls-experiment.yml']
+permissions:
+  contents: read
+jobs:
+  lighthouse-comparison:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install Lighthouse and Chromium
+        run: |
+          npm install --no-save --no-package-lock --legacy-peer-deps lighthouse@12.8.2 playwright@1.56.1
+          npx playwright install --with-deps chromium
+      - name: Compare production and preview mobile metrics
+        run: |
+          export CHROME_PATH="$(node -e 'console.log(require("playwright").chromium.executablePath())')"
+          for base in https://getqrgenius.com https://17d04a4e.qr-genius-1on.pages.dev; do
+            for route in / /tools/image-compressor /tools/images-to-pdf /tools/merge-pdf; do
+              echo "=== $base$route ==="
+              npx lighthouse "$base$route" --chrome-flags="--headless --no-sandbox" --preset=perf --form-factor=mobile --screenEmulation.mobile=true --screenEmulation.width=390 --screenEmulation.height=844 --screenEmulation.deviceScaleFactor=2 --throttling-method=simulate --output=json --output-path=/tmp/preview-cls.json --quiet
+              node -e 'const r=require("/tmp/preview-cls.json");console.log(JSON.stringify({url:r.finalUrl,performance:r.categories.performance.score*100,cls:r.audits["cumulative-layout-shift"].numericValue,lcp:r.audits["largest-contentful-paint"].numericValue,fcp:r.audits["first-contentful-paint"].numericValue,tbt:r.audits["total-blocking-time"].numericValue}))'
+            done
+          done
