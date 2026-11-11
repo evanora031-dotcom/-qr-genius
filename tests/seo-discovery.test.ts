@@ -23,7 +23,7 @@ test('tracked sitemap exactly matches the sitemap published by the build', () =>
   const canonicalUrls = [...generated.matchAll(/<loc>([^<]+)<\/loc>/g)].map(match => match[1]);
   assert.equal(canonicalUrls.length, pages.length * languages.length + 8);
   assert.equal(new Set(canonicalUrls).size, canonicalUrls.length, 'Sitemap contains duplicate canonical URLs');
-  for (const blogPath of ['/en/blog/', '/en/blog/how-to-make-wifi-qr-code-for-guests.html', '/en/blog/how-to-create-whatsapp-qr-code-for-customers.html', '/en/blog/how-to-make-business-card-qr-code.html']) {
+  for (const blogPath of ['/en/blog/', '/en/blog/how-to-make-wifi-qr-code-for-guests.html', '/en/blog/how-to-create-whatsapp-qr-code-for-customers.html', '/en/blog/how-to-make-business-card-qr-code']) {
     assert.ok(canonicalUrls.includes('https://getqrgenius.com' + blogPath), `Missing English blog URL ${blogPath}`);
   }
   for (const page of pages) {
@@ -185,7 +185,7 @@ test('footer blog navigation respects available content languages', () => {
 
 test('prerendered English and Arabic tool HTML links to its published guide', () => {
   const guideSlugs = {
-    en: { wifi: '/en/blog/how-to-make-wifi-qr-code-for-guests.html', whatsapp: '/en/blog/how-to-create-whatsapp-qr-code-for-customers.html', business: '/en/blog/how-to-make-business-card-qr-code.html' },
+    en: { wifi: '/en/blog/how-to-make-wifi-qr-code-for-guests.html', whatsapp: '/en/blog/how-to-create-whatsapp-qr-code-for-customers.html', business: '/en/blog/how-to-make-business-card-qr-code' },
     ar: { wifi: '/blog/wifi-qr-code-for-guests', whatsapp: '/blog/whatsapp-qr-code-for-customers', business: '/blog/business-card-qr-code-guide' }
   } as const;
   const routeSlugs = { wifi: 'wifi', whatsapp: 'whatsapp', business: 'business-vcard' } as const;
