@@ -12,7 +12,7 @@ import { Language, PageId } from '../types';
 import { translations } from '../i18n/translations';
 
 const PAGE_PATHS: Partial<Record<PageId, string>> = {
-  home: '/', generator: '/generator', 'image-compressor': '/tools/image-compressor', 'images-to-pdf': '/tools/images-to-pdf', url: '/tools/url', wifi: '/tools/wifi',
+  home: '/', generator: '/generator', 'image-compressor': '/tools/image-compressor', 'images-to-pdf': '/tools/images-to-pdf', 'pdf-merge': '/tools/merge-pdf', url: '/tools/url', wifi: '/tools/wifi',
   whatsapp: '/tools/whatsapp', business: '/tools/business-vcard', about: '/about',
   contact: '/contact', privacy: '/privacy', terms: '/terms', faq: '/faq'
 };
@@ -236,6 +236,11 @@ export const Navbar: React.FC<NavbarProps> = ({
             }`}
           >
             {t.nav.studio}
+          </a>
+          <a href={localizedHref('pdf-merge', lang)} onClick={(event) => { event.preventDefault(); handleNavClick('pdf-merge'); }} className={`w-full text-left rtl:text-right px-3 py-3 rounded-xl text-sm font-medium min-h-[44px] flex items-center ${
+              currentPage === 'pdf-merge' ? 'bg-indigo-50 text-indigo-600 font-bold' : 'text-slate-700 hover:bg-slate-50'
+            }`}>
+            {({ en: 'Merge PDF', ar: 'دمج PDF', fr: 'Fusionner PDF', es: 'Unir PDF' } as Record<Language, string>)[lang]}
           </a>
           <a href={localizedHref('url', lang)} onClick={(event) => { event.preventDefault(); handleNavClick('url'); }} className={`w-full text-left rtl:text-right px-3 py-3 rounded-xl text-sm font-medium min-h-[44px] flex items-center ${
               currentPage === 'url' ? 'bg-indigo-50 text-indigo-600 font-bold' : 'text-slate-700 hover:bg-slate-50'
