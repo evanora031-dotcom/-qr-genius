@@ -206,7 +206,7 @@ function structuredData(locale: typeof locales[number], page: typeof pages[numbe
     description: SEO_METADATA.home[locale].description,
     offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD', description: 'Free QR code generator' }
   });
-  if (['url', 'wifi', 'whatsapp', 'business'].includes(page)) {
+  if (page !== 'home') {
     objects.push({
       '@context': 'https://schema.org', '@type': 'BreadcrumbList',
       itemListElement: [
