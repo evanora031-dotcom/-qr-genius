@@ -1,0 +1,30 @@
+name: Production mobile median audit
+on:
+  push:
+    branches: [audit/production-mobile-median-20261111]
+    paths: ['.github/workflows/production-mobile-median-audit.yml']
+permissions:
+  contents: read
+jobs:
+  median:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install Lighthouse and Chromium
+        run: |
+          npm install --no-save --no-package-lock --legacy-peer-deps lighthouse@12.8.2 playwright@1.56.1
+          npx playwright install --with-deps chromium
+      - name: Three mobile Lighthouse runs per route
+        run: |
+          export CHROME_PATH="$(node -e 'console.log(require("playwright").chromium.executablePath())')"
+          for route in / /tools/image-compressor /tools/images-to-pdf /tools/merge-pdf; do
+            for iteration in 1 2 3; do
+              echo "=== $route run $iteration ==="
+              npx lighthouse "https://getqrgenius.com$route" --chrome-flags="--headless --no-sandbox" --preset=perf --form-factor=mobile --screenEmulation.mobile=true --screenEmulation.width=390 --screenEmulation.height=844 --screenEmulation.deviceScaleFactor=2 --throttling-method=simulate --output=json --output-path=/tmp/median-audit.json --quiet
+              node -e 'const r=require("/tmp/median-audit.json");console.log("RESULT "+JSON.stringify({route:process.env.AUDIT_ROUTE||r.finalUrl,performance:r.categories.performance.score*100,cls:r.audits["cumulative-layout-shift"].numericValue,lcp:r.audits["largest-contentful-paint"].numericValue,fcp:r.audits["first-contentful-paint"].numericValue,tbt:r.audits["total-blocking-time"].numericValue}))'
+            done
+          done
