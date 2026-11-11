@@ -6,7 +6,7 @@ import { chromium } from 'playwright';
 const base = (process.env.BASE_URL || 'http://localhost:4173').replace(/\/$/, '');
 const browser = await chromium.launch({ headless: true });
 try {
-  for (const route of ['/tools/wifi', '/tools/whatsapp']) {
+  for (const route of ['/tools/wifi', '/tools/whatsapp', '/tools/image-compressor', '/tools/images-to-pdf', '/tools/merge-pdf']) {
     const page = await browser.newPage({
       viewport: { width: 390, height: 844 },
       deviceScaleFactor: 2,
