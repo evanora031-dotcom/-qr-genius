@@ -150,7 +150,7 @@ export const SEO_METADATA: Record<PageId, Record<Language, PageMeta>> = {
   whatsapp: {
     en: {
       title: "Free WhatsApp QR Code Generator for Direct Chat | QR Genius",
-      description: "Make a free WhatsApp QR code with your phone number and an optional pre-filled message. Let customers scan to open a chat from menus, flyers or business cards.",
+      description: "Free WhatsApp QR code generator for direct chat. Add your phone number and an optional pre-filled message, then download a QR code for menus, flyers or business cards.",
       keywords: "whatsapp qr code, wa me qr generator, whatsapp direct chat qr, scan to message whatsapp",
       canonicalPath: "/tools/whatsapp",
       h1: "Free WhatsApp QR Code Generator for Direct Chat"
