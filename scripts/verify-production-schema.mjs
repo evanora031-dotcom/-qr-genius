@@ -17,7 +17,7 @@ let failures = 0;
 for (const [route, expected] of pages) {
   try {
     const response = await fetch(base + route, { headers: { Accept: 'text/html' } });
-    if (!response.ok()) throw Error('HTTP ' + response.status);
+    if (!response.ok) throw Error('HTTP ' + response.status);
     const html = await response.text();
     const scripts = [...html.matchAll(new RegExp('<script[^>]*type=[^>]*application.ld.json[^>]*>([^]*?)</script>', 'gi'))];
     const objects = scripts.flatMap((match) => {
