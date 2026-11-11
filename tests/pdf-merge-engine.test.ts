@@ -18,6 +18,7 @@ test('merges all pages from PDFs in selected order', async () => {
   assert.equal(result.type, 'application/pdf');
   const merged = await PDFDocument.load(await result.arrayBuffer());
   assert.equal(merged.getPageCount(), 5);
+  assert.deepEqual(merged.getPages().map(page => [page.getWidth(), page.getHeight()]), Array.from({ length: 5 }, () => [200, 300]));
 });
 
 test('rejects PDF extension with invalid file contents', async () => {
