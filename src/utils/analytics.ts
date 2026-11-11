@@ -18,10 +18,14 @@ export function trackEvent(
   properties: Record<string, string | number | boolean> = {}
 ): void {
   if (typeof window === 'undefined') return;
-  window.posthog?.capture(event, properties);
+  if (typeof window.posthog?.capture === 'function') {
+    window.posthog.capture(event, properties);
+  }
 }
 
 export function trackPageView(path: string): void {
   if (typeof window === 'undefined') return;
-  window.posthog?.capture('$pageview', { $current_url: window.location.origin + path });
+  if (typeof window.posthog?.capture === 'function') {
+    window.posthog.capture('$pageview', { $current_url: window.location.origin + path });
+  }
 }
