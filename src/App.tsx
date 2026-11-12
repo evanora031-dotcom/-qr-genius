@@ -147,7 +147,7 @@ export default function App() {
         historyCount={historyItems.length}
       />
       <main className="flex-1">
-        <Suspense fallback={<div role="status" className={`mx-auto max-w-5xl px-6 py-16 text-sm text-slate-600 ${['image-compressor', 'images-to-pdf', 'pdf-merge'].includes(currentPage) ? 'min-h-[650px]' : ''}` }>{lang === 'ar' ? 'جارٍ تحميل الأداة…' : lang === 'fr' ? 'Chargement de l’outil…' : lang === 'es' ? 'Cargando herramienta…' : 'Loading tool…'}</div>}>
+        <Suspense fallback={<div role="status" className={`mx-auto max-w-5xl px-6 py-16 text-sm text-slate-600 ${['url', 'wifi', 'whatsapp', 'business'].includes(currentPage) ? 'min-h-[100svh]' : ['image-compressor', 'images-to-pdf', 'pdf-merge'].includes(currentPage) ? 'min-h-[650px]' : ''}` }>{lang === 'ar' ? 'جارٍ تحميل الأداة…' : lang === 'fr' ? 'Chargement de l’outil…' : lang === 'es' ? 'Cargando herramienta…' : 'Loading tool…'}</div>}>
         {currentPage === 'home' && <HomePage lang={lang} onNavigate={handleNavigate} />}
         {currentPage === 'image-compressor' && <ImageCompressor lang={lang} />}
         {currentPage === 'images-to-pdf' && <ImagesToPdf lang={lang} />}
