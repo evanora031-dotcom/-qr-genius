@@ -12,7 +12,10 @@ import {
   MessageSquare,
   Contact,
   CheckCircle2,
-  ChevronRight
+  ChevronRight,
+  ImageDown,
+  FileImage,
+  Files
 } from 'lucide-react';
 import { Language, PageId, QRType } from '../types';
 import { translations } from '../i18n/translations';
@@ -267,14 +270,15 @@ export const HomePage: React.FC<HomePageProps> = ({ lang, onNavigate }) => {
             <h3 className="text-base font-bold text-slate-900 mb-4">{({ en: 'PDF & image tools', ar: 'أدوات PDF والصور', fr: 'Outils PDF et images', es: 'Herramientas PDF e imágenes' } as Record<Language, string>)[lang]}</h3>
             <div className="flex flex-wrap gap-3">
               {([
-                { page: 'image-compressor', path: 'image-compressor', label: { en: 'Compress images', ar: 'ضغط الصور', fr: 'Compresser les images', es: 'Comprimir imágenes' } },
-                { page: 'images-to-pdf', path: 'images-to-pdf', label: { en: 'Images to PDF', ar: 'الصور إلى PDF', fr: 'Images en PDF', es: 'Imágenes a PDF' } },
-                { page: 'pdf-merge', path: 'merge-pdf', label: { en: 'Merge PDF', ar: 'دمج PDF', fr: 'Fusionner PDF', es: 'Unir PDF' } }
+                { page: 'image-compressor', path: 'image-compressor', icon: ImageDown, label: { en: 'Compress images', ar: 'ضغط الصور', fr: 'Compresser les images', es: 'Comprimir imágenes' } },
+                { page: 'images-to-pdf', path: 'images-to-pdf', icon: FileImage, label: { en: 'Images to PDF', ar: 'الصور إلى PDF', fr: 'Images en PDF', es: 'Imágenes a PDF' } },
+                { page: 'pdf-merge', path: 'merge-pdf', icon: Files, label: { en: 'Merge PDF', ar: 'دمج PDF', fr: 'Fusionner PDF', es: 'Unir PDF' } }
               ] as const).map((tool) => (
                 <a key={tool.page} href={`${lang === 'en' ? '' : `/${lang}`}/tools/${tool.path}`}
                   onClick={(event) => { event.preventDefault(); onNavigate(tool.page); }}
                   className="inline-flex items-center gap-2 rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-semibold text-indigo-700 hover:bg-indigo-50 hover:border-indigo-300 transition-colors min-h-[44px]">
-                  {tool.label[lang]} <ArrowRight className="w-4 h-4" />
+                  <tool.icon className="w-4 h-4 shrink-0" aria-hidden="true" />
+                  <span>{tool.label[lang]}</span> <ArrowRight className="w-4 h-4" aria-hidden="true" />
                 </a>
               ))}
             </div>
