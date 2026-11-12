@@ -13,7 +13,7 @@ permissions:
 jobs:
   lighthouse-mobile:
     runs-on: ubuntu-24.04
-    timeout-minutes: 12
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -23,18 +23,38 @@ jobs:
         run: |
           npm install --no-save --no-package-lock --legacy-peer-deps lighthouse@12.8.2 playwright@1.56.1
           npx playwright install --with-deps chromium
-      - name: Audit live homepage and file tools on mobile
+      - name: Audit homepage and QR tools three times on mobile
         env:
           BASE_URL: https://getqrgenius.com
         run: |
           export CHROME_PATH="$(node -e 'console.log(require("playwright").chromium.executablePath())')"
           test -x "$CHROME_PATH"
-          for route in / /tools/image-compressor /tools/images-to-pdf /tools/merge-pdf; do
+          mkdir -p lighthouse-results
+          for route in / /tools/wifi /tools/whatsapp /tools/business-vcard; do
+            for iteration in 1 2 3; do
             export AUDIT_ROUTE="$route"
-            echo "=== Auditing $BASE_URL$route ==="
+            echo "=== Auditing $BASE_URL$route run $iteration ==="
             npx lighthouse "$BASE_URL$route" --chrome-flags="--headless --no-sandbox" --preset=perf --form-factor=mobile --screenEmulation.mobile=true --screenEmulation.width=390 --screenEmulation.height=844 --screenEmulation.deviceScaleFactor=2 --throttling-method=simulate --output=json --output-path=/tmp/lighthouse-mobile.json --quiet
           node -e 'const r=require("/tmp/lighthouse-mobile.json"); console.log(JSON.stringify({url:r.finalUrl,score:r.categories.performance.score*100,metrics:Object.fromEntries(["first-contentful-paint","largest-contentful-paint","speed-index","total-blocking-time","cumulative-layout-shift"].map(k=>[k,{value:r.audits[k].numericValue,display:r.audits[k].displayValue}])),opportunities:Object.values(r.audits).filter(a=>a.details?.type==="opportunity"&&a.details.overallSavingsMs>100).map(a=>({title:a.title,savingsMs:a.details.overallSavingsMs})).slice(0,8)},null,2))'
           # Lighthouse attribution helps explain CLS scores that differ from the Playwright observer.
           node -e 'const r=require("/tmp/lighthouse-mobile.json"); const a=r.audits["layout-shift-elements"]; console.log(JSON.stringify({audit:"layout-shift-elements",score:r.audits["cumulative-layout-shift"]?.numericValue,items:(a?.details?.items||[]).slice(0,12).map(i=>({node:i.node?.snippet||i.node?.selector||null,score:i.score,contribution:i.contribution}))},null,2))'
           node -e 'const r=require("/tmp/lighthouse-mobile.json"); const a=r.audits["unused-javascript"]; console.log(JSON.stringify({audit:"unused-javascript",displayValue:a?.displayValue,items:(a?.details?.items||[]).slice(0,15).map(i=>({url:i.url,totalBytes:i.totalBytes,wastedBytes:i.wastedBytes}))},null,2))'
+            cp /tmp/lighthouse-mobile.json "lighthouse-results/$(echo "$route" | tr / _)-$iteration.json"
+            done
           done
+          python3 - <<'PY'
+          import glob,json,statistics
+          for route in ('_','_tools_wifi','_tools_whatsapp','_tools_business-vcard'):
+              samples=[]
+              for file in glob.glob('lighthouse-results/'+route+'-*.json'):
+                  with open(file) as f: r=json.load(f)
+                  samples.append({'score':round(r['categories']['performance']['score']*100),'cls':r['audits']['cumulative-layout-shift']['numericValue'],'tbt_ms':r['audits']['total-blocking-time']['numericValue'],'lcp_ms':r['audits']['largest-contentful-paint']['numericValue']})
+              print(route,'samples:',samples,'medians:',{k:statistics.median(x[k] for x in samples) for k in samples[0]} if samples else 'NO DATA')
+          PY
+      - name: Upload raw Lighthouse reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: mobile-lighthouse-json
+          path: lighthouse-results/
+          if-no-files-found: warn
