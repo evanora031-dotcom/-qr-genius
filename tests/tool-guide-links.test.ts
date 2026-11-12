@@ -13,7 +13,7 @@ const articles = {
   },
   en: {
     wifi: '/en/blog/how-to-make-wifi-qr-code-for-guests.html',
-    whatsapp: '/en/blog/how-to-create-whatsapp-qr-code-for-customers.html',
+    whatsapp: '/en/blog/how-to-create-whatsapp-qr-code-for-customers',
     business: '/en/blog/how-to-make-business-card-qr-code'
   }
 } as const;
@@ -26,7 +26,7 @@ test('specialized QR tools link to existing canonical guides in Arabic and Engli
         tool, lang, onNavigate: () => {}, onHistoryUpdated: () => {}
       }));
       assert.ok(markup.includes('href="' + href + '"'), 'Missing ' + lang + ' guide link on ' + tool);
-      const file = new URL('../public' + (lang === 'ar' || (lang === 'en' && tool === 'business') ? href + '.html' : href), import.meta.url);
+      const file = new URL('../public' + (lang === 'ar' || (lang === 'en' && (tool === 'business' || tool === 'whatsapp')) ? href + '.html' : href), import.meta.url);
       assert.ok(existsSync(file), 'Missing guide file: ' + href);
       const html = readFileSync(file, 'utf8');
       assert.ok(html.includes('https://getqrgenius.com' + href), 'Missing canonical URL in ' + href);
