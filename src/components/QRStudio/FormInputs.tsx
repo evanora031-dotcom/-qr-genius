@@ -76,7 +76,7 @@ export const FormInputs: React.FC<FormInputsProps> = ({
           <button
             type="button"
             onClick={onClear}
-            className="inline-flex items-center gap-1 px-2.5 py-1.5 text-xs text-slate-500 hover:text-rose-600 hover:bg-rose-50 rounded-lg transition-colors min-h-[36px]"
+            className="inline-flex items-center gap-1 px-2.5 py-1.5 text-xs text-slate-500 hover:text-rose-600 hover:bg-rose-50 rounded-lg transition-colors min-h-[44px]"
             title={t.forms.clear}
           >
             <Trash2 className="w-3.5 h-3.5" />
@@ -85,7 +85,7 @@ export const FormInputs: React.FC<FormInputsProps> = ({
           <button
             type="button"
             onClick={onReset}
-            className="inline-flex items-center gap-1 px-2.5 py-1.5 text-xs text-slate-500 hover:text-indigo-600 hover:bg-indigo-50 rounded-lg transition-colors min-h-[36px]"
+            className="inline-flex items-center gap-1 px-2.5 py-1.5 text-xs text-slate-500 hover:text-indigo-600 hover:bg-indigo-50 rounded-lg transition-colors min-h-[44px]"
             title={t.forms.reset}
           >
             <RotateCcw className="w-3.5 h-3.5" />
@@ -176,7 +176,7 @@ export const FormInputs: React.FC<FormInputsProps> = ({
                           onClick={() => setShowWifiPassword(!showWifiPassword)}
                           aria-label={showWifiPassword ? (lang === 'ar' ? 'إخفاء كلمة المرور' : lang === 'fr' ? 'Masquer le mot de passe' : lang === 'es' ? 'Ocultar contraseña' : 'Hide password') : (lang === 'ar' ? 'إظهار كلمة المرور' : lang === 'fr' ? 'Afficher le mot de passe' : lang === 'es' ? 'Mostrar contraseña' : 'Show password')}
                           aria-pressed={showWifiPassword}
-                          className="absolute right-1 rtl:right-auto rtl:left-1 top-1/2 -translate-y-1/2 flex h-9 w-9 items-center justify-center rounded-lg text-slate-500 hover:text-slate-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-600"
+                          className="absolute right-1 rtl:right-auto rtl:left-1 top-1/2 -translate-y-1/2 flex h-11 w-11 items-center justify-center rounded-lg text-slate-500 hover:text-slate-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-600"
                         >
                           {showWifiPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                         </button>
@@ -639,7 +639,7 @@ export const FormInputs: React.FC<FormInputsProps> = ({
         <button
           type="button"
           onClick={handleCopy}
-          className="inline-flex items-center gap-1.5 text-indigo-600 hover:text-indigo-700 font-semibold shrink-0 self-start sm:self-auto min-h-[36px] px-2 py-1 rounded-lg hover:bg-indigo-50 transition-colors"
+          className="inline-flex items-center gap-1.5 text-indigo-600 hover:text-indigo-700 font-semibold shrink-0 self-start sm:self-auto min-h-[44px] px-2 py-1 rounded-lg hover:bg-indigo-50 transition-colors"
         >
           {copied ? <Check className="w-3.5 h-3.5 text-emerald-600" /> : <Copy className="w-3.5 h-3.5" />}
           <span>{copied ? t.forms.copied : t.forms.copyContent}</span>
