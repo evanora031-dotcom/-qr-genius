@@ -66,7 +66,7 @@ const TOOL_CONFIGS = {
       'The QR code contains your website URL directly, without a QR Genius redirect',
       'Add UTM parameters to your URL before generating the code to track visits in your own analytics',
       'Download a scalable SVG or high-resolution PNG for flyers, business cards, and packaging',
-      'Static QR codes contain your URL directly and do not depend on a QR Genius redirect subscription'
+      'Check that your destination uses HTTPS and works on a phone before printing or sharing the QR code'
     ],
     faqs: [
       { q: 'Do URL QR codes generated here ever expire?', a: 'QR GENIUS creates a static QR code containing your web address. The code itself has no built-in expiry, but it will only open the page while that address and website remain available.' },
