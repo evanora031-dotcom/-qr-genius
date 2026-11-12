@@ -147,12 +147,29 @@ function renderStaticContent(locale: typeof locales[number], page: typeof pages[
   const fileToolHeading = { en: 'PDF and image tools', ar: 'أدوات PDF والصور', fr: 'Outils PDF et images', es: 'Herramientas PDF e imágenes' }[locale];
   // Provide useful, tool-specific instructions to crawlers before React hydration.
   // Keep claims limited to features implemented by the browser-side tools.
-  const fileToolGuides: Partial<Record<typeof pages[number], { heading: string; steps: string[] }>> = {
-    'pdf-merge': { heading: 'How to merge PDF files', steps: ['Choose two or more PDF files from your device.', 'Review the selected documents and their order.', 'Merge the PDFs and download the combined document.'] },
-    'images-to-pdf': { heading: 'How to convert images to PDF', steps: ['Select JPG or PNG images from your device.', 'Review the selected images before converting.', 'Create and download a PDF document.'] },
-    'image-compressor': { heading: 'How to compress an image', steps: ['Select a JPG, PNG or WebP image.', 'Adjust the available size or quality settings.', 'Preview and download the compressed image.'] }
+  const fileToolGuides: Record<typeof locales[number], Partial<Record<typeof pages[number], { heading: string; steps: string[] }>>> = {
+    en: {
+      'pdf-merge': { heading: "How to merge PDF files", steps: ["Select 2–10 unlocked PDF files in the order you want their pages to appear.","Each file can be up to 20 MB, with a 60 MB combined limit. Merge and check the downloaded document.","This tool combines pages without editing text or guaranteeing a smaller file."] },
+      'images-to-pdf': { heading: "How to convert images to PDF", steps: ["Select up to 10 JPEG or PNG images in the order you want them.","Check image clarity and orientation before creating the PDF. Each image is placed on its own A4 page.","The PDF contains images, not searchable text; this tool does not perform OCR."] },
+      'image-compressor': { heading: "How to compress an image", steps: ["Select a JPEG, PNG, or WebP image smaller than 20 MB; choose WebP or JPEG output.","Adjust quality and maximum dimensions. JPEG output replaces transparency with white.","Compare original and output sizes: re-encoding does not always produce a smaller file."] },
+    },
+    ar: {
+      'pdf-merge': { heading: "كيفية دمج ملفات PDF", steps: ["اختر من ملفين إلى 10 ملفات PDF غير محمية، بالترتيب الذي تريد ظهور صفحاتها به.","الحد الأقصى 20 ميغابايت لكل ملف و60 ميغابايت للمجموع. راجع المستند بعد تنزيله.","تجمع الأداة الصفحات دون تحرير النصوص أو ضمان تقليل حجم الملف."] },
+      'images-to-pdf': { heading: "كيفية تحويل الصور إلى PDF", steps: ["اختر حتى 10 صور JPEG أو PNG بالترتيب المطلوب.","تحقق من وضوح الصور واتجاهها قبل التحويل. توضع كل صورة في صفحة A4 مستقلة.","يحتوي PDF الناتج على صور وليس نصاً قابلاً للبحث؛ لا تتوفر ميزة OCR."] },
+      'image-compressor': { heading: "كيفية ضغط صورة", steps: ["اختر صورة JPEG أو PNG أو WebP أصغر من 20 ميغابايت، وحدد WebP أو JPEG للناتج.","اضبط الجودة والأبعاد القصوى. تستبدل صيغة JPEG المناطق الشفافة باللون الأبيض.","قارن الحجم الأصلي بالناتج، فقد لا تؤدي إعادة الترميز دائماً إلى ملف أصغر."] },
+    },
+    fr: {
+      'pdf-merge': { heading: "Comment fusionner des PDF", steps: ["Sélectionnez 2 à 10 PDF non protégés dans l’ordre souhaité des pages.","Chaque fichier peut atteindre 20 Mo, avec une limite totale de 60 Mo. Vérifiez le document téléchargé.","L’outil assemble les pages sans modifier le texte ni garantir un fichier plus léger."] },
+      'images-to-pdf': { heading: "Comment convertir des images en PDF", steps: ["Choisissez jusqu’à 10 images JPEG ou PNG dans le bon ordre.","Vérifiez leur netteté et leur orientation. Chaque image occupe une page A4 distincte.","Le PDF contient des images, pas du texte recherchable ; cet outil ne fait pas de reconnaissance OCR."] },
+      'image-compressor': { heading: "Comment compresser une image", steps: ["Choisissez une image JPEG, PNG ou WebP de moins de 20 Mo, puis une sortie WebP ou JPEG.","Réglez la qualité et les dimensions maximales. Le JPEG remplace la transparence par du blanc.","Comparez les tailles : le réencodage ne réduit pas toujours le fichier."] },
+    },
+    es: {
+      'pdf-merge': { heading: "Cómo unir archivos PDF", steps: ["Selecciona entre 2 y 10 PDF sin contraseña en el orden deseado.","Cada archivo admite hasta 20 MB, con un límite total de 60 MB. Revisa el documento descargado.","La herramienta reúne páginas sin editar el texto ni garantizar un archivo más pequeño."] },
+      'images-to-pdf': { heading: "Cómo convertir imágenes a PDF", steps: ["Selecciona hasta 10 imágenes JPEG o PNG en el orden deseado.","Comprueba su nitidez y orientación. Cada imagen ocupa una página A4 independiente.","El PDF contiene imágenes, no texto que se pueda buscar; esta herramienta no realiza OCR."] },
+      'image-compressor': { heading: "Cómo comprimir una imagen", steps: ["Selecciona una imagen JPEG, PNG o WebP de menos de 20 MB y elige WebP o JPEG como salida.","Ajusta la calidad y las dimensiones máximas. JPEG sustituye la transparencia por blanco.","Compara los tamaños: recodificar no siempre produce un archivo más pequeño."] },
+    },
   };
-  const fileGuide = locale === 'en' ? fileToolGuides[page] : undefined;
+  const fileGuide = fileToolGuides[locale][page];
   const fileGuideHtml = fileGuide
     ? '<section><h2>' + escapeHtml(fileGuide.heading) + '</h2><ol>' + fileGuide.steps.map(step => '<li>' + escapeHtml(step) + '</li>').join('') + '</ol></section>'
     : '';
