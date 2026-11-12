@@ -98,6 +98,29 @@ const COPY: Record<Language, Record<'title' | 'intro' | 'choose' | 'privacy' | '
   }
 };
 
+const CONTENT_TIPS: Record<Language, { heading: string; body: string }[]> = {
+  en: [
+    { heading: "Which output format should I choose?", body: "WebP is a useful option for web graphics when the viewer supports it. JPEG is widely compatible with photos, but transparent areas become white in this tool." },
+    { heading: "How do quality and dimensions affect the result?", body: "Lower quality can reduce file size but may blur fine details. A smaller maximum dimension can help with large photos. Compare the original and output sizes before downloading." },
+    { heading: "Can this tool make every file smaller?", body: "No. Small, already optimized, or simple images can become larger after re-encoding. If the output is larger, keep the original or try different settings." }
+  ],
+  ar: [
+    { heading: "أي صيغة أختار للصورة الناتجة؟", body: "صيغة WebP مناسبة لصور الويب عندما يدعمها البرنامج المستخدم. أما JPEG فتتميز بتوافق واسع مع الصور الفوتوغرافية، لكن المناطق الشفافة تصبح بيضاء في هذه الأداة." },
+    { heading: "كيف تؤثر الجودة والأبعاد على النتيجة؟", body: "قد يقل الحجم عند خفض الجودة، لكن التفاصيل الدقيقة قد تصبح أقل وضوحاً. ويساعد تقليل الأبعاد القصوى للصور الكبيرة. قارن حجم الملف الأصلي بالناتج قبل التنزيل." },
+    { heading: "هل تصبح كل صورة أصغر بعد الضغط؟", body: "لا. قد يزداد حجم الصور الصغيرة أو المحسنة مسبقاً بعد إعادة الترميز. إذا كان الملف الناتج أكبر، احتفظ بالأصل أو جرّب إعدادات أخرى." }
+  ],
+  fr: [
+    { heading: "Quel format de sortie choisir ?", body: "WebP convient aux images destinées au Web lorsque le logiciel utilisé le prend en charge. JPEG est largement compatible avec les photos, mais les zones transparentes deviennent blanches dans cet outil." },
+    { heading: "Comment la qualité et les dimensions influencent-elles le résultat ?", body: "Une qualité plus faible peut réduire la taille du fichier, au prix de détails moins nets. Réduire la dimension maximale aide aussi pour les grandes photos. Comparez les tailles avant de télécharger." },
+    { heading: "Toutes les images deviennent-elles plus petites ?", body: "Non. Une petite image ou un fichier déjà optimisé peut grossir après réencodage. Dans ce cas, conservez l’original ou essayez d’autres réglages." }
+  ],
+  es: [
+    { heading: "¿Qué formato de salida debo elegir?", body: "WebP puede ser útil para imágenes web cuando el programa de destino lo admite. JPEG es muy compatible con fotografías, pero las zonas transparentes se vuelven blancas en esta herramienta." },
+    { heading: "¿Cómo afectan la calidad y las dimensiones al resultado?", body: "Reducir la calidad puede disminuir el tamaño, pero también perder detalle. Limitar las dimensiones ayuda con fotos grandes. Compara el tamaño original con el resultado antes de descargar." },
+    { heading: "¿Todas las imágenes se vuelven más pequeñas?", body: "No. Una imagen pequeña o ya optimizada puede aumentar de tamaño al recodificarse. En ese caso, conserva el original o prueba otros ajustes." }
+  ]
+};
+
 const MAX_FILE_BYTES = 20 * 1024 * 1024;
 
 export function ImageCompressor({ lang = 'en' }: { lang?: Language }) {
@@ -178,6 +201,12 @@ export function ImageCompressor({ lang = 'en' }: { lang?: Language }) {
         <p>{t.howText}</p>
         <h2 className="text-xl font-bold">{t.privacyTitle}</h2>
         <p>{t.privacyText}</p>
+        {CONTENT_TIPS[lang].map((tip) => (
+          <section key={tip.heading} className="pt-3">
+            <h3 className="font-semibold text-slate-900">{tip.heading}</h3>
+            <p className="mt-1 leading-relaxed">{tip.body}</p>
+          </section>
+        ))}
       </div>
     </section>
   );
