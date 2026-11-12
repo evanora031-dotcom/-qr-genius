@@ -9,6 +9,29 @@ const COPY: Record<Language, { title: string; intro: string; choose: string; con
   es: { title: 'Convertir imágenes a PDF gratis', intro: 'Convierte hasta 10 imágenes JPEG o PNG en un PDF A4. Cada imagen ocupa una página en el orden seleccionado.', choose: 'Selecciona imágenes JPEG o PNG (máximo 10)', convert: 'Crear PDF', busy: 'Creando PDF…', download: 'Descargar PDF', privacy: 'Las imágenes permanecen en tu navegador, sin subirlas al servidor.', guide: 'Selecciona las imágenes, crea el PDF y descárgalo. Cada imagen se ajusta a una página A4 sin recortar.', error: 'No se pudo crear el PDF. Comprueba tus imágenes JPEG o PNG.' }
 };
 
+const CONTENT_NOTES: Record<Language, { title: string; body: string }[]> = {
+  en: [
+    { title: "When should you use this tool?", body: "Use it to combine scanned receipts, notes, or document photos into one PDF that is easier to share. The result uses A4 pages, one image per page." },
+    { title: "What should I check before converting?", body: "Choose clear, correctly oriented images in the order you want them to appear. This tool does not reorder, rotate, or crop images." },
+    { title: "Will text in the images become searchable?", body: "No. The PDF contains the images as pages; it does not perform OCR or turn photographed text into selectable text." }
+  ],
+  ar: [
+    { title: "متى تفيد هذه الأداة؟", body: "اجمع صور الإيصالات أو الملاحظات أو المستندات في ملف PDF واحد يسهل مشاركته. يتضمن الملف صفحة A4 لكل صورة." },
+    { title: "ما الذي أراجعه قبل التحويل؟", body: "اختر صوراً واضحة وبالاتجاه الصحيح وبالترتيب الذي تريد ظهوره. لا تعيد الأداة ترتيب الصور ولا تدوّرها أو تقصّها." },
+    { title: "هل يصبح النص الموجود في الصور قابلاً للبحث؟", body: "لا. يحتوي ملف PDF على الصور نفسها، ولا تنفذ الأداة التعرف الضوئي على النصوص (OCR)." }
+  ],
+  fr: [
+    { title: "Quand utiliser cet outil ?", body: "Réunissez des reçus, des notes ou des photos de documents dans un seul PDF facile à partager. Chaque image occupe une page A4." },
+    { title: "Que vérifier avant la conversion ?", body: "Choisissez des images nettes, bien orientées et dans l’ordre souhaité. L’outil ne réorganise, ne pivote et ne recadre pas les images." },
+    { title: "Le texte des images sera-t-il recherchable ?", body: "Non. Le PDF contient les images comme pages et n’effectue pas de reconnaissance optique de caractères (OCR)." }
+  ],
+  es: [
+    { title: "¿Cuándo conviene usar esta herramienta?", body: "Reúne recibos, apuntes o fotos de documentos en un solo PDF fácil de compartir. Cada imagen ocupa una página A4." },
+    { title: "¿Qué debo comprobar antes de convertir?", body: "Selecciona imágenes nítidas, bien orientadas y en el orden deseado. La herramienta no reordena, gira ni recorta las imágenes." },
+    { title: "¿Se podrá buscar el texto de las imágenes?", body: "No. El PDF contiene las imágenes como páginas y no realiza reconocimiento óptico de caracteres (OCR)." }
+  ]
+};
+
 export const ImagesToPdf: React.FC<{ lang?: Language }> = ({ lang = 'en' }) => {
   const t = COPY[lang];
   const [files, setFiles] = useState<File[]>([]);
@@ -50,6 +73,14 @@ export const ImagesToPdf: React.FC<{ lang?: Language }> = ({ lang = 'en' }) => {
         <h2 className="text-xl font-bold text-slate-900">{t.title}</h2>
         <p>{t.guide}</p>
         <p>{t.privacy}</p>
+        <div className="space-y-4 pt-2">
+          {CONTENT_NOTES[lang].map((note) => (
+            <div key={note.title}>
+              <h3 className="font-semibold text-slate-900">{note.title}</h3>
+              <p className="mt-1 text-sm leading-relaxed">{note.body}</p>
+            </div>
+          ))}
+        </div>
       </section>
     </main>
   );
