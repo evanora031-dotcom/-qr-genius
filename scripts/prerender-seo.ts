@@ -145,6 +145,17 @@ function renderStaticContent(locale: typeof locales[number], page: typeof pages[
     return '<li><a href="' + escapeHtml(localizedPath(toolMeta.canonicalPath, locale)) + '">' + escapeHtml(toolMeta.h1) + '</a></li>';
   }).join('');
   const fileToolHeading = { en: 'PDF and image tools', ar: 'أدوات PDF والصور', fr: 'Outils PDF et images', es: 'Herramientas PDF e imágenes' }[locale];
+  // Provide useful, tool-specific instructions to crawlers before React hydration.
+  // Keep claims limited to features implemented by the browser-side tools.
+  const fileToolGuides: Partial<Record<typeof pages[number], { heading: string; steps: string[] }>> = {
+    'pdf-merge': { heading: 'How to merge PDF files', steps: ['Choose two or more PDF files from your device.', 'Review the selected documents and their order.', 'Merge the PDFs and download the combined document.'] },
+    'images-to-pdf': { heading: 'How to convert images to PDF', steps: ['Select JPG or PNG images from your device.', 'Review the selected images before converting.', 'Create and download a PDF document.'] },
+    'image-compressor': { heading: 'How to compress an image', steps: ['Select a JPG, PNG or WebP image.', 'Adjust the available size or quality settings.', 'Preview and download the compressed image.'] }
+  };
+  const fileGuide = locale === 'en' ? fileToolGuides[page] : undefined;
+  const fileGuideHtml = fileGuide
+    ? '<section><h2>' + escapeHtml(fileGuide.heading) + '</h2><ol>' + fileGuide.steps.map(step => '<li>' + escapeHtml(step) + '</li>').join('') + '</ol></section>'
+    : '';
   const resourcePages = ['about', 'faq', 'contact', 'privacy', 'terms'] as const;
   const resourceLabels: Record<typeof locales[number], Record<typeof resourcePages[number], string>> = {
     en: { about: 'About QR GENIUS', faq: 'Frequently asked questions', contact: 'Contact support', privacy: 'Privacy policy', terms: 'Terms of use' },
@@ -180,7 +191,7 @@ function renderStaticContent(locale: typeof locales[number], page: typeof pages[
     : '';
   return '<section class="seo-static-content" aria-label="' + escapeHtml(meta.h1) + '">' +
     '<h1>' + escapeHtml(meta.h1) + '</h1>' +
-    '<p>' + escapeHtml(meta.description) + '</p>' + supportingSection + guideLink +
+    '<p>' + escapeHtml(meta.description) + '</p>' + supportingSection + fileGuideHtml + guideLink +
     '<nav aria-label="' + escapeHtml(labels[locale]) + '">' +
     '<h2>' + escapeHtml(labels[locale]) + '</h2><ul>' + links + '</ul></nav>' +
     '<nav aria-label="' + escapeHtml(fileToolHeading) + '"><h2>' + escapeHtml(fileToolHeading) + '</h2><ul>' + fileToolLinks + '</ul></nav>' +
