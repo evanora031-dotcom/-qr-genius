@@ -69,9 +69,9 @@ export const FormInputs: React.FC<FormInputsProps> = ({
   return (
     <div className="qr-studio-card w-full box-border bg-white rounded-2xl border border-slate-200 p-4 sm:p-6 shadow-sm overflow-hidden">
       <div className="flex items-center justify-between pb-3 sm:pb-4 mb-4 sm:mb-5 border-b border-slate-100">
-        <h3 className="text-sm font-bold text-slate-900">
+        <h2 className="text-sm font-bold text-slate-900">
           {t.qrTypes[type].label} {ui.details}
-        </h3>
+        </h2>
         <div className="flex items-center gap-1.5 sm:gap-2">
           <button
             type="button"
@@ -174,7 +174,9 @@ export const FormInputs: React.FC<FormInputsProps> = ({
                         <button
                           type="button"
                           onClick={() => setShowWifiPassword(!showWifiPassword)}
-                          className="absolute right-3 rtl:right-auto rtl:left-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600"
+                          aria-label={showWifiPassword ? (lang === 'ar' ? 'إخفاء كلمة المرور' : lang === 'fr' ? 'Masquer le mot de passe' : lang === 'es' ? 'Ocultar contraseña' : 'Hide password') : (lang === 'ar' ? 'إظهار كلمة المرور' : lang === 'fr' ? 'Afficher le mot de passe' : lang === 'es' ? 'Mostrar contraseña' : 'Show password')}
+                          aria-pressed={showWifiPassword}
+                          className="absolute right-1 rtl:right-auto rtl:left-1 top-1/2 -translate-y-1/2 flex h-9 w-9 items-center justify-center rounded-lg text-slate-500 hover:text-slate-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-600"
                         >
                           {showWifiPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                         </button>
@@ -187,6 +189,7 @@ export const FormInputs: React.FC<FormInputsProps> = ({
                       {t.forms.encryption}
                     </label>
                     <select
+                      aria-label={t.forms.encryption}
                       value={wifi.encryption || 'WPA'}
                       onChange={(e) => updateField('encryption', e.target.value)}
                       className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-indigo-600/30 focus:border-indigo-600"
