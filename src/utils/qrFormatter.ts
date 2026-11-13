@@ -102,25 +102,29 @@ export function formatMaps(data: MapsData): string {
   return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(addr)}`;
 }
 
+function escapeVCardText(value: string): string {
+  return value.replace(/\\/g, '\\\\').replace(/\r\n|\r|\n/g, '\\n').replace(/;/g, '\\;').replace(/,/g, '\\,');
+}
+
 export function formatVCard(data: VCardData): string {
   if (!Object.values(data).some(value => typeof value === 'string' && value.trim())) return '';
   const lines: string[] = [
     'BEGIN:VCARD',
     'VERSION:3.0',
-    `N:${data.lastName || ''};${data.firstName || ''};;;`,
-    `FN:${`${data.firstName || ''} ${data.lastName || ''}`.trim()}`
+    `N:${escapeVCardText(data.lastName || '')};${escapeVCardText(data.firstName || '')};;;`,
+    `FN:${escapeVCardText(`${data.firstName || ''} ${data.lastName || ''}`.trim())}`
   ];
 
-  if (data.company) lines.push(`ORG:${data.company}`);
-  if (data.jobTitle) lines.push(`TITLE:${data.jobTitle}`);
-  if (data.phone) lines.push(`TEL;TYPE=CELL:${data.phone}`);
-  if (data.workPhone) lines.push(`TEL;TYPE=WORK:${data.workPhone}`);
-  if (data.email) lines.push(`EMAIL:${data.email}`);
-  if (data.website) lines.push(`URL:${data.website}`);
+  if (data.company) lines.push(`ORG:${escapeVCardText(data.company)}`);
+  if (data.jobTitle) lines.push(`TITLE:${escapeVCardText(data.jobTitle)}`);
+  if (data.phone) lines.push(`TEL;TYPE=CELL:${escapeVCardText(data.phone)}`);
+  if (data.workPhone) lines.push(`TEL;TYPE=WORK:${escapeVCardText(data.workPhone)}`);
+  if (data.email) lines.push(`EMAIL:${escapeVCardText(data.email)}`);
+  if (data.website) lines.push(`URL:${escapeVCardText(data.website)}`);
   if (data.street || data.city || data.state || data.zip || data.country) {
-    lines.push(`ADR;TYPE=WORK:;;${data.street || ''};${data.city || ''};${data.state || ''};${data.zip || ''};${data.country || ''}`);
+    lines.push(`ADR;TYPE=WORK:;;${escapeVCardText(data.street || '')};${escapeVCardText(data.city || '')};${escapeVCardText(data.state || '')};${escapeVCardText(data.zip || '')};${escapeVCardText(data.country || '')}`);
   }
-  if (data.notes) lines.push(`NOTE:${data.notes}`);
+  if (data.notes) lines.push(`NOTE:${escapeVCardText(data.notes)}`);
 
   lines.push('END:VCARD');
   return lines.join('\n');
