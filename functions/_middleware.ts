@@ -22,6 +22,15 @@ export const onRequest = async ({
     return Response.redirect(url.toString(), 308);
   }
 
+  // Reject a bogus localized robots route instead of serving the SPA homepage.
+  // The real crawler directives live at /robots.txt.
+  if (/^\/(?:ar|en|fr|es)\/robots\/?$/.test(url.pathname)) {
+    return new Response('Not Found', {
+      status: 404,
+      headers: { 'Content-Type': 'text/plain; charset=utf-8', 'X-Robots-Tag': 'noindex' },
+    });
+  }
+
   const response = await next();
 
   if (hostname.endsWith('.pages.dev')) {
