@@ -257,7 +257,7 @@ function structuredData(locale: typeof locales[number], page: typeof pages[numbe
     '@context': 'https://schema.org', '@type': 'FAQPage',
     mainEntity: [{ '@type': 'Question', name: faq.question, acceptedAnswer: { '@type': 'Answer', text: faq.answer } }]
   });
-  return objects.map(obj => '<script type="application/ld+json">' + JSON.stringify(obj).replaceAll('<', '\\u003c') + '</script>').join('\\n');
+  return objects.map(obj => '<script type="application/ld+json">' + JSON.stringify(obj).replaceAll('<', '\\u003c') + '</script>').join('\n');
 }
 
 function renderPage(locale: typeof locales[number], page: typeof pages[number]): string {
