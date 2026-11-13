@@ -37,6 +37,12 @@ export const onRequest = async ({
     return Response.redirect(url.toString(), 308);
   }
 
+  // Consolidate the WhatsApp article's .html URL onto its declared canonical path.
+  if (url.pathname === '/en/blog/how-to-create-whatsapp-qr-code-for-customers.html') {
+    url.pathname = '/en/blog/how-to-create-whatsapp-qr-code-for-customers';
+    return Response.redirect(url.toString(), 308);
+  }
+
   const response = await next();
 
   if (hostname.endsWith('.pages.dev')) {
