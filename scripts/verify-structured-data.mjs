@@ -36,6 +36,24 @@ for(const [path,expected] of routes){
  if(path.startsWith('ar/')&&types.includes('FAQPage'))throw Error('Unverified translated FAQ');
  for(const obj of scripts)if(obj['@context']!=='https://schema.org')throw Error(path+' invalid context');
 }
+// Ensure tool FAQ schema quotes real FAQ entries in the English React UI source.
+// This is a source-parity guard, not a substitute for rendered-page inspection.
+const toolPageSource = readFileSync('src/pages/ToolLandingPage.tsx', 'utf8');
+for (const path of ['tools/wifi.html', 'tools/whatsapp.html', 'tools/business-vcard.html']) {
+  const html = readFileSync(root + path, 'utf8');
+  const scripts = [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)]
+    .map(match => JSON.parse(match[1]));
+  const faq = scripts.find(schema => schema['@type'] === 'FAQPage');
+  if (!faq) throw Error(path + ' missing FAQPage schema');
+  for (const item of faq.mainEntity) {
+    const question = item.name;
+    const answer = item.acceptedAnswer?.text;
+    if (!toolPageSource.includes(`q: '${question}', a: '${answer}'`))
+      throw Error(path + ' FAQ schema differs from the UI FAQ source: ' + question);
+  }
+}
+console.log('Verified tool FAQ schema against English UI source.');
+
 // Validate article JSON-LD against the actual canonical URL and visible article metadata.
 const articles = [
   'en/blog/how-to-make-business-card-qr-code.html',
