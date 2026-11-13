@@ -31,6 +31,12 @@ export const onRequest = async ({
     });
   }
 
+  // Consolidate the legacy .html business-card article URL onto its declared canonical URL.
+  if (url.pathname === '/en/blog/how-to-make-business-card-qr-code.html') {
+    url.pathname = '/en/blog/how-to-make-business-card-qr-code';
+    return Response.redirect(url.toString(), 308);
+  }
+
   const response = await next();
 
   if (hostname.endsWith('.pages.dev')) {
