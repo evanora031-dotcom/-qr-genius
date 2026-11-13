@@ -27,7 +27,7 @@ for (const file of articles) {
   const html = readFileSync(root + file, 'utf8');
   const canonical = html.match(/<link rel="canonical" href="([^"]+)"/i)?.[1];
   if (!canonical) throw Error(file + ' missing canonical');
-  const schemas = [...html.matchAll(/<script type="application\\/ld\\+json">([\\s\\S]*?)<\\/script>/g)]
+  const schemas = [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)]
     .map(match => JSON.parse(match[1]));
   const article = schemas.filter(schema => schema['@type'] === 'Article');
   if (article.length !== 1) throw Error(file + ' requires exactly one Article schema');
