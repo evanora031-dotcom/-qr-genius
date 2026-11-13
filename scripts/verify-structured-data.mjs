@@ -14,6 +14,25 @@ for(const [path,expected] of routes){
  const types=scripts.map(x=>x['@type']);
  for(const type of expected)if(!types.includes(type))throw Error(path+' missing '+type);
  if(types.includes('WebApplication'))throw Error(path+' contains obsolete generic schema');
+ const canonical=html.match(/<link rel="canonical" href="([^"]+)"/i)?.[1];
+ if(!canonical)throw Error(path+' missing canonical URL');
+ if(expected.includes('SoftwareApplication')){
+  const apps=scripts.filter(x=>x['@type']==='SoftwareApplication');
+  if(apps.length!==1||apps[0].url!==canonical||!apps[0].name||!apps[0].offers)
+   throw Error(path+' SoftwareApplication metadata inconsistent with canonical');
+ }
+ if(expected.includes('BreadcrumbList')){
+  const crumbs=scripts.filter(x=>x['@type']==='BreadcrumbList');
+  const items=crumbs[0]?.itemListElement;
+  if(crumbs.length!==1||!Array.isArray(items)||items.length<2||items.at(-1)?.item!==canonical)
+   throw Error(path+' breadcrumb target inconsistent with canonical');
+ }
+ if(expected.includes('FAQPage')){
+  const faqs=scripts.filter(x=>x['@type']==='FAQPage');
+  if(faqs.length!==1||!Array.isArray(faqs[0].mainEntity)||!faqs[0].mainEntity.length||
+   faqs[0].mainEntity.some(q=>q['@type']!=='Question'||!q.name||q.acceptedAnswer?.['@type']!=='Answer'||!q.acceptedAnswer?.text))
+   throw Error(path+' invalid FAQPage question or answer');
+ }
  if(path.startsWith('ar/')&&types.includes('FAQPage'))throw Error('Unverified translated FAQ');
  for(const obj of scripts)if(obj['@context']!=='https://schema.org')throw Error(path+' invalid context');
 }
