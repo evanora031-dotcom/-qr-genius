@@ -130,7 +130,10 @@ const TOOL_CONFIGS = {
       'Add a QR code contact card to a printed name card, visiting card, or digital business card',
       'Stores full contact profiles: Name, Job Title, Company, Phone, Email, Address & Notes',
       'Uses the vCard 3.0 format supported by many smartphone contact apps',
-      'Ideal for conferences, badges, email signatures, and resume portfolios'
+      'Ideal for conferences, badges, email signatures, and resume portfolios',
+      'For networking events: add your role and company so new contacts can save your details after a conversation',
+      'For service businesses: include a public work phone and email, then test the saved contact on a second phone before printing',
+      'For freelancers: put the QR code on your portfolio or business card and update the printed code whenever your contact details change'
     ],
     faqs: [
       { q: 'How does vCard scanning work on smartphones?', a: 'Compatible phones and contact apps can recognize the vCard data and offer to create a new contact. The exact prompt and supported fields depend on the device.' },
