@@ -1,0 +1,36 @@
+name: Preview generator mobile Lighthouse
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'src/components/QRStudio/QRPreviewCard.tsx'
+      - '.github/workflows/preview-generator-lighthouse.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  preview-generator-lighthouse:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install Lighthouse and Chromium
+        run: |
+          npm install --no-save --no-package-lock --legacy-peer-deps lighthouse@12.8.2 playwright@1.56.1
+          npx playwright install --with-deps chromium
+      - name: Compare production and preview mobile CLS
+        env:
+          PREVIEW_URL: https://d6b28371.qr-genius-1on.pages.dev
+        run: |
+          export CHROME_PATH="$(node -e 'console.log(require("playwright").chromium.executablePath())')"
+          for origin in https://getqrgenius.com "$PREVIEW_URL"; do
+            for iteration in 1 2 3; do
+              npx lighthouse "$origin/generator" --chrome-flags="--headless --no-sandbox" --preset=perf --form-factor=mobile --screenEmulation.mobile=true --screenEmulation.width=390 --screenEmulation.height=844 --screenEmulation.deviceScaleFactor=2 --throttling-method=simulate --output=json --output-path=/tmp/generator-lighthouse.json --quiet
+              node -e 'const r=require("/tmp/generator-lighthouse.json"); console.log(JSON.stringify({url:r.finalUrl,performance:r.categories.performance.score*100,cls:r.audits["cumulative-layout-shift"].numericValue,layoutShifts:r.audits["layout-shifts"]?.details?.items?.map(i=>({selector:i.node?.selector,score:i.score}))},null,2))'
+            done
+          done
