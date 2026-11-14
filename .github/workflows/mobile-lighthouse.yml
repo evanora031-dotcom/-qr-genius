@@ -38,6 +38,10 @@ jobs:
           node -e 'const r=require("/tmp/lighthouse-mobile.json"); console.log(JSON.stringify({url:r.finalUrl,score:r.categories.performance.score*100,metrics:Object.fromEntries(["first-contentful-paint","largest-contentful-paint","speed-index","total-blocking-time","cumulative-layout-shift"].map(k=>[k,{value:r.audits[k].numericValue,display:r.audits[k].displayValue}])),opportunities:Object.values(r.audits).filter(a=>a.details?.type==="opportunity"&&a.details.overallSavingsMs>100).map(a=>({title:a.title,savingsMs:a.details.overallSavingsMs})).slice(0,8)},null,2))'
           # Lighthouse attribution helps explain CLS scores that differ from the Playwright observer.
           node -e 'const r=require("/tmp/lighthouse-mobile.json"); const a=r.audits["layout-shift-elements"]; console.log(JSON.stringify({audit:"layout-shift-elements",score:r.audits["cumulative-layout-shift"]?.numericValue,items:(a?.details?.items||[]).slice(0,12).map(i=>({node:i.node?.snippet||i.node?.selector||null,score:i.score,contribution:i.contribution}))},null,2))'
+          # Inspect Lighthouse's CLS attribution and diagnostic details when Playwright disagrees.
+          if [ "$route" = "/generator" ]; then
+            node -e 'const r=require("/tmp/lighthouse-mobile.json"); const keys=Object.keys(r.audits).filter(k=>/layout.shift|cls|viewport|font.display/i.test(k)); console.log(JSON.stringify({clsAuditKeys:keys,details:Object.fromEntries(keys.map(k=>[k,{display:r.audits[k]?.displayValue,details:r.audits[k]?.details?.items?.slice(0,15)}]))},null,2))'
+          fi
           node -e 'const r=require("/tmp/lighthouse-mobile.json"); const a=r.audits["unused-javascript"]; console.log(JSON.stringify({audit:"unused-javascript",displayValue:a?.displayValue,items:(a?.details?.items||[]).slice(0,15).map(i=>({url:i.url,totalBytes:i.totalBytes,wastedBytes:i.wastedBytes}))},null,2))'
             cp /tmp/lighthouse-mobile.json "lighthouse-results/$(echo "$route" | tr / _)-$iteration.json"
             done
