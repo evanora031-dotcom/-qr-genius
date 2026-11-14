@@ -119,9 +119,9 @@ export const SEO_METADATA: Record<PageId, Record<Language, PageMeta>> = {
   },
   wifi: {
     en: {
-      title: "Free WiFi QR Code Generator for Guests | QR Genius",
+      title: "WiFi QR Code Generator for Guests | QR Genius",
       description: "Create a QR code to connect to Wi-Fi. Enter your network name, security type and password, then download a free Wi-Fi QR code for guests to scan.",
-      keywords: "wifi qr code, scan to connect wifi, guest wifi qr code, generate wifi qr, free wifi barcode",
+      keywords: "wifi qr code generator, wifi password qr code generator, qr code to connect to wifi, guest wifi qr code",
       canonicalPath: "/tools/wifi",
       h1: "Free WiFi QR Code Generator for Guests"
     },
