@@ -324,7 +324,7 @@ export const QRPreviewCard: React.FC<QRPreviewCardProps> = ({
                   className="w-full text-left rtl:text-right px-4 py-2 hover:bg-indigo-50 hover:text-indigo-700 flex justify-between font-semibold text-indigo-600"
                 >
                   <span>{t.preview.resolutionHigh}</span>
-                  <span className="text-indigo-500 font-mono">1024×1024</span>
+                  <span className="text-indigo-600 font-mono">1024×1024</span>
                 </button>
                 <button
                   type="button"
