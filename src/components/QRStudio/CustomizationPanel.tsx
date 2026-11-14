@@ -223,13 +223,13 @@ export const CustomizationPanel: React.FC<CustomizationPanelProps> = ({
                   <input
                     type="color"
                     aria-label={`${t.customizer.foreground} color picker`}
-                    aria-label={`${t.customizer.foreground} hex value`}
                     value={config.fgColor}
                     onChange={(e) => onChangeConfig({ fgColor: e.target.value })}
                     className="w-10 h-10 rounded-xl cursor-pointer border border-slate-200 p-0.5"
                   />
                   <input
                     type="text"
+                    aria-label={`${t.customizer.foreground} hex value`}
                     value={config.fgColor}
                     onChange={(e) => onChangeConfig({ fgColor: e.target.value })}
                     className="flex-1 px-3 py-2 rounded-xl border border-slate-200 text-xs font-mono text-slate-800"
@@ -246,7 +246,6 @@ export const CustomizationPanel: React.FC<CustomizationPanelProps> = ({
                   <input
                     type="color"
                     aria-label={`${t.customizer.background} color picker`}
-                    aria-label={`${t.customizer.background} hex value`}
                     value={config.bgColor}
                     disabled={config.transparentBg}
                     onChange={(e) => onChangeConfig({ bgColor: e.target.value })}
@@ -254,6 +253,7 @@ export const CustomizationPanel: React.FC<CustomizationPanelProps> = ({
                   />
                   <input
                     type="text"
+                    aria-label={`${t.customizer.background} hex value`}
                     value={config.bgColor}
                     disabled={config.transparentBg}
                     onChange={(e) => onChangeConfig({ bgColor: e.target.value })}
@@ -303,14 +303,14 @@ export const CustomizationPanel: React.FC<CustomizationPanelProps> = ({
                       <input
                         type="color"
                         aria-label={`${t.customizer.gradientColor} color picker`}
-                        aria-label={`${t.customizer.gradientColor} hex value`}
                         value={config.gradientColor}
                         onChange={(e) => onChangeConfig({ gradientColor: e.target.value })}
                         className="w-8 h-8 rounded-lg cursor-pointer border border-slate-200"
                       />
                       <input
                         type="text"
-                        value={config.gradientColor}
+                        aria-label={`${t.customizer.gradientColor} hex value`}
+                    value={config.gradientColor}
                         onChange={(e) => onChangeConfig({ gradientColor: e.target.value })}
                         className="flex-1 px-2.5 py-1.5 rounded-lg border border-slate-200 text-xs font-mono text-slate-800"
                       />
@@ -363,14 +363,14 @@ export const CustomizationPanel: React.FC<CustomizationPanelProps> = ({
                       <input
                         type="color"
                         aria-label={`${t.customizer.cornerFrameColor} color picker`}
-                        aria-label={`${t.customizer.cornerFrameColor} hex value`}
                         value={config.cornerSquareColor}
                         onChange={(e) => onChangeConfig({ cornerSquareColor: e.target.value })}
                         className="w-8 h-8 rounded-lg cursor-pointer border border-slate-200"
                       />
                       <input
                         type="text"
-                        value={config.cornerSquareColor}
+                        aria-label={`${t.customizer.cornerFrameColor} hex value`}
+                    value={config.cornerSquareColor}
                         onChange={(e) => onChangeConfig({ cornerSquareColor: e.target.value })}
                         className="flex-1 px-2.5 py-1.5 rounded-lg border border-slate-200 text-xs font-mono text-slate-800"
                       />
@@ -385,14 +385,14 @@ export const CustomizationPanel: React.FC<CustomizationPanelProps> = ({
                       <input
                         type="color"
                         aria-label={`${t.customizer.cornerDotColor} color picker`}
-                        aria-label={`${t.customizer.cornerDotColor} hex value`}
                         value={config.cornerDotColor}
                         onChange={(e) => onChangeConfig({ cornerDotColor: e.target.value })}
                         className="w-8 h-8 rounded-lg cursor-pointer border border-slate-200"
                       />
                       <input
                         type="text"
-                        value={config.cornerDotColor}
+                        aria-label={`${t.customizer.cornerDotColor} hex value`}
+                    value={config.cornerDotColor}
                         onChange={(e) => onChangeConfig({ cornerDotColor: e.target.value })}
                         className="flex-1 px-2.5 py-1.5 rounded-lg border border-slate-200 text-xs font-mono text-slate-800"
                       />
@@ -631,14 +631,14 @@ export const CustomizationPanel: React.FC<CustomizationPanelProps> = ({
                       <input
                         type="color"
                         aria-label={`${t.customizer.logoBgColor} color picker`}
-                        aria-label={`${t.customizer.logoBgColor} hex value`}
                         value={config.logoBgColor}
                         onChange={(e) => onChangeConfig({ logoBgColor: e.target.value })}
                         className="w-7 h-7 rounded cursor-pointer border border-slate-200"
                       />
                       <input
                         type="text"
-                        value={config.logoBgColor}
+                        aria-label={`${t.customizer.logoBgColor} hex value`}
+                    value={config.logoBgColor}
                         onChange={(e) => onChangeConfig({ logoBgColor: e.target.value })}
                         className="flex-1 px-2 py-1 rounded border border-slate-200 text-xs font-mono"
                       />
