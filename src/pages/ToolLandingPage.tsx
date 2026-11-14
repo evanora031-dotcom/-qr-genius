@@ -119,7 +119,8 @@ const TOOL_CONFIGS = {
       { q: 'Does scanning a WhatsApp QR code send a message automatically?', a: 'No. Scanning opens the WhatsApp chat or a compatible link flow. The visitor decides whether to send the message.' },
       { q: 'What should I check before printing a WhatsApp QR code?', a: 'Scan the finished code with another phone. Confirm that it opens the intended business number, the optional message reads correctly, and the customer can edit it before sending. Test again after adding a logo or changing colors, and keep a readable size and contrast on printed materials.' },
       { q: 'Can I make a free WhatsApp QR code for customer support?', a: 'Yes. Enter your business WhatsApp number in international format, optionally add a pre-filled question, and generate a static QR code. Put it on a sign, receipt, or business card and scan-test the link before sharing it.' },
-      { q: 'Will a WhatsApp QR code work without a QR Genius subscription?', a: 'The static QR code stores a wa.me link directly and does not rely on a QR Genius redirect subscription. The destination still depends on WhatsApp and the phone number remaining available.' }
+      { q: 'Will a WhatsApp QR code work without a QR Genius subscription?', a: 'The static QR code stores a wa.me link directly and does not rely on a QR Genius redirect subscription. The destination still depends on WhatsApp and the phone number remaining available.' },
+      { q: 'Why does my WhatsApp QR code not open the intended chat?', a: 'Check that the phone number includes the correct country calling code and digits only, with no plus sign, spaces, or leading international dialing prefix. Generate the QR code again after correcting the number, then scan-test it on another phone. The destination also depends on the number being available on WhatsApp and the device supporting the WhatsApp link.' }
     ]
   },
   business: {
