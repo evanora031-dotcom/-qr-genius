@@ -254,7 +254,7 @@ export const QRPreviewCard: React.FC<QRPreviewCardProps> = ({
       </div>
 
       {/* QR Canvas Display */}
-      <div className="qr-preview-canvas-box w-full box-border flex flex-col items-center justify-center p-3 sm:p-6 bg-slate-50 rounded-2xl border border-slate-100 my-2 relative min-h-[220px] sm:min-h-[280px]">
+      <div className="qr-preview-canvas-box w-full box-border flex flex-col items-center justify-center p-3 sm:p-6 bg-slate-50 rounded-2xl border border-slate-100 my-2 relative min-h-[350px] sm:min-h-[400px]">
         {loading && (
           <div className="absolute inset-0 bg-white/70 backdrop-blur-xs flex items-center justify-center z-10 rounded-2xl">
             <div className="w-8 h-8 border-3 border-indigo-600 border-t-transparent rounded-full animate-spin" />
