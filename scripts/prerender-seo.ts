@@ -187,7 +187,7 @@ function renderStaticContent(locale: typeof locales[number], page: typeof pages[
   }).join('');
   // Mirror the existing React tool-to-guide links in the server-rendered fallback.
   const guidePaths = {
-    en: { wifi: '/en/blog/how-to-make-wifi-qr-code-for-guests', whatsapp: '/en/blog/how-to-create-whatsapp-qr-code-for-customers', business: '/en/blog/how-to-make-business-card-qr-code' },
+    en: { wifi: '/en/blog/how-to-make-wifi-qr-code-for-guests.html', whatsapp: '/en/blog/how-to-create-whatsapp-qr-code-for-customers', business: '/en/blog/how-to-make-business-card-qr-code' },
     ar: { wifi: '/blog/wifi-qr-code-for-guests', whatsapp: '/blog/whatsapp-qr-code-for-customers', business: '/blog/business-card-qr-code-guide' }
   } as const;
   const guideLabels = {
