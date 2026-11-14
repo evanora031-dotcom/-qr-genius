@@ -105,6 +105,7 @@ export const FormInputs: React.FC<FormInputsProps> = ({
             <div className="relative">
               <input
                 type="url"
+                aria-label={t.forms.urlLabel}
                 value={typeof rawPayload === 'string' ? rawPayload : ''}
                 onChange={(e) => onChangePayload(e.target.value)}
                 placeholder={t.forms.urlPlaceholder}
@@ -125,6 +126,7 @@ export const FormInputs: React.FC<FormInputsProps> = ({
             </label>
             <textarea
               rows={4}
+              aria-label={t.forms.textLabel}
               value={typeof rawPayload === 'string' ? rawPayload : ''}
               onChange={(e) => onChangePayload(e.target.value)}
               placeholder={t.forms.textPlaceholder}
@@ -149,6 +151,7 @@ export const FormInputs: React.FC<FormInputsProps> = ({
                   </label>
                   <input
                     type="text"
+                    aria-label={t.forms.ssid}
                     value={wifi.ssid || ''}
                     onChange={(e) => updateField('ssid', e.target.value)}
                     placeholder={ui.ssid}
@@ -164,7 +167,8 @@ export const FormInputs: React.FC<FormInputsProps> = ({
                     <div className="relative">
                       <input
                         type={showWifiPassword ? 'text' : 'password'}
-                        value={wifi.password || ''}
+                        aria-label={t.forms.password}
+                         value={wifi.password || ''}
                         disabled={wifi.encryption === 'nopass'}
                         onChange={(e) => updateField('password', e.target.value)}
                         placeholder={ui.password}
