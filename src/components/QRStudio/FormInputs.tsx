@@ -235,6 +235,7 @@ export const FormInputs: React.FC<FormInputsProps> = ({
                     </label>
                     <input
                       type="text"
+                      aria-label={t.forms.countryCode}
                       value={wa.countryCode || '+1'}
                       onChange={(e) => updateField('countryCode', e.target.value)}
                       placeholder="+1"
@@ -247,6 +248,7 @@ export const FormInputs: React.FC<FormInputsProps> = ({
                     </label>
                     <input
                       type="tel"
+                      aria-label={t.forms.phoneNumber}
                       value={wa.phoneNumber || ''}
                       onChange={(e) => updateField('phoneNumber', e.target.value)}
                       placeholder={ui.phone}
@@ -261,6 +263,7 @@ export const FormInputs: React.FC<FormInputsProps> = ({
                   </label>
                   <textarea
                     rows={3}
+                    aria-label={t.forms.message}
                     value={wa.message || ''}
                     onChange={(e) => updateField('message', e.target.value)}
                     placeholder={ui.waMessage}
@@ -284,6 +287,7 @@ export const FormInputs: React.FC<FormInputsProps> = ({
                   </label>
                   <input
                     type="email"
+                    aria-label={t.forms.emailTo}
                     value={emailData.email || ''}
                     onChange={(e) => updateField('email', e.target.value)}
                     placeholder="contact@yourcompany.com"
@@ -296,6 +300,7 @@ export const FormInputs: React.FC<FormInputsProps> = ({
                   </label>
                   <input
                     type="text"
+                    aria-label={t.forms.subject}
                     value={emailData.subject || ''}
                     onChange={(e) => updateField('subject', e.target.value)}
                     placeholder={ui.subject}
@@ -308,6 +313,7 @@ export const FormInputs: React.FC<FormInputsProps> = ({
                   </label>
                   <textarea
                     rows={3}
+                    aria-label={t.forms.body}
                     value={emailData.body || ''}
                     onChange={(e) => updateField('body', e.target.value)}
                     placeholder={ui.body}
@@ -327,6 +333,7 @@ export const FormInputs: React.FC<FormInputsProps> = ({
             </label>
             <input
               type="tel"
+              aria-label={t.forms.phoneNumber}
               value={typeof rawPayload === 'string' ? rawPayload : (rawPayload?.phone || '')}
               onChange={(e) => onChangePayload(e.target.value)}
               placeholder="+1 (555) 234-5678"
@@ -350,6 +357,7 @@ export const FormInputs: React.FC<FormInputsProps> = ({
                   </label>
                   <input
                     type="tel"
+                    aria-label={t.forms.phoneNumber}
                     value={sms.phoneNumber || ''}
                     onChange={(e) => updateField('phoneNumber', e.target.value)}
                     placeholder="+1 555 987 6543"
@@ -362,6 +370,7 @@ export const FormInputs: React.FC<FormInputsProps> = ({
                   </label>
                   <textarea
                     rows={3}
+                    aria-label={t.forms.message}
                     value={sms.message || ''}
                     onChange={(e) => updateField('message', e.target.value)}
                     placeholder={ui.sms}
@@ -380,6 +389,7 @@ export const FormInputs: React.FC<FormInputsProps> = ({
               Instagram Username or Profile Link <span className="text-rose-500">*</span>
             </label>
             <input
+              aria-label="Instagram Username or Profile Link"
               type="text"
               value={typeof rawPayload === 'string' ? rawPayload : (rawPayload?.usernameOrUrl || '')}
               onChange={(e) => onChangePayload(e.target.value)}
@@ -396,6 +406,7 @@ export const FormInputs: React.FC<FormInputsProps> = ({
               Facebook Page or Profile Link <span className="text-rose-500">*</span>
             </label>
             <input
+              aria-label="Facebook Page or Profile Link"
               type="text"
               value={typeof rawPayload === 'string' ? rawPayload : (rawPayload?.usernameOrUrl || '')}
               onChange={(e) => onChangePayload(e.target.value)}
@@ -412,6 +423,7 @@ export const FormInputs: React.FC<FormInputsProps> = ({
               YouTube Channel, Video Link, or ID <span className="text-rose-500">*</span>
             </label>
             <input
+              aria-label="YouTube Channel, Video Link, or ID"
               type="text"
               value={typeof rawPayload === 'string' ? rawPayload : (rawPayload?.usernameOrUrl || '')}
               onChange={(e) => onChangePayload(e.target.value)}
@@ -460,6 +472,7 @@ export const FormInputs: React.FC<FormInputsProps> = ({
                       </label>
                       <input
                         type="text"
+                        aria-label={t.forms.latitude}
                         value={maps.latitude || ''}
                         onChange={(e) => updateField('latitude', e.target.value)}
                         placeholder="37.7749"
@@ -472,6 +485,7 @@ export const FormInputs: React.FC<FormInputsProps> = ({
                       </label>
                       <input
                         type="text"
+                        aria-label={t.forms.longitude}
                         value={maps.longitude || ''}
                         onChange={(e) => updateField('longitude', e.target.value)}
                         placeholder="-122.4194"
@@ -486,6 +500,7 @@ export const FormInputs: React.FC<FormInputsProps> = ({
                     </label>
                     <input
                       type="text"
+                      aria-label={t.forms.address}
                       value={maps.address || ''}
                       onChange={(e) => updateField('address', e.target.value)}
                       placeholder={ui.address}
@@ -511,6 +526,7 @@ export const FormInputs: React.FC<FormInputsProps> = ({
                     </label>
                     <input
                       type="text"
+                      aria-label={t.forms.firstName}
                       value={vc.firstName || ''}
                       onChange={(e) => updateField('firstName', e.target.value)}
                       placeholder="Alex"
@@ -523,6 +539,7 @@ export const FormInputs: React.FC<FormInputsProps> = ({
                     </label>
                     <input
                       type="text"
+                      aria-label={t.forms.lastName}
                       value={vc.lastName || ''}
                       onChange={(e) => updateField('lastName', e.target.value)}
                       placeholder="Morgan"
@@ -538,6 +555,7 @@ export const FormInputs: React.FC<FormInputsProps> = ({
                     </label>
                     <input
                       type="text"
+                      aria-label={t.forms.company}
                       value={vc.company || ''}
                       onChange={(e) => updateField('company', e.target.value)}
                       placeholder="Apex Digital Inc."
@@ -550,6 +568,7 @@ export const FormInputs: React.FC<FormInputsProps> = ({
                     </label>
                     <input
                       type="text"
+                      aria-label={t.forms.jobTitle}
                       value={vc.jobTitle || ''}
                       onChange={(e) => updateField('jobTitle', e.target.value)}
                       placeholder="Chief Architect"
@@ -565,6 +584,7 @@ export const FormInputs: React.FC<FormInputsProps> = ({
                     </label>
                     <input
                       type="tel"
+                      aria-label={t.forms.phoneNumber}
                       value={vc.phone || ''}
                       onChange={(e) => updateField('phone', e.target.value)}
                       placeholder="+1 (555) 902-1234"
@@ -577,6 +597,7 @@ export const FormInputs: React.FC<FormInputsProps> = ({
                     </label>
                     <input
                       type="email"
+                      aria-label={t.forms.emailTo}
                       value={vc.email || ''}
                       onChange={(e) => updateField('email', e.target.value)}
                       placeholder="alex@example.com"
@@ -592,6 +613,7 @@ export const FormInputs: React.FC<FormInputsProps> = ({
                     </label>
                     <input
                       type="url"
+                      aria-label={t.forms.website}
                       value={vc.website || ''}
                       onChange={(e) => updateField('website', e.target.value)}
                       placeholder="https://example.com"
@@ -604,6 +626,7 @@ export const FormInputs: React.FC<FormInputsProps> = ({
                     </label>
                     <input
                       type="text"
+                      aria-label={`${t.forms.city} & ${t.forms.country}`}
                       value={vc.city ? `${vc.city}${vc.country ? `, ${vc.country}` : ''}` : ''}
                       onChange={(e) => {
                         const parts = e.target.value.split(',');
@@ -622,6 +645,7 @@ export const FormInputs: React.FC<FormInputsProps> = ({
                   </label>
                   <input
                     type="text"
+                    aria-label={t.forms.notes}
                     value={vc.notes || ''}
                     onChange={(e) => updateField('notes', e.target.value)}
                     placeholder={ui.notes}
