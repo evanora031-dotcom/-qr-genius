@@ -222,6 +222,8 @@ export const CustomizationPanel: React.FC<CustomizationPanelProps> = ({
                 <div className="flex items-center gap-2">
                   <input
                     type="color"
+                    aria-label={`${t.customizer.foreground} color picker`}
+                    aria-label={`${t.customizer.foreground} hex value`}
                     value={config.fgColor}
                     onChange={(e) => onChangeConfig({ fgColor: e.target.value })}
                     className="w-10 h-10 rounded-xl cursor-pointer border border-slate-200 p-0.5"
@@ -243,6 +245,8 @@ export const CustomizationPanel: React.FC<CustomizationPanelProps> = ({
                 <div className="flex items-center gap-2">
                   <input
                     type="color"
+                    aria-label={`${t.customizer.background} color picker`}
+                    aria-label={`${t.customizer.background} hex value`}
                     value={config.bgColor}
                     disabled={config.transparentBg}
                     onChange={(e) => onChangeConfig({ bgColor: e.target.value })}
@@ -298,6 +302,8 @@ export const CustomizationPanel: React.FC<CustomizationPanelProps> = ({
                     <div className="flex items-center gap-2">
                       <input
                         type="color"
+                        aria-label={`${t.customizer.gradientColor} color picker`}
+                        aria-label={`${t.customizer.gradientColor} hex value`}
                         value={config.gradientColor}
                         onChange={(e) => onChangeConfig({ gradientColor: e.target.value })}
                         className="w-8 h-8 rounded-lg cursor-pointer border border-slate-200"
@@ -316,6 +322,7 @@ export const CustomizationPanel: React.FC<CustomizationPanelProps> = ({
                       {t.customizer.gradientDirection}
                     </label>
                     <select
+                      aria-label={t.customizer.gradientDirection}
                       value={config.gradientDirection}
                       onChange={(e) => onChangeConfig({ gradientDirection: e.target.value as any })}
                       className="w-full px-2.5 py-1.5 rounded-lg border border-slate-200 text-xs text-slate-800 bg-white"
@@ -339,6 +346,7 @@ export const CustomizationPanel: React.FC<CustomizationPanelProps> = ({
                 <input
                   type="checkbox"
                   id="customCornerColor"
+                  aria-label={t.customizer.customCornerColors}
                   checked={config.customCornerColor}
                   onChange={(e) => onChangeConfig({ customCornerColor: e.target.checked })}
                   className="w-4 h-4 text-indigo-600 rounded border-slate-300 focus:ring-indigo-500"
@@ -354,6 +362,8 @@ export const CustomizationPanel: React.FC<CustomizationPanelProps> = ({
                     <div className="flex items-center gap-2">
                       <input
                         type="color"
+                        aria-label={`${t.customizer.cornerFrameColor} color picker`}
+                        aria-label={`${t.customizer.cornerFrameColor} hex value`}
                         value={config.cornerSquareColor}
                         onChange={(e) => onChangeConfig({ cornerSquareColor: e.target.value })}
                         className="w-8 h-8 rounded-lg cursor-pointer border border-slate-200"
@@ -374,6 +384,8 @@ export const CustomizationPanel: React.FC<CustomizationPanelProps> = ({
                     <div className="flex items-center gap-2">
                       <input
                         type="color"
+                        aria-label={`${t.customizer.cornerDotColor} color picker`}
+                        aria-label={`${t.customizer.cornerDotColor} hex value`}
                         value={config.cornerDotColor}
                         onChange={(e) => onChangeConfig({ cornerDotColor: e.target.value })}
                         className="w-8 h-8 rounded-lg cursor-pointer border border-slate-200"
@@ -586,6 +598,7 @@ export const CustomizationPanel: React.FC<CustomizationPanelProps> = ({
                     type="range"
                     min={0}
                     max={12}
+                    aria-label={t.customizer.logoPadding}
                     value={config.logoPadding}
                     onChange={(e) => onChangeConfig({ logoPadding: Number(e.target.value) })}
                     className="w-full accent-indigo-600"
@@ -598,6 +611,7 @@ export const CustomizationPanel: React.FC<CustomizationPanelProps> = ({
                       {t.customizer.logoShape}
                     </label>
                     <select
+                      aria-label={t.customizer.logoShape}
                       value={config.logoBgShape}
                       onChange={(e) => onChangeConfig({ logoBgShape: e.target.value as any })}
                       className="w-full px-2.5 py-1.5 rounded-lg border border-slate-200 text-xs text-slate-800 bg-white"
@@ -616,6 +630,8 @@ export const CustomizationPanel: React.FC<CustomizationPanelProps> = ({
                     <div className="flex items-center gap-2">
                       <input
                         type="color"
+                        aria-label={`${t.customizer.logoBgColor} color picker`}
+                        aria-label={`${t.customizer.logoBgColor} hex value`}
                         value={config.logoBgColor}
                         onChange={(e) => onChangeConfig({ logoBgColor: e.target.value })}
                         className="w-7 h-7 rounded cursor-pointer border border-slate-200"
@@ -692,6 +708,7 @@ export const CustomizationPanel: React.FC<CustomizationPanelProps> = ({
                 min={0}
                 max={5}
                 step={1}
+                aria-label={t.customizer.quietZone}
                 value={config.margin}
                 onChange={(e) => onChangeConfig({ margin: Number(e.target.value) })}
                 className="w-full accent-indigo-600"
