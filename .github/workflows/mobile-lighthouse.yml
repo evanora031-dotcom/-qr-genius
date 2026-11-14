@@ -25,12 +25,12 @@ jobs:
           npx playwright install --with-deps chromium
       - name: Audit homepage and QR tools three times on mobile
         env:
-          BASE_URL: https://dec23dc1.qr-genius-1on.pages.dev
+          BASE_URL: https://getqrgenius.com
         run: |
           export CHROME_PATH="$(node -e 'console.log(require("playwright").chromium.executablePath())')"
           test -x "$CHROME_PATH"
           mkdir -p lighthouse-results
-          for route in /generator; do
+          for route in / /tools/wifi /tools/whatsapp /tools/business-vcard; do
             for iteration in 1 2 3; do
             export AUDIT_ROUTE="$route"
             echo "=== Auditing $BASE_URL$route run $iteration ==="
@@ -44,7 +44,7 @@ jobs:
           done
           python3 - <<'PY'
           import glob,json,statistics
-          for route in ('_generator',):
+          for route in ('_','_tools_wifi','_tools_whatsapp','_tools_business-vcard'):
               samples=[]
               for file in glob.glob('lighthouse-results/'+route+'-*.json'):
                   with open(file) as f: r=json.load(f)
