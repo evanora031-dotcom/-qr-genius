@@ -1,6 +1,11 @@
-name: Preview HTTP routing smoke test
+name: HTTP routing smoke test (preview and production)
 on:
   pull_request:
+    paths:
+      - 'public/404.html'
+      - '.github/workflows/preview-http-routing.yml'
+  push:
+    branches: [main]
     paths:
       - 'public/404.html'
       - '.github/workflows/preview-http-routing.yml'
@@ -10,11 +15,12 @@ jobs:
   http-routing:
     runs-on: ubuntu-latest
     steps:
-      - name: Check real 404 and existing routes on Cloudflare Pages preview
+      - name: Check real 404 and existing routes on Cloudflare Pages
         env:
-          BASE_URL: https://d800896f.qr-genius-1on.pages.dev
+          BASE_URL: ${{ github.event_name == 'pull_request' && 'https://d800896f.qr-genius-1on.pages.dev' || 'https://getqrgenius.com' }}
         run: |
           set -euo pipefail
+          echo "Testing $BASE_URL"
           for attempt in {1..12}; do
             if curl -fsS --max-time 15 -o /dev/null "$BASE_URL/"; then break; fi
             sleep 10
