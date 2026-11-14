@@ -580,6 +580,7 @@ export const CustomizationPanel: React.FC<CustomizationPanelProps> = ({
                   </div>
                   <input
                     type="range"
+                    aria-label={t.customizer.logoSize}
                     min={12}
                     max={26}
                     value={config.logoSize}
