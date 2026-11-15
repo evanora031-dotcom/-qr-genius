@@ -451,6 +451,24 @@ export const ToolLandingPage: React.FC<ToolLandingPageProps> = ({
           </section>
         )}
 
+        {/* Practical English WhatsApp QR guide for customer-facing use. */}
+        {lang === 'en' && tool === 'whatsapp' && (
+          <section className="pt-8 border-t border-slate-200" aria-labelledby="whatsapp-customer-qr-guide">
+            <h2 id="whatsapp-customer-qr-guide" className="text-2xl font-bold text-slate-900 tracking-tight mb-4">
+              How to create a WhatsApp QR code for customers
+            </h2>
+            <ol className="list-decimal pl-6 space-y-3 text-sm text-slate-700 leading-relaxed">
+              <li><strong>Enter your WhatsApp business number.</strong> Include the correct country calling code and check every digit. The generated wa.me link uses the number in international format.</li>
+              <li><strong>Add an optional opening message.</strong> For example, “Hello, I have a question about your services.” Customers can edit it and decide whether to send.</li>
+              <li><strong>Generate and download the QR code.</strong> Place it on a menu, flyer, receipt or business card with a clear label such as “Scan to chat on WhatsApp.”</li>
+              <li><strong>Test the finished code on a phone.</strong> Confirm that the intended chat opens and that any pre-filled message is correct. Test again after changing colors or adding a logo.</li>
+            </ol>
+            <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+              <strong>Before printing:</strong> Scanning does not automatically send a message. The customer must choose to send it. A static QR code keeps the original phone number, so generate a replacement if your WhatsApp number changes.
+            </p>
+          </section>
+        )}
+
         {/* Tool FAQs */}
         <div className="pt-8 border-t border-slate-200">
           <h2 className="text-2xl font-bold text-slate-900 tracking-tight mb-8">
