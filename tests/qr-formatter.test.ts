@@ -98,6 +98,8 @@ test('vCard escapes commas, semicolons, backslashes and newlines in contact fiel
   });
   assert.ok(result.includes('N:Smith\\;Jones;Alex\\, Jr.;;;'));
   assert.ok(result.includes('FN:Alex\\, Jr. Smith\\;Jones'));
+  assert.ok(result.startsWith('BEGIN:VCARD\nVERSION:3.0\n'));
+  assert.ok(result.endsWith('\nEND:VCARD'));
   assert.ok(result.includes('ORG:Example\\\\Studio\\, Inc.\\; West'));
   assert.ok(result.includes('ADR;TYPE=WORK:;;42 Main St\\; Suite 2;New York;;;'));
   assert.ok(result.includes('NOTE:Line one\\nLine two\\nLine three'));
