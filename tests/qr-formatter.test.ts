@@ -85,3 +85,23 @@ test('clearing each QR type returns an empty preview payload', () => {
     assert.equal(formatPayload(type, input), '', `Unexpected content for cleared ${type}`);
   }
 });
+
+test('vCard escapes commas, semicolons, backslashes and newlines in contact fields', () => {
+  const result = formatVCard({
+    ...blankVCard,
+    firstName: 'Alex, Jr.',
+    lastName: 'Smith;Jones',
+    company: String.raw`Example\Studio, Inc.; West`,
+    street: '42 Main St; Suite 2',
+    city: 'New York',
+    notes: 'Line one\r\nLine two\nLine three'
+  });
+  assert.ok(result.includes('N:Smith\\;Jones;Alex\\, Jr.;;;'));
+  assert.ok(result.includes('FN:Alex\\, Jr. Smith\\;Jones'));
+  assert.ok(result.startsWith('BEGIN:VCARD\nVERSION:3.0\n'));
+  assert.ok(result.endsWith('\nEND:VCARD'));
+  assert.ok(result.includes('ORG:Example\\\\Studio\\, Inc.\\; West'));
+  assert.ok(result.includes('ADR;TYPE=WORK:;;42 Main St\\; Suite 2;New York;;;'));
+  assert.ok(result.includes('NOTE:Line one\\nLine two\\nLine three'));
+  assert.equal(result.split('\n').filter(line => line.startsWith('NOTE:')).length, 1);
+});
