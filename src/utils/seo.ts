@@ -179,7 +179,7 @@ export const SEO_METADATA: Record<PageId, Record<Language, PageMeta>> = {
   },
   business: {
     en: {
-      title: "Business Card QR Code Generator – Free vCard | QR GENIUS",
+      title: "Free Business Card QR Code Generator | QR Genius",
       description: "Make a free business card QR code with a vCard. Add your name, company, phone and email so people can scan and save your contact details.",
       keywords: "vcard qr code, digital business card qr, contact qr generator, save contact qr",
       canonicalPath: "/tools/business-vcard",
