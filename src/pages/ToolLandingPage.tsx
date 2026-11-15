@@ -415,6 +415,24 @@ export const ToolLandingPage: React.FC<ToolLandingPageProps> = ({
           </div>
         </div>
 
+        {/* Practical, tool-specific guidance for English business card visitors. */}
+        {lang === 'en' && tool === 'business' && (
+          <section className="pt-8 border-t border-slate-200" aria-labelledby="business-card-print-guide">
+            <h2 id="business-card-print-guide" className="text-2xl font-bold text-slate-900 tracking-tight mb-4">
+              How to put a QR code on your business card
+            </h2>
+            <ol className="list-decimal pl-6 space-y-3 text-sm text-slate-700 leading-relaxed">
+              <li><strong>Enter your professional contact details.</strong> Include the name, company, phone number and email you want others to save. Leave private fields blank.</li>
+              <li><strong>Generate and download your vCard QR code.</strong> A vCard stores the contact details inside the code rather than linking to an editable profile.</li>
+              <li><strong>Place the code on your card design.</strong> Start with a QR image about 2.5–3 cm wide, keep a clear margin around it and add the label “Scan to save contact.” More contact fields may require a larger code.</li>
+              <li><strong>Test a printed proof.</strong> Scan with at least two phones if possible, open the contact preview and check the saved name, phone, company and email before printing a batch.</li>
+            </ol>
+            <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+              Need to update your details after printing? A static vCard cannot be edited. For a changeable destination, consider a <a className="text-indigo-700 underline underline-offset-2" href="/tools/url">website URL QR code</a> that points to a contact page you control.
+            </p>
+          </section>
+        )}
+
         {/* Tool FAQs */}
         <div className="pt-8 border-t border-slate-200">
           <h2 className="text-2xl font-bold text-slate-900 tracking-tight mb-8">
