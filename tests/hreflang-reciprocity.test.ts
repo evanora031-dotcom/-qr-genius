@@ -16,10 +16,6 @@ function builtFile(path: string, lang: typeof languages[number]) {
   return 'dist/' + (route.endsWith('/') ? route.slice(1) + 'index.html' : route.slice(1) + '.html');
 }
 
-function escapeRegex(value: string) {
-  return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-}
-
 function headLinks(html: string, relation: string) {
   const head = html.split('</head>')[0];
   return [...head.matchAll(/<link\b[^>]*>/g)]
