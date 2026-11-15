@@ -45,7 +45,7 @@ const fallbackStyles = `<style>
 const template = rawTemplate.replace('</head>', '<script>document.documentElement.classList.add("js-enabled");</script>' + fallbackStyles + '\n</head>');
 
 const locales = ['en', 'ar', 'fr', 'es'] as const;
-const pages = ['home', 'generator', 'image-compressor', 'images-to-pdf', 'pdf-merge', 'url', 'wifi', 'whatsapp', 'business', 'about', 'contact', 'privacy', 'terms', 'faq'] as const;
+const pages = ['home', 'generator', 'image-resizer', 'image-compressor', 'images-to-pdf', 'pdf-merge', 'url', 'wifi', 'whatsapp', 'business', 'about', 'contact', 'privacy', 'terms', 'faq'] as const;
 const baseUrl = 'https://getqrgenius.com';
 
 function escapeHtml(value: string): string {
@@ -139,7 +139,7 @@ function renderStaticContent(locale: typeof locales[number], page: typeof pages[
     return '<li><a href="' + escapeHtml(href) + '">' + escapeHtml(toolMeta.h1) + '</a></li>';
   }).join('');
   // Expose PDF and image tools in the prerendered HTML, not only after React hydration.
-  const fileToolPages = ['image-compressor', 'images-to-pdf', 'pdf-merge'] as const;
+  const fileToolPages = ['image-resizer', 'image-compressor', 'images-to-pdf', 'pdf-merge'] as const;
   const fileToolLinks = fileToolPages.map((tool) => {
     const toolMeta = SEO_METADATA[tool][locale];
     return '<li><a href="' + escapeHtml(localizedPath(toolMeta.canonicalPath, locale)) + '">' + escapeHtml(toolMeta.h1) + '</a></li>';
@@ -151,21 +151,25 @@ function renderStaticContent(locale: typeof locales[number], page: typeof pages[
     en: {
       'pdf-merge': { heading: "How to merge PDF files", steps: ["Select 2–10 unlocked PDF files in the order you want their pages to appear.","Each file can be up to 20 MB, with a 60 MB combined limit. Merge and check the downloaded document.","This tool combines pages without editing text or guaranteeing a smaller file."] },
       'images-to-pdf': { heading: "How to convert images to PDF", steps: ["Select up to 10 JPEG or PNG images in the order you want them.","Check image clarity and orientation before creating the PDF. Each image is placed on its own A4 page.","The PDF contains images, not searchable text; this tool does not perform OCR."] },
+      'image-resizer': { heading: 'How to resize an image', steps: ['Choose a JPEG, PNG or WebP under 20 MB.', 'Enter exact pixel dimensions; keep proportions to avoid stretching.', 'Choose PNG, JPEG or WebP and download. JPEG replaces transparency with white.'] },
       'image-compressor': { heading: "How to compress an image", steps: ["Select a JPEG, PNG, or WebP image smaller than 20 MB; choose WebP or JPEG output.","Adjust quality and maximum dimensions. JPEG output replaces transparency with white.","Compare original and output sizes: re-encoding does not always produce a smaller file."] },
     },
     ar: {
       'pdf-merge': { heading: "كيفية دمج ملفات PDF", steps: ["اختر من ملفين إلى 10 ملفات PDF غير محمية، بالترتيب الذي تريد ظهور صفحاتها به.","الحد الأقصى 20 ميغابايت لكل ملف و60 ميغابايت للمجموع. راجع المستند بعد تنزيله.","تجمع الأداة الصفحات دون تحرير النصوص أو ضمان تقليل حجم الملف."] },
       'images-to-pdf': { heading: "كيفية تحويل الصور إلى PDF", steps: ["اختر حتى 10 صور JPEG أو PNG بالترتيب المطلوب.","تحقق من وضوح الصور واتجاهها قبل التحويل. توضع كل صورة في صفحة A4 مستقلة.","يحتوي PDF الناتج على صور وليس نصاً قابلاً للبحث؛ لا تتوفر ميزة OCR."] },
+      'image-resizer': { heading: 'كيفية تغيير حجم صورة', steps: ['اختر صورة JPEG أو PNG أو WebP أصغر من 20 ميغابايت.', 'حدد الأبعاد بالبكسل وحافظ على التناسب لتجنب التشويه.', 'اختر PNG أو JPEG أو WebP ونزّل النتيجة. تصبح الشفافية بيضاء في JPEG.'] },
       'image-compressor': { heading: "كيفية ضغط صورة", steps: ["اختر صورة JPEG أو PNG أو WebP أصغر من 20 ميغابايت، وحدد WebP أو JPEG للناتج.","اضبط الجودة والأبعاد القصوى. تستبدل صيغة JPEG المناطق الشفافة باللون الأبيض.","قارن الحجم الأصلي بالناتج، فقد لا تؤدي إعادة الترميز دائماً إلى ملف أصغر."] },
     },
     fr: {
       'pdf-merge': { heading: "Comment fusionner des PDF", steps: ["Sélectionnez 2 à 10 PDF non protégés dans l’ordre souhaité des pages.","Chaque fichier peut atteindre 20 Mo, avec une limite totale de 60 Mo. Vérifiez le document téléchargé.","L’outil assemble les pages sans modifier le texte ni garantir un fichier plus léger."] },
       'images-to-pdf': { heading: "Comment convertir des images en PDF", steps: ["Choisissez jusqu’à 10 images JPEG ou PNG dans le bon ordre.","Vérifiez leur netteté et leur orientation. Chaque image occupe une page A4 distincte.","Le PDF contient des images, pas du texte recherchable ; cet outil ne fait pas de reconnaissance OCR."] },
+      'image-resizer': { heading: 'Comment redimensionner une image', steps: ['Choisissez une image JPEG, PNG ou WebP de moins de 20 Mo.', 'Définissez les dimensions en pixels et conservez les proportions.', 'Téléchargez en PNG, JPEG ou WebP. JPEG remplace la transparence par du blanc.'] },
       'image-compressor': { heading: "Comment compresser une image", steps: ["Choisissez une image JPEG, PNG ou WebP de moins de 20 Mo, puis une sortie WebP ou JPEG.","Réglez la qualité et les dimensions maximales. Le JPEG remplace la transparence par du blanc.","Comparez les tailles : le réencodage ne réduit pas toujours le fichier."] },
     },
     es: {
       'pdf-merge': { heading: "Cómo unir archivos PDF", steps: ["Selecciona entre 2 y 10 PDF sin contraseña en el orden deseado.","Cada archivo admite hasta 20 MB, con un límite total de 60 MB. Revisa el documento descargado.","La herramienta reúne páginas sin editar el texto ni garantizar un archivo más pequeño."] },
       'images-to-pdf': { heading: "Cómo convertir imágenes a PDF", steps: ["Selecciona hasta 10 imágenes JPEG o PNG en el orden deseado.","Comprueba su nitidez y orientación. Cada imagen ocupa una página A4 independiente.","El PDF contiene imágenes, no texto que se pueda buscar; esta herramienta no realiza OCR."] },
+      'image-resizer': { heading: 'Cómo cambiar el tamaño de una imagen', steps: ['Selecciona una imagen JPEG, PNG o WebP de menos de 20 MB.', 'Introduce las dimensiones en píxeles y mantén las proporciones.', 'Descarga PNG, JPEG o WebP. JPEG reemplaza la transparencia por blanco.'] },
       'image-compressor': { heading: "Cómo comprimir una imagen", steps: ["Selecciona una imagen JPEG, PNG o WebP de menos de 20 MB y elige WebP o JPEG como salida.","Ajusta la calidad y las dimensiones máximas. JPEG sustituye la transparencia por blanco.","Compara los tamaños: recodificar no siempre produce un archivo más pequeño."] },
     },
   };

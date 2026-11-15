@@ -51,6 +51,12 @@ export const SEO_METADATA: Record<PageId, Record<Language, PageMeta>> = {
     fr: { title: 'Convertir des images en PDF | QR Genius', description: 'Convertissez des images JPEG et PNG en PDF A4 directement dans votre navigateur.', keywords: 'image en pdf, jpg en pdf', canonicalPath: '/tools/images-to-pdf', h1: 'Convertir des images en PDF gratuitement' },
     es: { title: 'Convertir imágenes a PDF gratis | QR Genius', description: 'Convierte imágenes JPEG y PNG a PDF A4 en tu navegador sin subir archivos.', keywords: 'imágenes a pdf, jpg a pdf', canonicalPath: '/tools/images-to-pdf', h1: 'Convertir imágenes a PDF gratis' }
   },
+  'image-resizer': {
+    en: { title: 'Resize Images Online Free | QR Genius', description: 'Resize JPEG, PNG and WebP images to exact pixel dimensions in your browser without uploading files.', keywords: 'resize image online, image resizer free', canonicalPath: '/tools/image-resizer', h1: 'Resize Images Online Free' },
+    ar: { title: 'تغيير حجم الصور مجاناً | QR Genius', description: 'غيّر أبعاد صور JPEG وPNG وWebP بالبكسل داخل متصفحك دون رفع الصور.', keywords: 'تغيير حجم الصور, تعديل أبعاد الصور', canonicalPath: '/tools/image-resizer', h1: 'تغيير حجم الصور مجاناً' },
+    fr: { title: 'Redimensionner une image gratuitement | QR Genius', description: 'Modifiez les dimensions de vos images JPEG, PNG et WebP directement dans votre navigateur.', keywords: 'redimensionner image, changer taille photo', canonicalPath: '/tools/image-resizer', h1: 'Redimensionner une image gratuitement' },
+    es: { title: 'Cambiar el tamaño de imágenes gratis | QR Genius', description: 'Cambia las dimensiones de imágenes JPEG, PNG y WebP directamente en tu navegador.', keywords: 'cambiar tamaño imagen, redimensionar foto', canonicalPath: '/tools/image-resizer', h1: 'Cambiar el tamaño de imágenes gratis' }
+  },
   'image-compressor': {
     en: { title: 'Free Image Compressor Online | QR Genius', description: 'Compress JPEG, PNG and WebP images privately in your browser. Resize and download WebP or JPEG without uploading files.', keywords: 'free image compressor, compress images online, webp compressor', canonicalPath: '/tools/image-compressor', h1: 'Free Online Image Compressor' },
     ar: { title: 'ضغط الصور مجاناً عبر الإنترنت | QR Genius', description: 'اضغط صور JPEG وPNG وWebP داخل متصفحك دون رفعها إلى خادم. نزّل النتيجة بصيغة WebP أو JPEG.', keywords: 'ضغط الصور, تصغير حجم الصور, ضغط webp', canonicalPath: '/tools/image-compressor', h1: 'أداة ضغط الصور مجاناً' },
@@ -486,7 +492,7 @@ export function updateDocumentSEO(pageId: PageId, lang: Language) {
 
 export function generateSitemapXML(): string {
   const baseUrl = 'https://getqrgenius.com';
-  const pages: PageId[] = ['home', 'generator', 'image-compressor', 'images-to-pdf', 'url', 'wifi', 'whatsapp', 'business', 'about', 'contact', 'privacy', 'terms', 'faq'];
+  const pages: PageId[] = ['home', 'generator', 'image-resizer', 'image-compressor', 'images-to-pdf', 'url', 'wifi', 'whatsapp', 'business', 'about', 'contact', 'privacy', 'terms', 'faq'];
   let xml = `<?xml version="1.0" encoding="UTF-8"?>\n`;
   xml += `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n`;
 

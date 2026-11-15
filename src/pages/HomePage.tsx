@@ -270,6 +270,7 @@ export const HomePage: React.FC<HomePageProps> = ({ lang, onNavigate }) => {
             <h3 className="text-base font-bold text-slate-900 mb-4">{({ en: 'PDF & image tools', ar: 'أدوات PDF والصور', fr: 'Outils PDF et images', es: 'Herramientas PDF e imágenes' } as Record<Language, string>)[lang]}</h3>
             <div className="flex flex-wrap gap-3">
               {([
+                { page: 'image-resizer', path: 'image-resizer', icon: ImageDown, label: { en: 'Resize images', ar: 'تغيير حجم الصور', fr: 'Redimensionner les images', es: 'Cambiar tamaño de imágenes' } },
                 { page: 'image-compressor', path: 'image-compressor', icon: ImageDown, label: { en: 'Compress images', ar: 'ضغط الصور', fr: 'Compresser les images', es: 'Comprimir imágenes' } },
                 { page: 'images-to-pdf', path: 'images-to-pdf', icon: FileImage, label: { en: 'Images to PDF', ar: 'الصور إلى PDF', fr: 'Images en PDF', es: 'Imágenes a PDF' } },
                 { page: 'pdf-merge', path: 'merge-pdf', icon: Files, label: { en: 'Merge PDF', ar: 'دمج PDF', fr: 'Fusionner PDF', es: 'Unir PDF' } }

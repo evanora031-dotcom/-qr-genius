@@ -17,6 +17,7 @@ import { RobotsView } from './pages/RobotsView';
 
 const PdfMerge = lazy(() => import('./pages/PdfMerge').then(module => ({ default: module.PdfMerge })));
 const ImagesToPdf = lazy(() => import('./pages/ImagesToPdf').then(module => ({ default: module.ImagesToPdf })));
+const ImageResizer = lazy(() => import('./pages/ImageResizer').then(module => ({ default: module.ImageResizer })));
 const ImageCompressor = lazy(() => import('./pages/ImageCompressor').then(module => ({ default: module.ImageCompressor })));
 const GeneratorPage = lazy(() => import('./pages/GeneratorPage').then(module => ({ default: module.GeneratorPage })));
 const ToolLandingPage = lazy(() => import('./pages/ToolLandingPage').then(module => ({ default: module.ToolLandingPage })));
@@ -24,6 +25,7 @@ const ToolLandingPage = lazy(() => import('./pages/ToolLandingPage').then(module
 const ROUTES: Record<string, PageId> = {
   '/': 'home',
   '/generator': 'generator',
+  '/tools/image-resizer': 'image-resizer',
   '/tools/image-compressor': 'image-compressor',
   '/tools/images-to-pdf': 'images-to-pdf',
   '/tools/merge-pdf': 'pdf-merge',
@@ -62,7 +64,7 @@ function getRouteFromLocation(): { page: PageId; lang: Language } {
   // Keep old hash links working while moving to crawlable localized paths.
   const hash = window.location.hash.replace(/^#\/?/, '').toLowerCase() as PageId;
   const validPages: PageId[] = [
-    'home', 'generator', 'image-compressor', 'images-to-pdf', 'pdf-merge', 'url', 'wifi', 'whatsapp', 'business',
+    'home', 'generator', 'image-resizer', 'image-compressor', 'images-to-pdf', 'pdf-merge', 'url', 'wifi', 'whatsapp', 'business',
     'about', 'contact', 'privacy', 'terms', 'faq', 'sitemap', 'robots'
   ];
   return { page: validPages.includes(hash) ? hash : 'home', lang };
@@ -147,8 +149,9 @@ export default function App() {
         historyCount={historyItems.length}
       />
       <main className="flex-1">
-        <Suspense fallback={<div role="status" className={`mx-auto max-w-5xl px-6 py-16 text-sm text-slate-600 ${['generator', 'url', 'wifi', 'whatsapp', 'business'].includes(currentPage) ? 'min-h-[100svh]' : ['image-compressor', 'images-to-pdf', 'pdf-merge'].includes(currentPage) ? 'min-h-[650px]' : ''}` }>{lang === 'ar' ? 'جارٍ تحميل الأداة…' : lang === 'fr' ? 'Chargement de l’outil…' : lang === 'es' ? 'Cargando herramienta…' : 'Loading tool…'}</div>}>
+        <Suspense fallback={<div role="status" className={`mx-auto max-w-5xl px-6 py-16 text-sm text-slate-600 ${['generator', 'url', 'wifi', 'whatsapp', 'business'].includes(currentPage) ? 'min-h-[100svh]' : ['image-resizer', 'image-compressor', 'images-to-pdf', 'pdf-merge'].includes(currentPage) ? 'min-h-[650px]' : ''}` }>{lang === 'ar' ? 'جارٍ تحميل الأداة…' : lang === 'fr' ? 'Chargement de l’outil…' : lang === 'es' ? 'Cargando herramienta…' : 'Loading tool…'}</div>}>
         {currentPage === 'home' && <HomePage lang={lang} onNavigate={handleNavigate} />}
+        {currentPage === 'image-resizer' && <ImageResizer lang={lang} />}
         {currentPage === 'image-compressor' && <ImageCompressor lang={lang} />}
         {currentPage === 'images-to-pdf' && <ImagesToPdf lang={lang} />}
         {currentPage === 'pdf-merge' && <PdfMerge lang={lang} />}
