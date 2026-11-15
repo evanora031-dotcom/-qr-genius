@@ -3,7 +3,7 @@ import { chromium } from 'playwright';
 const base = process.env.PREVIEW_URL || 'http://127.0.0.1:4173';
 const browser = await chromium.launch({ headless: true });
 try {
-  const page = await browser.newPage({ acceptDownloads: true });
+  const page = await browser.newPage({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true, acceptDownloads: true });
   page.on('pageerror', error => console.error('PAGE ERROR', error.message));
   for (const [path, heading] of [
     ['/tools/images-to-pdf', 'Convert Images to PDF Free'],
