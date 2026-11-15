@@ -433,6 +433,24 @@ export const ToolLandingPage: React.FC<ToolLandingPageProps> = ({
           </section>
         )}
 
+        {/* Practical English Wi-Fi QR instructions, including guest-network safety. */}
+        {lang === 'en' && tool === 'wifi' && (
+          <section className="pt-8 border-t border-slate-200" aria-labelledby="wifi-guest-setup-guide">
+            <h2 id="wifi-guest-setup-guide" className="text-2xl font-bold text-slate-900 tracking-tight mb-4">
+              How to make a Wi-Fi QR code for guests
+            </h2>
+            <ol className="list-decimal pl-6 space-y-3 text-sm text-slate-700 leading-relaxed">
+              <li><strong>Choose the network to share.</strong> For a café, office or rental, use a separate guest Wi-Fi network when your router supports one.</li>
+              <li><strong>Enter the exact Wi-Fi details.</strong> Type the network name (SSID), select the matching security type and add its current password. Capital letters and spaces matter.</li>
+              <li><strong>Generate and download the code.</strong> Put the QR image on a guest sign, welcome card or reception desk with a clear “Scan to join Wi-Fi” label.</li>
+              <li><strong>Test with a guest phone.</strong> Scan near the network, confirm the displayed network name and try connecting. Some devices or camera apps require manual entry instead.</li>
+            </ol>
+            <p className="text-sm text-slate-600 mt-4 leading-relaxed">
+              <strong>Privacy reminder:</strong> A printed Wi-Fi QR code contains the credentials you entered. Anyone who scans it may be able to read or use them. If you change the password, create and replace the static QR code.
+            </p>
+          </section>
+        )}
+
         {/* Tool FAQs */}
         <div className="pt-8 border-t border-slate-200">
           <h2 className="text-2xl font-bold text-slate-900 tracking-tight mb-8">
