@@ -63,7 +63,7 @@ export const HomePage: React.FC<HomePageProps> = ({ lang, onNavigate }) => {
               <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 tracking-tight leading-[1.18] text-balance">
                 {lang === 'ar' ? 'أنشئ. امسح. تواصل.' : lang === 'fr' ? 'Créer. Scanner. Connecter.' : lang === 'es' ? 'Crear. Escanear. Conectar.' : 'Create. Scan. Connect.'}
                 <span className="block text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 via-purple-600 to-indigo-800">
-                  {lang === 'ar' ? 'مولّد رموز QR مجاني وعصري' : lang === 'fr' ? 'Le générateur QR moderne et gratuit' : lang === 'es' ? 'El generador QR moderno y gratuito' : 'Free QR Codes for Everyday Use'}
+                  {lang === 'ar' ? 'مولّد رموز QR مجاني وعصري' : lang === 'fr' ? 'Le générateur QR moderne et gratuit' : lang === 'es' ? 'El generador QR moderno y gratuito' : 'Free QR Code Generator Online'}
                 </span>
               </h1>
 
