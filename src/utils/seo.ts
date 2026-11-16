@@ -95,8 +95,8 @@ export const SEO_METADATA: Record<PageId, Record<Language, PageMeta>> = {
   },
   url: {
     en: {
-      title: "QR Code for Website – Free URL QR Generator | QR Genius",
-      description: "Create a QR code for your website free. Turn a link into a static QR code, customize its colors or logo, and download PNG or SVG with QR Genius.",
+      title: "URL to QR Code Generator Free | QR Genius",
+      description: "Turn any website link into a free static QR code. Paste your URL, customize the colors or logo, and download PNG or SVG. No sign-up needed.",
       keywords: "qr code for website, turn link into qr code, create qr code for website, url to qr code",
       canonicalPath: "/tools/url",
       h1: "URL to QR Code Generator for Website Links"
