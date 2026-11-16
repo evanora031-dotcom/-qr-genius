@@ -2,6 +2,9 @@ import React from 'react';
 import { Language } from '../types';
 import { translations } from '../i18n/translations';
 
+// Keep the ad integration point, but do not show an empty sponsor box before ads launch.
+const ADS_ENABLED = false;
+
 interface AdPlacementProps {
   lang: Language;
   format?: 'horizontal-leaderboard' | 'rectangle-box' | 'in-feed';
@@ -13,6 +16,8 @@ export const AdPlacement: React.FC<AdPlacementProps> = ({
   format = 'horizontal-leaderboard',
   className = ''
 }) => {
+  if (!ADS_ENABLED) return null;
+
   const t = translations[lang];
   const previewLabel = lang === 'ar'
     ? 'مساحة تجريبية — الإعلانات غير مفعّلة'
