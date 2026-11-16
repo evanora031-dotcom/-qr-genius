@@ -23,7 +23,7 @@ test('tracked sitemap exactly matches the sitemap published by the build', () =>
   const canonicalUrls = [...generated.matchAll(/<loc>([^<]+)<\/loc>/g)].map(match => match[1]);
   assert.equal(canonicalUrls.length, pages.length * languages.length + 8);
   assert.equal(new Set(canonicalUrls).size, canonicalUrls.length, 'Sitemap contains duplicate canonical URLs');
-  for (const blogPath of ['/en/blog/', '/en/blog/how-to-make-wifi-qr-code-for-guests.html', '/en/blog/how-to-create-whatsapp-qr-code-for-customers', '/en/blog/how-to-make-business-card-qr-code']) {
+  for (const blogPath of ['/en/blog/', '/en/blog/how-to-make-wifi-qr-code-for-guests', '/en/blog/how-to-create-whatsapp-qr-code-for-customers', '/en/blog/how-to-make-business-card-qr-code']) {
     assert.ok(canonicalUrls.includes('https://getqrgenius.com' + blogPath), `Missing English blog URL ${blogPath}`);
   }
   for (const page of pages) {
@@ -109,8 +109,8 @@ test('English blog index and first guide are built with matching canonical links
   const article = read('../dist/en/blog/how-to-make-wifi-qr-code-for-guests.html');
   assert.match(index, /<html lang="en">/);
   assert.ok(index.includes('rel="canonical" href="https://getqrgenius.com/en/blog/"'));
-  assert.ok(index.includes('href="/en/blog/how-to-make-wifi-qr-code-for-guests.html"'));
-  assert.ok(article.includes('rel="canonical" href="https://getqrgenius.com/en/blog/how-to-make-wifi-qr-code-for-guests.html"'));
+  assert.ok(index.includes('href="/en/blog/how-to-make-wifi-qr-code-for-guests"'));
+  assert.ok(article.includes('rel="canonical" href="https://getqrgenius.com/en/blog/how-to-make-wifi-qr-code-for-guests"'));
   assert.ok(article.includes('href="/tools/wifi"'));
   const whatsapp = read('../dist/en/blog/how-to-create-whatsapp-qr-code-for-customers.html');
   assert.ok(index.includes('href="/en/blog/how-to-create-whatsapp-qr-code-for-customers"'));
@@ -125,7 +125,7 @@ test('English blog index and first guide are built with matching canonical links
 
 test('English specialized tool pages link to their matching published blog guides', () => {
   const guidePaths = {
-    wifi: '/en/blog/how-to-make-wifi-qr-code-for-guests.html',
+    wifi: '/en/blog/how-to-make-wifi-qr-code-for-guests',
     whatsapp: '/en/blog/how-to-create-whatsapp-qr-code-for-customers',
     business: '/en/blog/how-to-make-business-card-qr-code'
   } as const;
@@ -134,7 +134,7 @@ test('English specialized tool pages link to their matching published blog guide
       tool: tool as keyof typeof guidePaths, lang: 'en', onNavigate: () => {}, onHistoryUpdated: () => {}
     }));
     assert.ok(html.includes('href="' + href + '"'), 'Missing English guide link on ' + tool);
-    const builtFile = '../dist' + href + (tool === 'business' || tool === 'whatsapp' ? '.html' : '');
+    const builtFile = '../dist' + href + '.html';
     assert.ok(read(builtFile).includes('rel="canonical" href="https://getqrgenius.com' + href + '"'));
   }
 });
@@ -143,7 +143,7 @@ test('English specialized tool pages link to their matching published blog guide
 test('English blog articles expose valid Article JSON-LD and social previews', () => {
   const slugs = ['how-to-make-wifi-qr-code-for-guests', 'how-to-create-whatsapp-qr-code-for-customers', 'how-to-make-business-card-qr-code'];
   for (const slug of slugs) {
-    const canonical = 'https://getqrgenius.com/en/blog/' + slug + ((slug === 'how-to-make-business-card-qr-code' || slug === 'how-to-create-whatsapp-qr-code-for-customers') ? '' : '.html');
+    const canonical = 'https://getqrgenius.com/en/blog/' + slug;
     const html = read('../dist/en/blog/' + slug + '.html');
     assert.ok(html.includes('property="og:type" content="article"'));
     assert.ok(html.includes('property="og:url" content="' + canonical + '"'));
@@ -186,7 +186,7 @@ test('footer blog navigation respects available content languages', () => {
 
 test('prerendered English and Arabic tool HTML links to its published guide', () => {
   const guideSlugs = {
-    en: { wifi: '/en/blog/how-to-make-wifi-qr-code-for-guests.html', whatsapp: '/en/blog/how-to-create-whatsapp-qr-code-for-customers', business: '/en/blog/how-to-make-business-card-qr-code' },
+    en: { wifi: '/en/blog/how-to-make-wifi-qr-code-for-guests', whatsapp: '/en/blog/how-to-create-whatsapp-qr-code-for-customers', business: '/en/blog/how-to-make-business-card-qr-code' },
     ar: { wifi: '/blog/wifi-qr-code-for-guests', whatsapp: '/blog/whatsapp-qr-code-for-customers', business: '/blog/business-card-qr-code-guide' }
   } as const;
   const routeSlugs = { wifi: 'wifi', whatsapp: 'whatsapp', business: 'business-vcard' } as const;
@@ -196,7 +196,7 @@ test('prerendered English and Arabic tool HTML links to its published guide', ()
       const html = read('../dist/' + route);
       const href = guideSlugs[lang][tool];
       assert.ok(html.includes('href="' + href + '"'), 'Missing prerendered guide link: ' + route);
-      const guideFile = '../dist' + href + (lang === 'ar' || (lang === 'en' && (tool === 'business' || tool === 'whatsapp')) ? '.html' : '');
+      const guideFile = '../dist' + href + '.html';
       const articleCanonicalPath = href;
       assert.ok(read(guideFile).includes('rel="canonical" href="https://getqrgenius.com' + articleCanonicalPath + '"'));
     }
