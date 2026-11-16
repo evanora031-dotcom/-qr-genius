@@ -23,7 +23,7 @@ test('tracked sitemap exactly matches the sitemap published by the build', () =>
   const canonicalUrls = [...generated.matchAll(/<loc>([^<]+)<\/loc>/g)].map(match => match[1]);
   assert.equal(canonicalUrls.length, pages.length * languages.length + 8);
   assert.equal(new Set(canonicalUrls).size, canonicalUrls.length, 'Sitemap contains duplicate canonical URLs');
-  for (const blogPath of ['/en/blog/', '/en/blog/how-to-make-wifi-qr-code-for-guests.html', '/en/blog/how-to-create-whatsapp-qr-code-for-customers', '/en/blog/how-to-make-business-card-qr-code']) {
+  for (const blogPath of ['/en/blog/', '/en/blog/how-to-make-wifi-qr-code-for-guests', '/en/blog/how-to-create-whatsapp-qr-code-for-customers', '/en/blog/how-to-make-business-card-qr-code']) {
     assert.ok(canonicalUrls.includes('https://getqrgenius.com' + blogPath), `Missing English blog URL ${blogPath}`);
   }
   for (const page of pages) {
@@ -106,11 +106,11 @@ test('blog index and all three Arabic articles are discoverable and canonical', 
 
 test('English blog index and first guide are built with matching canonical links', () => {
   const index = read('../dist/en/blog/index.html');
-  const article = read('../dist/en/blog/how-to-make-wifi-qr-code-for-guests.html');
+  const article = read('../dist/en/blog/how-to-make-wifi-qr-code-for-guests');
   assert.match(index, /<html lang="en">/);
   assert.ok(index.includes('rel="canonical" href="https://getqrgenius.com/en/blog/"'));
-  assert.ok(index.includes('href="/en/blog/how-to-make-wifi-qr-code-for-guests.html"'));
-  assert.ok(article.includes('rel="canonical" href="https://getqrgenius.com/en/blog/how-to-make-wifi-qr-code-for-guests.html"'));
+  assert.ok(index.includes('href="/en/blog/how-to-make-wifi-qr-code-for-guests"'));
+  assert.ok(article.includes('rel="canonical" href="https://getqrgenius.com/en/blog/how-to-make-wifi-qr-code-for-guests"'));
   assert.ok(article.includes('href="/tools/wifi"'));
   const whatsapp = read('../dist/en/blog/how-to-create-whatsapp-qr-code-for-customers.html');
   assert.ok(index.includes('href="/en/blog/how-to-create-whatsapp-qr-code-for-customers"'));
@@ -125,7 +125,7 @@ test('English blog index and first guide are built with matching canonical links
 
 test('English specialized tool pages link to their matching published blog guides', () => {
   const guidePaths = {
-    wifi: '/en/blog/how-to-make-wifi-qr-code-for-guests.html',
+    wifi: '/en/blog/how-to-make-wifi-qr-code-for-guests',
     whatsapp: '/en/blog/how-to-create-whatsapp-qr-code-for-customers',
     business: '/en/blog/how-to-make-business-card-qr-code'
   } as const;
@@ -186,7 +186,7 @@ test('footer blog navigation respects available content languages', () => {
 
 test('prerendered English and Arabic tool HTML links to its published guide', () => {
   const guideSlugs = {
-    en: { wifi: '/en/blog/how-to-make-wifi-qr-code-for-guests.html', whatsapp: '/en/blog/how-to-create-whatsapp-qr-code-for-customers', business: '/en/blog/how-to-make-business-card-qr-code' },
+    en: { wifi: '/en/blog/how-to-make-wifi-qr-code-for-guests', whatsapp: '/en/blog/how-to-create-whatsapp-qr-code-for-customers', business: '/en/blog/how-to-make-business-card-qr-code' },
     ar: { wifi: '/blog/wifi-qr-code-for-guests', whatsapp: '/blog/whatsapp-qr-code-for-customers', business: '/blog/business-card-qr-code-guide' }
   } as const;
   const routeSlugs = { wifi: 'wifi', whatsapp: 'whatsapp', business: 'business-vcard' } as const;
