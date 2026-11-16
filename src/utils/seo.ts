@@ -368,28 +368,28 @@ export const SEO_METADATA: Record<PageId, Record<Language, PageMeta>> = {
       title: "XML Sitemap & URL Architecture | QR GENIUS",
       description: "Indexable XML sitemap directory for search engines and crawlers covering all multilingual QR tools and resource pages.",
       keywords: "qr genius sitemap, xml sitemap, indexable pages",
-      canonicalPath: "/sitemap.xml",
+      canonicalPath: "/sitemap",
       h1: "XML Sitemap & Site Directory"
     },
     ar: {
       title: "خريطة الموقع XML وهيكل الروابط | كيو آر جينيوس",
       description: "دليل خريطة الموقع XML لمحركات البحث وفهارس الأرشفة بجميع اللغات المدعومة.",
       keywords: "خريطة الموقع, sitemap xml",
-      canonicalPath: "/sitemap.xml",
+      canonicalPath: "/sitemap",
       h1: "خريطة الموقع XML"
     },
     fr: {
       title: "Plan de Site XML & Structure des Pages | QR GENIUS",
       description: "Index XML complet pour moteurs de recherche répertoriant tous nos outils et pages multilingues.",
       keywords: "plan de site xml, sitemap qr genius",
-      canonicalPath: "/sitemap.xml",
+      canonicalPath: "/sitemap",
       h1: "Plan de Site XML"
     },
     es: {
       title: "Mapa del Sitio XML y Arquitectura de Enlaces | QR GENIUS",
       description: "Directorio XML indexable para motores de búsqueda con todas las páginas y herramientas multilingües.",
       keywords: "mapa del sitio xml, sitemap qr",
-      canonicalPath: "/sitemap.xml",
+      canonicalPath: "/sitemap",
       h1: "Mapa del Sitio XML"
     }
   },
@@ -398,28 +398,28 @@ export const SEO_METADATA: Record<PageId, Record<Language, PageMeta>> = {
       title: "Robots.txt Directive & Crawl Guidelines | QR GENIUS",
       description: "Directives for search engine web crawlers, robots, and automated indexing bots.",
       keywords: "robots.txt, crawl directives, search indexing",
-      canonicalPath: "/robots.txt",
+      canonicalPath: "/robots",
       h1: "Robots.txt Crawl Directive"
     },
     ar: {
       title: "ملف Robots.txt وتوجيهات محركات البحث | كيو آر جينيوس",
       description: "توجيهات ملف robots.txt لمحركات البحث وعناكب الفهرسة.",
       keywords: "ملف robots txt, فهرسة محركات البحث",
-      canonicalPath: "/robots.txt",
+      canonicalPath: "/robots",
       h1: "توجيهات ملف Robots.txt"
     },
     fr: {
       title: "Fichier Robots.txt & Directives d'Indexation | QR GENIUS",
       description: "Directives d'indexation pour les moteurs de recherche et robots d'exploration.",
       keywords: "robots txt, directives indexation google",
-      canonicalPath: "/robots.txt",
+      canonicalPath: "/robots",
       h1: "Directives Robots.txt"
     },
     es: {
       title: "Directivas de Robots.txt y Rastreo | QR GENIUS",
       description: "Directivas de rastreo e indexación para robots y motores de búsqueda.",
       keywords: "robots txt, indexacion google",
-      canonicalPath: "/robots.txt",
+      canonicalPath: "/robots",
       h1: "Directivas de Robots.txt"
     }
   }
