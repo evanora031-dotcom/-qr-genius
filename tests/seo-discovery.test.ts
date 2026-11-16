@@ -106,7 +106,7 @@ test('blog index and all three Arabic articles are discoverable and canonical', 
 
 test('English blog index and first guide are built with matching canonical links', () => {
   const index = read('../dist/en/blog/index.html');
-  const article = read('../dist/en/blog/how-to-make-wifi-qr-code-for-guests');
+  const article = read('../dist/en/blog/how-to-make-wifi-qr-code-for-guests.html');
   assert.match(index, /<html lang="en">/);
   assert.ok(index.includes('rel="canonical" href="https://getqrgenius.com/en/blog/"'));
   assert.ok(index.includes('href="/en/blog/how-to-make-wifi-qr-code-for-guests"'));
