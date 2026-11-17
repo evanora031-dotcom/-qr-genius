@@ -38,6 +38,7 @@ jobs:
           done
           if [ "$ready" -ne 1 ]; then cat /tmp/preview.log; exit 1; fi
           npx lighthouse http://127.0.0.1:4173/tools/image-compressor --chrome-flags="--headless --no-sandbox --disable-dev-shm-usage" --output=json --output-path=/tmp/lighthouse-mobile.json --quiet
+          npx lighthouse http://127.0.0.1:4173/tools/image-compressor --chrome-flags="--headless --no-sandbox --disable-dev-shm-usage" --blocked-url-patterns="*fonts.googleapis.com*,*fonts.gstatic.com*" --output=json --output-path=/tmp/lighthouse-no-webfonts.json --quiet
           node --input-type=module -e '
             import fs from "node:fs";
             const report=JSON.parse(fs.readFileSync("/tmp/lighthouse-mobile.json","utf8"));
@@ -45,7 +46,8 @@ jobs:
             const cls=report.audits["cumulative-layout-shift"].numericValue;
             const lcp=report.audits["largest-contentful-paint"].numericValue;
             const tbt=report.audits["total-blocking-time"].numericValue;
-            console.log(JSON.stringify({score,cls,lcp_ms:lcp,tbt_ms:tbt},null,2));
+            const noFonts=JSON.parse(fs.readFileSync("/tmp/lighthouse-no-webfonts.json","utf8"));
+            console.log(JSON.stringify({score,cls,lcp_ms:lcp,tbt_ms:tbt,without_webfonts:{score:Math.round(noFonts.categories.performance.score*100),cls:noFonts.audits["cumulative-layout-shift"].numericValue}},null,2));
             if(score<90 || cls>=0.1) process.exitCode=1;
           '
       - name: Upload Lighthouse report
@@ -53,5 +55,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: image-compressor-mobile-lighthouse
-          path: /tmp/lighthouse-mobile.json
+          path: |
+            /tmp/lighthouse-mobile.json
+            /tmp/lighthouse-no-webfonts.json
           if-no-files-found: warn
