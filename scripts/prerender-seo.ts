@@ -208,6 +208,38 @@ function renderStaticContent(locale: typeof locales[number], page: typeof pages[
   const guideLink = guidePage && (locale === 'en' || locale === 'ar')
     ? '<p><a href="' + escapeHtml(guidePaths[locale][guidePage]) + '">' + escapeHtml(guideLabels[locale][guidePage]) + '</a></p>'
     : '';
+  // Keep these answers visible in the prerendered HTML; do not mark them up as
+  // FAQPage structured data until the same questions are verified in the live UI.
+  const compressorFaq: Record<typeof locales[number], { heading: string; items: { question: string; answer: string }[] }> = {
+    en: { heading: 'Image compression FAQs', items: [
+      { question: 'Will every image become smaller?', answer: 'No. Images that are already efficiently compressed can stay the same size or become larger after re-encoding.' },
+      { question: 'Does JPEG preserve transparent backgrounds?', answer: 'No. In this tool, JPEG output replaces transparent areas with white.' },
+      { question: 'Which files can I use?', answer: 'JPEG, PNG and WebP images under 20 MB. The available output formats are WebP and JPEG.' },
+      { question: 'What should I check before publishing?', answer: 'Compare the downloaded file size and inspect text, edges, color gradients and transparency against the original.' }
+    ] },
+    ar: { heading: 'أسئلة شائعة عن ضغط الصور', items: [
+      { question: 'هل تصبح كل صورة أصغر؟', answer: 'لا. قد يبقى حجم الصورة المضغوطة سابقاً كما هو أو يزداد بعد إعادة الترميز.' },
+      { question: 'هل يحتفظ JPEG بالخلفية الشفافة؟', answer: 'لا. تستبدل الأداة المساحات الشفافة باللون الأبيض عند التصدير إلى JPEG.' },
+      { question: 'ما أنواع الملفات المدعومة؟', answer: 'صور JPEG وPNG وWebP الأصغر من 20 ميغابايت، مع إخراج WebP أو JPEG.' },
+      { question: 'ماذا أفحص قبل النشر؟', answer: 'قارن الحجم وافحص النصوص والحواف والتدرجات والشفافية في الملف المنزّل.' }
+    ] },
+    fr: { heading: 'Questions fréquentes sur la compression', items: [
+      { question: 'Toutes les images deviennent-elles plus légères ?', answer: 'Non. Une image déjà optimisée peut rester aussi volumineuse ou grossir après réencodage.' },
+      { question: 'JPEG conserve-t-il la transparence ?', answer: 'Non. La sortie JPEG remplace les zones transparentes par du blanc.' },
+      { question: 'Quels fichiers sont acceptés ?', answer: 'Les images JPEG, PNG et WebP de moins de 20 Mo, avec sortie WebP ou JPEG.' },
+      { question: 'Que vérifier avant publication ?', answer: 'Comparez le poids du fichier téléchargé et inspectez les textes, les contours, les dégradés et la transparence.' }
+    ] },
+    es: { heading: 'Preguntas frecuentes sobre compresión', items: [
+      { question: '¿Todas las imágenes se hacen más pequeñas?', answer: 'No. Una imagen ya optimizada puede conservar su tamaño o aumentar después de recodificarla.' },
+      { question: '¿JPEG conserva la transparencia?', answer: 'No. La salida JPEG sustituye las zonas transparentes por blanco.' },
+      { question: '¿Qué archivos se admiten?', answer: 'Imágenes JPEG, PNG y WebP de menos de 20 MB, con salida WebP o JPEG.' },
+      { question: '¿Qué debo revisar antes de publicar?', answer: 'Compara el tamaño descargado y comprueba textos, bordes, degradados y transparencia.' }
+    ] }
+  };
+  const compressorFaqHtml = page === 'image-compressor'
+    ? '<section aria-label="' + escapeHtml(compressorFaq[locale].heading) + '"><h2>' + escapeHtml(compressorFaq[locale].heading) + '</h2>' +
+      compressorFaq[locale].items.map(item => '<h3>' + escapeHtml(item.question) + '</h3><p>' + escapeHtml(item.answer) + '</p>').join('') + '</section>'
+    : '';
   const copy = supportingCopy[page]?.[locale];
   const supportingSection = copy
     ? '<section><h2>' + escapeHtml(copy.heading) + '</h2><p>' + escapeHtml(copy.body) + '</p><h3>' +
@@ -218,7 +250,7 @@ function renderStaticContent(locale: typeof locales[number], page: typeof pages[
     : '';
   return '<section class="seo-static-content" aria-label="' + escapeHtml(meta.h1) + '">' +
     '<h1>' + escapeHtml(meta.h1) + '</h1>' +
-    '<p>' + escapeHtml(meta.description) + '</p>' + supportingSection + fileGuideHtml + guideLink +
+    '<p>' + escapeHtml(meta.description) + '</p>' + supportingSection + compressorFaqHtml + fileGuideHtml + guideLink +
     '<nav aria-label="' + escapeHtml(labels[locale]) + '">' +
     '<h2>' + escapeHtml(labels[locale]) + '</h2><ul>' + links + '</ul></nav>' +
     '<nav aria-label="' + escapeHtml(fileToolHeading) + '"><h2>' + escapeHtml(fileToolHeading) + '</h2><ul>' + fileToolLinks + '</ul></nav>' +
