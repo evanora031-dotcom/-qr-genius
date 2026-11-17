@@ -201,12 +201,6 @@ export function ImageCompressor({ lang = 'en' }: { lang?: Language }) {
         <p>{t.howText}</p>
         <h2 className="text-xl font-bold">{t.privacyTitle}</h2>
         <p>{t.privacyText}</p>
-        {CONTENT_TIPS[lang].map((tip) => (
-          <section key={tip.heading} className="pt-3">
-            <h3 className="font-semibold text-slate-900">{tip.heading}</h3>
-            <p className="mt-1 leading-relaxed">{tip.body}</p>
-          </section>
-        ))}
       </div>
       <section className="mt-10 space-y-4 text-slate-700" aria-label="Image compression FAQs">
         <h2 className="text-xl font-bold">{lang === 'ar' ? 'أسئلة شائعة عن ضغط الصور' : lang === 'fr' ? 'Questions fréquentes sur la compression' : lang === 'es' ? 'Preguntas frecuentes sobre compresión' : 'Image compression FAQs'}</h2>
