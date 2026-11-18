@@ -4,6 +4,7 @@ on:
   pull_request:
     branches: [main]
     paths:
+      - 'index.html'
       - 'src/pages/ImageCompressor.tsx'
       - 'scripts/prerender-seo.ts'
       - '.github/workflows/image-compressor-lighthouse.yml'
