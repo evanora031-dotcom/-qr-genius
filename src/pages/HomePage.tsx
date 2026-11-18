@@ -92,6 +92,14 @@ export const HomePage: React.FC<HomePageProps> = ({ lang, onNavigate }) => {
                 </button>
               </div>
 
+              <a
+                href={`${lang === 'en' ? '' : '/' + lang}/tools/guest-connect`}
+                className="inline-flex min-h-11 items-center gap-2 rounded-lg font-semibold text-indigo-700 underline underline-offset-4 hover:text-indigo-900 focus-visible:ring-2 focus-visible:ring-indigo-600"
+              >
+                <MessageSquare aria-hidden="true" className="h-4 w-4 shrink-0" />
+                <span><bdi>Guest Connect</bdi> · {{ ar: 'بطاقات طلبات النزلاء', en: 'Guest request cards', fr: 'Cartes de demandes des clients', es: 'Tarjetas de solicitudes para huéspedes' }[lang]}</span>
+              </a>
+
               {/* Trust Indicators */}
               <div className="pt-4 flex flex-wrap items-center gap-x-6 gap-y-2 text-xs text-slate-500">
                 <div className="flex items-center gap-1.5">
