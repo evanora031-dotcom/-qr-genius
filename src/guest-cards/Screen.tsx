@@ -10,7 +10,17 @@ function Language({label,value,onChange}:{label:string;value:Lang;onChange:(valu
   return <label>{label}<select value={value} onChange={e=>{if(isLang(e.target.value))onChange(e.target.value)}}>
     {languages.map(lang=><option key={lang} value={lang}>{copy[lang].name}</option>)}</select></label>;
 }
-function Preview({card,lang}:{card:Card;lang:Lang}){
+const previewLabels = {
+  ar: {room: 'اختر غرفة للمعاينة', open: 'افتح البطاقة كضيف (تبويب جديد)'},
+  en: {room: 'Choose a room to preview', open: 'Open as a guest (new tab)'},
+  fr: {room: 'Choisir une chambre à prévisualiser', open: 'Ouvrir la carte côté client (nouvel onglet)'},
+  es: {room: 'Elige una habitación para la vista previa', open: 'Abrir como huésped (pestaña nueva)'},
+};
+
+function Preview({cards,lang}:{cards:Card[];lang:Lang}){
+  const [room,setRoom]=useState('');
+  const card=cards.find(item=>item.room===room) ?? cards[0];
+  const labels=previewLabels[lang];
   const [image,setImage]=useState('');
   const url=guestLink(card);
   useEffect(()=>{
@@ -19,8 +29,16 @@ function Preview({card,lang}:{card:Card;lang:Lang}){
     import('qrcode').then(q=>q.default.toDataURL(url,{width:320,margin:4})).then(src=>{if(active)setImage(src)}).catch(()=>{});
     return ()=>{active=false};
   },[url]);
-  return <aside><small>{guide[lang].preview}</small><h2 dir="auto">{card.venue}</h2><p>{copy[lang].room} {card.room}</p>
-    <div className="qr">{image&&<img alt="QR" width="160" height="160" src={image}/>}</div><p>{copy[lang].scan}</p></aside>;
+  return <aside><small>{guide[lang].preview}</small>{card.sample&&<p>{guide[lang].sampleNote}</p>}
+    {cards.length>1&&<label>{labels.room}
+      <select value={card.room} onChange={event=>setRoom(event.target.value)}>
+        {cards.map(item=><option key={item.room} value={item.room}>{copy[lang].room} {item.room}</option>)}
+      </select>
+    </label>}
+    <h2 dir="auto">{card.venue}</h2><p>{copy[lang].room} {card.room}</p>
+    <div className="qr">{image&&<img alt="QR" width="160" height="160" src={image}/>}</div><p>{copy[lang].scan}</p>
+    <a className="primary" href={url} target="_blank" rel="noopener noreferrer">{labels.open}</a>
+  </aside>;
 }
 export function Screen({initialLang,hash=''}:{initialLang:Lang;hash?:string}){
   const [lang,setLang]=useState(initialLang),[desk,setDesk]=useState<Lang>(initialLang);
@@ -66,7 +84,7 @@ export function Screen({initialLang,hash=''}:{initialLang:Lang;hash?:string}){
       <label>{t.rooms}<input required maxLength={350} dir="ltr" value={rooms} onChange={e=>setRooms(e.target.value)}/></label>
       <fieldset><legend>{t.options}</legend>{t.requests.map((label,i)=><label className="check" key={i}><input type="checkbox" checked={!!(mask&(1<<i))} onChange={()=>setMask(mask^(1<<i))}/>{label}</label>)}</fieldset>
       <button className="primary" disabled={busy}>{t.pdf}</button>
-    </form><Preview card={valid&&!tooLong?cards[0]:{...sample,desk}} lang={lang}/></div>
+    </form><Preview cards={valid&&!tooLong?cards:[{...sample,desk}]} lang={lang}/></div>
     {error&&<p role="alert">{error}</p>}
     <article><h2>{g.title}</h2><p>{g.about}</p><p>{g.privacy}</p></article></>}
   </div>;
