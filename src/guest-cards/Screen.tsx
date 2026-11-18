@@ -17,6 +17,13 @@ const previewLabels = {
   es: {room: 'Elige una habitación para la vista previa', open: 'Abrir como huésped (pestaña nueva)'},
 };
 
+const validationText = {
+  ar: {venue:'أدخل اسم المكان في 48 حرفًا أو أقل وتجنّب علامتي < و>.',phone:'أدخل رقم واتساب الاستقبال مع رمز الدولة، من 7 إلى 15 رقمًا.',rooms:'الحد الأقصى 50 غرفة. أدخل أرقامًا مثل 4، 7، 10-12.',services:'اختر خدمة واحدة على الأقل.'},
+  en: {venue:'Enter a property name of up to 48 characters without < or >.',phone:'Enter the reception WhatsApp number with its country code, using 7–15 digits.',rooms:'Use up to 50 rooms. Enter numbers such as 4, 7, 10-12.',services:'Select at least one service.'},
+  fr: {venue:'Saisissez un nom de 48 caractères maximum, sans < ni >.',phone:'Saisissez le numéro WhatsApp de la réception avec son indicatif pays (7 à 15 chiffres).',rooms:'Maximum 50 chambres. Saisissez des numéros comme 4, 7, 10-12.',services:'Sélectionnez au moins un service.'},
+  es: {venue:'Escribe un nombre de hasta 48 caracteres sin < ni >.',phone:'Introduce el número de WhatsApp de recepción con el prefijo del país (7 a 15 dígitos).',rooms:'El máximo es de 50 habitaciones. Introduce números como 4, 7, 10-12.',services:'Selecciona al menos un servicio.'},
+};
+
 function Preview({cards,lang}:{cards:Card[];lang:Lang}){
   const [room,setRoom]=useState('');
   const card=cards.find(item=>item.room===room) ?? cards[0];
@@ -50,12 +57,25 @@ export function Screen({initialLang,hash=''}:{initialLang:Lang;hash?:string}){
   const guest=scanned||(demo?{...sample,desk}:null);
   const numbers=roomNumbers(rooms);
   const cards:Card[]=numbers.map(room=>({venue:venue.trim(),desk,mask,room,phone:phoneNumber(phone)}));
-  const valid=validVenue(venue.trim())&&!!phoneNumber(phone)&&!!mask&&cards.length>0;
+  const [submitted,setSubmitted]=useState(false);
+  const invalidVenue=!validVenue(venue.trim());
+  const invalidPhone=!phoneNumber(phone);
+  const valid=!invalidVenue&&!invalidPhone&&!!mask&&cards.length>0;
   let tooLong=false;
   if(valid){try{cards.forEach(guestLink)}catch{tooLong=true}}
+  const labels=validationText[lang];
+  const issues={
+    venue: submitted && (invalidVenue ? labels.venue : tooLong && g.short),
+    phone: submitted && invalidPhone && labels.phone,
+    rooms: submitted && !numbers.length && labels.rooms,
+    services: submitted && !mask && labels.services,
+  };
   async function download(example:boolean){
     setError('');
-    if(!example&&(!valid||tooLong)){setError(tooLong?g.short:t.invalid);return}
+    if(!example){
+      setSubmitted(true);
+      if(!valid||tooLong) return;
+    }
     setBusy(true);
     try{
       const {cardPDF}=await import('./pdf');
@@ -77,12 +97,16 @@ export function Screen({initialLang,hash=''}:{initialLang:Lang;hash?:string}){
     <h1>{t.title}</h1><p>{t.intro}</p>
     <div className="actions"><button onClick={()=>setDemo(true)}>{t.demo}</button><button disabled={busy} onClick={()=>download(true)}>{g.sample}</button></div>
     <Language label={g.language} value={lang} onChange={l=>{setLang(l);history.replaceState(null,'',pathFor(l));document.title=guide[l].title+' | QR Genius Guest Connect';document.querySelector('link[rel="canonical"]')?.setAttribute('href','https://getqrgenius.com'+pathFor(l))}}/>
-    <div className="layout"><form onSubmit={e=>{e.preventDefault();download(false)}}>
-      <label>{g.venue}<input required maxLength={96} value={venue} onChange={e=>setVenue(e.target.value)}/></label>
-      <label>{t.phone}<input required type="tel" dir="ltr" placeholder="+212…" value={phone} onChange={e=>setPhone(e.target.value)}/></label>
+    <div className="layout"><form noValidate onSubmit={e=>{e.preventDefault();download(false)}}>
+      <label>{g.venue}<input required maxLength={96} aria-invalid={!!issues.venue} aria-describedby={issues.venue ? 'error-venue' : undefined} value={venue} onChange={e=>setVenue(e.target.value)}/></label>
+      {issues.venue && <p id="error-venue" role="alert">{issues.venue}</p>}
+      <label>{t.phone}<input required type="tel" dir="ltr" placeholder="+212…" aria-invalid={!!issues.phone} aria-describedby={issues.phone ? 'error-phone' : undefined} value={phone} onChange={e=>setPhone(e.target.value)}/></label>
+      {issues.phone && <p id="error-phone" role="alert">{issues.phone}</p>}
       <Language label={t.deskLanguage} value={desk} onChange={setDesk}/>
-      <label>{t.rooms}<input required maxLength={350} dir="ltr" value={rooms} onChange={e=>setRooms(e.target.value)}/></label>
-      <fieldset><legend>{t.options}</legend>{t.requests.map((label,i)=><label className="check" key={i}><input type="checkbox" checked={!!(mask&(1<<i))} onChange={()=>setMask(mask^(1<<i))}/>{label}</label>)}</fieldset>
+      <label>{t.rooms}<input required maxLength={350} dir="ltr" aria-invalid={!!issues.rooms} aria-describedby={issues.rooms ? 'error-rooms' : undefined} value={rooms} onChange={e=>setRooms(e.target.value)}/></label>
+      {issues.rooms && <p id="error-rooms" role="alert">{issues.rooms}</p>}
+      <fieldset aria-invalid={!!issues.services} aria-describedby={issues.services ? 'error-services' : undefined}><legend>{t.options}</legend>{t.requests.map((label,i)=><label className="check" key={i}><input type="checkbox" checked={!!(mask&(1<<i))} onChange={()=>setMask(mask^(1<<i))}/>{label}</label>)}</fieldset>
+      {issues.services && <p id="error-services" role="alert">{issues.services}</p>}
       <button className="primary" disabled={busy}>{t.pdf}</button>
     </form><Preview cards={valid&&!tooLong?cards:[{...sample,desk}]} lang={lang}/></div>
     {error&&<p role="alert">{error}</p>}
