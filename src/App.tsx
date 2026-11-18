@@ -5,6 +5,7 @@ import { trackPageView } from './utils/analytics';
 import { getStoredHistory, setStoredLanguage } from './utils/storage';
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
+import { ImageCompressor } from './pages/ImageCompressor';
 import { HistoryDrawer } from './components/QRStudio/HistoryDrawer';
 import { HomePage } from './pages/HomePage';
 import { AboutPage } from './pages/AboutPage';
@@ -18,7 +19,7 @@ import { RobotsView } from './pages/RobotsView';
 const PdfMerge = lazy(() => import('./pages/PdfMerge').then(module => ({ default: module.PdfMerge })));
 const ImagesToPdf = lazy(() => import('./pages/ImagesToPdf').then(module => ({ default: module.ImagesToPdf })));
 const ImageResizer = lazy(() => import('./pages/ImageResizer').then(module => ({ default: module.ImageResizer })));
-const ImageCompressor = lazy(() => import('./pages/ImageCompressor').then(module => ({ default: module.ImageCompressor })));
+
 const GeneratorPage = lazy(() => import('./pages/GeneratorPage').then(module => ({ default: module.GeneratorPage })));
 const ToolLandingPage = lazy(() => import('./pages/ToolLandingPage').then(module => ({ default: module.ToolLandingPage })));
 

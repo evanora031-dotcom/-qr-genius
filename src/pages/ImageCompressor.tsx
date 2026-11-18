@@ -98,28 +98,32 @@ const COPY: Record<Language, Record<'title' | 'intro' | 'choose' | 'privacy' | '
   }
 };
 
-const CONTENT_TIPS: Record<Language, { heading: string; body: string }[]> = {
-  en: [
-    { heading: "Which output format should I choose?", body: "WebP is a useful option for web graphics when the viewer supports it. JPEG is widely compatible with photos, but transparent areas become white in this tool." },
-    { heading: "How do quality and dimensions affect the result?", body: "Lower quality can reduce file size but may blur fine details. A smaller maximum dimension can help with large photos. Compare the original and output sizes before downloading." },
-    { heading: "Can this tool make every file smaller?", body: "No. Small, already optimized, or simple images can become larger after re-encoding. If the output is larger, keep the original or try different settings." }
-  ],
-  ar: [
-    { heading: "أي صيغة أختار للصورة الناتجة؟", body: "صيغة WebP مناسبة لصور الويب عندما يدعمها البرنامج المستخدم. أما JPEG فتتميز بتوافق واسع مع الصور الفوتوغرافية، لكن المناطق الشفافة تصبح بيضاء في هذه الأداة." },
-    { heading: "كيف تؤثر الجودة والأبعاد على النتيجة؟", body: "قد يقل الحجم عند خفض الجودة، لكن التفاصيل الدقيقة قد تصبح أقل وضوحاً. ويساعد تقليل الأبعاد القصوى للصور الكبيرة. قارن حجم الملف الأصلي بالناتج قبل التنزيل." },
-    { heading: "هل تصبح كل صورة أصغر بعد الضغط؟", body: "لا. قد يزداد حجم الصور الصغيرة أو المحسنة مسبقاً بعد إعادة الترميز. إذا كان الملف الناتج أكبر، احتفظ بالأصل أو جرّب إعدادات أخرى." }
-  ],
-  fr: [
-    { heading: "Quel format de sortie choisir ?", body: "WebP convient aux images destinées au Web lorsque le logiciel utilisé le prend en charge. JPEG est largement compatible avec les photos, mais les zones transparentes deviennent blanches dans cet outil." },
-    { heading: "Comment la qualité et les dimensions influencent-elles le résultat ?", body: "Une qualité plus faible peut réduire la taille du fichier, au prix de détails moins nets. Réduire la dimension maximale aide aussi pour les grandes photos. Comparez les tailles avant de télécharger." },
-    { heading: "Toutes les images deviennent-elles plus petites ?", body: "Non. Une petite image ou un fichier déjà optimisé peut grossir après réencodage. Dans ce cas, conservez l’original ou essayez d’autres réglages." }
-  ],
-  es: [
-    { heading: "¿Qué formato de salida debo elegir?", body: "WebP puede ser útil para imágenes web cuando el programa de destino lo admite. JPEG es muy compatible con fotografías, pero las zonas transparentes se vuelven blancas en esta herramienta." },
-    { heading: "¿Cómo afectan la calidad y las dimensiones al resultado?", body: "Reducir la calidad puede disminuir el tamaño, pero también perder detalle. Limitar las dimensiones ayuda con fotos grandes. Compara el tamaño original con el resultado antes de descargar." },
-    { heading: "¿Todas las imágenes se vuelven más pequeñas?", body: "No. Una imagen pequeña o ya optimizada puede aumentar de tamaño al recodificarse. En ese caso, conserva el original o prueba otros ajustes." }
-  ]
-};
+const COMPRESSOR_FAQ: Record<Language, { heading: string; items: { question: string; answer: string }[] }> = {
+    en: { heading: 'Image compression FAQs', items: [
+      { question: 'Will every image become smaller?', answer: 'No. Images that are already efficiently compressed can stay the same size or become larger after re-encoding.' },
+      { question: 'Does JPEG preserve transparent backgrounds?', answer: 'No. In this tool, JPEG output replaces transparent areas with white.' },
+      { question: 'Which files can I use?', answer: 'JPEG, PNG and WebP images under 20 MB. The available output formats are WebP and JPEG.' },
+      { question: 'What should I check before publishing?', answer: 'Compare the downloaded file size and inspect text, edges, color gradients and transparency against the original.' }
+    ] },
+    ar: { heading: 'أسئلة شائعة عن ضغط الصور', items: [
+      { question: 'هل تصبح كل صورة أصغر؟', answer: 'لا. قد يبقى حجم الصورة المضغوطة سابقاً كما هو أو يزداد بعد إعادة الترميز.' },
+      { question: 'هل يحتفظ JPEG بالخلفية الشفافة؟', answer: 'لا. تستبدل الأداة المساحات الشفافة باللون الأبيض عند التصدير إلى JPEG.' },
+      { question: 'ما أنواع الملفات المدعومة؟', answer: 'صور JPEG وPNG وWebP الأصغر من 20 ميغابايت، مع إخراج WebP أو JPEG.' },
+      { question: 'ماذا أفحص قبل النشر؟', answer: 'قارن الحجم وافحص النصوص والحواف والتدرجات والشفافية في الملف المنزّل.' }
+    ] },
+    fr: { heading: 'Questions fréquentes sur la compression', items: [
+      { question: 'Toutes les images deviennent-elles plus légères ?', answer: 'Non. Une image déjà optimisée peut rester aussi volumineuse ou grossir après réencodage.' },
+      { question: 'JPEG conserve-t-il la transparence ?', answer: 'Non. La sortie JPEG remplace les zones transparentes par du blanc.' },
+      { question: 'Quels fichiers sont acceptés ?', answer: 'Les images JPEG, PNG et WebP de moins de 20 Mo, avec sortie WebP ou JPEG.' },
+      { question: 'Que vérifier avant publication ?', answer: 'Comparez le poids du fichier téléchargé et inspectez les textes, les contours, les dégradés et la transparence.' }
+    ] },
+    es: { heading: 'Preguntas frecuentes sobre compresión', items: [
+      { question: '¿Todas las imágenes se hacen más pequeñas?', answer: 'No. Una imagen ya optimizada puede conservar su tamaño o aumentar después de recodificarla.' },
+      { question: '¿JPEG conserva la transparencia?', answer: 'No. La salida JPEG sustituye las zonas transparentes por blanco.' },
+      { question: '¿Qué archivos se admiten?', answer: 'Imágenes JPEG, PNG y WebP de menos de 20 MB, con salida WebP o JPEG.' },
+      { question: '¿Qué debo revisar antes de publicar?', answer: 'Compara el tamaño descargado y comprueba textos, bordes, degradados y transparencia.' }
+    ] }
+  };
 
 const MAX_FILE_BYTES = 20 * 1024 * 1024;
 
@@ -201,13 +205,16 @@ export function ImageCompressor({ lang = 'en' }: { lang?: Language }) {
         <p>{t.howText}</p>
         <h2 className="text-xl font-bold">{t.privacyTitle}</h2>
         <p>{t.privacyText}</p>
-        {CONTENT_TIPS[lang].map((tip) => (
-          <section key={tip.heading} className="pt-3">
-            <h3 className="font-semibold text-slate-900">{tip.heading}</h3>
-            <p className="mt-1 leading-relaxed">{tip.body}</p>
-          </section>
-        ))}
       </div>
+      <section className="mt-10 space-y-4 text-slate-700" aria-label="Image compression FAQs">
+        <h2 className="text-xl font-bold">{lang === 'ar' ? 'أسئلة شائعة عن ضغط الصور' : lang === 'fr' ? 'Questions fréquentes sur la compression' : lang === 'es' ? 'Preguntas frecuentes sobre compresión' : 'Image compression FAQs'}</h2>
+        {COMPRESSOR_FAQ[lang].items.map((item) => (
+          <div key={item.question}>
+            <h3 className="font-semibold text-slate-900">{item.question}</h3>
+            <p className="mt-1 leading-relaxed">{item.answer}</p>
+          </div>
+        ))}
+      </section>
     </section>
   );
 }
