@@ -29,6 +29,14 @@ interface ToolLandingPageProps {
   onHistoryUpdated: () => void;
 }
 
+const exampleContact = { firstName: 'Alex', lastName: 'Example', company: 'Example Studio', email: 'alex@example.com' };
+const contactCopy = {
+  en: { example: 'Example contact', preview: 'Contact preview', use: 'Try this example' },
+  fr: { example: 'Exemple de contact', preview: 'Aperçu du contact', use: 'Essayer cet exemple' },
+  es: { example: 'Contacto de ejemplo', preview: 'Vista previa del contacto', use: 'Probar este ejemplo' },
+  ar: { example: 'مثال لجهة اتصال', preview: 'معاينة جهة الاتصال', use: 'جرّب هذا المثال' },
+};
+
 function createEmptyToolPayload(tool: keyof typeof TOOL_CONFIGS) {
   switch (tool) {
     case 'url':
@@ -277,6 +285,9 @@ export const ToolLandingPage: React.FC<ToolLandingPageProps> = ({
 
   const formattedContent = formatPayload(toolData.type, payload);
 
+  const contact = formattedContent ? payload : exampleContact;
+  const contactLabels = contactCopy[lang];
+
   const hasPresetLogo = tool !== 'business';
   const previewConfig: QRConfig = {
     content: formattedContent,
@@ -357,6 +368,31 @@ export const ToolLandingPage: React.FC<ToolLandingPageProps> = ({
         {/* Live Interactive Tool Studio Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-8 items-start bg-slate-50/70 p-2.5 sm:p-8 rounded-2xl sm:rounded-3xl border border-slate-200 w-full box-border">
           <div className="lg:col-span-7 space-y-4">
+            {tool === 'business' && (
+              <section className="rounded-2xl border border-indigo-200 bg-indigo-50 p-4 sm:p-5">
+                <h2 className="text-sm font-bold text-indigo-800">
+                  {formattedContent ? contactLabels.preview : contactLabels.example}
+                </h2>
+                <div className="mt-2 space-y-1 break-words text-sm text-slate-700">
+                  <p dir="auto" className="text-lg font-bold text-slate-900">{[contact.firstName, contact.lastName].filter(Boolean).join(' ')}</p>
+                  {[
+                    [contact.jobTitle, contact.company].filter(Boolean).join(' · '),
+                    contact.phone, contact.workPhone, contact.email, contact.website,
+                    [contact.street, contact.city, contact.state, contact.zip, contact.country].filter(Boolean).join(', '),
+                    contact.notes
+                  ].map((line, index) => line && <p key={index} dir="auto">{line}</p>)}
+                </div>
+                {!formattedContent && (
+                  <button type="button" className="mt-3 min-h-11 rounded-lg bg-indigo-700 px-4 text-sm font-bold text-white hover:bg-indigo-800"
+                    onClick={() => {
+                      setPayload({ ...payload, ...exampleContact });
+                      trackEvent('vcard_example_loaded', { lang });
+                    }}>
+                    {contactLabels.use}
+                  </button>
+                )}
+              </section>
+            )}
             <FormInputs
               type={toolData.type}
               lang={lang}
