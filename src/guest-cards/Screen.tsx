@@ -58,7 +58,7 @@ export function Screen({initialLang,hash=''}:{initialLang:Lang;hash?:string}){
     </section>:<>
     <h1>{t.title}</h1><p>{t.intro}</p>
     <div className="actions"><button onClick={()=>setDemo(true)}>{t.demo}</button><button disabled={busy} onClick={()=>download(true)}>{g.sample}</button></div>
-    <Language label={g.language} value={lang} onChange={l=>{setLang(l);history.replaceState(null,'',pathFor(l))}}/>
+    <Language label={g.language} value={lang} onChange={l=>{setLang(l);history.replaceState(null,'',pathFor(l));document.title=guide[l].title+' | QR Genius Guest Connect';document.querySelector('link[rel="canonical"]')?.setAttribute('href','https://getqrgenius.com'+pathFor(l))}}/>
     <div className="layout"><form onSubmit={e=>{e.preventDefault();download(false)}}>
       <label>{g.venue}<input required maxLength={96} value={venue} onChange={e=>setVenue(e.target.value)}/></label>
       <label>{t.phone}<input required type="tel" dir="ltr" placeholder="+212…" value={phone} onChange={e=>setPhone(e.target.value)}/></label>
