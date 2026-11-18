@@ -21,8 +21,16 @@ test('tracked sitemap exactly matches the sitemap published by the build', () =>
   assert.equal(publishedSource, generated);
   assert.doesNotMatch(generated, /pages\.dev/);
   const canonicalUrls = [...generated.matchAll(/<loc>([^<]+)<\/loc>/g)].map(match => match[1]);
-  assert.equal(canonicalUrls.length, pages.length * languages.length + 8);
+  assert.equal(canonicalUrls.length, (pages.length + 1) * languages.length + 8);
   assert.equal(new Set(canonicalUrls).size, canonicalUrls.length, 'Sitemap contains duplicate canonical URLs');
+  for (const lang of languages) {
+    const route = url('/tools/guest-connect', lang);
+    assert.ok(canonicalUrls.includes(route));
+    const html = read('../dist/' + (lang === 'en' ? '' : lang + '/') + 'tools/guest-connect.html');
+    assert.ok(html.includes('rel="canonical" href="' + route + '"'));
+    assert.equal((html.match(/hreflang="/g) || []).length, 5);
+    assert.ok(html.includes('application/ld+json'));
+  }
   for (const blogPath of ['/en/blog/', '/en/blog/how-to-make-wifi-qr-code-for-guests', '/en/blog/how-to-create-whatsapp-qr-code-for-customers', '/en/blog/how-to-make-business-card-qr-code']) {
     assert.ok(canonicalUrls.includes('https://getqrgenius.com' + blogPath), `Missing English blog URL ${blogPath}`);
   }
