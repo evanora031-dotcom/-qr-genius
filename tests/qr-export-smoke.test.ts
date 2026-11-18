@@ -31,9 +31,9 @@ const config: QRConfig = {
 test('QR encoder produces a nonempty matrix for the production website URL', () => {
   const modules = getQRMatrix(config.content, config.errorCorrectionLevel);
   assert.ok(modules.size >= 21);
-  assert.equal(modules.get(0, 0), true);
-  assert.equal(modules.get(0, 6), true);
-  assert.equal(modules.get(6, 0), true);
+  assert.ok(modules.get(0, 0));
+  assert.ok(modules.get(0, 6));
+  assert.ok(modules.get(6, 0));
 });
 
 test('SVG export produces an image with the requested dimensions and QR modules', () => {
