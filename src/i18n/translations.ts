@@ -112,6 +112,34 @@ export interface TranslationDictionary {
     shapeLeaf: string;
     shapeCircle: string;
   };
+  studioControls: {
+    typePrompt: string;
+    typeCount: string;
+    icons3d: string;
+    icons2d: string;
+    live: string;
+    historyAction: string;
+    saved: string;
+    save: string;
+    pngResolution: string;
+    svgHint: string;
+    svg: string;
+    pdfHint: string;
+    pdf: string;
+    copied: string;
+    verifyTitle: string;
+    verifyIntro: string;
+    verifyWifi: string;
+    verifyVcard: string;
+    verifyWhatsApp: string;
+    verifyUrl: string;
+    verifyOther: string;
+    correction: string;
+    specification: string;
+    standard: string;
+    copyText: string;
+    close: string;
+  };
   preview: {
     title: string;
     liveScanHint: string;
@@ -279,6 +307,34 @@ export const translations: Record<Language, TranslationDictionary> = {
       shapeExtraRounded: "Pill Rounded",
       shapeLeaf: "Leaf Corner",
       shapeCircle: "Circular"
+    },
+    studioControls: {
+      typePrompt: "Select QR Code Type",
+      typeCount: "12 Categories",
+      icons3d: "3D Icons",
+      icons2d: "Flat 2D",
+      live: "Live",
+      historyAction: "Save to local browser history",
+      saved: "Saved",
+      save: "Save",
+      pngResolution: "Select PNG resolution",
+      svgHint: "Download infinite resolution vector SVG",
+      svg: "SVG Vector",
+      pdfHint: "Download printable A4 card PDF",
+      pdf: "Print PDF",
+      copied: "Copied!",
+      verifyTitle: "QR Verification Helper",
+      verifyIntro: "Scan this code with an iOS Camera, Google Lens, or any QR scanner. Below is the exact payload encoded into the code:",
+      verifyWifi: "Triggers instant \"Join Wi-Fi Network\" prompt on iOS & Android devices.",
+      verifyVcard: "Triggers native \"Add to Contacts / Create New Contact\" on iOS & Android.",
+      verifyWhatsApp: "Opens WhatsApp chat directly without saving phone number first.",
+      verifyUrl: "Opens web destination directly in default mobile browser.",
+      verifyOther: "Standard compliant payload readable by any modern smartphone camera.",
+      correction: "Error Correction Level",
+      specification: "Specification",
+      standard: "Standard",
+      copyText: "Copy Payload",
+      close: "Close",
     },
     preview: {
       title: "Live QR Preview",
@@ -459,6 +515,34 @@ export const translations: Record<Language, TranslationDictionary> = {
       shapeLeaf: "ورقة نباتية",
       shapeCircle: "دائري كامل"
     },
+    studioControls: {
+      typePrompt: "اختر نوع رمز QR",
+      typeCount: "12 فئة",
+      icons3d: "أيقونات ثلاثية الأبعاد",
+      icons2d: "ثنائية الأبعاد",
+      live: "مباشر",
+      historyAction: "حفظ في سجل المتصفح المحلي",
+      saved: "تم الحفظ",
+      save: "حفظ",
+      pngResolution: "اختيار دقة PNG",
+      svgHint: "تنزيل SVG متجهي بدقة قابلة للتكبير",
+      svg: "ملف SVG متجهي",
+      pdfHint: "تنزيل ملف PDF للطباعة بحجم A4",
+      pdf: "طباعة PDF",
+      copied: "تم النسخ!",
+      verifyTitle: "مساعد التحقق من رمز QR",
+      verifyIntro: "امسح هذا الرمز باستخدام كاميرا iOS أو Google Lens أو أي قارئ QR. فيما يلي البيانات المشفّرة داخل الرمز:",
+      verifyWifi: "يعرض خيار الاتصال بشبكة Wi-Fi مباشرةً على أجهزة iOS وAndroid.",
+      verifyVcard: "يعرض خيار إضافة جهة الاتصال أو إنشاء جهة جديدة على iOS وAndroid.",
+      verifyWhatsApp: "يفتح محادثة واتساب مباشرةً دون الحاجة إلى حفظ رقم الهاتف أولاً.",
+      verifyUrl: "يفتح وجهة الويب مباشرةً في متصفح الهاتف الافتراضي.",
+      verifyOther: "بيانات متوافقة مع المعايير ويمكن قراءتها بكاميرات الهواتف الحديثة.",
+      correction: "مستوى تصحيح الأخطاء",
+      specification: "المواصفة",
+      standard: "المعيار",
+      copyText: "نسخ البيانات",
+      close: "إغلاق",
+    },
     preview: {
       title: "المعاينة المباشرة للرمز",
       liveScanHint: "امسح الرمز بكاميرا هاتفك لاختباره فورياً",
@@ -638,6 +722,34 @@ export const translations: Record<Language, TranslationDictionary> = {
       shapeLeaf: "Feuille",
       shapeCircle: "Circulaire"
     },
+    studioControls: {
+      typePrompt: "Choisir le type de QR code",
+      typeCount: "12 catégories",
+      icons3d: "Icônes 3D",
+      icons2d: "Icônes 2D",
+      live: "En direct",
+      historyAction: "Enregistrer dans l’historique de ce navigateur",
+      saved: "Enregistré",
+      save: "Enregistrer",
+      pngResolution: "Choisir la résolution du PNG",
+      svgHint: "Télécharger le fichier vectoriel SVG",
+      svg: "SVG vectoriel",
+      pdfHint: "Télécharger la fiche A4 en PDF",
+      pdf: "Imprimer en PDF",
+      copied: "Copié !",
+      verifyTitle: "Vérification du QR code",
+      verifyIntro: "Scannez le QR code avec l’appareil photo de votre téléphone ou un lecteur QR. Voici les données encodées.",
+      verifyWifi: "Un téléphone compatible peut proposer de rejoindre le réseau Wi-Fi.",
+      verifyVcard: "Un téléphone compatible peut proposer d’enregistrer la fiche de contact.",
+      verifyWhatsApp: "Ouvre une conversation WhatsApp sans enregistrer le numéro.",
+      verifyUrl: "Ouvre le lien dans le navigateur du téléphone.",
+      verifyOther: "Utilisez un lecteur QR compatible pour vérifier le contenu.",
+      correction: "Niveau de correction des erreurs",
+      specification: "Spécification",
+      standard: "Norme",
+      copyText: "Copier les données",
+      close: "Fermer",
+    },
     preview: {
       title: "Aperçu en direct",
       liveScanHint: "Scannez avec votre téléphone pour tester immédiatement",
@@ -816,6 +928,34 @@ export const translations: Record<Language, TranslationDictionary> = {
       shapeExtraRounded: "Píldora",
       shapeLeaf: "Hoja",
       shapeCircle: "Circular"
+    },
+    studioControls: {
+      typePrompt: "Seleccionar el tipo de código QR",
+      typeCount: "12 categorías",
+      icons3d: "Iconos 3D",
+      icons2d: "Iconos 2D",
+      live: "En vivo",
+      historyAction: "Guardar en el historial de este navegador",
+      saved: "Guardado",
+      save: "Guardar",
+      pngResolution: "Elegir la resolución del PNG",
+      svgHint: "Descargar el archivo vectorial SVG",
+      svg: "SVG vectorial",
+      pdfHint: "Descargar la tarjeta en PDF para imprimir en A4",
+      pdf: "Imprimir en PDF",
+      copied: "¡Copiado!",
+      verifyTitle: "Comprobar el código QR",
+      verifyIntro: "Escanea el código con la cámara del móvil o con un lector QR. Estos son los datos codificados.",
+      verifyWifi: "Un móvil compatible puede ofrecerte la opción de conectarte a la red Wi-Fi.",
+      verifyVcard: "Un móvil compatible puede ofrecerte la opción de guardar el contacto.",
+      verifyWhatsApp: "Abre un chat de WhatsApp sin guardar el número.",
+      verifyUrl: "Abre el enlace en el navegador del móvil.",
+      verifyOther: "Utiliza un lector QR compatible para comprobar el contenido.",
+      correction: "Nivel de corrección de errores",
+      specification: "Especificación",
+      standard: "Norma",
+      copyText: "Copiar los datos",
+      close: "Cerrar",
     },
     preview: {
       title: "Vista Previa en Vivo",

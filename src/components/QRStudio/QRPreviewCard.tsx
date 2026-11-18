@@ -229,7 +229,7 @@ export const QRPreviewCard: React.FC<QRPreviewCardProps> = ({
             {t.preview.title}
           </span>
           <span className="text-[10px] px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 font-semibold border border-emerald-200">
-            {lang === 'ar' ? 'مباشر' : 'Live'}
+            {t.studioControls.live}
           </span>
         </div>
         <button
@@ -237,17 +237,17 @@ export const QRPreviewCard: React.FC<QRPreviewCardProps> = ({
           onClick={handleManualSave}
             disabled={!canUseQR}
           className="inline-flex items-center gap-1 text-[11px] font-semibold text-slate-500 hover:text-indigo-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-          title={lang === 'ar' ? 'حفظ في سجل المتصفح المحلي' : 'Save to local browser history'}
+          title={t.studioControls.historyAction}
         >
           {saveSuccess ? (
             <>
               <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
-              <span className="text-emerald-600">{lang === 'ar' ? 'تم الحفظ' : 'Saved'}</span>
+              <span className="text-emerald-600">{t.studioControls.saved}</span>
             </>
           ) : (
             <>
               <Bookmark className="w-3.5 h-3.5" />
-              <span>{lang === 'ar' ? 'حفظ' : 'Save'}</span>
+              <span>{t.studioControls.save}</span>
             </>
           )}
         </button>
@@ -300,7 +300,7 @@ export const QRPreviewCard: React.FC<QRPreviewCardProps> = ({
               onClick={() => setShowResMenu(!showResMenu)}
             disabled={!canUseQR}
               className="px-3 bg-indigo-700 hover:bg-indigo-800 text-white border-l border-indigo-500 transition-colors flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed"
-              aria-label={lang === 'ar' ? 'اختيار دقة PNG' : 'Select PNG resolution'}
+              aria-label={t.studioControls.pngResolution}
             >
               <ChevronDown className="w-4 h-4" />
             </button>
@@ -346,10 +346,10 @@ export const QRPreviewCard: React.FC<QRPreviewCardProps> = ({
             onClick={handleDownloadSVG}
             disabled={!canUseQR}
             className="py-2.5 px-3 bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 rounded-xl text-xs font-bold transition-colors flex items-center justify-center gap-1.5 disabled:opacity-50 disabled:cursor-not-allowed"
-            title={lang === 'ar' ? 'تنزيل SVG متجهي بدقة قابلة للتكبير' : 'Download infinite resolution vector SVG'}
+            title={t.studioControls.svgHint}
           >
             <FileCode className="w-3.5 h-3.5 text-indigo-600" />
-            <span>{lang === 'ar' ? 'ملف SVG متجهي' : 'SVG Vector'}</span>
+            <span>{t.studioControls.svg}</span>
           </button>
 
           <button
@@ -357,10 +357,10 @@ export const QRPreviewCard: React.FC<QRPreviewCardProps> = ({
             onClick={handleDownloadPDF}
             disabled={!canUseQR}
             className="py-2.5 px-3 bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 rounded-xl text-xs font-bold transition-colors flex items-center justify-center gap-1.5 disabled:opacity-50 disabled:cursor-not-allowed"
-            title={lang === 'ar' ? 'تنزيل ملف PDF للطباعة بحجم A4' : 'Download printable A4 card PDF'}
+            title={t.studioControls.pdfHint}
           >
             <FileText className="w-3.5 h-3.5 text-indigo-600" />
-            <span>{lang === 'ar' ? 'طباعة PDF' : 'Print PDF'}</span>
+            <span>{t.studioControls.pdf}</span>
           </button>
         </div>
 
@@ -375,7 +375,7 @@ export const QRPreviewCard: React.FC<QRPreviewCardProps> = ({
             {copySuccess ? (
               <>
                 <Check className="w-3.5 h-3.5 text-emerald-600" />
-                <span className="text-emerald-700 font-bold">{lang === 'ar' ? 'تم النسخ!' : 'Copied!'}</span>
+                <span className="text-emerald-700 font-bold">{t.studioControls.copied}</span>
               </>
             ) : (
               <>
@@ -410,11 +410,12 @@ export const QRPreviewCard: React.FC<QRPreviewCardProps> = ({
             <div className="flex items-center justify-between pb-3 mb-4 border-b border-slate-100">
               <h3 className="text-sm font-bold flex items-center gap-2">
                 <Scan className="w-4 h-4 text-indigo-600" />
-                <span>{lang === 'ar' ? 'مساعد التحقق من رمز QR' : 'QR Verification Helper'}</span>
+                <span>{t.studioControls.verifyTitle}</span>
               </h3>
               <button
                 type="button"
                 onClick={() => setShowScanModal(false)}
+                aria-label={t.studioControls.close}
                 className="text-slate-600 hover:text-slate-800 text-sm font-bold"
               >
                 ✕
@@ -422,7 +423,7 @@ export const QRPreviewCard: React.FC<QRPreviewCardProps> = ({
             </div>
 
             <p className="text-xs text-slate-600 mb-3 leading-relaxed">
-              {lang === 'ar' ? 'امسح هذا الرمز باستخدام كاميرا iOS أو Google Lens أو أي قارئ QR. فيما يلي البيانات المشفّرة داخل الرمز:' : 'Scan this code with an iOS Camera, Google Lens, or any QR scanner. Below is the exact payload encoded into the code:'}
+              {t.studioControls.verifyIntro}
             </p>
 
             <div className="p-3 bg-slate-50 rounded-xl border border-slate-200 mb-3 font-mono text-[11px] text-slate-800 break-all max-h-28 overflow-y-auto">
@@ -439,22 +440,22 @@ export const QRPreviewCard: React.FC<QRPreviewCardProps> = ({
                 {lang === 'ar' ? 'هذه معاينة للبيانات المشفّرة، وليست نتيجة فحص بالكاميرا. امسح الرمز بهاتفك للتأكد من عمله.' : lang === 'fr' ? 'Ceci est un aperçu des données, pas un test de lecture. Scannez le QR avec votre téléphone pour vérifier.' : lang === 'es' ? 'Esta es una vista previa de los datos, no una prueba de escaneo. Escanea el QR con tu móvil para verificarlo.' : 'This previews the encoded data; it is not a camera scan test. Scan with your phone to verify it.'}
               </p>
               <p className="text-[11px] text-emerald-700 leading-normal">
-                {type === 'wifi' && (lang === 'ar' ? 'يعرض خيار الاتصال بشبكة Wi-Fi مباشرةً على أجهزة iOS وAndroid.' : 'Triggers instant "Join Wi-Fi Network" prompt on iOS & Android devices.')}
-                {type === 'vcard' && (lang === 'ar' ? 'يعرض خيار إضافة جهة الاتصال أو إنشاء جهة جديدة على iOS وAndroid.' : 'Triggers native "Add to Contacts / Create New Contact" on iOS & Android.')}
-                {type === 'whatsapp' && (lang === 'ar' ? 'يفتح محادثة واتساب مباشرةً دون الحاجة إلى حفظ رقم الهاتف أولاً.' : 'Opens WhatsApp chat directly without saving phone number first.')}
-                {type === 'url' && (lang === 'ar' ? 'يفتح وجهة الويب مباشرةً في متصفح الهاتف الافتراضي.' : 'Opens web destination directly in default mobile browser.')}
-                {type !== 'wifi' && type !== 'vcard' && type !== 'whatsapp' && type !== 'url' && (lang === 'ar' ? 'بيانات متوافقة مع المعايير ويمكن قراءتها بكاميرات الهواتف الحديثة.' : 'Standard compliant payload readable by any modern smartphone camera.')}
+                {type === 'wifi' && (t.studioControls.verifyWifi)}
+                {type === 'vcard' && (t.studioControls.verifyVcard)}
+                {type === 'whatsapp' && (t.studioControls.verifyWhatsApp)}
+                {type === 'url' && (t.studioControls.verifyUrl)}
+                {type !== 'wifi' && type !== 'vcard' && type !== 'whatsapp' && type !== 'url' && (t.studioControls.verifyOther)}
               </p>
             </div>
 
             <div className="text-[11px] text-slate-500 space-y-1 mb-4">
               <div className="flex items-center justify-between">
-                <span>{lang === 'ar' ? 'مستوى تصحيح الأخطاء' : 'Error Correction Level'}</span>
+                <span>{t.studioControls.correction}</span>
                 <span className="font-semibold text-slate-700">Level {config.errorCorrectionLevel}</span>
               </div>
               <div className="flex items-center justify-between">
-                <span>{lang === 'ar' ? 'المواصفة' : 'Specification'}</span>
-                <span className="font-semibold text-slate-700">ISO/IEC 18004 {lang === 'ar' ? 'المعيار' : 'Standard'}</span>
+                <span>{t.studioControls.specification}</span>
+                <span className="font-semibold text-slate-700">ISO/IEC 18004 {t.studioControls.standard}</span>
               </div>
             </div>
 
@@ -468,14 +469,14 @@ export const QRPreviewCard: React.FC<QRPreviewCardProps> = ({
                 className="flex-1 py-2 px-3 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-xs font-semibold transition-colors flex items-center justify-center gap-1.5"
               >
                 <Copy className="w-3.5 h-3.5" />
-                <span>{lang === 'ar' ? 'نسخ البيانات' : 'Copy Payload'}</span>
+                <span>{t.studioControls.copyText}</span>
               </button>
               <button
                 type="button"
                 onClick={() => setShowScanModal(false)}
                 className="flex-1 py-2 px-3 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-xs font-bold transition-colors"
               >
-                {lang === 'ar' ? 'إغلاق' : 'Close'}
+                {t.studioControls.close}
               </button>
             </div>
           </div>
