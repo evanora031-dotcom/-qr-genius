@@ -422,6 +422,9 @@ export const ToolLandingPage: React.FC<ToolLandingPageProps> = ({
             <h2 id="business-card-print-guide" className="text-2xl font-bold text-slate-900 tracking-tight mb-4">
               How to put a QR code on your business card
             </h2>
+            <p className="mb-4 text-sm text-slate-700">
+              <a className="text-indigo-700 underline" href="/en/blog/how-to-make-business-card-qr-code#sample-card">Try a sample business card QR code</a> to see which contact details a phone can read.
+            </p>
             <ol className="list-decimal pl-6 space-y-3 text-sm text-slate-700 leading-relaxed">
               <li><strong>Enter your professional contact details.</strong> Include the name, company, phone number and email you want others to save. Leave private fields blank.</li>
               <li><strong>Generate and download your vCard QR code.</strong> A vCard stores the contact details inside the code rather than linking to an editable profile.</li>
