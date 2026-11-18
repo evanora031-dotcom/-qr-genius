@@ -16,6 +16,7 @@ import { translations } from '../i18n/translations';
 import { AdPlacement } from '../components/AdPlacement';
 import { FormInputs } from '../components/QRStudio/FormInputs';
 import { QRPreviewCard } from '../components/QRStudio/QRPreviewCard';
+import { makeWifiSign, wifiSignLabels } from '../utils/wifiSign';
 import { formatPayload } from '../utils/qrFormatter';
 import { Category3DIcon } from '../components/icons/Category3DIcon';
 import { getToolShareUrl } from '../utils/toolShare';
@@ -237,6 +238,24 @@ export const ToolLandingPage: React.FC<ToolLandingPageProps> = ({
   const [shareFeedback, setShareFeedback] = useState<'copied' | 'manual' | null>(null);
   const shareUrl = getToolShareUrl(tool, lang);
 
+  const [signError, setSignError] = useState(false);
+  const downloadWifiSign = async () => {
+    setSignError(false);
+    try {
+      const svg = await makeWifiSign(payload, lang);
+      const url = URL.createObjectURL(new Blob([svg], { type: 'image/svg+xml' }));
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = 'guest-wifi-sign.svg';
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      window.setTimeout(() => URL.revokeObjectURL(url), 60000);
+    } catch {
+      setSignError(true);
+    }
+  };
+
   const handleShareTool = async () => {
     setShareFeedback(null);
     trackEvent('tool_share_clicked', { tool, lang });
@@ -372,6 +391,15 @@ export const ToolLandingPage: React.FC<ToolLandingPageProps> = ({
               lang={lang}
               onHistoryUpdated={onHistoryUpdated}
             />
+            {tool === 'wifi' && (
+              <div className="mt-3">
+                <button type="button" disabled={!formattedContent} onClick={downloadWifiSign}
+                  className="w-full rounded-xl border border-indigo-200 bg-white p-3 text-sm font-semibold text-indigo-700 disabled:opacity-50">
+                  {wifiSignLabels[lang].button}
+                </button>
+                {signError && <p role="alert">{wifiSignLabels[lang].error}</p>}
+              </div>
+            )}
           </div>
         </div>
 
