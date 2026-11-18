@@ -35,6 +35,11 @@ test('Wi-Fi requires a network name and a password for secured networks', () => 
   assert.match(formatWifi({ ssid: 'Guest', password: 'secret', encryption: 'WPA', hidden: false }), /^WIFI:T:WPA;S:Guest;P:secret;/);
 });
 
+test('switching to an open network excludes the previously entered password', () => {
+  const data = { ssid: 'Office', password: 'previous-password', encryption: 'nopass' as const, hidden: true };
+  assert.equal(formatWifi(data), 'WIFI:T:nopass;S:Office;P:;H:true;;');
+});
+
 test('WhatsApp requires a phone number beyond the country prefix', () => {
   assert.equal(formatWhatsapp({ countryCode: '+1', phoneNumber: '', message: 'Hello' }), '');
   assert.equal(formatWhatsapp({ countryCode: '+1', phoneNumber: '5550192834', message: 'Hello' }), 'https://wa.me/15550192834?text=Hello');

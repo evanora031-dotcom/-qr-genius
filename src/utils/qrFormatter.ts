@@ -25,7 +25,7 @@ export function formatWifi(data: WifiData): string {
   const { ssid, password, encryption, hidden } = data;
   if (!ssid?.trim() || (encryption !== 'nopass' && !password?.trim())) return '';
   const safeSsid = escapeWifiString(ssid || '');
-  const safePassword = escapeWifiString(password || '');
+  const safePassword = encryption === 'nopass' ? '' : escapeWifiString(password || '');
   return `WIFI:T:${encryption};S:${safeSsid};P:${safePassword};H:${hidden ? 'true' : 'false'};;`;
 }
 
