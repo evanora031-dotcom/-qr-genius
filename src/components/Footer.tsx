@@ -128,12 +128,12 @@ export const Footer: React.FC<FooterProps> = ({ lang, onNavigate }) => {
                 </a>
               </li>
               <li>
-                <a href={localizedHref('sitemap', lang)} onClick={(event) => { event.preventDefault(); handleLink('sitemap'); }} className="hover:text-indigo-400 transition-colors">
+                <a href="/sitemap.xml" className="hover:text-indigo-400 transition-colors">
                   {t.footer.sitemap}
                 </a>
               </li>
               <li>
-                <a href={localizedHref('robots', lang)} onClick={(event) => { event.preventDefault(); handleLink('robots'); }} className="hover:text-indigo-400 transition-colors">
+                <a href="/robots.txt" className="hover:text-indigo-400 transition-colors">
                   {t.footer.robots}
                 </a>
               </li>
