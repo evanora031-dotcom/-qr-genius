@@ -375,15 +375,32 @@ const sitemapEntries = pages.flatMap((page) =>
   })
 );
 
-const blogSlugs = ['business-card-qr-code-guide', 'wifi-qr-code-for-guests', 'whatsapp-qr-code-for-customers'];
-const blogEntries = [
-  `  <url>\n    <loc>${baseUrl}/blog/</loc>\n  </url>`,
-  ...blogSlugs.map(slug => `  <url>\n    <loc>${baseUrl}/blog/${slug}</loc>\n    <xhtml:link rel="alternate" hreflang="ar" href="${baseUrl}/blog/${slug}" />\n  </url>`),
-  `  <url>\n    <loc>${baseUrl}/en/blog/</loc>\n  </url>`,
-  `  <url>\n    <loc>${baseUrl}/en/blog/how-to-make-wifi-qr-code-for-guests</loc>\n  </url>`,
-  `  <url>\n    <loc>${baseUrl}/en/blog/how-to-create-whatsapp-qr-code-for-customers</loc>\n  </url>`,
-  `  <url>\n    <loc>${baseUrl}/en/blog/how-to-make-business-card-qr-code</loc>\n  </url>`
+const blogPairs = [
+  { en: '/en/blog/', ar: '/blog/' },
+  { en: '/en/blog/how-to-make-business-card-qr-code', ar: '/blog/business-card-qr-code-guide' },
+  { en: '/en/blog/how-to-make-wifi-qr-code-for-guests', ar: '/blog/wifi-qr-code-for-guests' },
+  { en: '/en/blog/how-to-create-whatsapp-qr-code-for-customers', ar: '/blog/whatsapp-qr-code-for-customers' },
 ];
+const blogEntries: string[] = [];
+for (const pair of blogPairs) {
+  const alternates = Object.entries({ ...pair, 'x-default': pair.en });
+  const attributes = alternates.map(([lang, url]) =>
+    `rel="alternate" hreflang="${lang}" href="${escapeXml(baseUrl + url)}"`
+  );
+  for (const route of Object.values(pair)) {
+    const file = path.join(distDir, route.endsWith('/') ? route + 'index.html' : route + '.html');
+    const html = await readFile(file, 'utf8');
+    const headLinks = attributes.map(attrs => `<link ${attrs}>`).join('\n');
+    await writeFile(file, html.replace(/<link\b[^>]*\bhreflang="[^"]+"[^>]*>/gi, '')
+      .replace('</head>', headLinks + '\n</head>'), 'utf8');
+    blogEntries.push([
+      '  <url>',
+      `    <loc>${escapeXml(baseUrl + route)}</loc>`,
+      ...attributes.map(attrs => `    <xhtml:link ${attrs} />`),
+      '  </url>',
+    ].join('\n'));
+  }
+}
 
 const sitemap = [
   '<?xml version="1.0" encoding="UTF-8"?>',
