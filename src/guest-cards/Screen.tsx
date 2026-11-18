@@ -1,4 +1,5 @@
 import React,{useEffect,useState} from 'react';
+import { BedDouble, Brush, Check, Coffee, Copy, MessageCircle, Wrench } from 'lucide-react';
 import {copy} from './copy';
 import {guide} from './guide';
 import {chatLink,guestLink,isLang,languages,message,phoneNumber,readCard,roomNumbers,validVenue,type Card,type Lang} from './model';
@@ -47,6 +48,29 @@ function Preview({cards,lang}:{cards:Card[];lang:Lang}){
     <a className="primary" href={url} target="_blank" rel="noopener noreferrer">{labels.open}</a>
   </aside>;
 }
+const serviceIcons = [BedDouble, Brush, Coffee, Wrench];
+const guestActions = {
+  ar: {copy:'نسخ الرسالة', done:'تم نسخ الرسالة', manual:'حدّد نص الرسالة وانسخه يدويًا.', hint:'راجع طلبك هنا، ثم اضغط إرسال في واتساب عندما تكون جاهزًا.'},
+  en: {copy:'Copy message', done:'Message copied', manual:'Select the message text and copy it manually.', hint:'Review your request here, then tap Send in WhatsApp when you’re ready.'},
+  fr: {copy:'Copier le message', done:'Message copié', manual:'Sélectionnez le texte et copiez-le manuellement.', hint:'Relisez votre demande ici, puis appuyez sur Envoyer dans WhatsApp.'},
+  es: {copy:'Copiar mensaje', done:'Mensaje copiado', manual:'Selecciona el texto y cópialo manualmente.', hint:'Revisa tu solicitud aquí y pulsa Enviar en WhatsApp cuando quieras.'},
+};
+
+function CopyRequest({text,lang}:{text:string;lang:Lang}){
+  const [status,setStatus]=useState<'idle'|'done'|'manual'>('idle');
+  async function copyRequest(){
+    try {
+      await navigator.clipboard.writeText(text);
+      setStatus('done');
+    } catch {
+      setStatus('manual');
+    }
+  }
+  return <div className="copy-request"><button type="button" onClick={copyRequest}>
+    <Copy size={16} aria-hidden="true"/>{guestActions[lang].copy}
+  </button><span role="status">{status!=='idle' && guestActions[lang][status]}</span></div>;
+}
+
 export function Screen({initialLang,hash=''}:{initialLang:Lang;hash?:string}){
   const [lang,setLang]=useState(initialLang),[desk,setDesk]=useState<Lang>(initialLang);
   const [venue,setVenue]=useState(''),[phone,setPhone]=useState(''),[rooms,setRooms]=useState('4, 5');
@@ -84,14 +108,26 @@ export function Screen({initialLang,hash=''}:{initialLang:Lang;hash?:string}){
     }catch{setError(t.failed)}finally{setBusy(false)}
   }
   const request=guest && !(guest.mask & (1<<choice)) ? [0,1,2,3].find(i=>guest.mask&(1<<i))! : choice;
+  const requestText=guest?message(guest,lang,request):'';
   const href=guest?chatLink(guest,lang,request):null;
   return <div className="shell"><header><a href="/" dir="ltr">QR Genius</a><span>Guest Connect</span></header>
-    {hash&&!scanned?<p role="alert">{t.invalidLink}</p>:guest?<section>
-      <small dir="auto">{guest.venue}</small><h1>{t.room} {guest.room}</h1>
+    {hash&&!scanned?<p role="alert">{t.invalidLink}</p>:guest?<section className="guest-page">
+      <div className="room-banner"><p dir="auto">{guest.venue}</p><h1>{t.room} <bdi>{guest.room}</bdi></h1></div>
       <Language label={t.guestLanguage} value={lang} onChange={setLang}/>
-      <h2>{t.choose}</h2><div className="requests">{t.requests.map((item,i)=>guest.mask&(1<<i)?<button key={i} aria-pressed={i===request} onClick={()=>setChoice(i)}>{item}</button>:null)}</div>
-      <h2>{t.preview}</h2><blockquote>{message(guest,lang,request).split('\n').map((line,i)=><p dir="auto" key={i}>{line}</p>)}</blockquote>
-      {href?<a className="primary" rel="noreferrer" href={href}>{t.open} · <bdi>+{guest.phone}</bdi></a>:<p>{g.sampleNote}</p>}
+      <h2>{t.choose}</h2><div className="requests">{t.requests.map((item,i)=>{
+        if (!(guest.mask & (1<<i))) return null;
+        const Icon=serviceIcons[i];
+        return <button key={i} aria-pressed={i===request} onClick={()=>setChoice(i)}>
+          <Icon size={21} aria-hidden="true"/><span>{item}</span>{i===request&&<Check size={16} aria-hidden="true"/>}
+        </button>;
+      })}</div>
+      <div className="message-panel"><h2>{t.preview}</h2>
+        <blockquote>{requestText.split('\n').map((line,i)=><p dir="auto" key={i}>{line}</p>)}</blockquote>
+        <CopyRequest key={lang+requestText} text={requestText} lang={lang}/>
+        {href?<><p>{guestActions[lang].hint}</p><a className="primary chat-action" rel="noreferrer" href={href}>
+          <MessageCircle size={20} aria-hidden="true"/>{t.open} · <bdi>+{guest.phone}</bdi>
+        </a></>:<p>{g.sampleNote}</p>}
+      </div>
       {demo&&<button onClick={()=>setDemo(false)}>{t.back}</button>}
     </section>:<>
     <h1>{t.title}</h1><p>{t.intro}</p>
