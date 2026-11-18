@@ -1,0 +1,7 @@
+BEGIN:VCARD
+VERSION:3.0
+N:Example;Alex;;;
+FN:Alex Example
+ORG:Example Studio
+EMAIL:alex@example.com
+END:VCARD

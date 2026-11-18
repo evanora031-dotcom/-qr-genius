@@ -251,6 +251,7 @@ function renderStaticContent(locale: typeof locales[number], page: typeof pages[
   return '<section class="seo-static-content" aria-label="' + escapeHtml(meta.h1) + '">' +
     '<h1>' + escapeHtml(meta.h1) + '</h1>' +
     '<p>' + escapeHtml(meta.description) + '</p>' + supportingSection + compressorFaqHtml + fileGuideHtml + guideLink +
+    (locale === 'en' && page === 'business' ? '<p><a href="/en/blog/how-to-make-business-card-qr-code#sample-card">Try a sample business card QR code</a></p>' : '') +
     '<nav aria-label="' + escapeHtml(labels[locale]) + '">' +
     '<h2>' + escapeHtml(labels[locale]) + '</h2><ul>' + links + '</ul></nav>' +
     '<nav aria-label="' + escapeHtml(fileToolHeading) + '"><h2>' + escapeHtml(fileToolHeading) + '</h2><ul>' + fileToolLinks + '</ul></nav>' +
