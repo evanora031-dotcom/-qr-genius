@@ -11,7 +11,7 @@ import {
   Download,
   Share2
 } from 'lucide-react';
-import { Language, PageId, QRType } from '../types';
+import { Language, PageId, QRConfig, QRType } from '../types';
 import { translations } from '../i18n/translations';
 import { AdPlacement } from '../components/AdPlacement';
 import { FormInputs } from '../components/QRStudio/FormInputs';
@@ -258,27 +258,28 @@ export const ToolLandingPage: React.FC<ToolLandingPageProps> = ({
 
   const formattedContent = formatPayload(toolData.type, payload);
 
-  const previewConfig = {
+  const hasPresetLogo = tool !== 'business';
+  const previewConfig: QRConfig = {
     content: formattedContent,
-    errorCorrectionLevel: 'M' as const,
-    margin: 2,
+    errorCorrectionLevel: hasPresetLogo ? 'H' : 'M',
+    margin: hasPresetLogo ? 4 : 2,
     fgColor: tool === 'wifi' ? '#6D28D9' : tool === 'whatsapp' ? '#059669' : tool === 'business' ? '#0284C7' : '#4F46E5',
     bgColor: '#FFFFFF',
     transparentBg: false,
     useGradient: true,
     gradientColor: tool === 'whatsapp' ? '#10B981' : '#7C3AED',
-    gradientDirection: 'to-br' as const,
-    dotStyle: 'rounded' as const,
-    cornerSquareStyle: 'rounded' as const,
-    cornerDotStyle: 'rounded' as const,
+    gradientDirection: 'to-br',
+    dotStyle: hasPresetLogo ? 'square' : 'rounded',
+    cornerSquareStyle: 'rounded',
+    cornerDotStyle: 'rounded',
     customCornerColor: false,
     cornerSquareColor: '#4F46E5',
     cornerDotColor: '#4F46E5',
     logoUrl: undefined,
     logoPreset: tool === 'whatsapp' ? 'whatsapp' : tool === 'wifi' ? 'wifi' : tool === 'url' ? 'link' : undefined,
-    logoSize: 22,
+    logoSize: 14,
     logoPadding: 5,
-    logoBgShape: 'rounded' as const,
+    logoBgShape: 'rounded',
     logoBgColor: '#FFFFFF'
   };
 
