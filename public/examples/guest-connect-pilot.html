@@ -1,0 +1,11 @@
+<!doctype html><html lang="ar" dir="rtl"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><title>استمارة تجربة Guest Connect لمدة أسبوع</title><style>*{box-sizing:border-box}body{margin:24px auto;padding:0 16px;max-width:900px;font:16px/1.65 system-ui;color:#17233a}table{width:100%;border-collapse:collapse}th,td{border:1px solid #999;padding:5px;text-align:center}td{height:34px}textarea{width:100%;min-height:65px}input{width:100%;border:0;text-align:center;font:inherit}button{padding:10px 16px}@media print{button{display:none}body{font-size:13px}textarea{border:1px solid #aaa}}</style>
+<h1>Guest Connect · تجربة غرفتين لمدة أسبوع</h1>
+<p>بعد موافقة صاحب الرياض، جهّز بطاقتين برقمه المهني للغرفتين 4 و5، واطبعهما بحجم 100%. امسح كل بطاقة من هاتف، وتأكد من الغرفة والرقم واللغتين قبل وضعها. بطاقات العرض التجريبي تعطل فتح واتساب. استخدم بطاقات المنشأة لاختبار الاستقبال الفعلي بعد الموافقة.</p>
+<p>يسجّل فريق الاستقبال مجموع المحاولات التي لاحظها أو أبلغ عنها النزلاء، بما فيها المحاولات المتعثرة. اترك الخانة فارغة إذا كانت غير معروفة. لا تسجل أسماء النزلاء أو أرقامهم أو نصوص المحادثات. تبقى المدخلات داخل الصفحة وتُفقد عند إغلاقها، فاطبعها لحفظ نسخة.</p>
+<table><thead><tr><th>اليوم</th><th>محاولات معلومة</th><th>استخدام دون مساعدة</th><th>طلبات مستلمة</th><th>رسائل واضحة</th><th>تعذّر فتح واتساب</th></tr></thead><tbody id="days"></tbody></table>
+<h2>مراجعة نهاية الأسبوع</h2>
+<label>ما الخطوة التي احتاج فيها النزيل إلى مساعدة؟<textarea></textarea></label>
+<label>ما مشكلة الاتصال أو الترجمة التي تكررت؟<textarea></textarea></label>
+<label>هل يرغب المضيف في إضافة بقية الغرف؟ نعم / لا / بعد تعديل محدد. لماذا؟<textarea></textarea></label>
+<button onclick="print()">طباعة الاستمارة</button>
+<script>const days=document.getElementById('days');for(let i=1;i<=7;i++){const row=days.insertRow();row.insertCell().textContent=i;for(const th of Array.from(document.querySelectorAll('th')).slice(1)){const box=document.createElement('input');box.type='number';box.min='0';box.setAttribute('aria-label',th.textContent+'، اليوم '+i);row.insertCell().append(box)}}</script></html>

@@ -1,3 +1,4 @@
+import {buildGuestPages} from "./guest-connect-seo";
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -407,13 +408,14 @@ const sitemap = [
   '<?xml version="1.0" encoding="UTF-8"?>',
   '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">',
   ...sitemapEntries,
+  ...await buildGuestPages(distDir,baseUrl),
   ...blogEntries,
   '</urlset>',
   ''
 ].join('\n');
 
 await writeFile(path.join(distDir, 'sitemap.xml'), sitemap, 'utf8');
-console.log(`Generated sitemap.xml with ${sitemapEntries.length + blogEntries.length} canonical URLs.`);
+console.log(`Generated sitemap.xml with ${sitemapEntries.length + blogEntries.length + locales.length} canonical URLs.`);
 
 // Publish the robots.txt generated from the same canonical site configuration.
 await writeFile(path.join(distDir, 'robots.txt'), generateRobotsTxt(), 'utf8');

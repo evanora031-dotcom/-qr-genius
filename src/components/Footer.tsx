@@ -59,6 +59,9 @@ export const Footer: React.FC<FooterProps> = ({ lang, onNavigate }) => {
               {t.footer.toolsTitle}
             </h3>
             <ul className="space-y-2.5 text-xs text-slate-400">
+              <li><a className="hover:text-indigo-400" href={(lang === 'en' ? '' : '/' + lang) + '/tools/guest-connect'}>
+                {{ en: 'Guest request cards', fr: 'Cartes de demandes des clients', es: 'Tarjetas para huéspedes', ar: 'بطاقات طلبات النزلاء' }[lang]}
+              </a></li>
               <li>
                 <a href={localizedHref('generator', lang)} onClick={(event) => { event.preventDefault(); handleLink('generator'); }} className="hover:text-indigo-400 transition-colors">
                   {t.nav.studio}

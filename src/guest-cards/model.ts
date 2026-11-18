@@ -32,7 +32,10 @@ export function roomNumbers(input: string) {
 export function guestLink(card: Card) {
   const fragment = new URLSearchParams({venue:card.venue, room:card.room, phone:card.phone, desk:card.desk, requests:String(card.mask)});
   if (card.sample) fragment.set('demo','1');
-  const url='https://getqrgenius.com/tools/guest-connect#'+fragment;
+  // Preview proofs must scan back into the same tested build before production release.
+  const preview = typeof location !== 'undefined' && /^https:\/\/[a-z0-9-]+\.qr-genius-1on\.pages\.dev$/.test(location.origin);
+  const origin = preview ? location.origin : 'https://getqrgenius.com';
+  const url=origin+'/tools/guest-connect#'+fragment;
   if (url.length > 550) throw new Error('Card URL too long');
   return url;
 }

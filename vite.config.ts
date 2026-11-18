@@ -6,6 +6,7 @@ import {defineConfig} from 'vite';
 export default defineConfig(() => {
   return {
     plugins: [react(), tailwindcss()],
+    build: { rollupOptions: { input: { main: 'index.html', guestCards: 'tools/guest-connect.html' } } },
     resolve: {
       alias: {
         '@': path.resolve(__dirname, '.'),
