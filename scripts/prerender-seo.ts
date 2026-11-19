@@ -404,18 +404,35 @@ for (const pair of blogPairs) {
   }
 }
 
+// Fail the build if generated canonical URLs or alternate-language targets diverge.
+const generatedEntries = [...sitemapEntries, ...await buildGuestPages(distDir, baseUrl), ...blogEntries];
+const canonicalUrls = generatedEntries.map(entry => {
+  const match = entry.match(/<loc>([^<]+)<\\/loc>/);
+  if (!match) throw new Error('Sitemap entry missing a canonical <loc> URL');
+  return match[1];
+});
+const canonicalSet = new Set(canonicalUrls);
+if (canonicalSet.size !== canonicalUrls.length) {
+  throw new Error('Sitemap contains duplicate canonical URLs');
+}
+for (const entry of generatedEntries) {
+  for (const match of entry.matchAll(/hreflang="[^"]+" href="([^"]+)"/g)) {
+    if (!canonicalSet.has(match[1])) {
+      throw new Error(`Sitemap hreflang target missing from canonical URLs: ${match[1]}`);
+    }
+  }
+}
+
 const sitemap = [
   '<?xml version="1.0" encoding="UTF-8"?>',
   '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">',
-  ...sitemapEntries,
-  ...await buildGuestPages(distDir,baseUrl),
-  ...blogEntries,
+  ...generatedEntries,
   '</urlset>',
   ''
 ].join('\n');
 
 await writeFile(path.join(distDir, 'sitemap.xml'), sitemap, 'utf8');
-console.log(`Generated sitemap.xml with ${sitemapEntries.length + blogEntries.length + locales.length} canonical URLs.`);
+console.log(`Generated sitemap.xml with ${generatedEntries.length} validated canonical URLs.`);
 
 // Publish the robots.txt generated from the same canonical site configuration.
 await writeFile(path.join(distDir, 'robots.txt'), generateRobotsTxt(), 'utf8');
