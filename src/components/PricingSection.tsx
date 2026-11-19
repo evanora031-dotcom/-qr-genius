@@ -3,6 +3,37 @@ import { Check, Sparkles, Shield, ArrowRight } from 'lucide-react';
 import { Language } from '../types';
 import { translations } from '../i18n/translations';
 
+const planCopy = {
+  en: {
+    status: "In development",
+    planned: "Planned enterprise features",
+    intro: "Use the free tools now or preview features planned for teams.",
+    preview: "Enterprise preview",
+    back: "Back to free tools",
+  },
+  ar: {
+    status: "قيد التطوير",
+    planned: "الميزات المخطّط لها للمؤسسات",
+    intro: "استخدم الأدوات المجانية الآن أو اطّلع على الميزات المخطّط لها للفرق.",
+    preview: "معاينة باقة المؤسسات",
+    back: "العودة إلى الأدوات المجانية",
+  },
+  fr: {
+    status: "En développement",
+    planned: "Fonctionnalités prévues pour les entreprises",
+    intro: "Utilisez les outils gratuits ou découvrez les fonctionnalités prévues pour les équipes.",
+    preview: "Aperçu de l’offre entreprise",
+    back: "Revenir aux outils gratuits",
+  },
+  es: {
+    status: "En desarrollo",
+    planned: "Funciones previstas para empresas",
+    intro: "Utiliza las herramientas gratuitas o consulta las funciones previstas para equipos.",
+    preview: "Vista previa del plan para empresas",
+    back: "Volver a las herramientas gratuitas",
+  },
+};
+
 interface PricingSectionProps {
   lang: Language;
   onSelectFree?: () => void;
@@ -10,6 +41,7 @@ interface PricingSectionProps {
 
 export const PricingSection: React.FC<PricingSectionProps> = ({ lang, onSelectFree }) => {
   const t = translations[lang];
+  const plan = planCopy[lang];
   const [showProModal, setShowProModal] = useState(false);
 
   return (
@@ -25,7 +57,7 @@ export const PricingSection: React.FC<PricingSectionProps> = ({ lang, onSelectFr
             {t.pro.title}
           </h2>
           <p className="mt-4 text-base text-slate-600 leading-relaxed">
-            {t.pro.subtitle}
+            {plan.intro}
           </p>
         </div>
 
@@ -77,20 +109,15 @@ export const PricingSection: React.FC<PricingSectionProps> = ({ lang, onSelectFr
             <div>
               <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-indigo-500/20 text-indigo-300 text-[10px] font-semibold mb-3">
                 <Sparkles className="w-3 h-3" />
-                <span>{lang === 'ar' ? 'مستوى المؤسسات' : 'Enterprise Grade'}</span>
+                <span>{plan.status}</span>
               </div>
 
               <div className="text-xl font-bold text-white mb-2">
                 {t.pro.proTitle}
               </div>
               <p className="text-xs text-slate-300 mb-6">
-                {lang === 'ar' ? 'لفرق التسويق والوكالات والعلامات التجارية التي تحتاج إلى روابط ديناميكية وتحليلات وإنشاء جماعي.' : 'For marketing teams, agencies, and brands requiring dynamic URLs, analytics, and bulk generation.'}
+                {plan.planned}
               </p>
-
-              <div className="flex items-baseline gap-1 mb-8">
-                <span className="text-4xl font-extrabold text-white">$19</span>
-                <span className="text-xs text-slate-200 font-medium">{lang === 'ar' ? '/ شهرياً (تُدفع سنوياً)' : '/ month (billed annually)'}</span>
-              </div>
 
               <ul className="space-y-3.5 text-xs text-slate-200 mb-8">
                 {t.pro.proFeatures.map((feat, idx) => (
@@ -109,7 +136,7 @@ export const PricingSection: React.FC<PricingSectionProps> = ({ lang, onSelectFr
                 onClick={() => setShowProModal(true)}
                 className="w-full py-3 px-4 rounded-xl text-xs font-bold text-slate-950 bg-gradient-to-r from-white via-indigo-100 to-white hover:opacity-95 transition-opacity flex items-center justify-center gap-2 shadow-lg"
               >
-                <span>{t.pro.proCta}</span>
+                <span>{plan.preview}</span>
                 <ArrowRight className="w-4 h-4" />
               </button>
             </div>
@@ -128,7 +155,7 @@ export const PricingSection: React.FC<PricingSectionProps> = ({ lang, onSelectFr
               <div className="w-12 h-12 rounded-xl bg-indigo-100 text-indigo-600 flex items-center justify-center mb-4">
                 <Shield className="w-6 h-6" />
               </div>
-              <h3 className="text-lg font-bold mb-2">{lang === 'ar' ? 'معاينة QR GENIUS للمؤسسات' : 'QR GENIUS Enterprise Preview'}</h3>
+              <h3 className="text-lg font-bold mb-2">{plan.preview}</h3>
               <p className="text-xs text-slate-600 leading-relaxed mb-4">
                 {lang === 'ar' ? 'هذه معاينة لخيارات المؤسسات. ميزات الرموز الديناميكية والتحليلات والاستضافة المخصصة ليست متاحة للاستخدام حالياً.' : lang === 'fr' ? 'Ceci est un aperçu des options entreprise. Les QR dynamiques, les statistiques et l’hébergement personnalisé ne sont pas disponibles actuellement.' : lang === 'es' ? 'Esta es una vista previa de las opciones empresariales. Los códigos dinámicos, las analíticas y el alojamiento personalizado no están disponibles actualmente.' : 'This is a preview of enterprise options. Dynamic QR codes, analytics, and custom hosting are not currently available.'}
               </p>
@@ -141,7 +168,7 @@ export const PricingSection: React.FC<PricingSectionProps> = ({ lang, onSelectFr
                   onClick={() => setShowProModal(false)}
                   className="flex-1 py-2.5 px-4 bg-indigo-600 text-white rounded-xl text-xs font-bold hover:bg-indigo-700 transition-colors"
                 >
-                  {lang === 'ar' ? 'متابعة الاستخدام المجاني' : 'Continue Free Use'}
+                  {plan.back}
                 </button>
               </div>
             </div>
