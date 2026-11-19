@@ -1,11 +1,13 @@
 import {buildGuestPages} from "./guest-connect-seo";
-import { mkdir, readFile, writeFile } from 'node:fs/promises';
+import { mkdir, readdir, readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { SEO_METADATA, generateRobotsTxt } from '../src/utils/seo.ts';
 
 const projectRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const distDir = path.join(projectRoot, 'dist');
+const outputAssets = await readdir(path.join(distDir, 'assets'));
+const resizerChunk = outputAssets.find(name => /^ImageResizer-[\w-]+\.js$/.test(name));
 const rawTemplate = await readFile(path.join(distDir, 'index.html'), 'utf8');
 // Keep the prerendered SEO fallback readable and visually intentional while the app bundle loads.
 const fallbackStyles = `<style>
@@ -311,6 +313,9 @@ function renderPage(locale: typeof locales[number], page: typeof pages[number]):
   // Remove the generic WebApplication JSON-LD inherited from index.html:
   // structured data below is generated per page and locale instead.
   let html = template.replace(/<script\s+type="application\/ld\+json">[\s\S]*?<\/script>/g, '').replace(/<html\s+lang="[^"]*">/, `<html lang="${locale}" dir="${locale === 'ar' ? 'rtl' : 'ltr'}">`);
+  if (page === 'image-resizer' && resizerChunk) {
+    html = html.replace('</head>', `<link rel="modulepreload" crossorigin href="/assets/${resizerChunk}">\n</head>`);
+  }
   // Put meaningful, crawlable page content in the initial HTML response.
   // React replaces this lightweight fallback when the application mounts.
   html = html.replace('<div id="root"></div>', '<div id="root">' + renderStaticContent(locale, page) + '</div>');
