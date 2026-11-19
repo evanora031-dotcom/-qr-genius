@@ -407,7 +407,7 @@ for (const pair of blogPairs) {
 // Fail the build if generated canonical URLs or alternate-language targets diverge.
 const generatedEntries = [...sitemapEntries, ...await buildGuestPages(distDir, baseUrl), ...blogEntries];
 const canonicalUrls = generatedEntries.map(entry => {
-  const match = entry.match(/<loc>([^<]+)<\\/loc>/);
+  const match = entry.match(/<loc>([^<]+)<\/loc>/);
   if (!match) throw new Error('Sitemap entry missing a canonical <loc> URL');
   return match[1];
 });
