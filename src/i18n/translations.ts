@@ -400,7 +400,7 @@ export const translations: Record<Language, TranslationDictionary> = {
       sitemap: "XML Sitemap",
       robots: "Robots.txt",
       rights: "All rights reserved.",
-      privacyNotice: "QR Genius processes all codes locally in your browser. We never log or store your payload."
+      privacyNotice: "QR code content is generated in your browser."
     }
   },
   ar: {
@@ -607,7 +607,7 @@ export const translations: Record<Language, TranslationDictionary> = {
       sitemap: "خريطة الموقع XML",
       robots: "ملف Robots.txt",
       rights: "جميع الحقوق محفوظة.",
-      privacyNotice: "يعمل كيو آر جينيوس محلياً داخل متصفحك بالكامل ولا يتم تخزين بياناتك في أي خادم."
+      privacyNotice: "يُنشأ محتوى رمز QR داخل متصفحك."
     }
   },
   fr: {
@@ -814,7 +814,7 @@ export const translations: Record<Language, TranslationDictionary> = {
       sitemap: "Plan de site XML",
       robots: "Fichier Robots.txt",
       rights: "Tous droits réservés.",
-      privacyNotice: "QR Genius traite l'ensemble des codes localement dans votre navigateur sans jamais collecter vos données."
+      privacyNotice: "Le contenu du code QR est généré dans votre navigateur."
     }
   },
   es: {
@@ -1021,7 +1021,7 @@ export const translations: Record<Language, TranslationDictionary> = {
       sitemap: "Mapa de Sitio XML",
       robots: "Archivo Robots.txt",
       rights: "Todos los derechos reservados.",
-      privacyNotice: "QR Genius procesa todos los códigos localmente en su navegador sin almacenar su información."
+      privacyNotice: "El contenido del código QR se genera en tu navegador."
     }
   }
 };
