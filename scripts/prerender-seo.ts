@@ -274,7 +274,7 @@ const toolFaqs: Partial<Record<typeof pages[number], { question: string; answer:
   },
   business: {
     question: 'How does vCard scanning work on smartphones?',
-    answer: 'Compatible phones and contact apps can recognize the vCard data and offer to create a new contact. The exact prompt and supported fields depend on the device.'
+    answer: 'On a compatible iPhone or Android phone, scanning may show a contact preview or an option to add the details to contacts; the exact behavior depends on the camera, scanner, and contact app. If the phone only displays text, try its built-in QR scanner or a contact app that supports vCard.'
   }
 };
 function structuredData(locale: typeof locales[number], page: typeof pages[number], canonicalUrl: string) {

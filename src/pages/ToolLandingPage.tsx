@@ -147,7 +147,7 @@ const TOOL_CONFIGS = {
       'For freelancers: put the QR code on your portfolio or business card and update the printed code whenever your contact details change'
     ],
     faqs: [
-      { q: 'How does vCard scanning work on smartphones?', a: 'Compatible phones and contact apps can recognize the vCard data and offer to create a new contact. The exact prompt and supported fields depend on the device.' },
+      { q: 'How does vCard scanning work on smartphones?', a: 'On a compatible iPhone or Android phone, scanning may show a contact preview or an option to add the details to contacts; the exact behavior depends on the camera, scanner, and contact app. If the phone only displays text, try its built-in QR scanner or a contact app that supports vCard.' },
       { q: 'Is there a limit on how many people can scan my vCard QR?', a: 'The QR code itself does not impose a scan counter. Successful scanning depends on the printed or displayed code and the device used.' },
       { q: 'Can I add my company logo to the center of the vCard QR?', a: 'Yes. Open our Full Studio designer to upload your company logo and adjust custom colors. Scan-test the finished QR code before printing.' },
       { q: 'How do I make a QR code for my business card?', a: 'Enter your contact details, generate the vCard QR code, scan it with a phone to check the information, and download the code for your business card design.' },
