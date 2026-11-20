@@ -1,3 +1,5 @@
+import { toolsByLanguage } from '../src/content/toolLanding';
+import { faqByLanguage } from '../src/content/faq';
 import {buildGuestPages} from "./guest-connect-seo";
 import { mkdir, readdir, readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
@@ -251,9 +253,16 @@ function renderStaticContent(locale: typeof locales[number], page: typeof pages[
       '</ol><p><strong>' + escapeHtml(locale === 'ar' ? 'نصيحة:' : locale === 'fr' ? 'Conseil :' : locale === 'es' ? 'Consejo:' : 'Tip:') +
       '</strong> ' + escapeHtml(copy.tip) + '</p></section>'
     : '';
+  const questions = page === 'faq' ? faqByLanguage[locale] :
+    (page === 'wifi' || page === 'url' || page === 'business' || page === 'whatsapp')
+      ? toolsByLanguage[locale][page].faqs.map(({ q, a }) => ({ question: q, answer: a })) : [];
+  const questionsHtml = questions.length
+    ? '<section><h2>' + escapeHtml(resourceLabels[locale].faq) + '</h2>' +
+      questions.map(({ question, answer }) => '<h3>' + escapeHtml(question) + '</h3><p>' + escapeHtml(answer) + '</p>').join('') + '</section>'
+    : '';
   return '<section class="seo-static-content" aria-label="' + escapeHtml(meta.h1) + '">' +
     '<h1>' + escapeHtml(meta.h1) + '</h1>' +
-    '<p>' + escapeHtml(meta.description) + '</p>' + supportingSection + compressorFaqHtml + fileGuideHtml + guideLink +
+    '<p>' + escapeHtml(meta.description) + '</p>' + supportingSection + compressorFaqHtml + questionsHtml + fileGuideHtml + guideLink +
     (locale === 'en' && page === 'business' ? '<p><a href="/en/blog/how-to-make-business-card-qr-code#sample-card">Try a sample business card QR code</a></p>' : '') +
     '<nav aria-label="' + escapeHtml(labels[locale]) + '">' +
     '<h2>' + escapeHtml(labels[locale]) + '</h2><ul>' + links + '</ul></nav>' +
@@ -263,22 +272,6 @@ function renderStaticContent(locale: typeof locales[number], page: typeof pages[
 }
 
 
-// Keep FAQ structured data sourced from the same visible FAQ entries in ToolLandingPage.
-// The first question for each tool is copied verbatim; do not invent answers.
-const toolFaqs: Partial<Record<typeof pages[number], { question: string; answer: string }>> = {
-  wifi: {
-    question: 'Do guests need an app to scan the Wi-Fi code?',
-    answer: 'Many recent iPhone and Android devices recognize Wi-Fi QR codes in the camera or QR scanner. Scan the code, review the network name, and follow the device prompt to connect. Support varies by device and operating system.'
-  },
-  whatsapp: {
-    question: 'How does WhatsApp QR code routing work?',
-    answer: 'The QR code contains a wa.me link for the phone number you enter. Scanning opens the chat in WhatsApp when available, or a compatible browser flow. The visitor must choose to send any message.'
-  },
-  business: {
-    question: 'How does vCard scanning work on smartphones?',
-    answer: 'On a compatible iPhone or Android phone, scanning may show a contact preview or an option to add the details to contacts; the exact behavior depends on the camera, scanner, and contact app. If the phone only displays text, try its built-in QR scanner or a contact app that supports vCard.'
-  }
-};
 function structuredData(locale: typeof locales[number], page: typeof pages[number], canonicalUrl: string) {
   const objects: Record<string, unknown>[] = [];
   if (page === 'home') objects.push({
@@ -297,11 +290,11 @@ function structuredData(locale: typeof locales[number], page: typeof pages[numbe
       ]
     });
   }
-  const faq = toolFaqs[page];
+  const faq = (page === 'wifi' || page === 'whatsapp' || page === 'business') ? toolsByLanguage.en[page].faqs : null;
   // Only English tool pages currently render these exact English FAQ strings.
   if (faq && locale === 'en') objects.push({
     '@context': 'https://schema.org', '@type': 'FAQPage',
-    mainEntity: [{ '@type': 'Question', name: faq.question, acceptedAnswer: { '@type': 'Answer', text: faq.answer } }]
+    mainEntity: faq.map(({ q, a }) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } }))
   });
   return objects.map(obj => '<script type="application/ld+json">' + JSON.stringify(obj).replaceAll('<', '\\u003c') + '</script>').join('\n');
 }

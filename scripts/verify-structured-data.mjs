@@ -38,7 +38,7 @@ for(const [path,expected] of routes){
 }
 // Ensure tool FAQ schema quotes real FAQ entries in the English React UI source.
 // This is a source-parity guard, not a substitute for rendered-page inspection.
-const toolPageSource = readFileSync('src/pages/ToolLandingPage.tsx', 'utf8');
+const toolPageSource = readFileSync('src/content/toolLanding.ts', 'utf8');
 for (const path of ['tools/wifi.html', 'tools/whatsapp.html', 'tools/business-vcard.html']) {
   const html = readFileSync(root + path, 'utf8');
   const scripts = [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)]
@@ -48,8 +48,9 @@ for (const path of ['tools/wifi.html', 'tools/whatsapp.html', 'tools/business-vc
   for (const item of faq.mainEntity) {
     const question = item.name;
     const answer = item.acceptedAnswer?.text;
-    if (!toolPageSource.includes(`q: '${question}', a: '${answer}'`))
-      throw Error(path + ' FAQ schema differs from the UI FAQ source: ' + question);
+    const escapeText = value => value.replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;');
+    if (!toolPageSource.includes(question) || !html.includes('<h3>' + escapeText(question) + '</h3>') || !html.includes('<p>' + escapeText(answer) + '</p>'))
+      throw Error(path + ' FAQ schema differs from its visible content: ' + question);
   }
 }
 console.log('Verified tool FAQ schema against English UI source.');
