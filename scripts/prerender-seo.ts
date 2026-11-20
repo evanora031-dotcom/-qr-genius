@@ -9,7 +9,15 @@ import { SEO_METADATA, generateRobotsTxt } from '../src/utils/seo.ts';
 const projectRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const distDir = path.join(projectRoot, 'dist');
 const outputAssets = await readdir(path.join(distDir, 'assets'));
-const resizerChunk = outputAssets.find(name => /^ImageResizer-[\w-]+\.js$/.test(name));
+const routeModules: Record<string, string> = {
+  'image-resizer': 'ImageResizer',
+  'pdf-merge': 'PdfMerge',
+  generator: 'GeneratorPage',
+  url: 'ToolLandingPage',
+  wifi: 'ToolLandingPage',
+  whatsapp: 'ToolLandingPage',
+  business: 'ToolLandingPage'
+};
 const rawTemplate = await readFile(path.join(distDir, 'index.html'), 'utf8');
 // Keep the prerendered SEO fallback readable and visually intentional while the app bundle loads.
 const fallbackStyles = `<style>
@@ -306,8 +314,10 @@ function renderPage(locale: typeof locales[number], page: typeof pages[number]):
   // Remove the generic WebApplication JSON-LD inherited from index.html:
   // structured data below is generated per page and locale instead.
   let html = template.replace(/<script\s+type="application\/ld\+json">[\s\S]*?<\/script>/g, '').replace(/<html\s+lang="[^"]*">/, `<html lang="${locale}" dir="${locale === 'ar' ? 'rtl' : 'ltr'}">`);
-  if (page === 'image-resizer' && resizerChunk) {
-    html = html.replace('</head>', `<link rel="modulepreload" crossorigin href="/assets/${resizerChunk}">\n</head>`);
+  const prefix = routeModules[page];
+  const entry = prefix && outputAssets.find(name => name.startsWith(prefix + '-') && name.endsWith('.js'));
+  if (entry) {
+    html = html.replace('</head>', `<link rel="modulepreload" crossorigin href="/assets/${entry}">\n</head>`);
   }
   // Put meaningful, crawlable page content in the initial HTML response.
   // React replaces this lightweight fallback when the application mounts.
