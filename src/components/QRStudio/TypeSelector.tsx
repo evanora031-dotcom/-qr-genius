@@ -81,7 +81,7 @@ export const TypeSelector: React.FC<TypeSelectorProps> = ({
             className={`flex items-center gap-1.5 px-2.5 py-1 text-[11px] font-semibold rounded-md transition-colors ${
               iconMode === '3d'
                 ? 'bg-white text-indigo-700 shadow-xs'
-                : 'text-slate-500 hover:text-slate-800'
+                : 'text-slate-600 hover:text-slate-800'
             }`}
           >
             <Box className="w-3 h-3" />
@@ -93,7 +93,7 @@ export const TypeSelector: React.FC<TypeSelectorProps> = ({
             className={`flex items-center gap-1.5 px-2.5 py-1 text-[11px] font-semibold rounded-md transition-colors ${
               iconMode === 'flat'
                 ? 'bg-white text-indigo-700 shadow-xs'
-                : 'text-slate-500 hover:text-slate-800'
+                : 'text-slate-600 hover:text-slate-800'
             }`}
           >
             <Layers className="w-3 h-3" />
