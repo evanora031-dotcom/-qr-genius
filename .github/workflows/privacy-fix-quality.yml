@@ -50,6 +50,8 @@ jobs:
         run: bun run build
       - name: Search discoverability and canonical sitemap tests
         run: bunx tsx --test tests/seo-discovery.test.ts
+      - name: Localized canonical and hreflang reciprocity tests
+        run: bunx tsx --test tests/hreflang-reciprocity.test.ts
       - name: Tool guide link tests
         run: bunx tsx --test tests/tool-guide-links.test.ts
       - name: Preview Turnstile live smoke test (no email sent)
