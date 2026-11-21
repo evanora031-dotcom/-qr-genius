@@ -79,6 +79,17 @@ export const HistoryDrawer: React.FC<HistoryDrawerProps> = ({
 
       <div className="fixed inset-y-0 right-0 rtl:right-auto rtl:left-0 max-w-full flex pl-0 sm:pl-10 rtl:pl-0 rtl:sm:pr-10">
         <div className="w-screen max-w-md bg-white shadow-2xl flex flex-col">
+          {history.some((item) => item.type === 'wifi') && (
+            <p role="status" className="mx-4 mt-3 rounded-lg border border-amber-200 bg-amber-50 px-3 py-2 text-xs text-amber-900">
+              {lang === 'ar'
+                ? 'تنبيه الخصوصية: قد يحتوي سجل Wi-Fi المحلي على كلمة مرور الشبكة. امسح السجل عند استخدام جهاز مشترك.'
+                : lang === 'fr'
+                  ? 'Confidentialité : votre historique Wi-Fi local peut contenir le mot de passe du réseau. Effacez-le sur un appareil partagé.'
+                  : lang === 'es'
+                    ? 'Privacidad: el historial Wi-Fi local puede contener la contraseña de la red. Bórrelo en un dispositivo compartido.'
+                    : 'Privacy: your local Wi-Fi QR history may contain the network password. Clear history on shared devices.'}
+            </p>
+          )}
           {/* Header */}
           <div className="p-4 sm:p-5 border-b border-slate-200 flex items-center justify-between bg-slate-50">
             <div className="flex items-center gap-2">
