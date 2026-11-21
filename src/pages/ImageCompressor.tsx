@@ -179,17 +179,17 @@ export function ImageCompressor({ lang = 'en' }: { lang?: Language }) {
       <p className="mt-3 text-slate-600">{t.intro}</p>
       <form onSubmit={handleCompress} className="mt-8 space-y-6 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
         <label className="block font-semibold text-slate-800" htmlFor="image-file">{t.choose}</label>
-        <input id="image-file" aria-describedby="image-privacy" type="file" accept="image/jpeg,image/png,image/webp" onChange={e => chooseFile(e.target.files?.[0] || null)} className="block w-full text-sm" />
+        <input id="image-file" aria-describedby="image-privacy" type="file" disabled={busy} accept="image/jpeg,image/png,image/webp" onChange={e => chooseFile(e.target.files?.[0] || null)} className="block w-full text-sm" />
         <p id="image-privacy" className="text-sm text-slate-500">{t.privacy}</p>
         <label className="block font-semibold text-slate-800" htmlFor="image-format">{t.format}</label>
-        <select id="image-format" value={format} onChange={e => { setFormat(e.target.value as CompressedImageFormat); setResult(null); }} className="w-full rounded-lg border border-slate-300 p-3">
+        <select id="image-format" disabled={busy} value={format} onChange={e => { setFormat(e.target.value as CompressedImageFormat); setResult(null); }} className="w-full rounded-lg border border-slate-300 p-3">
           <option value="image/webp">WebP</option>
           <option value="image/jpeg">{t.jpeg}</option>
         </select>
         <label className="block font-semibold text-slate-800" htmlFor="image-quality">{t.quality}: {Math.round(quality * 100)}%</label>
-        <input id="image-quality" type="range" min="10" max="100" value={Math.round(quality * 100)} onChange={e => { setQuality(Number(e.target.value) / 100); setResult(null); }} className="w-full" />
+        <input id="image-quality" disabled={busy} type="range" min="10" max="100" value={Math.round(quality * 100)} onChange={e => { setQuality(Number(e.target.value) / 100); setResult(null); }} className="w-full" />
         <label className="block font-semibold text-slate-800" htmlFor="image-dimension">{t.dimension}</label>
-        <select id="image-dimension" value={maxDimension} onChange={e => { setMaxDimension(Number(e.target.value)); setResult(null); }} className="w-full rounded-lg border border-slate-300 p-3">
+        <select id="image-dimension" disabled={busy} value={maxDimension} onChange={e => { setMaxDimension(Number(e.target.value)); setResult(null); }} className="w-full rounded-lg border border-slate-300 p-3">
           <option value="640">640 px</option><option value="1280">1280 px</option><option value="1920">1920 px</option><option value="3840">3840 px</option>
         </select>
         <button type="submit" disabled={!file || busy} className="min-h-12 w-full rounded-xl bg-indigo-600 px-6 py-3 font-semibold text-white disabled:cursor-not-allowed disabled:opacity-50">{busy ? t.busy : t.compress}</button>
