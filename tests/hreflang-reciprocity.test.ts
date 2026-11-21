@@ -4,7 +4,7 @@ import { test } from 'node:test';
 import { SEO_METADATA } from '../src/utils/seo';
 
 const languages = ['en', 'ar', 'fr', 'es'] as const;
-const pages = ['home', 'generator', 'image-compressor', 'images-to-pdf', 'pdf-merge', 'url', 'wifi', 'whatsapp', 'business', 'about', 'contact', 'privacy', 'terms', 'faq'] as const;
+const pages = ['home', 'generator', 'image-resizer', 'image-compressor', 'images-to-pdf', 'pdf-merge', 'url', 'wifi', 'whatsapp', 'business', 'about', 'contact', 'privacy', 'terms', 'faq'] as const;
 const base = 'https://getqrgenius.com';
 
 function localized(path: string, lang: typeof languages[number]) {
