@@ -48,10 +48,10 @@ export const PrivacyPage: React.FC<PrivacyPageProps> = ({ lang }) => {
             </h2>
             <p>
               {text(
-                'QR GENIUS does not require an account, email registration, or phone number verification to use the free service. We do not store:',
-                'لا تتطلب QR GENIUS إنشاء حساب أو التسجيل بالبريد الإلكتروني أو التحقق برقم الهاتف لاستخدام الخدمة المجانية. ولا نخزن ما يلي:',
-                'QR GENIUS ne nécessite ni compte, ni inscription par e-mail, ni vérification du numéro de téléphone pour utiliser le service gratuit. Nous ne stockons pas :',
-                'QR GENIUS no requiere una cuenta, registro por correo electrónico ni verificación del número de teléfono para utilizar el servicio gratuito. No almacenamos:'
+                'QR GENIUS does not require an account, email registration, or phone number verification to use the free service. We do not store on our servers:',
+                'لا تتطلب QR GENIUS إنشاء حساب أو التسجيل بالبريد الإلكتروني أو التحقق برقم الهاتف لاستخدام الخدمة المجانية. ولا نخزن على خوادمنا ما يلي:',
+                'QR GENIUS ne nécessite ni compte, ni inscription par e-mail, ni vérification du numéro de téléphone pour utiliser le service gratuit. Nous ne stockons pas sur nos serveurs :',
+                'QR GENIUS no requiere una cuenta, registro por correo electrónico ni verificación del número de teléfono para utilizar el servicio gratuito. No almacenamos en nuestros servidores:'
               )}
             </p>
             <ul className="list-disc pl-5 space-y-1 text-slate-600">
@@ -92,10 +92,10 @@ export const PrivacyPage: React.FC<PrivacyPageProps> = ({ lang }) => {
             </h2>
             <p>
               {text(
-                'For convenience, QR GENIUS lets you view recently created codes in your history. This history is stored only in your browser on your device using localStorage and is not synchronized with cloud servers. You can clear it at any time using the Clear History button.',
-                'لتسهيل الاستخدام، تتيح لك QR GENIUS عرض الرموز الأخيرة في سجلّك. يُحفظ هذا السجل محلياً في متصفح جهازك فقط باستخدام localStorage، ولا تتم مزامنته مع الخوادم السحابية. يمكنك مسحه في أي وقت من زر «مسح السجل».',
-                'Pour plus de commodité, QR GENIUS vous permet de consulter les codes récemment créés dans votre historique. Cet historique est enregistré uniquement dans le navigateur de votre appareil à l’aide de localStorage et n’est pas synchronisé avec des serveurs cloud. Vous pouvez l’effacer à tout moment avec le bouton Effacer l’historique.',
-                'Para mayor comodidad, QR GENIUS te permite consultar los códigos recientes en tu historial. Este historial se guarda únicamente en el navegador de tu dispositivo mediante localStorage y no se sincroniza con servidores en la nube. Puedes borrarlo en cualquier momento con el botón Borrar historial.'
+                'For convenience, QR GENIUS lets you view recently created codes in your history. This history may include QR contents such as Wi-Fi network names and passwords. It is stored only in your browser on your device using localStorage and is not synchronized with cloud servers. You can clear it at any time using the Clear History button.',
+                'لتسهيل الاستخدام، تتيح لك QR GENIUS عرض الرموز الأخيرة في سجلّك. قد يتضمن السجل محتوى رموز QR مثل أسماء شبكات Wi-Fi وكلمات مرورها. يُحفظ هذا السجل محلياً في متصفح جهازك فقط باستخدام localStorage، ولا تتم مزامنته مع الخوادم السحابية. يمكنك مسحه في أي وقت من زر «مسح السجل».',
+                'Pour plus de commodité, QR GENIUS vous permet de consulter les codes récemment créés dans votre historique. Cet historique peut contenir des données QR, notamment des noms et mots de passe Wi-Fi. Il est enregistré uniquement dans le navigateur de votre appareil à l’aide de localStorage et n’est pas synchronisé avec des serveurs cloud. Vous pouvez l’effacer à tout moment avec le bouton Effacer l’historique.',
+                'Para mayor comodidad, QR GENIUS te permite consultar los códigos recientes en tu historial. Este historial puede incluir el contenido de los QR, como nombres y contraseñas Wi-Fi. Se guarda únicamente en el navegador de tu dispositivo mediante localStorage y no se sincroniza con servidores en la nube. Puedes borrarlo en cualquier momento con el botón Borrar historial.'
               )}
             </p>
           </section>
