@@ -1,6 +1,8 @@
 name: PNG download browser smoke
 
 on:
+  push:
+    branches: [main]
   pull_request:
     branches: [main]
     paths:
