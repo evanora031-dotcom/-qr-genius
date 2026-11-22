@@ -1,4 +1,5 @@
 import { toolsByLanguage } from '../content/toolLanding';
+import { SEO_METADATA } from '../utils/seo';
 import React, { useState } from 'react';
 import { 
   Globe, 
@@ -167,7 +168,7 @@ export const ToolLandingPage: React.FC<ToolLandingPageProps> = ({
               <span>{ui.online}</span>
             </div>
             <h1 className="text-2xl sm:text-3xl lg:text-5xl font-extrabold text-slate-900 tracking-tight leading-tight">
-              {toolData.title}
+              {SEO_METADATA[tool][lang].h1}
             </h1>
             <p className="mt-2.5 sm:mt-4 text-sm sm:text-base lg:text-lg text-slate-600 leading-relaxed">
               {toolData.subtitle}
