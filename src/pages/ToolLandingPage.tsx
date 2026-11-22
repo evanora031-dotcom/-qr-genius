@@ -383,6 +383,28 @@ export const ToolLandingPage: React.FC<ToolLandingPageProps> = ({
           </section>
         )}
 
+        {/* Answer Wi-Fi QR troubleshooting searches with actionable, safe guidance. */}
+        {lang === 'en' && tool === 'wifi' && (
+          <section className="pt-8 border-t border-slate-200" aria-labelledby="wifi-qr-troubleshooting">
+            <h2 id="wifi-qr-troubleshooting" className="text-2xl font-bold text-slate-900 tracking-tight mb-4">
+              Wi-Fi QR code not connecting? Check these details
+            </h2>
+            <p className="text-sm text-slate-700 leading-relaxed mb-4">
+              A Wi-Fi QR code encodes the network name, security setting and password you enter. It does not create a new wireless network or increase its range. Your guests still need to be near the router, and their device must support joining Wi-Fi from a scanned code.
+            </p>
+            <ul className="list-disc pl-6 space-y-2 text-sm text-slate-700 leading-relaxed">
+              <li><strong>Check the exact network name (SSID).</strong> Network names are case-sensitive; include any spaces or punctuation exactly as shown in your Wi-Fi settings.</li>
+              <li><strong>Match the security type.</strong> Select the security option that corresponds to your network. If the network uses a login portal, scanning the QR code may not bypass that additional sign-in step.</li>
+              <li><strong>Recheck the password.</strong> A changed guest-network password requires a new QR code. Avoid sharing the password for your private home or office network.</li>
+              <li><strong>Test scanning and printing.</strong> Keep the code flat, high-contrast and surrounded by a clear border. Test it with an iPhone and an Android phone when possible.</li>
+            </ul>
+            <h3 className="text-lg font-bold text-slate-900 mt-5 mb-2">Where should you display a guest Wi-Fi QR code?</h3>
+            <p className="text-sm text-slate-700 leading-relaxed">
+              Put a printed sign near the entrance, reception desk or guest welcome booklet. Label it “Scan to join guest Wi-Fi” and identify the correct network. For step-by-step setup, see our <a href="/en/blog/how-to-make-wifi-qr-code-for-guests" className="text-indigo-700 underline underline-offset-2">Wi-Fi QR code guide for guests</a>.
+            </p>
+          </section>
+        )}
+
         {/* Practical English WhatsApp QR guide for customer-facing use. */}
         {lang === 'en' && tool === 'whatsapp' && (
           <section className="pt-8 border-t border-slate-200" aria-labelledby="whatsapp-customer-qr-guide">
