@@ -343,6 +343,28 @@ export const ToolLandingPage: React.FC<ToolLandingPageProps> = ({
           </section>
         )}
 
+        {/* Specific answers to common vCard search and printing problems. */}
+        {lang === 'en' && tool === 'business' && (
+          <section className="pt-8 border-t border-slate-200" aria-labelledby="vcard-troubleshooting">
+            <h2 id="vcard-troubleshooting" className="text-2xl font-bold text-slate-900 tracking-tight mb-4">
+              Business card QR code: vCard or website link?
+            </h2>
+            <p className="text-sm text-slate-700 leading-relaxed mb-4">
+              Choose a <strong>vCard QR code</strong> when the goal is to let someone save your name, phone number, company and email directly from a printed business card. Choose a <a href="/tools/url" className="text-indigo-700 underline underline-offset-2">website link QR code</a> when you want to send visitors to an online profile or contact page that you can update later.
+            </p>
+            <h3 className="text-lg font-bold text-slate-900 mb-3">Why does my contact QR code not scan?</h3>
+            <ul className="list-disc pl-6 space-y-2 text-sm text-slate-700 leading-relaxed">
+              <li><strong>The code is too small.</strong> More vCard fields create a denser QR code. Print a larger code and preserve its empty border.</li>
+              <li><strong>The colors are hard to read.</strong> Use a dark foreground on a light background and avoid putting graphics over the code's key patterns.</li>
+              <li><strong>The contact preview differs by phone.</strong> Some camera apps show a contact card while others offer a separate save-contact action. Test on the devices your audience uses.</li>
+              <li><strong>Your contact information changed.</strong> Static vCard codes contain the details entered when generated. Create and print a new code after changing a phone number or email address.</li>
+            </ul>
+            <p className="mt-4 text-sm text-slate-700 leading-relaxed">
+              For a print-ready workflow, start with a test card, scan it at normal viewing distance, and check the saved contact fields before ordering multiple copies. You can also read our <a href="/en/blog/how-to-make-business-card-qr-code" className="text-indigo-700 underline underline-offset-2">step-by-step business card QR code guide</a>.
+            </p>
+          </section>
+        )}
+
         {/* Practical English Wi-Fi QR instructions, including guest-network safety. */}
         {lang === 'en' && tool === 'wifi' && (
           <section className="pt-8 border-t border-slate-200" aria-labelledby="wifi-guest-setup-guide">
