@@ -18,6 +18,7 @@ const outputAssets = await readdir(path.join(distDir, 'assets'));
 const routeModules: Record<string, string> = {
   'image-resizer': 'ImageResizer',
   'pdf-merge': 'PdfMerge',
+  'images-to-pdf': 'ImagesToPdf',
   generator: 'GeneratorPage',
   url: 'ToolLandingPage',
   wifi: 'ToolLandingPage',
