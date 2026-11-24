@@ -1,3 +1,6 @@
+import { createElement } from 'react';
+import { renderToStaticMarkup } from 'react-dom/server';
+import { ResizeGuide } from '../src/components/ResizeGuide';
 import { mergeGuide } from '../src/content/mergeGuide';
 import { toolsByLanguage } from '../src/content/toolLanding';
 import { faqByLanguage } from '../src/content/faq';
@@ -194,7 +197,7 @@ function renderStaticContent(locale: typeof locales[number], page: typeof pages[
     },
   };
   const fileGuide = fileToolGuides[locale][page];
-  const fileGuideHtml = fileGuide
+  const fileGuideHtml = page === 'image-resizer' ? renderToStaticMarkup(createElement(ResizeGuide, { lang: locale })) : fileGuide
     ? '<section><h2>' + escapeHtml(fileGuide.heading) + '</h2><ol>' + fileGuide.steps.map(step => '<li>' + escapeHtml(step) + '</li>').join('') + '</ol></section>'
     : '';
   const resourcePages = ['about', 'faq', 'contact', 'privacy', 'terms'] as const;
