@@ -1,3 +1,4 @@
+import { watchFileRequests } from './watch-file-requests.mjs';
 import { chromium } from 'playwright';
 
 const base = process.env.PREVIEW_URL || 'https://getqrgenius.com';
@@ -19,6 +20,7 @@ try {
     ctx.fillRect(0, 0, 500, 300);
     return [...new Uint8Array(await (await new Promise(resolve => canvas.toBlob(resolve, 'image/png'))).arrayBuffer())];
   });
+  const verifyRequests = watchFileRequests(page);
   await page.locator('#image-file').setInputFiles({ name: 'sample.png', mimeType: 'image/png', buffer: Buffer.from(image) });
   await page.getByRole('button', { name: 'Compress image' }).click();
   const [download] = await Promise.all([
@@ -31,6 +33,7 @@ try {
   for await (const chunk of stream) chunks.push(chunk);
   const bytes = Buffer.concat(chunks);
   if (bytes.toString('ascii', 0, 4) !== 'RIFF' || bytes.toString('ascii', 8, 12) !== 'WEBP') throw new Error('Invalid WebP signature');
+  verifyRequests();
   console.log('PASS image compressor real WebP download', { bytes: bytes.length });
 } finally {
   await browser.close();

@@ -1,3 +1,4 @@
+import { watchFileRequests } from './watch-file-requests.mjs';
 import { chromium } from 'playwright';
 import { PDFDocument } from 'pdf-lib';
 
@@ -36,6 +37,7 @@ try {
     return { name, mimeType: 'application/pdf', buffer: Buffer.from(await doc.save()) };
   };
   await page.goto(base + '/tools/merge-pdf', { waitUntil: 'networkidle' });
+  const verifyRequests = watchFileRequests(page);
   await page.locator('#pdf-merge-files').setInputFiles([
     await makeFile('first.pdf', [210, 220]),
     await makeFile('second.pdf', [310])
@@ -53,5 +55,6 @@ try {
     throw new Error('Incorrect merged PDF page order: ' + widths.join(','));
   }
   if (errors.length) throw new Error('Browser errors: ' + errors.join('; '));
+  verifyRequests();
   console.log('PASS PDF merge browser test: 3 pages, original order preserved');
 } finally { await browser.close(); }
