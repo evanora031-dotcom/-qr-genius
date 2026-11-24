@@ -1,3 +1,4 @@
+import { mergeGuide } from '../src/content/mergeGuide';
 import { toolsByLanguage } from '../src/content/toolLanding';
 import { faqByLanguage } from '../src/content/faq';
 import {buildGuestPages} from "./guest-connect-seo";
@@ -261,7 +262,7 @@ function renderStaticContent(locale: typeof locales[number], page: typeof pages[
       '</ol><p><strong>' + escapeHtml(locale === 'ar' ? 'نصيحة:' : locale === 'fr' ? 'Conseil :' : locale === 'es' ? 'Consejo:' : 'Tip:') +
       '</strong> ' + escapeHtml(copy.tip) + '</p></section>'
     : '';
-  const questions = page === 'faq' ? faqByLanguage[locale] :
+  const questions = page === 'pdf-merge' ? mergeGuide[locale].map(({ heading, body }) => ({ question: heading, answer: body })) : page === 'faq' ? faqByLanguage[locale] :
     (page === 'wifi' || page === 'url' || page === 'business' || page === 'whatsapp')
       ? toolsByLanguage[locale][page].faqs.map(({ q, a }) => ({ question: q, answer: a })) : [];
   const questionsHtml = questions.length
