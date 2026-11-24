@@ -2,6 +2,7 @@ import {readFileSync} from 'node:fs';
 const root='dist/';
 const routes=[
 ['index.html',['SoftwareApplication']],
+...['', 'fr/', 'es/', 'ar/'].map(prefix => [prefix+'faq.html',['BreadcrumbList','FAQPage']]),
 ['tools/wifi.html',['BreadcrumbList','FAQPage']],
 ['tools/whatsapp.html',['BreadcrumbList','FAQPage']],
 ['tools/business-vcard.html',['BreadcrumbList','FAQPage']],
@@ -33,7 +34,7 @@ for(const [path,expected] of routes){
    faqs[0].mainEntity.some(q=>q['@type']!=='Question'||!q.name||q.acceptedAnswer?.['@type']!=='Answer'||!q.acceptedAnswer?.text))
    throw Error(path+' invalid FAQPage question or answer');
  }
- if(path.startsWith('ar/')&&types.includes('FAQPage'))throw Error('Unverified translated FAQ');
+ if(path.startsWith('ar/tools/')&&types.includes('FAQPage'))throw Error('Unverified translated FAQ');
  for(const obj of scripts)if(obj['@context']!=='https://schema.org')throw Error(path+' invalid context');
 }
 // Ensure tool FAQ schema quotes real FAQ entries in the English React UI source.

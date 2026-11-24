@@ -299,11 +299,17 @@ function structuredData(locale: typeof locales[number], page: typeof pages[numbe
       ]
     });
   }
-  const faq = (page === 'wifi' || page === 'whatsapp' || page === 'business') ? toolsByLanguage.en[page].faqs : null;
-  // Only English tool pages currently render these exact English FAQ strings.
-  if (faq && locale === 'en') objects.push({
+  let faq: { question: string; answer: string }[] = [];
+  if (page === 'faq') {
+    faq = faqByLanguage[locale];
+  } else if (locale === 'en' && (page === 'wifi' || page === 'whatsapp' || page === 'business')) {
+    faq = toolsByLanguage.en[page].faqs.map(({ q, a }) => ({ question: q, answer: a }));
+  }
+  if (faq.length) objects.push({
     '@context': 'https://schema.org', '@type': 'FAQPage',
-    mainEntity: faq.map(({ q, a }) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } }))
+    mainEntity: faq.map(({ question, answer }) => ({
+      '@type': 'Question', name: question, acceptedAnswer: { '@type': 'Answer', text: answer }
+    }))
   });
   return objects.map(obj => '<script type="application/ld+json">' + JSON.stringify(obj).replaceAll('<', '\\u003c') + '</script>').join('\n');
 }
