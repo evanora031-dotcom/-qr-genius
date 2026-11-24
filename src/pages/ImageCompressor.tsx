@@ -1,3 +1,4 @@
+import { CompressionTips } from '../components/CompressionTips';
 import React, { useEffect, useState } from 'react';
 import { compressImage, type CompressedImageFormat } from '../utils/imageCompression';
 
@@ -203,6 +204,7 @@ export function ImageCompressor({ lang = 'en' }: { lang?: Language }) {
       <div className="mt-10 space-y-3 text-slate-700">
         <h2 className="text-xl font-bold">{t.howTitle}</h2>
         <p>{t.howText}</p>
+        <CompressionTips lang={lang} />
         <h2 className="text-xl font-bold">{t.privacyTitle}</h2>
         <p>{t.privacyText}</p>
       </div>
