@@ -1,7 +1,7 @@
 import { watchFileRequests } from './watch-file-requests.mjs';
 import { chromium } from 'playwright';
 
-const base = process.env.PREVIEW_URL || 'https://getqrgenius.com';
+const base = 'https://getqrgenius.com';
 const browser = await chromium.launch({ headless: true });
 try {
   const page = await browser.newPage({ viewport: { width: 390, height: 844 }, acceptDownloads: true });

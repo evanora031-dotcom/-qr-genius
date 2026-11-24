@@ -20,6 +20,14 @@ try {
         return buttons.some(b => /png/i.test(b.textContent || '') && !b.disabled);
       }, null, { timeout: 20000 });
       if (!(await png.isEnabled())) throw new Error('PNG download button remains disabled');
+      // Supply a synthetic URL while all network access is disabled. Generating
+      // and downloading a fresh code must succeed with no server available.
+      await context.setOffline(true);
+      const marker = 'https://example.org/qr-network-smoke-' + viewport.width;
+      const canvas = page.locator('canvas').first();
+      const previous = await canvas.evaluate(node => node.toDataURL());
+      await page.locator('input[type="url"]').first().fill(marker);
+      await page.waitForFunction(before => document.querySelector('canvas').toDataURL() !== before, previous);
       const [download] = await Promise.all([
         page.waitForEvent('download', { timeout: 30000 }),
         png.click()

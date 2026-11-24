@@ -2,7 +2,7 @@ import { watchFileRequests } from './watch-file-requests.mjs';
 import { chromium } from 'playwright';
 import { PDFDocument } from 'pdf-lib';
 
-const base = process.env.PREVIEW_URL || 'http://127.0.0.1:4173';
+const base = 'https://getqrgenius.com';
 const browser = await chromium.launch({ headless: true });
 try {
   const page = await browser.newPage({ acceptDownloads: true });
