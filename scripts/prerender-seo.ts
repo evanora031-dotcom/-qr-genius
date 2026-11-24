@@ -410,7 +410,14 @@ for (const pair of blogPairs) {
   );
   for (const route of Object.values(pair)) {
     const file = path.join(distDir, route.endsWith('/') ? route + 'index.html' : route + '.html');
-    const html = await readFile(file, 'utf8');
+    const source = await readFile(file, 'utf8');
+    const card = pair.en.endsWith('/') ? 'image' : pair.en.includes('business-card') ? 'business' : pair.en.includes('wifi') ? 'wifi' : 'whatsapp';
+    const image = baseUrl + '/og-' + card + '.png';
+    const label = source.match(/<title>(.*?)<\/title>/)?.[1] || 'QR Genius';
+    let html = setHeadTag(source, /<meta property="og:image"[^>]*>/, `<meta property="og:image" content="${image}">`);
+    html = setHeadTag(html, /<meta property="og:image:alt"[^>]*>/, `<meta property="og:image:alt" content="${label}">`);
+    html = setHeadTag(html, /<meta name="twitter:image"[^>]*>/, `<meta name="twitter:image" content="${image}">`);
+    html = setHeadTag(html, /<meta name="twitter:card"[^>]*>/, '<meta name="twitter:card" content="summary_large_image">');
     const headLinks = attributes.map(attrs => `<link ${attrs}>`).join('\n');
     await writeFile(file, html.replace(/<link\b[^>]*\bhreflang="[^"]+"[^>]*>/gi, '')
       .replace('</head>', headLinks + '\n</head>'), 'utf8');
