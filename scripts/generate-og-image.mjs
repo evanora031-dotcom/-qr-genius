@@ -30,6 +30,7 @@ mkdirSync('public',{recursive:true});writeFileSync('public/'+filename,png);
 savePreview('og-image.png');
 
 const previews = [
+  ['guest', 'GUEST', 'CONNECT'],
   ['pdf-merge', 'MERGE', 'PDF FILES'],
   ['images-to-pdf', 'IMAGES', 'TO PDF'],
   ['image-resizer', 'RESIZE', 'IMAGES'],
