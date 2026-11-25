@@ -8,14 +8,13 @@ import { Footer } from './components/Footer';
 import { ImageCompressor } from './pages/ImageCompressor';
 import { HistoryDrawer } from './components/QRStudio/HistoryDrawer';
 import { HomePage } from './pages/HomePage';
+import { AboutPage } from './pages/AboutPage';
+import { ContactPage } from './pages/ContactPage';
+import { PrivacyPage } from './pages/PrivacyPage';
+import { TermsPage } from './pages/TermsPage';
+import { FAQPage } from './pages/FAQPage';
 import { SitemapView } from './pages/SitemapView';
 import { RobotsView } from './pages/RobotsView';
-
-const AboutPage = lazy(() => import('./pages/AboutPage').then(module => ({ default: module.AboutPage })));
-const ContactPage = lazy(() => import('./pages/ContactPage').then(module => ({ default: module.ContactPage })));
-const PrivacyPage = lazy(() => import('./pages/PrivacyPage').then(module => ({ default: module.PrivacyPage })));
-const TermsPage = lazy(() => import('./pages/TermsPage').then(module => ({ default: module.TermsPage })));
-const FAQPage = lazy(() => import('./pages/FAQPage').then(module => ({ default: module.FAQPage })));
 
 const PdfMerge = lazy(() => import('./pages/PdfMerge').then(module => ({ default: module.PdfMerge })));
 const ImagesToPdf = lazy(() => import('./pages/ImagesToPdf').then(module => ({ default: module.ImagesToPdf })));
