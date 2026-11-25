@@ -24,11 +24,27 @@ const tips = {
   ]
 };
 
+const exampleCaptions = {
+  en: ['The same QR image at 424 × 424 pixels', 'Original PNG', 'JPEG at 65% quality', 'The sharp black-and-white pattern takes fewer bytes as a PNG. Compare downloads before replacing an original.'],
+  fr: ['La même image QR de 424 × 424 pixels', 'PNG original', 'JPEG à 65 % de qualité', 'Pour ce motif noir et blanc, le PNG occupe moins de place. Comparez les tailles avant de remplacer l’original.'],
+  es: ['La misma imagen QR de 424 × 424 píxeles', 'PNG original', 'JPEG al 65 % de calidad', 'Este patrón en blanco y negro ocupa menos como PNG. Compara el tamaño de los archivos antes de sustituir el original.'],
+  ar: ['صورة QR نفسها بأبعاد 424 × 424 بكسل', 'صورة PNG الأصلية', 'صورة JPEG بجودة 65٪', 'في هذا المثال تشغل صورة PNG بالأبيض والأسود مساحة أقل. قارن حجم الملفين قبل استبدال الأصل.']
+};
+
 export function CompressionTips({ lang }: { lang: Language }) {
+  const [heading, original, compressed, explanation] = exampleCaptions[lang];
   return <div className="space-y-3">
     {tips[lang].map(([heading, body]) => <section key={heading}>
       <h3 className="font-semibold">{heading}</h3>
       <p>{body}</p>
     </section>)}
+    <section>
+      <h3 className="font-semibold">{heading}</h3>
+      <div className="grid grid-cols-2 gap-3">
+        <figure><img src="/examples/alex-example.png" width="424" height="424" loading="lazy" alt={original} className="h-auto w-full max-w-44" /><figcaption>{original} · 931 B</figcaption></figure>
+        <figure><img src="/examples/contact-card-compressed.jpg" width="424" height="424" loading="lazy" alt={compressed} className="h-auto w-full max-w-44" /><figcaption>{compressed} · 2658 B</figcaption></figure>
+      </div>
+      <p>{explanation}</p>
+    </section>
   </div>;
 }
