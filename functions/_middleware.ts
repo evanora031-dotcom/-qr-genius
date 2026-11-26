@@ -22,6 +22,11 @@ export const onRequest = async ({
     return Response.redirect(url.toString(), 308);
   }
 
+  if (url.pathname === '/en' || url.pathname === '/en/') {
+    url.pathname = '/';
+    return Response.redirect(url.toString(), 308);
+  }
+
   // Reject a bogus localized robots route instead of serving the SPA homepage.
   // The real crawler directives live at /robots.txt.
   if (/^\/(?:ar|en|fr|es)\/robots\/?$/.test(url.pathname)) {
