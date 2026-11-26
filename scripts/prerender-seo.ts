@@ -158,6 +158,10 @@ function renderStaticContent(locale: typeof locales[number], page: typeof pages[
     const href = localizedPath(toolMeta.canonicalPath, locale);
     return '<li><a href="' + escapeHtml(href) + '">' + escapeHtml(toolMeta.h1) + '</a></li>';
   }).join('');
+  const guestCardLabels = { en: 'Guest request cards', ar: 'بطاقات طلبات النزلاء', fr: 'Cartes de demandes des clients', es: 'Tarjetas para huéspedes' };
+  const guestCardLink = page === 'home'
+    ? '<li><a href="' + localizedPath('/tools/guest-connect', locale) + '">' + escapeHtml(guestCardLabels[locale]) + '</a></li>'
+    : '';
   // Expose PDF and image tools in the prerendered HTML, not only after React hydration.
   const fileToolPages = ['image-resizer', 'image-compressor', 'images-to-pdf', 'pdf-merge'] as const;
   const fileToolLinks = fileToolPages.map((tool) => {
@@ -275,7 +279,7 @@ function renderStaticContent(locale: typeof locales[number], page: typeof pages[
     '<p>' + escapeHtml(meta.description) + '</p>' + supportingSection + questionsHtml + fileGuideHtml + compressionTips + compressorFaqHtml + guideLink +
     (locale === 'en' && page === 'business' ? '<p><a href="/en/blog/how-to-make-business-card-qr-code#sample-card">Try a sample business card QR code</a></p>' : '') +
     '<nav aria-label="' + escapeHtml(labels[locale]) + '">' +
-    '<h2>' + escapeHtml(labels[locale]) + '</h2><ul>' + links + '</ul></nav>' +
+    '<h2>' + escapeHtml(labels[locale]) + '</h2><ul>' + links + guestCardLink + '</ul></nav>' +
     '<nav aria-label="' + escapeHtml(fileToolHeading) + '"><h2>' + escapeHtml(fileToolHeading) + '</h2><ul>' + fileToolLinks + '</ul></nav>' +
     '<nav aria-label="' + escapeHtml(resourceLabels[locale].about) + '">' +
     '<h2>' + escapeHtml(locale === 'ar' ? 'معلومات ومساعدة' : locale === 'fr' ? 'Informations et assistance' : locale === 'es' ? 'Información y ayuda' : 'Information and help') + '</h2><ul>' + resourceLinks + '</ul></nav></section>';
